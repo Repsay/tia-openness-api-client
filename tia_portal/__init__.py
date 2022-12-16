@@ -48,6 +48,7 @@ try:
     import Siemens.Engineering.HW.Features as hwf  # type: ignore
     import Siemens.Engineering.SW as sw  # type: ignore
     import Siemens.Engineering.SW.Blocks as swb  # type: ignore
+    import Siemens.Engineering.Library.Types as lbt  # type: ignore
 except Exception as e:
     raise tia_e.TIALibraryNotFound(f"Could not load {DLL_PATH}") from e
 
@@ -125,6 +126,53 @@ class Client:
         self.session.Dispose()
         self.session = None
         Process.GetProcessById(process.Id).Kill()
+
+    # ==================================================================================================================
+    # PROJECTS
+    # ==================================================================================================================
+
+    def open_project(self, path: str, name: str, version: Optional[TIAVersion] = None) -> Project:
+        if self.session is None:
+            raise tia_e.TIAInvalidSession("Session is None")
+
+        if self.project is not None and self.project.is_open():
+            self.project.close()
+
+        self.project = Project(self, path, name, version)
+        self.project.open()
+
+        return self.project
+
+    def create_project(self, path: str, name: str, version: Optional[TIAVersion] = None) -> Project:
+        if self.session is None:
+            raise tia_e.TIAInvalidSession("Session is None")
+
+        if self.project is not None and self.project.is_open():
+            self.project.close()
+
+        self.project = Project(self, path, name, version)
+        self.project.create(True)
+
+        return self.project
+
+    def create_projects(self, path: str, names: List[str], version: Optional[TIAVersion] = None) -> List[Project]:
+        if self.session is None:
+            raise tia_e.TIAInvalidSession("Session is None")
+
+        if self.project is not None:
+            self.project.close()
+
+        projects: List[Project] = []
+        for name in names:
+            project = Project(self, path, name, version)
+            try:
+                project.create(False)
+            except tia_e.TIAProjectAlreadyExists:
+                projects.append(project)
+                continue
+            projects.append(project)
+
+        return projects
 
 
 class Project:
@@ -254,6 +302,37 @@ class Project:
 
         raise tia_e.TIADeviceNotFound(f"Device {name} not found")
 
+    # ================================================================================================================
+    # Device
+    # ================================================================================================================
+
+    def create_device(self, HwTypeIdentifier: str, deviceName: str) -> Device:
+        if self.value is None:
+            raise tia_e.TIAInvalidProject("Project is None")
+
+        device = Device(self, deviceName)
+        device.create(HwTypeIdentifier, deviceName)
+
+        return device
+
+    def create_PLC(self, article_no: str, version: str, deviceName: str, deviceItemName: str) -> Device:
+        if self.value is None:
+            raise tia_e.TIAInvalidProject("Project is None")
+
+        device = Device(self, deviceName)
+        device.create_PLC(article_no, version, deviceItemName)
+
+        return device
+
+    def create_HMI(self, article_no: str, version: str, deviceName: str) -> Device:
+        if self.value is None:
+            raise tia_e.TIAInvalidProject("Project is None")
+
+        device = Device(self, deviceName)
+        device.create_HMI(article_no, version)
+
+        return device
+
 
 class Device:
     def __init__(self, project: Project, name: str) -> None:
@@ -294,6 +373,9 @@ class Device:
             raise tia_e.TIADeviceNotFound(f"Device {self.name} not found")
         self.value.Delete()
         self.value = None
+
+    def delete(self) -> None:
+        self.remove()
 
     def get_device_items(self) -> List[DeviceItem]:
         if self.value is None:
@@ -503,6 +585,10 @@ class PLCBlock:
         self.parent_blocks.Import(file_info, tia.ImportOptions.Override)
 
         os.remove(f"{os.path.join(DATA_PATH, self.name)}.xml")
+
+
+
+        self.parent_blocks.CreateFrom(swb.CodeBlockLibraryTypeVersion)
 
     def export(self):
         if self.value is None:
