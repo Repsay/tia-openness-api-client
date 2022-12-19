@@ -1,57 +1,505 @@
 from __future__ import annotations
 
-import configparser
 import os
 import shutil
-from typing import List, Optional, Protocol, Union
+from typing import Any, Iterator, List, Optional, Union
 
-import clr
+import config as cfg
 import exceptions as tia_e
-from System.Diagnostics import Process
-from System.IO import DirectoryInfo, FileInfo
+from protocol.composition import Composition, CompositionItem
+from protocol.objects import TiaObject
 from version import TIAVersion
 
-DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "data"))
-config = configparser.ConfigParser()
-CONFIG_PATH = os.path.join(DATA_PATH, "config.ini")
+cfg.load()
 
-if not os.path.exists(DATA_PATH):
-    os.mkdir(DATA_PATH)
+from System.Diagnostics import Process
+from System.IO import DirectoryInfo, FileInfo
 
-if not os.path.exists(CONFIG_PATH):
-    config["DEFAULT"] = {"version": "V15_1"}
-    config["USER"] = {}
-    config.write(open(CONFIG_PATH, "w"))
+tia = cfg.tia
+comp = cfg.comp
+hw = cfg.hw
+hwf = cfg.hwf
+sw = cfg.sw
+swb = cfg.swb
+lib = cfg.lib
+lib_mc = cfg.lib_mc
 
-config.read(CONFIG_PATH)
-VERSION = (
-    TIAVersion[config["DEFAULT"]["version"]]
-    if config["USER"].get("version") is None
-    else TIAVersion[config["USER"]["version"]]
-)
+class Device(CompositionItem[hw.Device]):
+    def __init__(self, parent: Devices, name: str):
+        self.parent = parent
+        self.name = name
 
-DLL_PATH = f"C:\\Program Files\\Siemens\\Automation\\Portal {VERSION.name}\\PublicAPI\\V{VERSION.value.replace('_', '.')}\\Siemens.Engineering.dll"
+        if self.parent.value is None:
+            raise tia_e.InvalidDeviceComposition("Parent value is None")
 
-if not os.path.exists(DLL_PATH):
-    raise tia_e.TIALibraryNotFound(f"File {DLL_PATH} does not exist")
+        value = self.parent.value.Find(name)
 
-try:
-    clr.AddReference(DLL_PATH)
-except Exception as e:
-    raise tia_e.TIALibraryNotFound(f"Could not load {DLL_PATH}") from e
+        if value is None:
+            self.value = None
+        else:
+            self.value = value
 
-try:
-    import Siemens.Engineering as tia
-    import Siemens.Engineering.Compiler as comp  # type: ignore
-    import Siemens.Engineering.HmiUnified as hmiu  # type: ignore
-    import Siemens.Engineering.HW as hw  # type: ignore
-    import Siemens.Engineering.HW.Features as hwf  # type: ignore
-    import Siemens.Engineering.SW as sw  # type: ignore
-    import Siemens.Engineering.SW.Blocks as swb  # type: ignore
-    import Siemens.Engineering.Library.Types as lbt  # type: ignore
-except Exception as e:
-    raise tia_e.TIALibraryNotFound(f"Could not load {DLL_PATH}") from e
+    @staticmethod
+    def find(object: Devices, name: str) -> Device:
+        return object.find(name)
 
+    def exists(self) -> bool:
+        return self.value is not None
+
+    def remove(self) -> None:
+        if self.value is None:
+            raise tia_e.InvalidDevice("Value is None")
+
+        self.value.Delete()
+        self.value = None
+
+    def delete(self) -> None:
+        self.remove()
+
+    def get_items(self) -> DeviceItems:
+        return DeviceItems(self)
+
+class Devices(Composition[Device, hw.DeviceComposition]):
+    def __init__(self, parent: Project) -> None:
+        self.parent = parent
+
+        if self.parent.value is None:
+            raise tia_e.InvalidProject("Project value is None")
+
+        value = self.parent.value.Devices
+
+        if value is None:
+            self.value = None
+        else:
+            self.value = value
+
+    def find(self, name: str) -> Device:
+        if self.value is None:
+            raise tia_e.InvalidDeviceComposition("Value is None")
+
+        return Device(self, name)
+
+    def __iter__(self) -> Iterator[Device]:
+        if self.value is None:
+            raise tia_e.InvalidDeviceComposition("Value is None")
+
+        for device in self.value:
+            yield Device(self, device.Name)
+
+    def create(self, HwTypeIdentifier: str, name: str, device_name: Optional[str]) -> Device:
+        if self.value is None:
+            raise tia_e.InvalidDeviceComposition("Value is None")
+
+        device = Device(self, name)
+
+        if device.value is not None:
+            raise tia_e.DeviceAlreadyExists(f"Device '{name}' already exists")
+
+        if device_name is None:
+            self.value.CreateWithItem(HwTypeIdentifier, name, None)
+        else:
+            self.value.CreateWithItem(HwTypeIdentifier, device_name, name)
+
+        return Device(self, name)
+
+    def create_PLC(self, article_no: str, version: str, name: str, device_name: str) -> Device:
+        hw_id = f"OrderNumber:{article_no}/{version}"
+        return self.create(hw_id, name, device_name)
+
+    def create_HMI(self, article_no: str, version: str, name: str) -> Device:
+        hw_id = f"OrderNumber:{article_no}/{version}"
+        return self.create(hw_id, name, None)
+
+class DeviceItem(CompositionItem[hw.DeviceItem]):
+    def __init__(self, parent: DeviceItems, name: str):
+        self.parent = parent
+        self.name = name
+
+        if self.parent.value is None:
+            raise tia_e.InvalidDeviceItemComposition("Parent value is None")
+
+        value = self.parent.value.Find(name)
+
+        if value is None:
+            self.value = None
+        else:
+            self.value = value
+
+    @staticmethod
+    def find(object: DeviceItems, name: str) -> DeviceItem:
+        return object.find(name)
+
+    def get_software(self):
+        if self.value is None:
+            raise tia_e.InvalidDeviceItem("Value is None")
+
+        software_container = self.value.GetService[hwf.SoftwareContainer]()
+
+        if software_container is None:
+            return None
+
+        if software_container.Software is None:
+            return None
+
+        software_type = software_container.Software.ToString()
+
+        if software_type == "Siemens.Engineering.SW.PlcSoftware":
+            return PLCSoftware(self)
+
+    def get_items(self) -> Optional[DeviceItems]:
+        if self.value is None:
+            raise tia_e.InvalidDeviceItem("Value is None")
+
+        if self.value.DeviceItems.Count > 0:
+            return DeviceItems(self)
+
+class DeviceItems(Composition[DeviceItem, hw.DeviceItemComposition]):
+    def __init__(self, parent: Union[Device, DeviceItem]) -> None:
+        self.parent = parent
+
+        if self.parent.value is None:
+            raise tia_e.InvalidDevice("Device value is None")
+
+        value = self.parent.value.DeviceItems
+
+        if value is None:
+            self.value = None
+        else:
+            self.value = value
+
+    def find(self, name: str) -> DeviceItem:
+        if self.value is None:
+            raise tia_e.InvalidDeviceItemComposition("Value is None")
+
+        return DeviceItem(self, name)
+
+    def __iter__(self) -> Iterator[DeviceItem]:
+        if self.value is None:
+            raise tia_e.InvalidDeviceItemComposition("Value is None")
+
+        for device_item in self.value:
+            yield DeviceItem(self, device_item.Name)
+
+    def get_device_items(self) -> list[DeviceItem]:
+        device_items: list[DeviceItem] = []
+        for device_item in self:
+            device_items.append(device_item)
+
+        return device_items
+
+class PLCSoftware(TiaObject[sw.PlcSoftware]):
+    def __init__(self, parent: DeviceItem) -> None:
+        self.parent = parent
+
+        if self.parent.value is None:
+            raise tia_e.InvalidDeviceItem("Value is None")
+
+        software_container = self.parent.value.GetService[hwf.SoftwareContainer]()
+
+        if software_container is None:
+            raise tia_e.InvalidDeviceItem("Software container is None")
+
+        if software_container.Software is None:
+            raise tia_e.InvalidDeviceItem("Software is None")
+
+        value = software_container.Software
+
+        if not isinstance(value, sw.PlcSoftware):
+            raise tia_e.InvalidSoftwareType("Software is not PLC software")
+
+        self.value = value
+
+    def get_system_block_groups(self) -> PLCSystemBlockGroups:
+        if self.value is None:
+            raise tia_e.InvalidSoftware("Value is None")
+
+        return PLCSystemBlockGroups(self)
+
+    def get_user_block_groups(self) -> PLCUserBlockGroups:
+        if self.value is None:
+            raise tia_e.InvalidSoftware("Value is None")
+
+        return PLCUserBlockGroups(self)
+
+    def get_blocks(self) -> PLCBlocks:
+        if self.value is None:
+            raise tia_e.InvalidSoftware("Value is None")
+
+        return PLCBlocks(self)
+
+    def get_all_blocks(self, recursive: bool = False) -> list[PLCBlock]:
+        if not recursive:
+            return [block for block in self.get_blocks()]
+        else:
+            blocks = [block for block in self.get_blocks()]
+            for group in self.get_system_block_groups():
+                blocks.extend(group.get_all_blocks(True))
+            for group in self.get_user_block_groups():
+                blocks.extend(group.get_all_blocks(True))
+
+            return blocks
+
+class PLCSystemBlockGroup(CompositionItem[swb.PlcSystemBlockGroup]):
+    def __init__(self, parent: PLCSystemBlockGroups, name: str) -> None:
+        self.parent = parent
+        self.name = name
+
+        if self.parent.value is None:
+            raise tia_e.InvalidSystemBlockGroupComposition("Parent value is None")
+
+        value = self.parent.value.Find(name)
+
+        if value is None:
+            self.value = None
+        else:
+            self.value = value
+
+    @staticmethod
+    def find(object: PLCSystemBlockGroups, name: str) -> PLCSystemBlockGroup:
+        return object.find(name)
+
+    def get_groups(self) -> PLCSystemBlockGroups:
+        if self.value is None:
+            raise tia_e.InvalidSystemBlockGroup("Value is None")
+
+        return PLCSystemBlockGroups(self)
+
+    def get_blocks(self) -> PLCBlocks:
+        if self.value is None:
+            raise tia_e.InvalidSystemBlockGroup("Value is None")
+
+        return PLCBlocks(self)
+
+    def get_all_blocks(self, recursive: bool = False) -> list[PLCBlock]:
+        if not recursive:
+            return [block for block in self.get_blocks()]
+        else:
+            blocks = [block for block in self.get_blocks()]
+            for group in self.get_groups():
+                blocks.extend(group.get_all_blocks(True))
+
+            return blocks
+
+class PLCSystemBlockGroups(Composition[PLCSystemBlockGroup, swb.PlcSystemBlockGroupComposition]):
+    def __init__(self, parent: Union[PLCSoftware, PLCSystemBlockGroup]) -> None:
+        self.parent = parent
+
+        if self.parent.value is None:
+            raise tia_e.InvalidSoftware("Software value is None")
+
+        value = None
+
+        if not isinstance(self.parent.value, sw.PlcSoftware):
+            value = self.parent.value.Groups
+
+        if not isinstance(self.parent.value, swb.PlcSystemBlockGroup):
+            value = self.parent.value.BlockGroup.SystemBlockGroups
+
+        if value is None:
+            self.value = None
+        else:
+            self.value = value
+
+    def find(self, name: str) -> PLCSystemBlockGroup:
+        if self.value is None:
+            raise tia_e.InvalidSystemBlockGroupComposition("Value is None")
+
+        return PLCSystemBlockGroup(self, name)
+
+    def __iter__(self) -> Iterator[PLCSystemBlockGroup]:
+        if self.value is None:
+            raise tia_e.InvalidSystemBlockGroupComposition("Value is None")
+
+        for system_block_group in self.value:
+            yield PLCSystemBlockGroup(self, system_block_group.Name)
+
+    def create(self, name: str) -> PLCSystemBlockGroup:
+        if self.value is None:
+            raise tia_e.InvalidSystemBlockGroupComposition("Value is None")
+
+        self.value.Create(name)
+
+        return PLCSystemBlockGroup(self, name)
+
+class PLCUserBlockGroup(CompositionItem[swb.PlcBlockUserGroup]):
+    def __init__(self, parent: PLCUserBlockGroups, name: str) -> None:
+        self.parent = parent
+        self.name = name
+
+        if self.parent.value is None:
+            raise tia_e.InvalidUserBlockGroupComposition("Parent value is None")
+
+        value = self.parent.value.Find(name)
+
+        if value is None:
+            self.value = None
+        else:
+            self.value = value
+
+    @staticmethod
+    def find(object: PLCUserBlockGroups, name: str) -> PLCUserBlockGroup:
+        return object.find(name)
+
+    def get_groups(self) -> PLCUserBlockGroups:
+        if self.value is None:
+            raise tia_e.InvalidUserBlockGroup("Value is None")
+
+        return PLCUserBlockGroups(self)
+
+    def get_blocks(self) -> PLCBlocks:
+        if self.value is None:
+            raise tia_e.InvalidUserBlockGroup("Value is None")
+
+        return PLCBlocks(self)
+
+    def get_all_blocks(self, recursive: bool = False) -> list[PLCBlock]:
+        if not recursive:
+            return [block for block in self.get_blocks()]
+        else:
+            blocks = [block for block in self.get_blocks()]
+            for group in self.get_groups():
+                blocks.extend(group.get_all_blocks(True))
+
+            return blocks
+
+class PLCUserBlockGroups(Composition[PLCUserBlockGroup, swb.PlcBlockUserGroupComposition]):
+    def __init__(self, parent: Union[PLCSoftware, PLCUserBlockGroup]) -> None:
+        self.parent = parent
+
+        if self.parent.value is None:
+            raise tia_e.InvalidSoftware("Software value is None")
+
+        value = None
+
+        if not isinstance(self.parent.value, sw.PlcSoftware):
+            value = self.parent.value.Groups
+
+        if not isinstance(self.parent.value, swb.PlcBlockUserGroup):
+            value = self.parent.value.BlockGroup.SystemBlockGroups
+
+        if value is None:
+            self.value = None
+        else:
+            self.value = value
+
+    def find(self, name: str) -> PLCUserBlockGroup:
+        if self.value is None:
+            raise tia_e.InvalidUserBlockGroupComposition("Value is None")
+
+        return PLCUserBlockGroup(self, name)
+
+    def __iter__(self) -> Iterator[PLCUserBlockGroup]:
+        if self.value is None:
+            raise tia_e.InvalidUserBlockGroupComposition("Value is None")
+
+        for user_block_group in self.value:
+            yield PLCUserBlockGroup(self, user_block_group.Name)
+
+    def create(self, name: str) -> PLCUserBlockGroup:
+        if self.value is None:
+            raise tia_e.InvalidUserBlockGroupComposition("Value is None")
+
+        self.value.Create(name)
+
+        return PLCUserBlockGroup(self, name)
+
+class PLCBlock(CompositionItem[swb.PlcBlock]):
+    def __init__(self, parent: PLCBlocks, name: str) -> None:
+        self.parent = parent
+        self.name = name
+
+        if self.parent.value is None:
+            raise tia_e.InvalidBlockComposition("Parent value is None")
+
+        value = self.parent.value.Find(name)
+
+        if value is None:
+            self.value = None
+        else:
+            self.value = value
+
+    @staticmethod
+    def find(object: PLCBlocks, name: str) -> PLCBlock:
+        return object.find(name)
+
+    def export(self) -> str:
+        if self.value is None:
+            raise tia_e.InvalidBlock("Value is None")
+
+        if not self.value.IsConsistent:
+            raise tia_e.InvalidBlock("Block is inconsistent")
+
+        new_file = os.path.join(cfg.DATA_PATH, "exported_blocks", f"{self.name}.xml")
+
+        if not os.path.exists(os.path.dirname(new_file)):
+            os.makedirs(os.path.dirname(new_file))
+
+        file_info = FileInfo(new_file)
+
+        self.value.Export(file_info, tia.ExportOptions(0))
+
+        return new_file
+
+class PLCBlocks(Composition[PLCBlock, swb.PlcBlockComposition]):
+    def __init__(self, parent: Union[PLCSoftware, PLCSystemBlockGroup, PLCUserBlockGroup]) -> None:
+        self.parent = parent
+
+        if isinstance(self.parent, PLCSoftware):
+            if self.parent.value is None:
+                raise tia_e.InvalidSoftware("Software value is None")
+
+            self.value = self.parent.value.BlockGroup.Blocks
+        elif isinstance(self.parent, PLCSystemBlockGroup):
+            if self.parent.value is None:
+                raise tia_e.InvalidSystemBlockGroup("Value is None")
+
+            self.value = self.parent.value.Blocks
+        else:
+            if self.parent.value is None:
+                raise tia_e.InvalidUserBlockGroup("Value is None")
+
+            self.value = self.parent.value.Blocks
+
+    def find(self, name: str) -> PLCBlock:
+        if self.value is None:
+            raise tia_e.InvalidBlockComposition("Value is None")
+
+        return PLCBlock(self, name)
+
+    def __iter__(self) -> Iterator[PLCBlock]:
+        if self.value is None:
+            raise tia_e.InvalidBlockComposition("Value is None")
+
+        for block in self.value:
+            yield PLCBlock(self, block.Name)
+
+    def create(self, type: str, name: str) -> PLCBlock:
+        if self.value is None:
+            raise tia_e.InvalidBlockComposition("Value is None")
+
+        file = os.path.join(cfg.DATA_PATH, "empty_blocks", f"{type}.xml")
+        new_file = os.path.join(cfg.DATA_PATH, "temp", f"{name}.xml")
+
+        if not os.path.isfile(file):
+            raise tia_e.InvalidBlockType(f"Invalid block type: {type}")
+
+        shutil.copyfile(file, new_file)
+
+        with open(new_file, "r") as f:
+            data = f.read()
+
+        data = data.replace("__NAME__", name)
+
+        with open(new_file, "w") as f:
+            f.write(data)
+
+        file_info = FileInfo(new_file)
+
+        self.value.Import(file_info, tia.ImportOptions.Override)
+
+        os.remove(new_file)
+
+        return PLCBlock(self, name)
 
 class Client:
     def __init__(self) -> None:
@@ -174,15 +622,14 @@ class Client:
 
         return projects
 
-
-class Project:
+class Project(TiaObject[tia.Project]):
     def __init__(self, client: Client, path: str, name: str, version: Optional[TIAVersion] = None):
         self.client = client
         self.path = path
         self.name = name
 
-        self.version = version if version is not None else VERSION
-        self.value: Optional[tia.Project] = None
+        self.version = version if version is not None else cfg.VERSION
+        self.value = None
 
     def open(self) -> None:
         if self.client.session is None:
@@ -285,324 +732,51 @@ class Project:
     def is_open(self) -> bool:
         return self.value is not None
 
-    def get_devices(self) -> List[Device]:
-        if self.value is None:
-            raise tia_e.TIAInvalidProject("Project is None")
-        return [Device(self, device.Name) for device in self.value.Devices]
-
-    def find_device(self, name: str):
-        if self.value is None:
-            raise tia_e.TIAInvalidProject("Project is None")
-
-        devices = self.get_devices()
-
-        for device in devices:
-            if device.name == name:
-                return device
-
-        raise tia_e.TIADeviceNotFound(f"Device {name} not found")
-
-    # ================================================================================================================
-    # Device
-    # ================================================================================================================
-
-    def create_device(self, HwTypeIdentifier: str, deviceName: str) -> Device:
-        if self.value is None:
-            raise tia_e.TIAInvalidProject("Project is None")
-
-        device = Device(self, deviceName)
-        device.create(HwTypeIdentifier, deviceName)
-
-        return device
-
-    def create_PLC(self, article_no: str, version: str, deviceName: str, deviceItemName: str) -> Device:
-        if self.value is None:
-            raise tia_e.TIAInvalidProject("Project is None")
-
-        device = Device(self, deviceName)
-        device.create_PLC(article_no, version, deviceItemName)
-
-        return device
-
-    def create_HMI(self, article_no: str, version: str, deviceName: str) -> Device:
-        if self.value is None:
-            raise tia_e.TIAInvalidProject("Project is None")
-
-        device = Device(self, deviceName)
-        device.create_HMI(article_no, version)
-
-        return device
-
-
-class Device:
-    def __init__(self, project: Project, name: str) -> None:
-        self.project = project
-        self.name = name
-
-        if self.project.value is not None:
-            device = self.project.value.Devices.Find(self.name)
-            if isinstance(device, hw.Device):
-                self.value = device
-            else:
-                self.value = None
-
-    def create(self, HwTypeIdentifier: str, deviceName: str) -> None:
-        if self.project.value is None:
-            raise tia_e.TIAInvalidProject("Project is None")
-        if self.value is not None:
-            raise tia_e.TIADeviceAlreadyExists(f"Device {self.name} already exists")
-        self.value = self.project.value.Devices.CreateWithItem(HwTypeIdentifier, deviceName, self.name)
-
-    def create_PLC(self, article_no: str, version: str, deviceName: str) -> None:
-        hwIdentifier = f"OrderNumber:{article_no}/{version}"
-        self.create(hwIdentifier, deviceName)
-
-    def create_HMI(self, article_no: str, version: str) -> None:
-        hwIdentifier = f"OrderNumber:{article_no}/{version}"
-        if self.project.value is None:
-            raise tia_e.TIAInvalidProject("Project is None")
-        if self.value is not None:
-            raise tia_e.TIADeviceAlreadyExists(f"Device {self.name} already exists")
-        self.value = self.project.value.Devices.CreateWithItem(hwIdentifier, self.name, None)
-
-    def exists(self) -> bool:
-        return self.value is not None
-
-    def remove(self) -> None:
-        if self.value is None:
-            raise tia_e.TIADeviceNotFound(f"Device {self.name} not found")
-        self.value.Delete()
-        self.value = None
-
-    def delete(self) -> None:
-        self.remove()
-
-    def get_device_items(self) -> List[DeviceItem]:
-        if self.value is None:
-            raise tia_e.TIADeviceNotFound(f"Device {self.name} not found")
-        return [DeviceItem(self, item.Name) for item in self.value.DeviceItems]
-
-
-class DeviceItem:
-    def __init__(self, parent: Union[Device, DeviceItem], name: str) -> None:
-        self.parent = parent
-        temp_parent = parent
-
-        while not isinstance(temp_parent, Device) and isinstance(temp_parent, DeviceItem):
-            temp_parent = temp_parent.parent
-
-        if not isinstance(temp_parent, Device):
-            raise tia_e.TIADeviceNotFound(f"Device not found")
-
-        self.device: Device = temp_parent
-
-        self.name = name
-
-        if self.parent.value is not None:
-            device_items = self.parent.value.DeviceItems
-            for item in device_items:
-                if item.Name == self.name:
-                    self.value = item
-                    break
-
-    def get_software(self):
-        if self.value is None:
-            raise tia_e.TIADeviceItemNotFound(f"DeviceItem {self.name} not found")
-
-        software_container = self.value.GetService[hwf.SoftwareContainer]()  # type: ignore
-        if software_container is None:
-            raise tia_e.TIADeviceItemNotFound(f"DeviceItem {self.name} not found")
-
-        software_container: hwf.SoftwareContainer
-
-        if software_container.Software is None:
-            raise tia_e.TIADeviceItemNotFound(f"DeviceItem {self.name} not found")
-
-        software_type = software_container.Software.ToString()
-
-        if software_type == "Siemens.Engineering.SW.PlcSoftware":
-            return PLCSoftware(self)
-
-    def get_device_items(self) -> List[DeviceItem]:
-        if self.value is None:
-            raise tia_e.TIADeviceItemNotFound(f"DeviceItem {self.name} not found")
-        return [DeviceItem(self, item.Name) for item in self.value.DeviceItems]
-
-
-class PLCSoftware:
-    def __init__(self, device_item: DeviceItem) -> None:
-        self.device_item = device_item
-
-        software_container = self.device_item.value.GetService[hwf.SoftwareContainer]()  # type: ignore
-        if software_container is None:
-            raise tia_e.TIADeviceItemNotFound(f"DeviceItem {self.device_item.name} not found")
-        self.value: sw.PlcSoftware = software_container.Software
-
-        if self.value is None:
-            raise tia_e.TIADeviceItemNotFound(f"DeviceItem {self.device_item.name} not found")
-
-        if not isinstance(self.value, sw.PlcSoftware):
-            raise tia_e.TIADeviceItemNotFound(f"DeviceItem {self.device_item.name} not found")
-
-    def get_system_block_groups(self) -> List[PLCSystemBlockGroup]:
-        if self.value is None:
-            raise tia_e.TIADeviceItemNotFound(f"DeviceItem {self.device_item.name} not found")
-        return [PLCSystemBlockGroup(self, None, group.Name) for group in self.value.BlockGroup.SystemBlockGroups]
-
-    def get_block_groups(self) -> List[PLCBlockUserGroup]:
-        if self.value is None:
-            raise tia_e.TIADeviceItemNotFound(f"DeviceItem {self.device_item.name} not found")
-        return [PLCBlockUserGroup(self, None, group.Name) for group in self.value.BlockGroup.Groups]
-
-    def get_blocks(self) -> List[PLCBlock]:
-        if self.value is None:
-            raise tia_e.TIADeviceItemNotFound(f"DeviceItem {self.device_item.name} not found")
-        return [PLCBlock(self, block.Name) for block in self.value.BlockGroup.Blocks]
-
-
-class PLCBlockGroup(Protocol):
-    value: Optional[Union[swb.PlcSystemBlockGroup, swb.PlcBlockUserGroup]]
-    plc_software: PLCSoftware
-    group: Optional[Union[PLCSystemBlockGroup, PLCBlockUserGroup]]
-    name: str
-
-    def get_groups(self):
+    @property
+    def devices(self) -> Devices:
         ...
 
-    def get_blocks(self) -> List[PLCBlock]:
-        ...
-
-    def create(self) -> None:
-        ...
-
-
-class PLCSystemBlockGroup(PLCBlockGroup):
-    def __init__(self, plc_software: PLCSoftware, group: Optional[PLCSystemBlockGroup], name: str) -> None:
-        self.plc_software = plc_software
-        self.name = name
-        self.group: Optional[PLCSystemBlockGroup] = group
-
-        if self.plc_software.value is not None:
-            self.value: Optional[swb.PlcSystemBlockGroup] = self.plc_software.value.BlockGroup.SystemBlockGroups.Find(
-                self.name
-            )
-        else:
-            self.value = None
-
-    def get_groups(self) -> List[PLCSystemBlockGroup]:
+    @devices.getter
+    def devices(self) -> Devices:
         if self.value is None:
-            raise tia_e.TIAGroupNotFound(f"Group {self.name} not found")
-        return [PLCSystemBlockGroup(self.plc_software, self, item.Name) for item in self.value.Groups]
+            raise tia_e.TIAInvalidProject("Project is None")
+        return Devices(self)
 
-    def get_blocks(self) -> List[PLCBlock]:
-        if self.value is None:
-            raise tia_e.TIAGroupNotFound(f"Group {self.name} not found")
-        return [PLCBlock(self, item.Name) for item in self.value.Blocks]
+    @devices.setter
+    def devices(self, value: Any) -> None:
+        raise NotImplementedError("Devices can only be accessed through the devices property")
 
-    def create(self) -> None:
-        if self.group is None:
-            if self.plc_software.value is None:
-                raise tia_e.TIAInvalidProperty(f"PLCSoftware not found")
-            else:
-                self.plc_software.value.BlockGroup.SystemBlockGroups.Create(self.name)
-                return
-        if self.group.value is None:
-            raise tia_e.TIAGroupNotFound(f"Group {self.group.name} not found")
-        self.group.value.Groups.Create(self.name)
+# class GlobalLibrary:
+#     def __init__(self, client: Client, name: str):
+#         self.client = client
+#         self.value: Optional[lib.GlobalLibrary] = None
+#         self.name = name
 
+#         if not self.client.session:
+#             raise tia_e.TIAInvalidSession("Session is None")
 
-class PLCBlockUserGroup:
-    def __init__(self, plc_software: PLCSoftware, group: Optional[PLCBlockUserGroup], name: str) -> None:
-        self.plc_software = plc_software
-        self.name = name
-        self.group: Optional[PLCBlockUserGroup] = group
+#         info =  self.client.session.GlobalLibraries.GetGlobalLibraryInfos()
 
-        if self.plc_software.value is not None:
-            self.value: Optional[swb.PlcBlockUserGroup] = self.plc_software.value.BlockGroup.Groups.Find(self.name)
-        else:
-            self.value = None
+#         for lib_info in info:
+#             if lib_info.Name == self.name:
+#                 self.value = self.client.session.GlobalLibraries.Open(lib_info)
+#                 return
 
-    def get_groups(self) -> List[PLCBlockUserGroup]:
-        if self.value is None:
-            raise tia_e.TIAGroupNotFound(f"Group {self.name} not found")
-        return [PLCBlockUserGroup(self.plc_software, self, item.Name) for item in self.value.Groups]
+# class MasterCopy(Protocol):
+#     def __init__(self, global_library: GlobalLibrary, name: str):
+#         ...
 
-    def get_blocks(self) -> List[PLCBlock]:
-        if self.value is None:
-            raise tia_e.TIAGroupNotFound(f"Group {self.name} not found")
-        return [PLCBlock(self, item.Name) for item in self.value.Blocks]
+# class MasterCopyGlobalLibrary(MasterCopy):
+#     def __init__(self, global_library: GlobalLibrary, name: str):
+#         self.global_library = global_library
+#         self.value: Optional[lib_mc.MasterCopySystemFolder] = None
 
-    def create(self) -> None:
-        if self.group is None:
-            if self.plc_software.value is None:
-                raise tia_e.TIAInvalidProperty(f"PLCSoftware not found")
-            else:
-                self.plc_software.value.BlockGroup.Groups.Create(self.name)
-                return
-        if self.group.value is None:
-            raise tia_e.TIAGroupNotFound(f"Group {self.group.name} not found")
-        self.group.value.Groups.Create(self.name)
+#         if not self.global_library.value:
+#             raise tia_e.TIAGlobalLibraryNotFound("Global Library is None")
 
+#         copy = self.global_library.value.MasterCopyFolder.MasterCopies.Find(name)
 
-class PLCBlock:
-    def __init__(self, parent: Union[PLCSoftware, PLCSystemBlockGroup, PLCBlockUserGroup], name: str) -> None:
-        self.parent = parent
-        self.name = name
-        self.value = None
-
-        self.parent_blocks = None
-
-        if isinstance(self.parent, PLCSoftware):
-            if self.parent.value is not None:
-                self.parent_blocks = self.parent.value.BlockGroup.Blocks
-        else:
-            if self.parent.value is not None:
-                self.parent_blocks = self.parent.value.Blocks
-
-        if self.parent_blocks is not None:
-            self.value = self.parent_blocks.Find(self.name)
-        else:
-            self.value = None
-
-    def create(self):
-        if self.parent_blocks is None:
-            raise tia_e.TIAInvalidProperty(f"Parent blocks not found")
-
-        file = os.path.join(DATA_PATH, "empty_block.xml")
-
-        shutil.copyfile(file, f"{os.path.join(DATA_PATH, self.name)}.xml")
-
-        with open(f"{os.path.join(DATA_PATH, self.name)}.xml", "r") as f:
-            filedata = f.read()
-
-        filedata = filedata.replace("__EMPTY_BLOCK__", self.name)
-
-        with open(f"{os.path.join(DATA_PATH, self.name)}.xml", "w") as f:
-            f.write(filedata)
-
-        file_info = FileInfo(f"{os.path.join(DATA_PATH, self.name)}.xml")
-
-        self.parent_blocks.Import(file_info, tia.ImportOptions.Override)
-
-        os.remove(f"{os.path.join(DATA_PATH, self.name)}.xml")
-
-
-
-        self.parent_blocks.CreateFrom(swb.CodeBlockLibraryTypeVersion)
-
-    def export(self):
-        if self.value is None:
-            raise tia_e.TIABlockNotFound(f"Block {self.name} not found")
-
-        if not self.value.IsConsistent:
-            raise tia_e.TIAInconsistentBlock(
-                f"Block {self.name} is inconsistent and needs to be compiled before exporting"
-            )
-
-        file_name = f"{self.name}.xml"
-
-        file_info = rf"{os.path.join(DATA_PATH, file_name)}"
-
-        file_info = FileInfo(file_info)
-
-        return self.value.Export(file_info, tia.ExportOptions(0))
+#         if isinstance(copy, lib_mc.MasterCopy):
+#             self.value = copy
+#         else:
+#             self.value = None
