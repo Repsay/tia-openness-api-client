@@ -7,15 +7,22 @@
 
 # no functions
 # classes
+from typing import Any, List, Union, overload
 from Siemens.Engineering.SW import ISoftwareCompareTarget
-from Siemens.Engineering import IEngineeringComposition, IEngineeringObject, ITransactionSupport
+from Siemens.Engineering import IEngineeringComposition, IEngineeringObject, ITransactionSupport, OpenMode
 from System import Enum, IEquatable
+
+from System.IO import FileInfo
+
+from Siemens.Engineering.Library.MasterCopies import MasterCopySystemFolder
+
+from Siemens.Engineering.Library.Types import LibraryTypeSystemFolder
 
 class ILibrary:
     """Base interface implemented by all libraries"""
 
     @property
-    def MasterCopyFolder(self):
+    def MasterCopyFolder(self) -> MasterCopySystemFolder:
         """
         System folder containing master copies and master copy folders
 
@@ -23,7 +30,7 @@ class ILibrary:
         """
         ...
     @property
-    def TypeFolder(self):
+    def TypeFolder(self) -> LibraryTypeSystemFolder:
         """
         System folder containing library types and library type folders
 
@@ -181,7 +188,7 @@ class GlobalLibraryComposition(
         Get: Parent(self: GlobalLibraryComposition) -> IEngineeringObject
         """
         ...
-    def GetGlobalLibraryInfos(self):
+    def GetGlobalLibraryInfos(self) -> List[GlobalLibraryInfo]:
         """
         GetGlobalLibraryInfos(self: GlobalLibraryComposition) -> IList[GlobalLibraryInfo]
 
@@ -199,7 +206,15 @@ class GlobalLibraryComposition(
             Returns: A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         """
         ...
-    def Open(self, *__args):
+    @overload
+    def Open(self, libraryInfo: GlobalLibraryInfo) -> GlobalLibrary:
+        """ Open(self: GlobalLibraryComposition, libraryInfo: GlobalLibraryInfo) -> GlobalLibrary """
+        ...
+    @overload
+    def Open(self, path: FileInfo, openMode: OpenMode) -> UserGlobalLibrary:
+        """ Open(self: GlobalLibraryComposition, path: FileInfo, openMode: OpenMode) -> UserGlobalLibrary """
+        ...
+    def Open(self, *__args: Any) -> Union[GlobalLibrary, UserGlobalLibrary]:
         """
         Open(self: GlobalLibraryComposition, libraryInfo: GlobalLibraryInfo) -> GlobalLibrary
 
@@ -305,7 +320,7 @@ class GlobalLibraryInfo(
         """
         ...
     @property
-    def Name(self):
+    def Name(self) -> str:
         """
         The name of the global library.
 

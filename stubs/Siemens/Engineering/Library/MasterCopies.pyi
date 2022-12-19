@@ -156,7 +156,7 @@ class MasterCopyComposition(
             Returns: Siemens.Engineering.Library.MasterCopies.MasterCopy
         """
         ...
-    def Find(self, name):
+    def Find(self, name: str) -> MasterCopy:
         """
         Find(self: MasterCopyComposition, name: str) -> MasterCopy
 
@@ -289,7 +289,7 @@ class MasterCopyFolder(
         """
         ...
     @property
-    def MasterCopies(self):
+    def MasterCopies(self) -> MasterCopyComposition:
         """
         Composition of MasterCopies
 

@@ -8,6 +8,7 @@
 # no functions
 # classes
 
+from typing import Optional
 from Siemens.Engineering import (
     ExportOptions,
     IEngineeringObject,
@@ -15,6 +16,7 @@ from Siemens.Engineering import (
     IEngineeringServiceProvider,
     IEngineeringService,
     IEngineeringComposition,
+    ImportOptions,
 )
 from Siemens.Engineering.SW.ExternalSources import IGenerateSource
 from Siemens.Engineering.Library.MasterCopies import IMasterCopySource, IMasterCopyTarget
@@ -23,6 +25,8 @@ from Siemens.Engineering.AdvancedProtection import ProtectionProviderBase
 from System import IEquatable, Enum
 
 from System.IO import FileInfo
+
+from Siemens.Engineering.SW import SWImportOptions
 
 class PlcBlock(IEngineeringObject, IShowable, IGenerateSource, IInternalObjectAccess, IEngineeringServiceProvider, IEquatable):  # type: ignore
     # skipped bases: <type 'IInternalBaseAccess'>, <type 'IEngineeringCompositionOrObject'>, <type 'IEngineeringInstance'>, <type 'IServiceProvider'>, <type 'IInternalInstanceAccess'>
@@ -102,7 +106,7 @@ class PlcBlock(IEngineeringObject, IShowable, IGenerateSource, IInternalObjectAc
         """
         ...
     @property
-    def IsConsistent(self):
+    def IsConsistent(self) -> bool:
         """
         True if block and used data is consistent
 
@@ -554,7 +558,7 @@ class PlcBlockComposition(
             Returns: A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         """
         ...
-    def Import(self, path, importOptions, swImportOptions=...):
+    def Import(self, path: FileInfo, importOptions: ImportOptions, swImportOptions: Optional[SWImportOptions] = ...) -> list[PlcBlock]:
         """
         Import(self: PlcBlockComposition, path: FileInfo, importOptions: ImportOptions) -> IList[PlcBlock]
 

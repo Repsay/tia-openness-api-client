@@ -189,7 +189,7 @@ class LibraryTypeFolder(
     """Folder containing library types & library type folders"""
 
     @property
-    def Folders(self):
+    def Folders(self) -> LibraryTypeUserFolderComposition:
         """
         Composition of library type user folders
 
