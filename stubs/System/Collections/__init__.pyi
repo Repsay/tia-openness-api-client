@@ -8,7 +8,7 @@
 # no functions
 # classes
 
-from typing import Generic, TypeVar
+from typing import Generic, Iterator, TypeVar
 
 from System import ICloneable
 
@@ -613,11 +613,8 @@ class IEnumerable(Generic[U]):
             Returns: An System.Collections.IEnumerator object that can be used to iterate through the collection.
         """
         ...
-    def __iter__(self) -> U:
+    def __iter__(self) -> Iterator[U]:
         """__iter__(self: IEnumerable) -> object"""
-        ...
-    def __next__(self) -> U:
-        """__next__(self: IEnumerable) -> object"""
         ...
 
 class ICollection(IEnumerable):

@@ -52,7 +52,7 @@ class MasterCopy(
         """
         ...
     @property
-    def Name(self):
+    def Name(self) -> str:
         """
         The name of the MasterCopy
 
@@ -133,7 +133,7 @@ class MasterCopyAssociation(
     def __ne__(self, *args): ...
 
 class MasterCopyComposition(
-    IEngineeringComposition, IInternalCompositionAccess, IEquatable  # type: ignore
+    IEngineeringComposition[MasterCopy], IInternalCompositionAccess, IEquatable  # type: ignore
 ):  # skipped bases: <type 'IInternalBaseAccess'>, <type 'IEngineeringInstance'>, <type 'IEnumerable'>, <type 'IInternalInstanceAccess'>, <type 'IEngineeringCompositionOrObject'>, <type 'IInternalCollectionAccess'>
     """Composition of MasterCopies"""
 
@@ -281,7 +281,7 @@ class MasterCopyFolder(
     """Folder containing Master Copies & Master Copy folders"""
 
     @property
-    def Folders(self):
+    def Folders(self) -> MasterCopyUserFolderComposition:
         """
         Composition of MasterCopy user folders
 
@@ -297,7 +297,7 @@ class MasterCopyFolder(
         """
         ...
     @property
-    def Name(self):
+    def Name(self) -> str:
         """
         The name of the MasterCopy folder
 
@@ -365,7 +365,7 @@ class MasterCopyUserFolder(
         ...
 
 class MasterCopyUserFolderComposition(
-    IEngineeringComposition, IInternalCompositionAccess, IEquatable  # type: ignore
+    IEngineeringComposition[MasterCopyUserFolder], IInternalCompositionAccess, IEquatable  # type: ignore
 ):  # skipped bases: <type 'IInternalBaseAccess'>, <type 'IEngineeringInstance'>, <type 'IEnumerable'>, <type 'IInternalInstanceAccess'>, <type 'IEngineeringCompositionOrObject'>, <type 'IInternalCollectionAccess'>
     """Composition of MasterCopyUserFolders"""
 
@@ -377,7 +377,7 @@ class MasterCopyUserFolderComposition(
         Get: Parent(self: MasterCopyUserFolderComposition) -> IEngineeringObject
         """
         ...
-    def Find(self, name):
+    def Find(self, name: str) -> MasterCopyUserFolder:
         """
         Find(self: MasterCopyUserFolderComposition, name: str) -> MasterCopyUserFolder
 

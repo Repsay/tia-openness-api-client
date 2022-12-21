@@ -1,5 +1,5 @@
 import configparser
-import clr
+import clr #type: ignore
 from version import TIAVersion
 from exceptions import LibraryDLLNotFound, LibraryImportError
 import os
@@ -41,7 +41,7 @@ def load():
 
     global comp
     try:
-        import Siemens.Engineering.Compiler as comp
+        import Siemens.Engineering.Compiler as comp #type: ignore
     except Exception as e:
         raise LibraryImportError(f"Could not import Siemens.Engineering.Compiler") from e
 
@@ -53,7 +53,7 @@ def load():
 
     global hwf
     try:
-        import Siemens.Engineering.HW.Features as hwf
+        import Siemens.Engineering.HW.Features as hwf #type: ignore
     except Exception as e:
         raise LibraryImportError(f"Could not import Siemens.Engineering.HW.Features") from e
 
@@ -65,7 +65,7 @@ def load():
 
     global swb
     try:
-        import Siemens.Engineering.SW.Blocks as swb
+        import Siemens.Engineering.SW.Blocks as swb #type: ignore
     except Exception as e:
         raise LibraryImportError(f"Could not import Siemens.Engineering.SW.Blocks") from e
 
@@ -77,6 +77,12 @@ def load():
 
     global lib_mc
     try:
-        import Siemens.Engineering.Library.MasterCopies as lib_mc
+        import Siemens.Engineering.Library.MasterCopies as lib_mc #type: ignore
     except Exception as e:
         raise LibraryImportError(f"Could not import Siemens.Engineering.Library.MasterCopies") from e
+
+    global lib_type
+    try:
+        import Siemens.Engineering.Library.Types as lib_type #type: ignore
+    except Exception as e:
+        raise LibraryImportError(f"Could not import Siemens.Engineering.Library.Types") from e

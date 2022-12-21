@@ -14,15 +14,15 @@ from System import Enum, IEquatable
 
 from System.IO import FileInfo
 
-from Siemens.Engineering.Library.MasterCopies import MasterCopySystemFolder
+from Siemens.Engineering.Library.MasterCopies import MasterCopySystemFolder, MasterCopyFolder
 
-from Siemens.Engineering.Library.Types import LibraryTypeSystemFolder
+from Siemens.Engineering.Library.Types import LibraryTypeSystemFolder, LibraryTypeFolder
 
 class ILibrary:
     """Base interface implemented by all libraries"""
 
     @property
-    def MasterCopyFolder(self) -> MasterCopySystemFolder:
+    def MasterCopyFolder(self) -> Union[MasterCopySystemFolder, MasterCopyFolder]:
         """
         System folder containing master copies and master copy folders
 
@@ -30,7 +30,7 @@ class ILibrary:
         """
         ...
     @property
-    def TypeFolder(self) -> LibraryTypeSystemFolder:
+    def TypeFolder(self) -> Union[LibraryTypeSystemFolder, LibraryTypeFolder]:
         """
         System folder containing library types and library type folders
 
@@ -125,7 +125,7 @@ class GlobalLibrary(
         """
         ...
     @property
-    def Name(self):
+    def Name(self) -> str:
         """
         The name of the global library.
 
@@ -176,7 +176,7 @@ class CorporateGlobalLibrary(
     pass
 
 class GlobalLibraryComposition(
-    IEngineeringComposition, IInternalCompositionAccess, IEquatable  # type: ignore
+    IEngineeringComposition[GlobalLibrary], IInternalCompositionAccess, IEquatable  # type: ignore
 ):  # skipped bases: <type 'IInternalBaseAccess'>, <type 'IEngineeringInstance'>, <type 'IEnumerable'>, <type 'IInternalInstanceAccess'>, <type 'IEngineeringCompositionOrObject'>, <type 'IInternalCollectionAccess'>
     """Composition of GlobalLibraries"""
 

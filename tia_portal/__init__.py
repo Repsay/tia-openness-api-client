@@ -23,6 +23,7 @@ sw = cfg.sw
 swb = cfg.swb
 lib = cfg.lib
 lib_mc = cfg.lib_mc
+lib_type = cfg.lib_type
 
 class Device(CompositionItem[hw.Device]):
     def __init__(self, parent: Devices, name: str):
@@ -501,6 +502,300 @@ class PLCBlocks(Composition[PLCBlock, swb.PlcBlockComposition]):
 
         return PLCBlock(self, name)
 
+class GlobalLibrary(CompositionItem[lib.GlobalLibrary]):
+    def __init__(self, parent: GlobalLibraries, name: str):
+        self.parent = parent
+        self.name = name
+
+        if self.parent.value is None:
+            raise tia_e.InvalidGlobalLibraryComposition("Parent value is None")
+
+        self.value = None
+
+        for global_library in self.parent.value:
+            if global_library.Name == name:
+                self.value = global_library
+                break
+
+    @staticmethod
+    def find(object: GlobalLibraries, name: str) -> GlobalLibrary:
+        return object.find(name)
+
+    @property
+    def type_folder(self) -> LibraryTypeFolder:
+        ...
+
+    @type_folder.getter
+    def type_folder(self) -> LibraryTypeFolder:
+        if self.value is None:
+            raise tia_e.InvalidGlobalLibrary("Value is None")
+
+        return LibraryTypeFolder(self)
+
+    @type_folder.setter
+    def type_folder(self, value: LibraryTypeFolder) -> None:
+        raise NotImplementedError("Cannot set type folder")
+
+    @property
+    def master_copy_folder(self) -> MasterCopyFolder:
+        ...
+
+    @master_copy_folder.getter
+    def master_copy_folder(self) -> MasterCopyFolder:
+        if self.value is None:
+            raise tia_e.InvalidGlobalLibrary("Value is None")
+
+        return MasterCopyFolder(self)
+
+    @master_copy_folder.setter
+    def master_copy_folder(self, value: MasterCopyFolder) -> None:
+        raise NotImplementedError("Cannot set master copy folder")
+
+class GlobalLibraries(Composition[GlobalLibrary, lib.GlobalLibraryComposition]):
+    def __init__(self, parent: Client):
+        self.parent = parent
+
+        if self.parent.session is None:
+            raise tia_e.TIAInvalidSession("Session is None")
+
+        self.value = self.parent.session.GlobalLibraries
+
+    def find(self, name: str) -> GlobalLibrary:
+        if self.value is None:
+            raise tia_e.InvalidGlobalLibraryComposition("Value is None")
+
+        return GlobalLibrary(self, name)
+
+    def __iter__(self) -> Iterator[GlobalLibrary]:
+        if self.value is None:
+            raise tia_e.InvalidGlobalLibraryComposition("Value is None")
+
+        for global_library in self.value:
+            yield GlobalLibrary(self, global_library.Name)
+
+class LibraryTypeFolder(TiaObject[lib_type.LibraryTypeFolder]):
+    def __init__(self, parent: GlobalLibrary):
+        self.parent = parent
+
+        if self.parent.value is None:
+            raise tia_e.InvalidGlobalLibrary("Value is None")
+
+        self.value = self.parent.value.TypeFolder
+
+    @property
+    def folders(self) -> LibraryTypeUserFolders:
+        ...
+
+    @folders.getter
+    def folders(self) -> LibraryTypeUserFolders:
+        if self.value is None:
+            raise tia_e.InvalidTypeFolder("Value is None")
+
+        return LibraryTypeUserFolders(self)
+
+    @folders.setter
+    def folders(self, value: LibraryTypeUserFolders) -> None:
+        raise NotImplementedError("Cannot set type user folders")
+
+    @property
+    def types(self) -> LibraryTypes:
+        ...
+
+    @types.getter
+    def types(self) -> LibraryTypes:
+        if self.value is None:
+            raise tia_e.InvalidTypeFolder("Value is None")
+
+        return LibraryTypes(self)
+
+    @types.setter
+    def types(self, value: LibraryTypes) -> None:
+        raise NotImplementedError("Cannot set types")
+
+class LibraryTypeUserFolder(CompositionItem[lib_type.LibraryTypeUserFolder], LibraryTypeFolder):
+    def __init__(self, parent: LibraryTypeUserFolders, name: str):
+        self.parent = parent
+        self.name = name
+
+        if self.parent.value is None:
+            raise tia_e.InvalidTypeUserFolderComposition("Parent value is None")
+
+        self.value = self.parent.value.Find(name)
+
+    @staticmethod
+    def find(object: LibraryTypeUserFolders, name: str) -> LibraryTypeUserFolder:
+        return object.find(name)
+
+class LibraryTypeUserFolders(Composition[LibraryTypeUserFolder, lib_type.LibraryTypeUserFolderComposition]):
+    def __init__(self, parent: Union[LibraryTypeFolder, LibraryTypeUserFolder]):
+        self.parent = parent
+
+        if self.parent.value is None:
+            raise tia_e.InvalidTypeFolder("Value is None")
+
+        self.value = self.parent.value.Folders
+
+    def find(self, name: str) -> LibraryTypeUserFolder:
+        if self.value is None:
+            raise tia_e.InvalidTypeUserFolderComposition("Value is None")
+
+        return LibraryTypeUserFolder(self, name)
+
+    def __iter__(self) -> Iterator[LibraryTypeUserFolder]:
+        if self.value is None:
+            raise tia_e.InvalidTypeUserFolderComposition("Value is None")
+
+        for folder in self.value:
+            yield LibraryTypeUserFolder(self, folder.Name)
+
+class LibraryType(CompositionItem[lib_type.LibraryType]):
+    def __init__(self, parent: LibraryTypes, name: str):
+        self.parent = parent
+        self.name = name
+
+        if self.parent.value is None:
+            raise tia_e.InvalidTypeComposition("Parent value is None")
+
+        self.value = self.parent.value.Find(name)
+
+    @staticmethod
+    def find(object: LibraryTypes, name: str) -> LibraryType:
+        return object.find(name)
+
+class LibraryTypes(Composition[LibraryType, lib_type.LibraryTypeComposition]):
+    def __init__(self, parent: Union[LibraryTypeFolder, LibraryTypeUserFolder]):
+        self.parent = parent
+
+        if self.parent.value is None:
+            raise tia_e.InvalidTypeFolder("Value is None")
+
+        self.value = self.parent.value.Types
+
+    def find(self, name: str) -> LibraryType:
+        if self.value is None:
+            raise tia_e.InvalidTypeComposition("Value is None")
+
+        return LibraryType(self, name)
+
+    def __iter__(self) -> Iterator[LibraryType]:
+        if self.value is None:
+            raise tia_e.InvalidTypeComposition("Value is None")
+
+        for type in self.value:
+            yield LibraryType(self, type.Name)
+
+class MasterCopyFolder(TiaObject[lib_mc.MasterCopyFolder]):
+    def __init__(self, parent: GlobalLibrary):
+        self.parent = parent
+
+        if self.parent.value is None:
+            raise tia_e.InvalidGlobalLibrary("Value is None")
+
+        self.value = self.parent.value.MasterCopyFolder
+
+    @property
+    def folders(self) -> MasterCopyUserFolders:
+        ...
+
+    @folders.getter
+    def folders(self) -> MasterCopyUserFolders:
+        if self.value is None:
+            raise tia_e.InvalidTypeFolder("Value is None")
+
+        return MasterCopyUserFolders(self)
+
+    @folders.setter
+    def folders(self, value: MasterCopyUserFolders) -> None:
+        raise NotImplementedError("Cannot set type user folders")
+
+    @property
+    def master_copies(self) -> MasterCopies:
+        ...
+
+    @master_copies.getter
+    def master_copies(self) -> MasterCopies:
+        if self.value is None:
+            raise tia_e.InvalidMasterCopyFolder("Value is None")
+
+        return MasterCopies(self)
+
+    @master_copies.setter
+    def master_copies(self, value: MasterCopies) -> None:
+        raise NotImplementedError("Cannot set master copies")
+
+class MasterCopyUserFolder(CompositionItem[lib_mc.MasterCopyUserFolder], MasterCopyFolder):
+    def __init__(self, parent: MasterCopyUserFolders, name: str):
+        self.parent = parent
+        self.name = name
+
+        if self.parent.value is None:
+            raise tia_e.InvalidMasterCopyUserFolderComposition("Parent value is None")
+
+        self.value = self.parent.value.Find(name)
+
+    @staticmethod
+    def find(object: MasterCopyUserFolders, name: str) -> MasterCopyUserFolder:
+        return object.find(name)
+
+
+class MasterCopyUserFolders(Composition[MasterCopyUserFolder, lib_mc.MasterCopyUserFolderComposition]):
+    def __init__(self, parent: Union[MasterCopyFolder, MasterCopyUserFolder]):
+        self.parent = parent
+
+        if self.parent.value is None:
+            raise tia_e.InvalidMasterCopyFolder("Value is None")
+
+        self.value = self.parent.value.Folders
+
+    def find(self, name: str) -> MasterCopyUserFolder:
+        if self.value is None:
+            raise tia_e.InvalidMasterCopyUserFolderComposition("Value is None")
+
+        return MasterCopyUserFolder(self, name)
+
+    def __iter__(self) -> Iterator[MasterCopyUserFolder]:
+        if self.value is None:
+            raise tia_e.InvalidMasterCopyUserFolderComposition("Value is None")
+
+        for folder in self.value:
+            yield MasterCopyUserFolder(self, folder.Name)
+
+class MasterCopy(CompositionItem[lib_mc.MasterCopy]):
+    def __init__(self, parent: MasterCopies, name: str):
+        self.parent = parent
+        self.name = name
+
+        if self.parent.value is None:
+            raise tia_e.InvalidMasterCopyComposition("Parent value is None")
+
+        self.value = self.parent.value.Find(name)
+
+    @staticmethod
+    def find(object: MasterCopies, name: str) -> MasterCopy:
+        return object.find(name)
+
+class MasterCopies(Composition[MasterCopy, lib_mc.MasterCopyComposition]):
+    def __init__(self, parent: Union[MasterCopyFolder, MasterCopyUserFolder]):
+        self.parent = parent
+
+        if self.parent.value is None:
+            raise tia_e.InvalidMasterCopyFolder("Value is None")
+
+        self.value = self.parent.value.MasterCopies
+
+    def find(self, name: str) -> MasterCopy:
+        if self.value is None:
+            raise tia_e.InvalidMasterCopyComposition("Value is None")
+
+        return MasterCopy(self, name)
+
+    def __iter__(self) -> Iterator[MasterCopy]:
+        if self.value is None:
+            raise tia_e.InvalidMasterCopyComposition("Value is None")
+
+        for master_copy in self.value:
+            yield MasterCopy(self, master_copy.Name)
+
 class Client:
     def __init__(self) -> None:
         self.session: Optional[tia.TiaPortal] = tia.TiaPortal(tia.TiaPortalMode.WithoutUserInterface)
@@ -745,38 +1040,3 @@ class Project(TiaObject[tia.Project]):
     @devices.setter
     def devices(self, value: Any) -> None:
         raise NotImplementedError("Devices can only be accessed through the devices property")
-
-# class GlobalLibrary:
-#     def __init__(self, client: Client, name: str):
-#         self.client = client
-#         self.value: Optional[lib.GlobalLibrary] = None
-#         self.name = name
-
-#         if not self.client.session:
-#             raise tia_e.TIAInvalidSession("Session is None")
-
-#         info =  self.client.session.GlobalLibraries.GetGlobalLibraryInfos()
-
-#         for lib_info in info:
-#             if lib_info.Name == self.name:
-#                 self.value = self.client.session.GlobalLibraries.Open(lib_info)
-#                 return
-
-# class MasterCopy(Protocol):
-#     def __init__(self, global_library: GlobalLibrary, name: str):
-#         ...
-
-# class MasterCopyGlobalLibrary(MasterCopy):
-#     def __init__(self, global_library: GlobalLibrary, name: str):
-#         self.global_library = global_library
-#         self.value: Optional[lib_mc.MasterCopySystemFolder] = None
-
-#         if not self.global_library.value:
-#             raise tia_e.TIAGlobalLibraryNotFound("Global Library is None")
-
-#         copy = self.global_library.value.MasterCopyFolder.MasterCopies.Find(name)
-
-#         if isinstance(copy, lib_mc.MasterCopy):
-#             self.value = copy
-#         else:
-#             self.value = None

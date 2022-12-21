@@ -8,6 +8,7 @@
 # no functions
 # classes
 
+from typing import Optional
 from Siemens.Engineering import (
     IEngineeringAssociation,
     IEngineeringComposition,
@@ -66,7 +67,7 @@ class LibraryType(
         """
         ...
     @property
-    def Name(self):
+    def Name(self) -> str:
         """
         The name of the library type
 
@@ -137,7 +138,7 @@ class LibraryType(
     def __ne__(self, *args): ...
 
 class LibraryTypeComposition(
-    IEngineeringComposition, IInternalCompositionAccess, IEquatable  # type: ignore
+    IEngineeringComposition[LibraryType], IInternalCompositionAccess, IEquatable  # type: ignore
 ):  # skipped bases: <type 'IInternalBaseAccess'>, <type 'IEngineeringInstance'>, <type 'IEnumerable'>, <type 'IInternalInstanceAccess'>, <type 'IEngineeringCompositionOrObject'>, <type 'IInternalCollectionAccess'>
     """Composition of LibraryTypes"""
 
@@ -149,7 +150,7 @@ class LibraryTypeComposition(
         Get: Parent(self: LibraryTypeComposition) -> IEngineeringObject
         """
         ...
-    def Find(self, name):
+    def Find(self, name: str) -> LibraryType:
         """
         Find(self: LibraryTypeComposition, name: str) -> LibraryType
 
@@ -197,7 +198,7 @@ class LibraryTypeFolder(
         """
         ...
     @property
-    def Name(self):
+    def Name(self) -> str:
         """
         The name of the library type folder
 
@@ -213,7 +214,7 @@ class LibraryTypeFolder(
         """
         ...
     @property
-    def Types(self):
+    def Types(self) -> LibraryTypeComposition:
         """
         Composition of library types
 
@@ -310,7 +311,7 @@ class LibraryTypeUserFolder(
         ...
 
 class LibraryTypeUserFolderComposition(
-    IEngineeringComposition, IInternalCompositionAccess, IEquatable  # type: ignore
+    IEngineeringComposition[LibraryTypeUserFolder], IInternalCompositionAccess, IEquatable  # type: ignore
 ):  # skipped bases: <type 'IInternalBaseAccess'>, <type 'IEngineeringInstance'>, <type 'IEnumerable'>, <type 'IInternalInstanceAccess'>, <type 'IEngineeringCompositionOrObject'>, <type 'IInternalCollectionAccess'>
     """Composition of LibraryTypeUserFolders"""
 
@@ -322,7 +323,7 @@ class LibraryTypeUserFolderComposition(
         Get: Parent(self: LibraryTypeUserFolderComposition) -> IEngineeringObject
         """
         ...
-    def Find(self, name):
+    def Find(self, name: str) -> Optional[LibraryTypeUserFolder]:
         """
         Find(self: LibraryTypeUserFolderComposition, name: str) -> LibraryTypeUserFolder
 

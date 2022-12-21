@@ -58,6 +58,42 @@ class InvalidBlockType(Exception):
 class InvalidBlock(Exception):
     pass
 
+class InvalidGlobalLibraryComposition(Exception):
+    pass
+
+class InvalidGlobalLibrary(Exception):
+    pass
+
+class InvalidTypeFolder(Exception):
+    pass
+
+class InvalidTypeUserFolderComposition(Exception):
+    pass
+
+class InvalidUserTypeFolder(Exception):
+    pass
+
+class InvalidTypeUserFolder(Exception):
+    pass
+
+class InvalidTypeComposition(Exception):
+    pass
+
+class InvalidMasterCopyFolder(Exception):
+    pass
+
+class InvalidMasterCopyUserFolderComposition(Exception):
+    pass
+
+class InvalidUserMasterCopyFolder(Exception):
+    pass
+
+class InvalidMasterCopyComposition(Exception):
+    pass
+
+class InvalidMasterCopy(Exception):
+    pass
+
 class TIALibraryNotFound(Exception):
     pass
 
