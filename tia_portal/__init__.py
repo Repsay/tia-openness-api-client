@@ -1,34 +1,82 @@
 from __future__ import annotations
 
+import clr
 import os
 import shutil
 from typing import Any, Iterator, List, Optional, Union
 
-import config as cfg
-import exceptions as tia_e
-from protocol.composition import Composition, CompositionItem
-from protocol.objects import TiaObject
-from version import TIAVersion
+import tia_portal.config as cfg
+import tia_portal.exceptions as tia_e
+from tia_portal.protocol.composition import Composition, CompositionItem
+from tia_portal.protocol.objects import TiaObject
+from tia_portal.version import TIAVersion
 
 cfg.load()
 
 from System.Diagnostics import Process
 from System.IO import DirectoryInfo, FileInfo
 
-tia = cfg.tia
-comp = cfg.comp
-hw = cfg.hw
-hwf = cfg.hwf
-sw = cfg.sw
-swb = cfg.swb
-lib = cfg.lib
-lib_mc = cfg.lib_mc
-lib_type = cfg.lib_type
+dll_path = f"C:\\Program Files\\Siemens\\Automation\\Portal {cfg.VERSION.name}\\PublicAPI\\V{cfg.VERSION.value.replace('_', '.')}\\Siemens.Engineering.dll"
 
-class Device(CompositionItem[hw.Device]):
+if not os.path.exists(dll_path):
+    raise tia_e.LibraryDLLNotFound(f"Could not find {dll_path}")
+
+try:
+    clr.AddReference(dll_path)
+except Exception as e:
+    raise tia_e.LibraryImportError(f"Could not load {dll_path}") from e
+
+try:
+    import Siemens.Engineering as tia
+except Exception as e:
+    raise tia_e.LibraryImportError(f"Could not import Siemens.Engineering") from e
+
+try:
+    import Siemens.Engineering.Compiler as comp
+except Exception as e:
+    raise tia_e.LibraryImportError(f"Could not import Siemens.Engineering.Compiler") from e
+
+try:
+    import Siemens.Engineering.HW as hw
+except Exception as e:
+    raise tia_e.LibraryImportError(f"Could not import Siemens.Engineering.HW") from e
+
+try:
+    import Siemens.Engineering.HW.Features as hwf
+except Exception as e:
+    raise tia_e.LibraryImportError(f"Could not import Siemens.Engineering.HW.Features") from e
+
+try:
+    import Siemens.Engineering.SW as sw
+except Exception as e:
+    raise tia_e.LibraryImportError(f"Could not import Siemens.Engineering.SW") from e
+
+try:
+    import Siemens.Engineering.SW.Blocks as swb
+except Exception as e:
+    raise tia_e.LibraryImportError(f"Could not import Siemens.Engineering.SW.Blocks") from e
+
+try:
+    import Siemens.Engineering.Library as lib
+except Exception as e:
+    raise tia_e.LibraryImportError(f"Could not import Siemens.Engineering.Library") from e
+
+try:
+    import Siemens.Engineering.Library.MasterCopies as lib_mc
+except Exception as e:
+    raise tia_e.LibraryImportError(f"Could not import Siemens.Engineering.Library.MasterCopies") from e
+
+try:
+    import Siemens.Engineering.Library.Types as lib_type
+except Exception as e:
+    raise tia_e.LibraryImportError(f"Could not import Siemens.Engineering.Library.Types") from e
+
+
+class Device(CompositionItem):
     def __init__(self, parent: Devices, name: str):
         self.parent = parent
         self.name = name
+        self.__value = None
 
         if self.parent.value is None:
             raise tia_e.InvalidDeviceComposition("Parent value is None")
@@ -40,9 +88,13 @@ class Device(CompositionItem[hw.Device]):
         else:
             self.value = value
 
-    @staticmethod
-    def find(object: Devices, name: str) -> Device:
-        return object.find(name)
+    @property
+    def value(self) -> Optional[hw.Device]:
+        return self.__value
+
+    @value.setter
+    def value(self, value: Optional[hw.Device]) -> None:
+        self.__value = value
 
     def exists(self) -> bool:
         return self.value is not None
@@ -60,9 +112,11 @@ class Device(CompositionItem[hw.Device]):
     def get_items(self) -> DeviceItems:
         return DeviceItems(self)
 
-class Devices(Composition[Device, hw.DeviceComposition]):
+
+class Devices(Composition[Device]):
     def __init__(self, parent: Project) -> None:
         self.parent = parent
+        self.__value = None
 
         if self.parent.value is None:
             raise tia_e.InvalidProject("Project value is None")
@@ -73,6 +127,14 @@ class Devices(Composition[Device, hw.DeviceComposition]):
             self.value = None
         else:
             self.value = value
+
+    @property
+    def value(self) -> Optional[hw.DeviceComposition]:
+        return self.__value
+
+    @value.setter
+    def value(self, value: Optional[hw.DeviceComposition]) -> None:
+        self.__value = value
 
     def find(self, name: str) -> Device:
         if self.value is None:
@@ -111,10 +173,12 @@ class Devices(Composition[Device, hw.DeviceComposition]):
         hw_id = f"OrderNumber:{article_no}/{version}"
         return self.create(hw_id, name, None)
 
-class DeviceItem(CompositionItem[hw.DeviceItem]):
+
+class DeviceItem(CompositionItem):
     def __init__(self, parent: DeviceItems, name: str):
         self.parent = parent
         self.name = name
+        self.__value = None
 
         if self.parent.value is None:
             raise tia_e.InvalidDeviceItemComposition("Parent value is None")
@@ -126,15 +190,19 @@ class DeviceItem(CompositionItem[hw.DeviceItem]):
         else:
             self.value = value
 
-    @staticmethod
-    def find(object: DeviceItems, name: str) -> DeviceItem:
-        return object.find(name)
+    @property
+    def value(self) -> Optional[hw.DeviceItem]:
+        return self.__value
 
-    def get_software(self):
+    @value.setter
+    def value(self, value: Optional[hw.DeviceItem]) -> None:
+        self.__value = value
+
+    def get_software(self) -> Union[PLCSoftware, None]:
         if self.value is None:
             raise tia_e.InvalidDeviceItem("Value is None")
 
-        software_container = self.value.GetService[hwf.SoftwareContainer]()
+        software_container = self.value.GetService[hwf.SoftwareContainer]()  # type: ignore
 
         if software_container is None:
             return None
@@ -147,6 +215,8 @@ class DeviceItem(CompositionItem[hw.DeviceItem]):
         if software_type == "Siemens.Engineering.SW.PlcSoftware":
             return PLCSoftware(self)
 
+        return None
+
     def get_items(self) -> Optional[DeviceItems]:
         if self.value is None:
             raise tia_e.InvalidDeviceItem("Value is None")
@@ -154,9 +224,13 @@ class DeviceItem(CompositionItem[hw.DeviceItem]):
         if self.value.DeviceItems.Count > 0:
             return DeviceItems(self)
 
-class DeviceItems(Composition[DeviceItem, hw.DeviceItemComposition]):
+        return None
+
+
+class DeviceItems(Composition[DeviceItem]):
     def __init__(self, parent: Union[Device, DeviceItem]) -> None:
         self.parent = parent
+        self.__value = None
 
         if self.parent.value is None:
             raise tia_e.InvalidDevice("Device value is None")
@@ -167,6 +241,14 @@ class DeviceItems(Composition[DeviceItem, hw.DeviceItemComposition]):
             self.value = None
         else:
             self.value = value
+
+    @property
+    def value(self) -> Optional[hw.DeviceItemComposition]:
+        return self.__value
+
+    @value.setter
+    def value(self, value: Optional[hw.DeviceItemComposition]) -> None:
+        self.__value = value
 
     def find(self, name: str) -> DeviceItem:
         if self.value is None:
@@ -188,14 +270,16 @@ class DeviceItems(Composition[DeviceItem, hw.DeviceItemComposition]):
 
         return device_items
 
-class PLCSoftware(TiaObject[sw.PlcSoftware]):
+
+class PLCSoftware(TiaObject):
     def __init__(self, parent: DeviceItem) -> None:
         self.parent = parent
+        self.__value = None
 
         if self.parent.value is None:
             raise tia_e.InvalidDeviceItem("Value is None")
 
-        software_container = self.parent.value.GetService[hwf.SoftwareContainer]()
+        software_container = self.parent.value.GetService[hwf.SoftwareContainer]()  # type: ignore
 
         if software_container is None:
             raise tia_e.InvalidDeviceItem("Software container is None")
@@ -209,6 +293,14 @@ class PLCSoftware(TiaObject[sw.PlcSoftware]):
             raise tia_e.InvalidSoftwareType("Software is not PLC software")
 
         self.value = value
+
+    @property
+    def value(self) -> Optional[sw.PlcSoftware]:
+        return self.__value
+
+    @value.setter
+    def value(self, value: Optional[sw.PlcSoftware]) -> None:
+        self.__value = value
 
     def get_system_block_groups(self) -> PLCSystemBlockGroups:
         if self.value is None:
@@ -233,17 +325,19 @@ class PLCSoftware(TiaObject[sw.PlcSoftware]):
             return [block for block in self.get_blocks()]
         else:
             blocks = [block for block in self.get_blocks()]
-            for group in self.get_system_block_groups():
-                blocks.extend(group.get_all_blocks(True))
-            for group in self.get_user_block_groups():
-                blocks.extend(group.get_all_blocks(True))
+            for system_group in self.get_system_block_groups():
+                blocks.extend(system_group.get_all_blocks(True))
+            for user_group in self.get_user_block_groups():
+                blocks.extend(user_group.get_all_blocks(True))
 
             return blocks
 
-class PLCSystemBlockGroup(CompositionItem[swb.PlcSystemBlockGroup]):
+
+class PLCSystemBlockGroup(CompositionItem):
     def __init__(self, parent: PLCSystemBlockGroups, name: str) -> None:
         self.parent = parent
         self.name = name
+        self.__value = None
 
         if self.parent.value is None:
             raise tia_e.InvalidSystemBlockGroupComposition("Parent value is None")
@@ -255,9 +349,13 @@ class PLCSystemBlockGroup(CompositionItem[swb.PlcSystemBlockGroup]):
         else:
             self.value = value
 
-    @staticmethod
-    def find(object: PLCSystemBlockGroups, name: str) -> PLCSystemBlockGroup:
-        return object.find(name)
+    @property
+    def value(self) -> Optional[swb.PlcSystemBlockGroup]:
+        return self.__value
+
+    @value.setter
+    def value(self, value: Optional[swb.PlcSystemBlockGroup]) -> None:
+        self.__value = value
 
     def get_groups(self) -> PLCSystemBlockGroups:
         if self.value is None:
@@ -281,9 +379,11 @@ class PLCSystemBlockGroup(CompositionItem[swb.PlcSystemBlockGroup]):
 
             return blocks
 
-class PLCSystemBlockGroups(Composition[PLCSystemBlockGroup, swb.PlcSystemBlockGroupComposition]):
+
+class PLCSystemBlockGroups(Composition[PLCSystemBlockGroup]):
     def __init__(self, parent: Union[PLCSoftware, PLCSystemBlockGroup]) -> None:
         self.parent = parent
+        self.__value = None
 
         if self.parent.value is None:
             raise tia_e.InvalidSoftware("Software value is None")
@@ -300,6 +400,14 @@ class PLCSystemBlockGroups(Composition[PLCSystemBlockGroup, swb.PlcSystemBlockGr
             self.value = None
         else:
             self.value = value
+
+    @property
+    def value(self) -> Optional[swb.PlcSystemBlockGroupComposition]:
+        return self.__value
+
+    @value.setter
+    def value(self, value: Optional[swb.PlcSystemBlockGroupComposition]) -> None:
+        self.__value = value
 
     def find(self, name: str) -> PLCSystemBlockGroup:
         if self.value is None:
@@ -322,10 +430,12 @@ class PLCSystemBlockGroups(Composition[PLCSystemBlockGroup, swb.PlcSystemBlockGr
 
         return PLCSystemBlockGroup(self, name)
 
-class PLCUserBlockGroup(CompositionItem[swb.PlcBlockUserGroup]):
+
+class PLCUserBlockGroup(CompositionItem):
     def __init__(self, parent: PLCUserBlockGroups, name: str) -> None:
         self.parent = parent
         self.name = name
+        self.__value = None
 
         if self.parent.value is None:
             raise tia_e.InvalidUserBlockGroupComposition("Parent value is None")
@@ -337,9 +447,13 @@ class PLCUserBlockGroup(CompositionItem[swb.PlcBlockUserGroup]):
         else:
             self.value = value
 
-    @staticmethod
-    def find(object: PLCUserBlockGroups, name: str) -> PLCUserBlockGroup:
-        return object.find(name)
+    @property
+    def value(self) -> Optional[swb.PlcBlockUserGroup]:
+        return self.__value
+
+    @value.setter
+    def value(self, value: Optional[swb.PlcBlockUserGroup]) -> None:
+        self.__value = value
 
     def get_groups(self) -> PLCUserBlockGroups:
         if self.value is None:
@@ -363,9 +477,11 @@ class PLCUserBlockGroup(CompositionItem[swb.PlcBlockUserGroup]):
 
             return blocks
 
-class PLCUserBlockGroups(Composition[PLCUserBlockGroup, swb.PlcBlockUserGroupComposition]):
+
+class PLCUserBlockGroups(Composition[PLCUserBlockGroup]):
     def __init__(self, parent: Union[PLCSoftware, PLCUserBlockGroup]) -> None:
         self.parent = parent
+        self.__value = None
 
         if self.parent.value is None:
             raise tia_e.InvalidSoftware("Software value is None")
@@ -382,6 +498,14 @@ class PLCUserBlockGroups(Composition[PLCUserBlockGroup, swb.PlcBlockUserGroupCom
             self.value = None
         else:
             self.value = value
+
+    @property
+    def value(self) -> Optional[swb.PlcBlockUserGroupComposition]:
+        return self.__value
+
+    @value.setter
+    def value(self, value: Optional[swb.PlcBlockUserGroupComposition]) -> None:
+        self.__value = value
 
     def find(self, name: str) -> PLCUserBlockGroup:
         if self.value is None:
@@ -404,10 +528,12 @@ class PLCUserBlockGroups(Composition[PLCUserBlockGroup, swb.PlcBlockUserGroupCom
 
         return PLCUserBlockGroup(self, name)
 
-class PLCBlock(CompositionItem[swb.PlcBlock]):
+
+class PLCBlock(CompositionItem):
     def __init__(self, parent: PLCBlocks, name: str) -> None:
         self.parent = parent
         self.name = name
+        self.__value = None
 
         if self.parent.value is None:
             raise tia_e.InvalidBlockComposition("Parent value is None")
@@ -419,9 +545,13 @@ class PLCBlock(CompositionItem[swb.PlcBlock]):
         else:
             self.value = value
 
-    @staticmethod
-    def find(object: PLCBlocks, name: str) -> PLCBlock:
-        return object.find(name)
+    @property
+    def value(self) -> Optional[swb.PlcBlock]:
+        return self.__value
+
+    @value.setter
+    def value(self, value: Optional[swb.PlcBlock]) -> None:
+        self.__value = value
 
     def export(self) -> str:
         if self.value is None:
@@ -441,9 +571,11 @@ class PLCBlock(CompositionItem[swb.PlcBlock]):
 
         return new_file
 
-class PLCBlocks(Composition[PLCBlock, swb.PlcBlockComposition]):
+
+class PLCBlocks(Composition[PLCBlock]):
     def __init__(self, parent: Union[PLCSoftware, PLCSystemBlockGroup, PLCUserBlockGroup]) -> None:
         self.parent = parent
+        self.__value = None
 
         if isinstance(self.parent, PLCSoftware):
             if self.parent.value is None:
@@ -460,6 +592,14 @@ class PLCBlocks(Composition[PLCBlock, swb.PlcBlockComposition]):
                 raise tia_e.InvalidUserBlockGroup("Value is None")
 
             self.value = self.parent.value.Blocks
+
+    @property
+    def value(self) -> Optional[swb.PlcBlockComposition]:
+        return self.__value
+
+    @value.setter
+    def value(self, value: Optional[swb.PlcBlockComposition]) -> None:
+        self.__value = value
 
     def find(self, name: str) -> PLCBlock:
         if self.value is None:
@@ -502,10 +642,12 @@ class PLCBlocks(Composition[PLCBlock, swb.PlcBlockComposition]):
 
         return PLCBlock(self, name)
 
-class GlobalLibrary(CompositionItem[lib.GlobalLibrary]):
+
+class GlobalLibrary(CompositionItem):
     def __init__(self, parent: GlobalLibraries, name: str):
         self.parent = parent
         self.name = name
+        self.__value = None
 
         if self.parent.value is None:
             raise tia_e.InvalidGlobalLibraryComposition("Parent value is None")
@@ -517,15 +659,15 @@ class GlobalLibrary(CompositionItem[lib.GlobalLibrary]):
                 self.value = global_library
                 break
 
-    @staticmethod
-    def find(object: GlobalLibraries, name: str) -> GlobalLibrary:
-        return object.find(name)
+    @property
+    def value(self) -> Optional[lib.GlobalLibrary]:
+        return self.__value
+
+    @value.setter
+    def value(self, value: Optional[lib.GlobalLibrary]) -> None:
+        self.__value = value
 
     @property
-    def type_folder(self) -> LibraryTypeFolder:
-        ...
-
-    @type_folder.getter
     def type_folder(self) -> LibraryTypeFolder:
         if self.value is None:
             raise tia_e.InvalidGlobalLibrary("Value is None")
@@ -538,10 +680,6 @@ class GlobalLibrary(CompositionItem[lib.GlobalLibrary]):
 
     @property
     def master_copy_folder(self) -> MasterCopyFolder:
-        ...
-
-    @master_copy_folder.getter
-    def master_copy_folder(self) -> MasterCopyFolder:
         if self.value is None:
             raise tia_e.InvalidGlobalLibrary("Value is None")
 
@@ -551,14 +689,24 @@ class GlobalLibrary(CompositionItem[lib.GlobalLibrary]):
     def master_copy_folder(self, value: MasterCopyFolder) -> None:
         raise NotImplementedError("Cannot set master copy folder")
 
-class GlobalLibraries(Composition[GlobalLibrary, lib.GlobalLibraryComposition]):
+
+class GlobalLibraries(Composition[GlobalLibrary]):
     def __init__(self, parent: Client):
         self.parent = parent
+        self.__value = None
 
         if self.parent.session is None:
             raise tia_e.TIAInvalidSession("Session is None")
 
         self.value = self.parent.session.GlobalLibraries
+
+    @property
+    def value(self) -> Optional[lib.GlobalLibraryComposition]:
+        return self.__value
+
+    @value.setter
+    def value(self, value: Optional[lib.GlobalLibraryComposition]) -> None:
+        self.__value = value
 
     def find(self, name: str) -> GlobalLibrary:
         if self.value is None:
@@ -573,9 +721,11 @@ class GlobalLibraries(Composition[GlobalLibrary, lib.GlobalLibraryComposition]):
         for global_library in self.value:
             yield GlobalLibrary(self, global_library.Name)
 
-class LibraryTypeFolder(TiaObject[lib_type.LibraryTypeFolder]):
+
+class LibraryTypeFolder(TiaObject):
     def __init__(self, parent: GlobalLibrary):
         self.parent = parent
+        self.__value = None
 
         if self.parent.value is None:
             raise tia_e.InvalidGlobalLibrary("Value is None")
@@ -583,10 +733,14 @@ class LibraryTypeFolder(TiaObject[lib_type.LibraryTypeFolder]):
         self.value = self.parent.value.TypeFolder
 
     @property
-    def folders(self) -> LibraryTypeUserFolders:
-        ...
+    def value(self) -> Optional[lib_type.LibraryTypeFolder]:
+        return self.__value
 
-    @folders.getter
+    @value.setter
+    def value(self, value: Optional[lib_type.LibraryTypeFolder]) -> None:
+        self.__value = value
+
+    @property
     def folders(self) -> LibraryTypeUserFolders:
         if self.value is None:
             raise tia_e.InvalidTypeFolder("Value is None")
@@ -599,9 +753,47 @@ class LibraryTypeFolder(TiaObject[lib_type.LibraryTypeFolder]):
 
     @property
     def types(self) -> LibraryTypes:
-        ...
+        if self.value is None:
+            raise tia_e.InvalidTypeFolder("Value is None")
 
-    @types.getter
+        return LibraryTypes(self)
+
+    @types.setter
+    def types(self, value: LibraryTypes) -> None:
+        raise NotImplementedError("Cannot set types")
+
+
+class LibraryTypeUserFolder(CompositionItem):
+    def __init__(self, parent: LibraryTypeUserFolders, name: str):
+        self.parent = parent
+        self.name = name
+        self.__value = None
+
+        if self.parent.value is None:
+            raise tia_e.InvalidTypeUserFolderComposition("Parent value is None")
+
+        self.value = self.parent.value.Find(name)
+
+    @property
+    def value(self) -> Optional[lib_type.LibraryTypeUserFolder]:
+        return self.__value
+
+    @value.setter
+    def value(self, value: Optional[lib_type.LibraryTypeUserFolder]) -> None:
+        self.__value = value
+
+    @property
+    def folders(self) -> LibraryTypeUserFolders:
+        if self.value is None:
+            raise tia_e.InvalidTypeFolder("Value is None")
+
+        return LibraryTypeUserFolders(self)
+
+    @folders.setter
+    def folders(self, value: LibraryTypeUserFolders) -> None:
+        raise NotImplementedError("Cannot set type user folders")
+
+    @property
     def types(self) -> LibraryTypes:
         if self.value is None:
             raise tia_e.InvalidTypeFolder("Value is None")
@@ -612,28 +804,24 @@ class LibraryTypeFolder(TiaObject[lib_type.LibraryTypeFolder]):
     def types(self, value: LibraryTypes) -> None:
         raise NotImplementedError("Cannot set types")
 
-class LibraryTypeUserFolder(CompositionItem[lib_type.LibraryTypeUserFolder], LibraryTypeFolder):
-    def __init__(self, parent: LibraryTypeUserFolders, name: str):
-        self.parent = parent
-        self.name = name
 
-        if self.parent.value is None:
-            raise tia_e.InvalidTypeUserFolderComposition("Parent value is None")
-
-        self.value = self.parent.value.Find(name)
-
-    @staticmethod
-    def find(object: LibraryTypeUserFolders, name: str) -> LibraryTypeUserFolder:
-        return object.find(name)
-
-class LibraryTypeUserFolders(Composition[LibraryTypeUserFolder, lib_type.LibraryTypeUserFolderComposition]):
+class LibraryTypeUserFolders(Composition[LibraryTypeUserFolder]):
     def __init__(self, parent: Union[LibraryTypeFolder, LibraryTypeUserFolder]):
         self.parent = parent
+        self.__value = None
 
         if self.parent.value is None:
             raise tia_e.InvalidTypeFolder("Value is None")
 
         self.value = self.parent.value.Folders
+
+    @property
+    def value(self) -> Optional[lib_type.LibraryTypeUserFolderComposition]:
+        return self.__value
+
+    @value.setter
+    def value(self, value: Optional[lib_type.LibraryTypeUserFolderComposition]) -> None:
+        self.__value = value
 
     def find(self, name: str) -> LibraryTypeUserFolder:
         if self.value is None:
@@ -648,28 +836,44 @@ class LibraryTypeUserFolders(Composition[LibraryTypeUserFolder, lib_type.Library
         for folder in self.value:
             yield LibraryTypeUserFolder(self, folder.Name)
 
-class LibraryType(CompositionItem[lib_type.LibraryType]):
+
+class LibraryType(CompositionItem):
     def __init__(self, parent: LibraryTypes, name: str):
         self.parent = parent
         self.name = name
+        self.__value = None
 
         if self.parent.value is None:
             raise tia_e.InvalidTypeComposition("Parent value is None")
 
         self.value = self.parent.value.Find(name)
 
-    @staticmethod
-    def find(object: LibraryTypes, name: str) -> LibraryType:
-        return object.find(name)
+    @property
+    def value(self) -> Optional[lib_type.LibraryType]:
+        return self.__value
 
-class LibraryTypes(Composition[LibraryType, lib_type.LibraryTypeComposition]):
+    @value.setter
+    def value(self, value: Optional[lib_type.LibraryType]) -> None:
+        self.__value = value
+
+
+class LibraryTypes(Composition[LibraryType]):
     def __init__(self, parent: Union[LibraryTypeFolder, LibraryTypeUserFolder]):
         self.parent = parent
+        self.__value = None
 
         if self.parent.value is None:
             raise tia_e.InvalidTypeFolder("Value is None")
 
         self.value = self.parent.value.Types
+
+    @property
+    def value(self) -> Optional[lib_type.LibraryTypeComposition]:
+        return self.__value
+
+    @value.setter
+    def value(self, value: Optional[lib_type.LibraryTypeComposition]) -> None:
+        self.__value = value
 
     def find(self, name: str) -> LibraryType:
         if self.value is None:
@@ -684,9 +888,11 @@ class LibraryTypes(Composition[LibraryType, lib_type.LibraryTypeComposition]):
         for type in self.value:
             yield LibraryType(self, type.Name)
 
-class MasterCopyFolder(TiaObject[lib_mc.MasterCopyFolder]):
+
+class MasterCopyFolder(TiaObject):
     def __init__(self, parent: GlobalLibrary):
         self.parent = parent
+        self.__value = None
 
         if self.parent.value is None:
             raise tia_e.InvalidGlobalLibrary("Value is None")
@@ -694,10 +900,14 @@ class MasterCopyFolder(TiaObject[lib_mc.MasterCopyFolder]):
         self.value = self.parent.value.MasterCopyFolder
 
     @property
-    def folders(self) -> MasterCopyUserFolders:
-        ...
+    def value(self) -> Optional[lib_mc.MasterCopyFolder]:
+        return self.__value
 
-    @folders.getter
+    @value.setter
+    def value(self, value: Optional[lib_mc.MasterCopyFolder]) -> None:
+        self.__value = value
+
+    @property
     def folders(self) -> MasterCopyUserFolders:
         if self.value is None:
             raise tia_e.InvalidTypeFolder("Value is None")
@@ -710,9 +920,47 @@ class MasterCopyFolder(TiaObject[lib_mc.MasterCopyFolder]):
 
     @property
     def master_copies(self) -> MasterCopies:
-        ...
+        if self.value is None:
+            raise tia_e.InvalidMasterCopyFolder("Value is None")
 
-    @master_copies.getter
+        return MasterCopies(self)
+
+    @master_copies.setter
+    def master_copies(self, value: MasterCopies) -> None:
+        raise NotImplementedError("Cannot set master copies")
+
+
+class MasterCopyUserFolder(CompositionItem):
+    def __init__(self, parent: MasterCopyUserFolders, name: str):
+        self.parent = parent
+        self.name = name
+        self.__value = None
+
+        if self.parent.value is None:
+            raise tia_e.InvalidMasterCopyUserFolderComposition("Parent value is None")
+
+        self.value = self.parent.value.Find(name)
+
+    @property
+    def value(self) -> Optional[lib_mc.MasterCopyUserFolder]:
+        return self.__value
+
+    @value.setter
+    def value(self, value: Optional[lib_mc.MasterCopyUserFolder]) -> None:
+        self.__value = value
+
+    @property
+    def folders(self) -> MasterCopyUserFolders:
+        if self.value is None:
+            raise tia_e.InvalidTypeFolder("Value is None")
+
+        return MasterCopyUserFolders(self)
+
+    @folders.setter
+    def folders(self, value: MasterCopyUserFolders) -> None:
+        raise NotImplementedError("Cannot set type user folders")
+
+    @property
     def master_copies(self) -> MasterCopies:
         if self.value is None:
             raise tia_e.InvalidMasterCopyFolder("Value is None")
@@ -723,29 +971,24 @@ class MasterCopyFolder(TiaObject[lib_mc.MasterCopyFolder]):
     def master_copies(self, value: MasterCopies) -> None:
         raise NotImplementedError("Cannot set master copies")
 
-class MasterCopyUserFolder(CompositionItem[lib_mc.MasterCopyUserFolder], MasterCopyFolder):
-    def __init__(self, parent: MasterCopyUserFolders, name: str):
-        self.parent = parent
-        self.name = name
 
-        if self.parent.value is None:
-            raise tia_e.InvalidMasterCopyUserFolderComposition("Parent value is None")
-
-        self.value = self.parent.value.Find(name)
-
-    @staticmethod
-    def find(object: MasterCopyUserFolders, name: str) -> MasterCopyUserFolder:
-        return object.find(name)
-
-
-class MasterCopyUserFolders(Composition[MasterCopyUserFolder, lib_mc.MasterCopyUserFolderComposition]):
+class MasterCopyUserFolders(Composition[MasterCopyUserFolder]):
     def __init__(self, parent: Union[MasterCopyFolder, MasterCopyUserFolder]):
         self.parent = parent
+        self.__value = None
 
         if self.parent.value is None:
             raise tia_e.InvalidMasterCopyFolder("Value is None")
 
         self.value = self.parent.value.Folders
+
+    @property
+    def value(self) -> Optional[lib_mc.MasterCopyUserFolderComposition]:
+        return self.__value
+
+    @value.setter
+    def value(self, value: Optional[lib_mc.MasterCopyUserFolderComposition]) -> None:
+        self.__value = value
 
     def find(self, name: str) -> MasterCopyUserFolder:
         if self.value is None:
@@ -760,28 +1003,44 @@ class MasterCopyUserFolders(Composition[MasterCopyUserFolder, lib_mc.MasterCopyU
         for folder in self.value:
             yield MasterCopyUserFolder(self, folder.Name)
 
-class MasterCopy(CompositionItem[lib_mc.MasterCopy]):
+
+class MasterCopy(CompositionItem):
     def __init__(self, parent: MasterCopies, name: str):
         self.parent = parent
         self.name = name
+        self.__value = None
 
         if self.parent.value is None:
             raise tia_e.InvalidMasterCopyComposition("Parent value is None")
 
         self.value = self.parent.value.Find(name)
 
-    @staticmethod
-    def find(object: MasterCopies, name: str) -> MasterCopy:
-        return object.find(name)
+    @property
+    def value(self) -> Optional[lib_mc.MasterCopy]:
+        return self.__value
 
-class MasterCopies(Composition[MasterCopy, lib_mc.MasterCopyComposition]):
+    @value.setter
+    def value(self, value: Optional[lib_mc.MasterCopy]) -> None:
+        self.__value = value
+
+
+class MasterCopies(Composition[MasterCopy]):
     def __init__(self, parent: Union[MasterCopyFolder, MasterCopyUserFolder]):
         self.parent = parent
+        self.__value = None
 
         if self.parent.value is None:
             raise tia_e.InvalidMasterCopyFolder("Value is None")
 
         self.value = self.parent.value.MasterCopies
+
+    @property
+    def value(self) -> Optional[lib_mc.MasterCopyComposition]:
+        return self.__value
+
+    @value.setter
+    def value(self, value: Optional[lib_mc.MasterCopyComposition]) -> None:
+        self.__value = value
 
     def find(self, name: str) -> MasterCopy:
         if self.value is None:
@@ -795,6 +1054,7 @@ class MasterCopies(Composition[MasterCopy, lib_mc.MasterCopyComposition]):
 
         for master_copy in self.value:
             yield MasterCopy(self, master_copy.Name)
+
 
 class Client:
     def __init__(self) -> None:
@@ -917,14 +1177,24 @@ class Client:
 
         return projects
 
-class Project(TiaObject[tia.Project]):
+
+class Project(TiaObject):
     def __init__(self, client: Client, path: str, name: str, version: Optional[TIAVersion] = None):
         self.client = client
         self.path = path
         self.name = name
+        self.__value = None
 
         self.version = version if version is not None else cfg.VERSION
         self.value = None
+
+    @property
+    def value(self) -> Optional[tia.Project]:
+        return self.__value
+
+    @value.setter
+    def value(self, value: Optional[tia.Project]) -> None:
+        self.__value = value
 
     def open(self) -> None:
         if self.client.session is None:
@@ -971,9 +1241,16 @@ class Project(TiaObject[tia.Project]):
 
     def create(self, open: bool = False) -> None:
         if not open:
-            session = tia.TiaPortal(tia.TiaPortalMode.WithoutUserInterface)
+            new_session = tia.TiaPortal(tia.TiaPortalMode.WithoutUserInterface)
+            old_session = None
         else:
-            session = self.client.session
+            new_session = None
+            old_session = self.client.session
+
+            if old_session is None:
+                raise tia_e.TIAInvalidSession("Old session is None")
+
+        session = new_session if not new_session is None else old_session
 
         if session is None:
             raise tia_e.TIAInvalidSession("Session is None")
@@ -996,7 +1273,7 @@ class Project(TiaObject[tia.Project]):
         if self.is_modified():
             self.value.Save()
 
-    def is_modified(self):
+    def is_modified(self) -> bool:
         if self.value is None:
             raise tia_e.TIAInvalidProject("Project is None")
         return self.value.IsModified
@@ -1005,10 +1282,8 @@ class Project(TiaObject[tia.Project]):
         if self.value is None:
             raise tia_e.TIAInvalidProject("Project is None")
 
-        devices = self.value.Devices
-
         devices = [item for device in self.value.Devices for item in device.DeviceItems]
-        software_containers = [item.GetService[hwf.SoftwareContainer]() for item in devices]
+        software_containers = [item.GetService[hwf.SoftwareContainer]() for item in devices]  # type: ignore
         software_containers = [item for item in software_containers if item is not None]
 
         for software_container in software_containers:
@@ -1028,10 +1303,6 @@ class Project(TiaObject[tia.Project]):
         return self.value is not None
 
     @property
-    def devices(self) -> Devices:
-        ...
-
-    @devices.getter
     def devices(self) -> Devices:
         if self.value is None:
             raise tia_e.TIAInvalidProject("Project is None")

@@ -1142,7 +1142,7 @@ class AssemblyNameFlags(Enum): # skipped bases: <type 'IComparable'>, <type 'ICo
     """
     EnableJITcompileOptimizer = None
     EnableJITcompileTracking = None
-    None = None
+
     PublicKey = None
     Retargetable = None
     value__ = None
@@ -1967,7 +1967,7 @@ class CustomAttributeExtensions: # skipped bases: <type 'object'>
     """ Contains static methods for retrieving custom attributes. """
     @staticmethod
     def GetCustomAttribute(element, *__args):
-# Error generating skeleton for function GetCustomAttribute: Method must be called on a Type for which Type.IsGenericParameter is false.
+        pass
 
     @staticmethod
     def GetCustomAttributes(element, *__args):
@@ -2411,7 +2411,7 @@ class EventAttributes(Enum): # skipped bases: <type 'IComparable'>, <type 'IConv
 
     enum (flags) EventAttributes, values: None (0), ReservedMask (1024), RTSpecialName (1024), SpecialName (512)
     """
-    None = None
+
     ReservedMask = None
     RTSpecialName = None
     SpecialName = None
@@ -2873,7 +2873,7 @@ class GenericParameterAttributes(Enum): # skipped bases: <type 'IComparable'>, <
     Contravariant = None
     Covariant = None
     DefaultConstructorConstraint = None
-    None = None
+
     NotNullableValueTypeConstraint = None
     ReferenceTypeConstraint = None
     SpecialConstraintMask = None
@@ -4056,7 +4056,7 @@ class ParameterAttributes(Enum): # skipped bases: <type 'IComparable'>, <type 'I
     HasFieldMarshal = None
     In = None
     Lcid = None
-    None = None
+
     Optional = None
     Out = None
     Reserved3 = None
@@ -4329,7 +4329,7 @@ class ProcessorArchitecture(Enum): # skipped bases: <type 'IComparable'>, <type 
     Arm = None
     IA64 = None
     MSIL = None
-    None = None
+
     value__ = None
     X86 = None
 
@@ -4341,7 +4341,7 @@ class PropertyAttributes(Enum): # skipped bases: <type 'IComparable'>, <type 'IC
     enum (flags) PropertyAttributes, values: HasDefault (4096), None (0), Reserved2 (8192), Reserved3 (16384), Reserved4 (32768), ReservedMask (62464), RTSpecialName (1024), SpecialName (512)
     """
     HasDefault = None
-    None = None
+
     Reserved2 = None
     Reserved3 = None
     Reserved4 = None
@@ -4570,7 +4570,7 @@ class ResourceLocation(Enum): # skipped bases: <type 'IComparable'>, <type 'ICon
 class RuntimeReflectionExtensions: # skipped bases: <type 'object'>
     """ Provides methods that retrieve information about types at run time. """
     @staticmethod
-    def GetMethodInfo(del):
+    def GetMethodInfo(_):
         """
         GetMethodInfo(del: Delegate) -> MethodInfo
 

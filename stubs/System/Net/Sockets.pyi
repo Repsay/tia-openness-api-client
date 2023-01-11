@@ -8,12 +8,13 @@
 # no functions
 # classes
 
-class AddressFamily(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class AddressFamily(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the addressing scheme that an instance of the System.Net.Sockets.Socket class can use.
 
     enum AddressFamily, values: AppleTalk (16), Atm (22), Banyan (21), Ccitt (10), Chaos (5), Cluster (24), DataKit (9), DataLink (13), DecNet (12), Ecma (8), FireFox (19), HyperChannel (15), Ieee12844 (25), ImpLink (3), InterNetwork (2), InterNetworkV6 (23), Ipx (6), Irda (26), Iso (7), Lat (14), Max (29), NetBios (17), NetworkDesigners (28), NS (6), Osi (7), Pup (4), Sna (11), Unix (1), Unknown (-1), Unspecified (0), VoiceView (18)
     """
+
     AppleTalk = None
     Atm = None
     Banyan = None
@@ -47,13 +48,13 @@ class AddressFamily(Enum): # skipped bases: <type 'IComparable'>, <type 'IConver
     value__ = None
     VoiceView = None
 
-
-class IOControlCode(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class IOControlCode(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the IO control codes supported by the System.Net.Sockets.Socket.IOControl(System.Int32,System.Byte[],System.Byte[]) method.
 
     enum IOControlCode, values: AbsorbRouterAlert (2550136837), AddMulticastGroupOnInterface (2550136842), AddressListChange (671088663), AddressListQuery (1207959574), AddressListSort (3355443225), AssociateHandle (2281701377), AsyncIO (2147772029), BindToInterface (2550136840), DataToRead (1074030207), DeleteMulticastGroupFromInterface (2550136843), EnableCircularQueuing (671088642), Flush (671088644), GetBroadcastAddress (1207959557), GetExtensionFunctionPointer (3355443206), GetGroupQos (3355443208), GetQos (3355443207), KeepAliveValues (2550136836), LimitBroadcasts (2550136839), MulticastInterface (2550136841), MulticastScope (2281701386), MultipointLoopback (2281701385), NamespaceChange (2281701401), NonBlockingIO (2147772030), OobDataRead (1074033415), QueryTargetPnpHandle (1207959576), ReceiveAll (2550136833), ReceiveAllIgmpMulticast (2550136835), ReceiveAllMulticast (2550136834), RoutingInterfaceChange (2281701397), RoutingInterfaceQuery (3355443220), SetGroupQos (2281701388), SetQos (2281701387), TranslateHandle (3355443213), UnicastInterface (2550136838)
     """
+
     AbsorbRouterAlert = None
     AddMulticastGroupOnInterface = None
     AddressListChange = None
@@ -90,9 +91,9 @@ class IOControlCode(Enum): # skipped bases: <type 'IComparable'>, <type 'IConver
     UnicastInterface = None
     value__ = None
 
+class IPPacketInformation:  # skipped bases: <type 'object'>
+    """Presents the packet information from a call to System.Net.Sockets.Socket.ReceiveMessageFrom(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags@,System.Net.EndPoint@,System.Net.Sockets.IPPacketInformation@) or System.Net.Sockets.Socket.EndReceiveMessageFrom(System.IAsyncResult,System.Net.Sockets.SocketFlags@,System.Net.EndPoint@,System.Net.Sockets.IPPacketInformation@)."""
 
-class IPPacketInformation: # skipped bases: <type 'object'>
-    """ Presents the packet information from a call to System.Net.Sockets.Socket.ReceiveMessageFrom(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags@,System.Net.EndPoint@,System.Net.Sockets.IPPacketInformation@) or System.Net.Sockets.Socket.EndReceiveMessageFrom(System.IAsyncResult,System.Net.Sockets.SocketFlags@,System.Net.EndPoint@,System.Net.Sockets.IPPacketInformation@). """
     def Equals(self, comparand):
         """
         Equals(self: IPPacketInformation, comparand: object) -> bool
@@ -104,7 +105,6 @@ class IPPacketInformation: # skipped bases: <type 'object'>
             Returns: ue if comparand is an instance of System.Net.Sockets.IPPacketInformation and equals the value of the instance; otherwise, lse.
         """
         ...
-
     def GetHashCode(self):
         """
         GetHashCode(self: IPPacketInformation) -> int
@@ -114,14 +114,10 @@ class IPPacketInformation: # skipped bases: <type 'object'>
             Returns: An Int32 hash code.
         """
         ...
-
-    def __eq__(self, *args): #cannot find CLR method
-        """ x.__eq__(y) <==> x==y """
+    def __eq__(self, *args):  # cannot find CLR method
+        """x.__eq__(y) <==> x==y"""
         ...
-
-    def __ne__(self, *args): #cannot find CLR method
-        ...
-
+    def __ne__(self, *args): ...
     @property
     def Address(self):
         """
@@ -130,7 +126,6 @@ class IPPacketInformation: # skipped bases: <type 'object'>
         Get: Address(self: IPPacketInformation) -> IPAddress
         """
         ...
-
     @property
     def Interface(self):
         """
@@ -140,22 +135,20 @@ class IPPacketInformation: # skipped bases: <type 'object'>
         """
         ...
 
-
-
-class IPProtectionLevel(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class IPProtectionLevel(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     A value that enables restriction of an IPv6 socket to a specified scope, such as addresses with the same link local or site local prefix.
 
     enum IPProtectionLevel, values: EdgeRestricted (20), Restricted (30), Unrestricted (10), Unspecified (-1)
     """
+
     EdgeRestricted = None
     Restricted = None
     Unrestricted = None
     Unspecified = None
     value__ = None
 
-
-class IPv6MulticastOption: # skipped bases: <type 'object'>
+class IPv6MulticastOption:  # skipped bases: <type 'object'>
     """
     Contains option values for joining an IPv6 multicast group.
 
@@ -163,6 +156,7 @@ class IPv6MulticastOption: # skipped bases: <type 'object'>
 
     IPv6MulticastOption(group: IPAddress)
     """
+
     @property
     def Group(self):
         """
@@ -173,7 +167,6 @@ class IPv6MulticastOption: # skipped bases: <type 'object'>
         Set: Group(self: IPv6MulticastOption) = value
         """
         ...
-
     @property
     def InterfaceIndex(self):
         """
@@ -185,14 +178,13 @@ class IPv6MulticastOption: # skipped bases: <type 'object'>
         """
         ...
 
-
-
-class LingerOption: # skipped bases: <type 'object'>
+class LingerOption:  # skipped bases: <type 'object'>
     """
     Specifies whether a System.Net.Sockets.Socket will remain connected after a call to the System.Net.Sockets.Socket.Close or System.Net.Sockets.TcpClient.Close methods and the length of time it will remain connected, if data remains to be sent.
 
     LingerOption(enable: bool, seconds: int)
     """
+
     @property
     def Enabled(self):
         """
@@ -203,7 +195,6 @@ class LingerOption: # skipped bases: <type 'object'>
         Set: Enabled(self: LingerOption) = value
         """
         ...
-
     @property
     def LingerTime(self):
         """
@@ -215,9 +206,7 @@ class LingerOption: # skipped bases: <type 'object'>
         """
         ...
 
-
-
-class MulticastOption: # skipped bases: <type 'object'>
+class MulticastOption:  # skipped bases: <type 'object'>
     """
     Contains System.Net.IPAddress values used to join and drop multicast groups.
 
@@ -227,6 +216,7 @@ class MulticastOption: # skipped bases: <type 'object'>
 
     MulticastOption(group: IPAddress)
     """
+
     @property
     def Group(self):
         """
@@ -237,7 +227,6 @@ class MulticastOption: # skipped bases: <type 'object'>
         Set: Group(self: MulticastOption) = value
         """
         ...
-
     @property
     def InterfaceIndex(self):
         """
@@ -248,7 +237,6 @@ class MulticastOption: # skipped bases: <type 'object'>
         Set: InterfaceIndex(self: MulticastOption) = value
         """
         ...
-
     @property
     def LocalAddress(self):
         """
@@ -260,9 +248,7 @@ class MulticastOption: # skipped bases: <type 'object'>
         """
         ...
 
-
-
-class NetworkStream(Stream): # skipped bases: <type 'IDisposable'>
+class NetworkStream(Stream):  # skipped bases: <type 'IDisposable'>
     """
     Provides the underlying stream of data for network access.
 
@@ -274,7 +260,8 @@ class NetworkStream(Stream): # skipped bases: <type 'IDisposable'>
 
     NetworkStream(socket: Socket, access: FileAccess, ownsSocket: bool)
     """
-    @staticmethod # known case of __new__
+
+    @staticmethod  # known case of __new__
     def __new__(cls, socket, *__args):
         """
         __new__(cls: type, socket: Socket)
@@ -286,7 +273,6 @@ class NetworkStream(Stream): # skipped bases: <type 'IDisposable'>
         __new__(cls: type, socket: Socket, access: FileAccess, ownsSocket: bool)
         """
         ...
-
     @property
     def CanRead(self):
         """
@@ -295,7 +281,6 @@ class NetworkStream(Stream): # skipped bases: <type 'IDisposable'>
         Get: CanRead(self: NetworkStream) -> bool
         """
         ...
-
     @property
     def CanSeek(self):
         """
@@ -304,7 +289,6 @@ class NetworkStream(Stream): # skipped bases: <type 'IDisposable'>
         Get: CanSeek(self: NetworkStream) -> bool
         """
         ...
-
     @property
     def CanTimeout(self):
         """
@@ -313,7 +297,6 @@ class NetworkStream(Stream): # skipped bases: <type 'IDisposable'>
         Get: CanTimeout(self: NetworkStream) -> bool
         """
         ...
-
     @property
     def CanWrite(self):
         """
@@ -322,7 +305,6 @@ class NetworkStream(Stream): # skipped bases: <type 'IDisposable'>
         Get: CanWrite(self: NetworkStream) -> bool
         """
         ...
-
     @property
     def DataAvailable(self):
         """
@@ -331,7 +313,6 @@ class NetworkStream(Stream): # skipped bases: <type 'IDisposable'>
         Get: DataAvailable(self: NetworkStream) -> bool
         """
         ...
-
     @property
     def Length(self):
         """
@@ -340,7 +321,6 @@ class NetworkStream(Stream): # skipped bases: <type 'IDisposable'>
         Get: Length(self: NetworkStream) -> Int64
         """
         ...
-
     @property
     def Position(self):
         """
@@ -351,12 +331,10 @@ class NetworkStream(Stream): # skipped bases: <type 'IDisposable'>
         Set: Position(self: NetworkStream) = value
         """
         ...
-
     @property
     def Readable(self):
-        """ Gets or sets a value that indicates whether the System.Net.Sockets.NetworkStream can be read. """
+        """Gets or sets a value that indicates whether the System.Net.Sockets.NetworkStream can be read."""
         ...
-
     @property
     def ReadTimeout(self):
         """
@@ -367,17 +345,14 @@ class NetworkStream(Stream): # skipped bases: <type 'IDisposable'>
         Set: ReadTimeout(self: NetworkStream) = value
         """
         ...
-
     @property
     def Socket(self):
-        """ Gets the underlying System.Net.Sockets.Socket. """
+        """Gets the underlying System.Net.Sockets.Socket."""
         ...
-
     @property
     def Writeable(self):
-        """ Gets a value that indicates whether the System.Net.Sockets.NetworkStream is writable. """
+        """Gets a value that indicates whether the System.Net.Sockets.NetworkStream is writable."""
         ...
-
     @property
     def WriteTimeout(self):
         """
@@ -389,14 +364,13 @@ class NetworkStream(Stream): # skipped bases: <type 'IDisposable'>
         """
         ...
 
-
-
-class ProtocolFamily(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class ProtocolFamily(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the type of protocol that an instance of the System.Net.Sockets.Socket class can use.
 
     enum ProtocolFamily, values: AppleTalk (16), Atm (22), Banyan (21), Ccitt (10), Chaos (5), Cluster (24), DataKit (9), DataLink (13), DecNet (12), Ecma (8), FireFox (19), HyperChannel (15), Ieee12844 (25), ImpLink (3), InterNetwork (2), InterNetworkV6 (23), Ipx (6), Irda (26), Iso (7), Lat (14), Max (29), NetBios (17), NetworkDesigners (28), NS (6), Osi (7), Pup (4), Sna (11), Unix (1), Unknown (-1), Unspecified (0), VoiceView (18)
     """
+
     AppleTalk = None
     Atm = None
     Banyan = None
@@ -430,13 +404,13 @@ class ProtocolFamily(Enum): # skipped bases: <type 'IComparable'>, <type 'IConve
     value__ = None
     VoiceView = None
 
-
-class ProtocolType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class ProtocolType(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the protocols that the System.Net.Sockets.Socket class supports.
 
     enum ProtocolType, values: Ggp (3), Icmp (1), IcmpV6 (58), Idp (22), Igmp (2), IP (0), IPSecAuthenticationHeader (51), IPSecEncapsulatingSecurityPayload (50), IPv4 (4), IPv6 (41), IPv6DestinationOptions (60), IPv6FragmentHeader (44), IPv6HopByHopOptions (0), IPv6NoNextHeader (59), IPv6RoutingHeader (43), Ipx (1000), ND (77), Pup (12), Raw (255), Spx (1256), SpxII (1257), Tcp (6), Udp (17), Unknown (-1), Unspecified (0)
     """
+
     Ggp = None
     Icmp = None
     IcmpV6 = None
@@ -464,20 +438,19 @@ class ProtocolType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvert
     Unspecified = None
     value__ = None
 
-
-class SelectMode(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SelectMode(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Defines the polling modes for the System.Net.Sockets.Socket.Poll(System.Int32,System.Net.Sockets.SelectMode) method.
 
     enum SelectMode, values: SelectError (2), SelectRead (0), SelectWrite (1)
     """
+
     SelectError = None
     SelectRead = None
     SelectWrite = None
     value__ = None
 
-
-class SendPacketsElement: # skipped bases: <type 'object'>
+class SendPacketsElement:  # skipped bases: <type 'object'>
     """
     Represents an element in a System.Net.Sockets.SendPacketsElement array.
 
@@ -493,6 +466,7 @@ class SendPacketsElement: # skipped bases: <type 'object'>
 
     SendPacketsElement(buffer: Array[Byte], offset: int, count: int, endOfPacket: bool)
     """
+
     @property
     def Buffer(self):
         """
@@ -501,7 +475,6 @@ class SendPacketsElement: # skipped bases: <type 'object'>
         Get: Buffer(self: SendPacketsElement) -> Array[Byte]
         """
         ...
-
     @property
     def Count(self):
         """
@@ -510,7 +483,6 @@ class SendPacketsElement: # skipped bases: <type 'object'>
         Get: Count(self: SendPacketsElement) -> int
         """
         ...
-
     @property
     def EndOfPacket(self):
         """
@@ -519,7 +491,6 @@ class SendPacketsElement: # skipped bases: <type 'object'>
         Get: EndOfPacket(self: SendPacketsElement) -> bool
         """
         ...
-
     @property
     def FilePath(self):
         """
@@ -528,7 +499,6 @@ class SendPacketsElement: # skipped bases: <type 'object'>
         Get: FilePath(self: SendPacketsElement) -> str
         """
         ...
-
     @property
     def Offset(self):
         """
@@ -537,8 +507,6 @@ class SendPacketsElement: # skipped bases: <type 'object'>
         Get: Offset(self: SendPacketsElement) -> int
         """
         ...
-
-
 
 class Socket(object, IDisposable):
     """
@@ -550,6 +518,7 @@ class Socket(object, IDisposable):
 
     Socket(socketInformation: SocketInformation)
     """
+
     def Accept(self):
         """
         Accept(self: Socket) -> Socket
@@ -559,7 +528,6 @@ class Socket(object, IDisposable):
             Returns: A System.Net.Sockets.Socket for a newly created connection.
         """
         ...
-
     def AcceptAsync(self, e):
         """
         AcceptAsync(self: Socket, e: SocketAsyncEventArgs) -> bool
@@ -575,7 +543,6 @@ class Socket(object, IDisposable):
              and the e object passed as a parameter may be examined immediately after the method call returns to retrieve the result of the operation.
         """
         ...
-
     def BeginAccept(self, *__args):
         """
         BeginAccept(self: Socket, receiveSize: int, callback: AsyncCallback, state: object) -> IAsyncResult
@@ -615,7 +582,6 @@ class Socket(object, IDisposable):
             Returns: An System.IAsyncResult object that references the asynchronous System.Net.Sockets.Socket object creation.
         """
         ...
-
     def BeginConnect(self, *__args):
         """
         BeginConnect(self: Socket, remoteEP: EndPoint, callback: AsyncCallback, state: object) -> IAsyncResult
@@ -673,7 +639,6 @@ class Socket(object, IDisposable):
             Returns: An System.IAsyncResult that references the asynchronous connections.
         """
         ...
-
     def BeginDisconnect(self, reuseSocket, callback, state):
         """
         BeginDisconnect(self: Socket, reuseSocket: bool, callback: AsyncCallback, state: object) -> IAsyncResult
@@ -689,7 +654,6 @@ class Socket(object, IDisposable):
             Returns: An System.IAsyncResult object that references the asynchronous operation.
         """
         ...
-
     def BeginReceive(self, *__args):
         """
         BeginReceive(self: Socket, buffer: Array[Byte], offset: int, size: int, socketFlags: SocketFlags, callback: AsyncCallback, state: object) -> IAsyncResult
@@ -737,7 +701,6 @@ class Socket(object, IDisposable):
             Returns: An System.IAsyncResult that references the asynchronous read.
         """
         ...
-
     def BeginReceiveFrom(self, buffer, offset, size, socketFlags, remoteEP, callback, state):
         """
         BeginReceiveFrom(self: Socket, buffer: Array[Byte], offset: int, size: int, socketFlags: SocketFlags, remoteEP: EndPoint, callback: AsyncCallback, state: object) -> (IAsyncResult, EndPoint)
@@ -761,7 +724,6 @@ class Socket(object, IDisposable):
             Returns: An System.IAsyncResult that references the asynchronous read.
         """
         ...
-
     def BeginReceiveMessageFrom(self, buffer, offset, size, socketFlags, remoteEP, callback, state):
         """
         BeginReceiveMessageFrom(self: Socket, buffer: Array[Byte], offset: int, size: int, socketFlags: SocketFlags, remoteEP: EndPoint, callback: AsyncCallback, state: object) -> (IAsyncResult, EndPoint)
@@ -787,7 +749,6 @@ class Socket(object, IDisposable):
             Returns: An System.IAsyncResult that references the asynchronous read.
         """
         ...
-
     def BeginSend(self, *__args):
         """
         BeginSend(self: Socket, buffer: Array[Byte], offset: int, size: int, socketFlags: SocketFlags, callback: AsyncCallback, state: object) -> IAsyncResult
@@ -831,7 +792,6 @@ class Socket(object, IDisposable):
             Returns: An System.IAsyncResult that references the asynchronous send.
         """
         ...
-
     def BeginSendFile(self, fileName, *__args):
         """
         BeginSendFile(self: Socket, fileName: str, callback: AsyncCallback, state: object) -> IAsyncResult
@@ -865,7 +825,6 @@ class Socket(object, IDisposable):
             Returns: An System.IAsyncResult object that represents the asynchronous operation.
         """
         ...
-
     def BeginSendTo(self, buffer, offset, size, socketFlags, remoteEP, callback, state):
         """
         BeginSendTo(self: Socket, buffer: Array[Byte], offset: int, size: int, socketFlags: SocketFlags, remoteEP: EndPoint, callback: AsyncCallback, state: object) -> IAsyncResult
@@ -889,7 +848,6 @@ class Socket(object, IDisposable):
             Returns: An System.IAsyncResult that references the asynchronous send.
         """
         ...
-
     def Bind(self, localEP):
         """
         Bind(self: Socket, localEP: EndPoint)
@@ -899,7 +857,6 @@ class Socket(object, IDisposable):
             localEP: The local System.Net.EndPoint to associate with the System.Net.Sockets.Socket.
         """
         ...
-
     @staticmethod
     def CancelConnectAsync(e):
         """
@@ -912,7 +869,6 @@ class Socket(object, IDisposable):
              System.Net.Sockets.Socket.ConnectAsync(System.Net.Sockets.SocketType,System.Net.Sockets.ProtocolType,System.Net.Sockets.SocketAsyncEventArgs) methods.
         """
         ...
-
     def Close(self, timeout=None):
         """
         Close(self: Socket, timeout: int)
@@ -926,7 +882,6 @@ class Socket(object, IDisposable):
             Closes the System.Net.Sockets.Socket connection and releases all associated resources.
         """
         ...
-
     def Connect(self, *__args):
         """
         Connect(self: Socket, remoteEP: EndPoint)
@@ -960,7 +915,6 @@ class Socket(object, IDisposable):
             port: The port number of the remote host.
         """
         ...
-
     def ConnectAsync(self, *__args):
         """
         ConnectAsync(self: Socket, e: SocketAsyncEventArgs) -> bool
@@ -992,7 +946,6 @@ class Socket(object, IDisposable):
              not be raised and the e object passed as a parameter may be examined immediately after the method call returns to retrieve the result of the operation.
         """
         ...
-
     def Disconnect(self, reuseSocket):
         """
         Disconnect(self: Socket, reuseSocket: bool)
@@ -1002,7 +955,6 @@ class Socket(object, IDisposable):
             reuseSocket: ue if this socket can be reused after the current connection is closed; otherwise, lse.
         """
         ...
-
     def DisconnectAsync(self, e):
         """
         DisconnectAsync(self: Socket, e: SocketAsyncEventArgs) -> bool
@@ -1018,7 +970,6 @@ class Socket(object, IDisposable):
              not be raised and the e object passed as a parameter may be examined immediately after the method call returns to retrieve the result of the operation.
         """
         ...
-
     def DuplicateAndClose(self, targetProcessId):
         """
         DuplicateAndClose(self: Socket, targetProcessId: int) -> SocketInformation
@@ -1030,7 +981,6 @@ class Socket(object, IDisposable):
             Returns: The socket reference to be passed to the target process.
         """
         ...
-
     def EndAccept(self, *__args):
         """
         EndAccept(self: Socket, asyncResult: IAsyncResult) -> Socket
@@ -1062,7 +1012,6 @@ class Socket(object, IDisposable):
             Returns: A System.Net.Sockets.Socket object to handle communication with the remote host.
         """
         ...
-
     def EndConnect(self, asyncResult):
         """
         EndConnect(self: Socket, asyncResult: IAsyncResult)
@@ -1072,7 +1021,6 @@ class Socket(object, IDisposable):
             asyncResult: An System.IAsyncResult that stores state information and any user defined data for this asynchronous operation.
         """
         ...
-
     def EndDisconnect(self, asyncResult):
         """
         EndDisconnect(self: Socket, asyncResult: IAsyncResult)
@@ -1082,7 +1030,6 @@ class Socket(object, IDisposable):
             asyncResult: An System.IAsyncResult object that stores state information and any user-defined data for this asynchronous operation.
         """
         ...
-
     def EndReceive(self, asyncResult, errorCode=None):
         """
         EndReceive(self: Socket, asyncResult: IAsyncResult) -> int
@@ -1102,7 +1049,6 @@ class Socket(object, IDisposable):
             Returns: The number of bytes received.
         """
         ...
-
     def EndReceiveFrom(self, asyncResult, endPoint):
         """
         EndReceiveFrom(self: Socket, asyncResult: IAsyncResult, endPoint: EndPoint) -> (int, EndPoint)
@@ -1116,7 +1062,6 @@ class Socket(object, IDisposable):
             Returns: If successful, the number of bytes received. If unsuccessful, returns 0.
         """
         ...
-
     def EndReceiveMessageFrom(self, asyncResult, socketFlags, endPoint, ipPacketInformation):
         """
         EndReceiveMessageFrom(self: Socket, asyncResult: IAsyncResult, socketFlags: SocketFlags, endPoint: EndPoint) -> (int, SocketFlags, EndPoint, IPPacketInformation)
@@ -1134,7 +1079,6 @@ class Socket(object, IDisposable):
             Returns: If successful, the number of bytes received. If unsuccessful, returns 0.
         """
         ...
-
     def EndSend(self, asyncResult, errorCode=None):
         """
         EndSend(self: Socket, asyncResult: IAsyncResult) -> int
@@ -1154,7 +1098,6 @@ class Socket(object, IDisposable):
             Returns: If successful, the number of bytes sent to the System.Net.Sockets.Socket; otherwise, an invalid System.Net.Sockets.Socket error.
         """
         ...
-
     def EndSendFile(self, asyncResult):
         """
         EndSendFile(self: Socket, asyncResult: IAsyncResult)
@@ -1164,7 +1107,6 @@ class Socket(object, IDisposable):
             asyncResult: An System.IAsyncResult object that stores state information for this asynchronous operation.
         """
         ...
-
     def EndSendTo(self, asyncResult):
         """
         EndSendTo(self: Socket, asyncResult: IAsyncResult) -> int
@@ -1176,7 +1118,6 @@ class Socket(object, IDisposable):
             Returns: If successful, the number of bytes sent; otherwise, an invalid System.Net.Sockets.Socket error.
         """
         ...
-
     def GetSocketOption(self, optionLevel, optionName, *__args):
         """
         GetSocketOption(self: Socket, optionLevel: SocketOptionLevel, optionName: SocketOptionName) -> object
@@ -1218,7 +1159,6 @@ class Socket(object, IDisposable):
             Returns: An array of type System.Byte that contains the value of the socket option.
         """
         ...
-
     def IOControl(self, ioControlCode, optionInValue, optionOutValue):
         """
         IOControl(self: Socket, ioControlCode: IOControlCode, optionInValue: Array[Byte], optionOutValue: Array[Byte]) -> int
@@ -1246,7 +1186,6 @@ class Socket(object, IDisposable):
             Returns: The number of bytes in the optionOutValue parameter.
         """
         ...
-
     def Listen(self, backlog):
         """
         Listen(self: Socket, backlog: int)
@@ -1256,7 +1195,6 @@ class Socket(object, IDisposable):
             backlog: The maximum length of the pending connections queue.
         """
         ...
-
     def Poll(self, microSeconds, mode):
         """
         Poll(self: Socket, microSeconds: int, mode: SelectMode) -> bool
@@ -1290,7 +1228,6 @@ class Socket(object, IDisposable):
              System.Net.Sockets.SocketOptionName.OutOfBandInline is not set and out-of-band data is available; otherwise, returns lse.
         """
         ...
-
     def Receive(self, *__args):
         """
         Receive(self: Socket, buffer: Array[Byte], size: int, socketFlags: SocketFlags) -> int
@@ -1360,7 +1297,6 @@ class Socket(object, IDisposable):
             Returns: The number of bytes received.
         """
         ...
-
     def ReceiveAsync(self, e):
         """
         ReceiveAsync(self: Socket, e: SocketAsyncEventArgs) -> bool
@@ -1376,7 +1312,6 @@ class Socket(object, IDisposable):
              not be raised and the e object passed as a parameter may be examined immediately after the method call returns to retrieve the result of the operation.
         """
         ...
-
     def ReceiveFrom(self, buffer, *__args):
         """
         ReceiveFrom(self: Socket, buffer: Array[Byte], size: int, socketFlags: SocketFlags, remoteEP: EndPoint) -> (int, EndPoint)
@@ -1434,7 +1369,6 @@ class Socket(object, IDisposable):
             Returns: The number of bytes received.
         """
         ...
-
     def ReceiveFromAsync(self, e):
         """
         ReceiveFromAsync(self: Socket, e: SocketAsyncEventArgs) -> bool
@@ -1450,7 +1384,6 @@ class Socket(object, IDisposable):
              not be raised and the e object passed as a parameter may be examined immediately after the method call returns to retrieve the result of the operation.
         """
         ...
-
     def ReceiveMessageFrom(self, buffer, offset, size, socketFlags, remoteEP, ipPacketInformation):
         """
         ReceiveMessageFrom(self: Socket, buffer: Array[Byte], offset: int, size: int, socketFlags: SocketFlags, remoteEP: EndPoint) -> (int, SocketFlags, EndPoint, IPPacketInformation)
@@ -1472,7 +1405,6 @@ class Socket(object, IDisposable):
             Returns: The number of bytes received.
         """
         ...
-
     def ReceiveMessageFromAsync(self, e):
         """
         ReceiveMessageFromAsync(self: Socket, e: SocketAsyncEventArgs) -> bool
@@ -1490,7 +1422,6 @@ class Socket(object, IDisposable):
              not be raised and the e object passed as a parameter may be examined immediately after the method call returns to retrieve the result of the operation.
         """
         ...
-
     @staticmethod
     def Select(checkRead, checkWrite, checkError, microSeconds):
         """
@@ -1507,7 +1438,6 @@ class Socket(object, IDisposable):
             microSeconds: The time-out value, in microseconds. A -1 value indicates an infinite time-out.
         """
         ...
-
     def Send(self, *__args):
         """
         Send(self: Socket, buffer: Array[Byte], size: int, socketFlags: SocketFlags) -> int
@@ -1579,7 +1509,6 @@ class Socket(object, IDisposable):
             Returns: The number of bytes sent to the System.Net.Sockets.Socket.
         """
         ...
-
     def SendAsync(self, e):
         """
         SendAsync(self: Socket, e: SocketAsyncEventArgs) -> bool
@@ -1595,7 +1524,6 @@ class Socket(object, IDisposable):
              not be raised and the e object passed as a parameter may be examined immediately after the method call returns to retrieve the result of the operation.
         """
         ...
-
     def SendFile(self, fileName, preBuffer=None, postBuffer=None, flags=None):
         """
         SendFile(self: Socket, fileName: str)
@@ -1617,7 +1545,6 @@ class Socket(object, IDisposable):
             flags: One or more of System.Net.Sockets.TransmitFileOptions values.
         """
         ...
-
     def SendPacketsAsync(self, e):
         """
         SendPacketsAsync(self: Socket, e: SocketAsyncEventArgs) -> bool
@@ -1633,7 +1560,6 @@ class Socket(object, IDisposable):
              not be raised and the e object passed as a parameter may be examined immediately after the method call returns to retrieve the result of the operation.
         """
         ...
-
     def SendTo(self, buffer, *__args):
         """
         SendTo(self: Socket, buffer: Array[Byte], size: int, socketFlags: SocketFlags, remoteEP: EndPoint) -> int
@@ -1691,7 +1617,6 @@ class Socket(object, IDisposable):
             Returns: The number of bytes sent.
         """
         ...
-
     def SendToAsync(self, e):
         """
         SendToAsync(self: Socket, e: SocketAsyncEventArgs) -> bool
@@ -1707,7 +1632,6 @@ class Socket(object, IDisposable):
              not be raised and the e object passed as a parameter may be examined immediately after the method call returns to retrieve the result of the operation.
         """
         ...
-
     def SetIPProtectionLevel(self, level):
         """
         SetIPProtectionLevel(self: Socket, level: IPProtectionLevel)
@@ -1717,7 +1641,6 @@ class Socket(object, IDisposable):
             level: The IP protection level to set on this socket.
         """
         ...
-
     def SetSocketOption(self, optionLevel, optionName, optionValue):
         """
         SetSocketOption(self: Socket, optionLevel: SocketOptionLevel, optionName: SocketOptionName, optionValue: int)
@@ -1761,7 +1684,6 @@ class Socket(object, IDisposable):
             optionValue: A System.Net.Sockets.LingerOption or System.Net.Sockets.MulticastOption that contains the value of the option.
         """
         ...
-
     def Shutdown(self, how):
         """
         Shutdown(self: Socket, how: SocketShutdown)
@@ -1771,7 +1693,6 @@ class Socket(object, IDisposable):
             how: One of the System.Net.Sockets.SocketShutdown values that specifies the operation that will no longer be allowed.
         """
         ...
-
     @property
     def AddressFamily(self):
         """
@@ -1780,7 +1701,6 @@ class Socket(object, IDisposable):
         Get: AddressFamily(self: Socket) -> AddressFamily
         """
         ...
-
     @property
     def Available(self):
         """
@@ -1789,7 +1709,6 @@ class Socket(object, IDisposable):
         Get: Available(self: Socket) -> int
         """
         ...
-
     @property
     def Blocking(self):
         """
@@ -1800,7 +1719,6 @@ class Socket(object, IDisposable):
         Set: Blocking(self: Socket) = value
         """
         ...
-
     @property
     def Connected(self):
         """
@@ -1809,7 +1727,6 @@ class Socket(object, IDisposable):
         Get: Connected(self: Socket) -> bool
         """
         ...
-
     @property
     def DontFragment(self):
         """
@@ -1820,7 +1737,6 @@ class Socket(object, IDisposable):
         Set: DontFragment(self: Socket) = value
         """
         ...
-
     @property
     def DualMode(self):
         """
@@ -1831,7 +1747,6 @@ class Socket(object, IDisposable):
         Set: DualMode(self: Socket) = value
         """
         ...
-
     @property
     def EnableBroadcast(self):
         """
@@ -1842,7 +1757,6 @@ class Socket(object, IDisposable):
         Set: EnableBroadcast(self: Socket) = value
         """
         ...
-
     @property
     def ExclusiveAddressUse(self):
         """
@@ -1853,7 +1767,6 @@ class Socket(object, IDisposable):
         Set: ExclusiveAddressUse(self: Socket) = value
         """
         ...
-
     @property
     def Handle(self):
         """
@@ -1862,7 +1775,6 @@ class Socket(object, IDisposable):
         Get: Handle(self: Socket) -> IntPtr
         """
         ...
-
     @property
     def IsBound(self):
         """
@@ -1871,7 +1783,6 @@ class Socket(object, IDisposable):
         Get: IsBound(self: Socket) -> bool
         """
         ...
-
     @property
     def LingerState(self):
         """
@@ -1882,7 +1793,6 @@ class Socket(object, IDisposable):
         Set: LingerState(self: Socket) = value
         """
         ...
-
     @property
     def LocalEndPoint(self):
         """
@@ -1891,7 +1801,6 @@ class Socket(object, IDisposable):
         Get: LocalEndPoint(self: Socket) -> EndPoint
         """
         ...
-
     @property
     def MulticastLoopback(self):
         """
@@ -1902,7 +1811,6 @@ class Socket(object, IDisposable):
         Set: MulticastLoopback(self: Socket) = value
         """
         ...
-
     @property
     def NoDelay(self):
         """
@@ -1913,7 +1821,6 @@ class Socket(object, IDisposable):
         Set: NoDelay(self: Socket) = value
         """
         ...
-
     @property
     def ProtocolType(self):
         """
@@ -1922,7 +1829,6 @@ class Socket(object, IDisposable):
         Get: ProtocolType(self: Socket) -> ProtocolType
         """
         ...
-
     @property
     def ReceiveBufferSize(self):
         """
@@ -1933,7 +1839,6 @@ class Socket(object, IDisposable):
         Set: ReceiveBufferSize(self: Socket) = value
         """
         ...
-
     @property
     def ReceiveTimeout(self):
         """
@@ -1944,7 +1849,6 @@ class Socket(object, IDisposable):
         Set: ReceiveTimeout(self: Socket) = value
         """
         ...
-
     @property
     def RemoteEndPoint(self):
         """
@@ -1953,7 +1857,6 @@ class Socket(object, IDisposable):
         Get: RemoteEndPoint(self: Socket) -> EndPoint
         """
         ...
-
     @property
     def SendBufferSize(self):
         """
@@ -1964,7 +1867,6 @@ class Socket(object, IDisposable):
         Set: SendBufferSize(self: Socket) = value
         """
         ...
-
     @property
     def SendTimeout(self):
         """
@@ -1975,7 +1877,6 @@ class Socket(object, IDisposable):
         Set: SendTimeout(self: Socket) = value
         """
         ...
-
     @property
     def SocketType(self):
         """
@@ -1984,7 +1885,6 @@ class Socket(object, IDisposable):
         Get: SocketType(self: Socket) -> SocketType
         """
         ...
-
     @property
     def Ttl(self):
         """
@@ -1995,7 +1895,6 @@ class Socket(object, IDisposable):
         Set: Ttl(self: Socket) = value
         """
         ...
-
     @property
     def UseOnlyOverlappedIO(self):
         """
@@ -2006,13 +1905,10 @@ class Socket(object, IDisposable):
         Set: UseOnlyOverlappedIO(self: Socket) = value
         """
         ...
-
-
     OSSupportsIPv4 = True
     OSSupportsIPv6 = True
     SupportsIPv4 = True
     SupportsIPv6 = False
-
 
 class SocketAsyncEventArgs(EventArgs, IDisposable):
     """
@@ -2020,7 +1916,8 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
 
     SocketAsyncEventArgs()
     """
-    def OnCompleted(self, *args): #cannot find CLR method
+
+    def OnCompleted(self, *args):  # cannot find CLR method
         """
         OnCompleted(self: SocketAsyncEventArgs, e: SocketAsyncEventArgs)
 
@@ -2029,7 +1926,6 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
             e: The event that is signaled.
         """
         ...
-
     def SetBuffer(self, *__args):
         """
         SetBuffer(self: SocketAsyncEventArgs, buffer: Array[Byte], offset: int, count: int)
@@ -2051,7 +1947,6 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
             count: The maximum amount of data, in bytes, to send or receive in the buffer.
         """
         ...
-
     @property
     def AcceptSocket(self):
         """
@@ -2062,7 +1957,6 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
         Set: AcceptSocket(self: SocketAsyncEventArgs) = value
         """
         ...
-
     @property
     def Buffer(self):
         """
@@ -2071,7 +1965,6 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
         Get: Buffer(self: SocketAsyncEventArgs) -> Array[Byte]
         """
         ...
-
     @property
     def BufferList(self):
         """
@@ -2082,7 +1975,6 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
         Set: BufferList(self: SocketAsyncEventArgs) = value
         """
         ...
-
     @property
     def BytesTransferred(self):
         """
@@ -2091,7 +1983,6 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
         Get: BytesTransferred(self: SocketAsyncEventArgs) -> int
         """
         ...
-
     @property
     def ConnectByNameError(self):
         """
@@ -2100,7 +1991,6 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
         Get: ConnectByNameError(self: SocketAsyncEventArgs) -> Exception
         """
         ...
-
     @property
     def ConnectSocket(self):
         """
@@ -2109,7 +1999,6 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
         Get: ConnectSocket(self: SocketAsyncEventArgs) -> Socket
         """
         ...
-
     @property
     def Count(self):
         """
@@ -2118,7 +2007,6 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
         Get: Count(self: SocketAsyncEventArgs) -> int
         """
         ...
-
     @property
     def DisconnectReuseSocket(self):
         """
@@ -2129,7 +2017,6 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
         Set: DisconnectReuseSocket(self: SocketAsyncEventArgs) = value
         """
         ...
-
     @property
     def LastOperation(self):
         """
@@ -2138,7 +2025,6 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
         Get: LastOperation(self: SocketAsyncEventArgs) -> SocketAsyncOperation
         """
         ...
-
     @property
     def Offset(self):
         """
@@ -2147,7 +2033,6 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
         Get: Offset(self: SocketAsyncEventArgs) -> int
         """
         ...
-
     @property
     def ReceiveMessageFromPacketInfo(self):
         """
@@ -2156,7 +2041,6 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
         Get: ReceiveMessageFromPacketInfo(self: SocketAsyncEventArgs) -> IPPacketInformation
         """
         ...
-
     @property
     def RemoteEndPoint(self):
         """
@@ -2167,7 +2051,6 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
         Set: RemoteEndPoint(self: SocketAsyncEventArgs) = value
         """
         ...
-
     @property
     def SendPacketsElements(self):
         """
@@ -2178,7 +2061,6 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
         Set: SendPacketsElements(self: SocketAsyncEventArgs) = value
         """
         ...
-
     @property
     def SendPacketsFlags(self):
         """
@@ -2189,7 +2071,6 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
         Set: SendPacketsFlags(self: SocketAsyncEventArgs) = value
         """
         ...
-
     @property
     def SendPacketsSendSize(self):
         """
@@ -2200,7 +2081,6 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
         Set: SendPacketsSendSize(self: SocketAsyncEventArgs) = value
         """
         ...
-
     @property
     def SocketClientAccessPolicyProtocol(self):
         """
@@ -2211,7 +2091,6 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
         Set: SocketClientAccessPolicyProtocol(self: SocketAsyncEventArgs) = value
         """
         ...
-
     @property
     def SocketError(self):
         """
@@ -2222,7 +2101,6 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
         Set: SocketError(self: SocketAsyncEventArgs) = value
         """
         ...
-
     @property
     def SocketFlags(self):
         """
@@ -2233,7 +2111,6 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
         Set: SocketFlags(self: SocketAsyncEventArgs) = value
         """
         ...
-
     @property
     def UserToken(self):
         """
@@ -2244,21 +2121,19 @@ class SocketAsyncEventArgs(EventArgs, IDisposable):
         Set: UserToken(self: SocketAsyncEventArgs) = value
         """
         ...
-
-
     Completed = None
 
-
-class SocketAsyncOperation(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SocketAsyncOperation(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     The type of asynchronous socket operation most recently performed with this context object.
 
     enum SocketAsyncOperation, values: Accept (1), Connect (2), Disconnect (3), None (0), Receive (4), ReceiveFrom (5), ReceiveMessageFrom (6), Send (7), SendPackets (8), SendTo (9)
     """
+
     Accept = None
     Connect = None
     Disconnect = None
-    None = None
+
     Receive = None
     ReceiveFrom = None
     ReceiveMessageFrom = None
@@ -2267,24 +2142,26 @@ class SocketAsyncOperation(Enum): # skipped bases: <type 'IComparable'>, <type '
     SendTo = None
     value__ = None
 
-
-class SocketClientAccessPolicyProtocol(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SocketClientAccessPolicyProtocol(
+    Enum
+):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the method to download a client access policy file.
 
     enum SocketClientAccessPolicyProtocol, values: Http (1), Tcp (0)
     """
+
     Http = None
     Tcp = None
     value__ = None
 
-
-class SocketError(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SocketError(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Defines error codes for the System.Net.Sockets.Socket class.
 
     enum SocketError, values: AccessDenied (10013), AddressAlreadyInUse (10048), AddressFamilyNotSupported (10047), AddressNotAvailable (10049), AlreadyInProgress (10037), ConnectionAborted (10053), ConnectionRefused (10061), ConnectionReset (10054), DestinationAddressRequired (10039), Disconnecting (10101), Fault (10014), HostDown (10064), HostNotFound (11001), HostUnreachable (10065), InProgress (10036), Interrupted (10004), InvalidArgument (10022), IOPending (997), IsConnected (10056), MessageSize (10040), NetworkDown (10050), NetworkReset (10052), NetworkUnreachable (10051), NoBufferSpaceAvailable (10055), NoData (11004), NoRecovery (11003), NotConnected (10057), NotInitialized (10093), NotSocket (10038), OperationAborted (995), OperationNotSupported (10045), ProcessLimit (10067), ProtocolFamilyNotSupported (10046), ProtocolNotSupported (10043), ProtocolOption (10042), ProtocolType (10041), Shutdown (10058), SocketError (-1), SocketNotSupported (10044), Success (0), SystemNotReady (10091), TimedOut (10060), TooManyOpenSockets (10024), TryAgain (11002), TypeNotFound (10109), VersionNotSupported (10092), WouldBlock (10035)
     """
+
     AccessDenied = None
     AddressAlreadyInUse = None
     AddressFamilyNotSupported = None
@@ -2334,8 +2211,7 @@ class SocketError(Enum): # skipped bases: <type 'IComparable'>, <type 'IConverti
     VersionNotSupported = None
     WouldBlock = None
 
-
-class SocketException(Win32Exception): # skipped bases: <type '_Exception'>, <type 'ISerializable'>
+class SocketException(Win32Exception):  # skipped bases: <type '_Exception'>, <type 'ISerializable'>
     """
     The exception that is thrown when a socket error occurs.
 
@@ -2343,6 +2219,7 @@ class SocketException(Win32Exception): # skipped bases: <type '_Exception'>, <ty
 
     SocketException(errorCode: int)
     """
+
     @property
     def ErrorCode(self):
         """
@@ -2351,7 +2228,6 @@ class SocketException(Win32Exception): # skipped bases: <type '_Exception'>, <ty
         Get: ErrorCode(self: SocketException) -> int
         """
         ...
-
     @property
     def Message(self):
         """
@@ -2360,7 +2236,6 @@ class SocketException(Win32Exception): # skipped bases: <type '_Exception'>, <ty
         Get: Message(self: SocketException) -> str
         """
         ...
-
     @property
     def SocketErrorCode(self):
         """
@@ -2369,32 +2244,30 @@ class SocketException(Win32Exception): # skipped bases: <type '_Exception'>, <ty
         Get: SocketErrorCode(self: SocketException) -> SocketError
         """
         ...
-
-
     SerializeObjectState = None
 
-
-class SocketFlags(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SocketFlags(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies socket send and receive behaviors.
 
     enum (flags) SocketFlags, values: Broadcast (1024), ControlDataTruncated (512), DontRoute (4), MaxIOVectorLength (16), Multicast (2048), None (0), OutOfBand (1), Partial (32768), Peek (2), Truncated (256)
     """
+
     Broadcast = None
     ControlDataTruncated = None
     DontRoute = None
     MaxIOVectorLength = None
     Multicast = None
-    None = None
+
     OutOfBand = None
     Partial = None
     Peek = None
     Truncated = None
     value__ = None
 
+class SocketInformation:  # skipped bases: <type 'object'>
+    """Encapsulates the information that is necessary to duplicate a System.Net.Sockets.Socket."""
 
-class SocketInformation: # skipped bases: <type 'object'>
-    """ Encapsulates the information that is necessary to duplicate a System.Net.Sockets.Socket. """
     @property
     def Options(self):
         """
@@ -2405,7 +2278,6 @@ class SocketInformation: # skipped bases: <type 'object'>
         Set: Options(self: SocketInformation) = value
         """
         ...
-
     @property
     def ProtocolInformation(self):
         """
@@ -2417,27 +2289,28 @@ class SocketInformation: # skipped bases: <type 'object'>
         """
         ...
 
-
-
-class SocketInformationOptions(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SocketInformationOptions(
+    Enum
+):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Describes states for a System.Net.Sockets.Socket.
 
     enum (flags) SocketInformationOptions, values: Connected (2), Listening (4), NonBlocking (1), UseOnlyOverlappedIO (8)
     """
+
     Connected = None
     Listening = None
     NonBlocking = None
     UseOnlyOverlappedIO = None
     value__ = None
 
-
-class SocketOptionLevel(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SocketOptionLevel(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Defines socket option levels for the System.Net.Sockets.Socket.SetSocketOption(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Int32) and System.Net.Sockets.Socket.GetSocketOption(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName) methods.
 
     enum SocketOptionLevel, values: IP (0), IPv6 (41), Socket (65535), Tcp (6), Udp (17)
     """
+
     IP = None
     IPv6 = None
     Socket = None
@@ -2445,13 +2318,13 @@ class SocketOptionLevel(Enum): # skipped bases: <type 'IComparable'>, <type 'ICo
     Udp = None
     value__ = None
 
-
-class SocketOptionName(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SocketOptionName(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Defines configuration option names.
 
     enum SocketOptionName, values: AcceptConnection (2), AddMembership (12), AddSourceMembership (15), BlockSource (17), Broadcast (32), BsdUrgent (2), ChecksumCoverage (20), Debug (1), DontFragment (14), DontLinger (-129), DontRoute (16), DropMembership (13), DropSourceMembership (16), Error (4103), ExclusiveAddressUse (-5), Expedited (2), HeaderIncluded (2), HopLimit (21), IPOptions (1), IPProtectionLevel (23), IpTimeToLive (4), IPv6Only (27), KeepAlive (8), Linger (128), MaxConnections (2147483647), MulticastInterface (9), MulticastLoopback (11), MulticastTimeToLive (10), NoChecksum (1), NoDelay (1), OutOfBandInline (256), PacketInformation (19), ReceiveBuffer (4098), ReceiveLowWater (4100), ReceiveTimeout (4102), ReuseAddress (4), ReuseUnicastPort (12295), SendBuffer (4097), SendLowWater (4099), SendTimeout (4101), Type (4104), TypeOfService (3), UnblockSource (18), UpdateAcceptContext (28683), UpdateConnectContext (28688), UseLoopback (64)
     """
+
     AcceptConnection = None
     AddMembership = None
     AddSourceMembership = None
@@ -2500,35 +2373,35 @@ class SocketOptionName(Enum): # skipped bases: <type 'IComparable'>, <type 'ICon
     UseLoopback = None
     value__ = None
 
+class SocketReceiveFromResult:  # skipped bases: <type 'object'>
+    """The result of a System.Net.Sockets.SocketTaskExtensions.ReceiveFromAsync(System.Net.Sockets.Socket,System.ArraySegment{System.Byte},System.Net.Sockets.SocketFlags,System.Net.EndPoint) operation."""
 
-class SocketReceiveFromResult: # skipped bases: <type 'object'>
-    """ The result of a System.Net.Sockets.SocketTaskExtensions.ReceiveFromAsync(System.Net.Sockets.Socket,System.ArraySegment{System.Byte},System.Net.Sockets.SocketFlags,System.Net.EndPoint) operation. """
     ReceivedBytes = None
     RemoteEndPoint = None
 
+class SocketReceiveMessageFromResult:  # skipped bases: <type 'object'>
+    """The result of a System.Net.Sockets.SocketTaskExtensions.ReceiveMessageFromAsync(System.Net.Sockets.Socket,System.ArraySegment{System.Byte},System.Net.Sockets.SocketFlags,System.Net.EndPoint) operation."""
 
-class SocketReceiveMessageFromResult: # skipped bases: <type 'object'>
-    """ The result of a System.Net.Sockets.SocketTaskExtensions.ReceiveMessageFromAsync(System.Net.Sockets.Socket,System.ArraySegment{System.Byte},System.Net.Sockets.SocketFlags,System.Net.EndPoint) operation. """
     PacketInformation = None
     ReceivedBytes = None
     RemoteEndPoint = None
     SocketFlags = None
 
-
-class SocketShutdown(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SocketShutdown(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Defines constants that are used by the System.Net.Sockets.Socket.Shutdown(System.Net.Sockets.SocketShutdown) method.
 
     enum SocketShutdown, values: Both (2), Receive (0), Send (1)
     """
+
     Both = None
     Receive = None
     Send = None
     value__ = None
 
+class SocketTaskExtensions:  # skipped bases: <type 'object'>
+    """This class contains extension methods to the System.Net.Sockets.Socket class."""
 
-class SocketTaskExtensions: # skipped bases: <type 'object'>
-    """ This class contains extension methods to the System.Net.Sockets.Socket class. """
     @staticmethod
     def AcceptAsync(socket, acceptSocket=None):
         """
@@ -2551,7 +2424,6 @@ class SocketTaskExtensions: # skipped bases: <type 'object'>
             Returns: An asynchronous task that completes with a System.Net.Sockets.Socket to handle communication with the remote host.
         """
         ...
-
     @staticmethod
     def ConnectAsync(socket, *__args):
         """
@@ -2600,7 +2472,6 @@ class SocketTaskExtensions: # skipped bases: <type 'object'>
             Returns: Returns an asynchronous Task.
         """
         ...
-
     @staticmethod
     def ReceiveAsync(socket, *__args):
         """
@@ -2609,17 +2480,14 @@ class SocketTaskExtensions: # skipped bases: <type 'object'>
         ReceiveAsync(socket: Socket, buffer: ArraySegment[Byte], socketFlags: SocketFlags) -> Task[int]
         """
         ...
-
     @staticmethod
     def ReceiveFromAsync(socket, buffer, socketFlags, remoteEndPoint):
-        """ ReceiveFromAsync(socket: Socket, buffer: ArraySegment[Byte], socketFlags: SocketFlags, remoteEndPoint: EndPoint) -> Task[SocketReceiveFromResult] """
+        """ReceiveFromAsync(socket: Socket, buffer: ArraySegment[Byte], socketFlags: SocketFlags, remoteEndPoint: EndPoint) -> Task[SocketReceiveFromResult]"""
         ...
-
     @staticmethod
     def ReceiveMessageFromAsync(socket, buffer, socketFlags, remoteEndPoint):
-        """ ReceiveMessageFromAsync(socket: Socket, buffer: ArraySegment[Byte], socketFlags: SocketFlags, remoteEndPoint: EndPoint) -> Task[SocketReceiveMessageFromResult] """
+        """ReceiveMessageFromAsync(socket: Socket, buffer: ArraySegment[Byte], socketFlags: SocketFlags, remoteEndPoint: EndPoint) -> Task[SocketReceiveMessageFromResult]"""
         ...
-
     @staticmethod
     def SendAsync(socket, *__args):
         """
@@ -2628,29 +2496,27 @@ class SocketTaskExtensions: # skipped bases: <type 'object'>
         SendAsync(socket: Socket, buffer: ArraySegment[Byte], socketFlags: SocketFlags) -> Task[int]
         """
         ...
-
     @staticmethod
     def SendToAsync(socket, buffer, socketFlags, remoteEP):
-        """ SendToAsync(socket: Socket, buffer: ArraySegment[Byte], socketFlags: SocketFlags, remoteEP: EndPoint) -> Task[int] """
+        """SendToAsync(socket: Socket, buffer: ArraySegment[Byte], socketFlags: SocketFlags, remoteEP: EndPoint) -> Task[int]"""
         ...
-
     __all__ = [
-        'AcceptAsync',
-        'ConnectAsync',
-        'ReceiveAsync',
-        'ReceiveFromAsync',
-        'ReceiveMessageFromAsync',
-        'SendAsync',
-        'SendToAsync',
+        "AcceptAsync",
+        "ConnectAsync",
+        "ReceiveAsync",
+        "ReceiveFromAsync",
+        "ReceiveMessageFromAsync",
+        "SendAsync",
+        "SendToAsync",
     ]
 
-
-class SocketType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SocketType(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the type of socket that an instance of the System.Net.Sockets.Socket class represents.
 
     enum SocketType, values: Dgram (2), Raw (3), Rdm (4), Seqpacket (5), Stream (1), Unknown (-1)
     """
+
     Dgram = None
     Raw = None
     Rdm = None
@@ -2658,7 +2524,6 @@ class SocketType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertib
     Stream = None
     Unknown = None
     value__ = None
-
 
 class TcpClient(object, IDisposable):
     """
@@ -2672,6 +2537,7 @@ class TcpClient(object, IDisposable):
 
     TcpClient(hostname: str, port: int)
     """
+
     def BeginConnect(self, *__args):
         """
         BeginConnect(self: TcpClient, host: str, port: int, requestCallback: AsyncCallback, state: object) -> IAsyncResult
@@ -2717,7 +2583,6 @@ class TcpClient(object, IDisposable):
             Returns: An System.IAsyncResult object that references the asynchronous connection.
         """
         ...
-
     def Close(self):
         """
         Close(self: TcpClient)
@@ -2725,7 +2590,6 @@ class TcpClient(object, IDisposable):
             Disposes this System.Net.Sockets.TcpClient instance and requests that the underlying TCP connection be closed.
         """
         ...
-
     def Connect(self, *__args):
         """
         Connect(self: TcpClient, hostname: str, port: int)
@@ -2759,7 +2623,6 @@ class TcpClient(object, IDisposable):
             port: The port number to which you intend to connect.
         """
         ...
-
     def ConnectAsync(self, *__args):
         """
         ConnectAsync(self: TcpClient, address: IPAddress, port: int) -> Task
@@ -2793,7 +2656,6 @@ class TcpClient(object, IDisposable):
             Returns: Returns System.Threading.Tasks.TaskThe task object representing the asynchronous operation.
         """
         ...
-
     def EndConnect(self, asyncResult):
         """
         EndConnect(self: TcpClient, asyncResult: IAsyncResult)
@@ -2803,7 +2665,6 @@ class TcpClient(object, IDisposable):
             asyncResult: An System.IAsyncResult object returned by a call to erload:System.Net.Sockets.TcpClient.BeginConnect.
         """
         ...
-
     def GetStream(self):
         """
         GetStream(self: TcpClient) -> NetworkStream
@@ -2813,12 +2674,10 @@ class TcpClient(object, IDisposable):
             Returns: The underlying System.Net.Sockets.NetworkStream.
         """
         ...
-
     @property
     def Active(self):
-        """ Gets or set a value that indicates whether a connection has been made. """
+        """Gets or set a value that indicates whether a connection has been made."""
         ...
-
     @property
     def Available(self):
         """
@@ -2827,7 +2686,6 @@ class TcpClient(object, IDisposable):
         Get: Available(self: TcpClient) -> int
         """
         ...
-
     @property
     def Client(self):
         """
@@ -2838,7 +2696,6 @@ class TcpClient(object, IDisposable):
         Set: Client(self: TcpClient) = value
         """
         ...
-
     @property
     def Connected(self):
         """
@@ -2847,7 +2704,6 @@ class TcpClient(object, IDisposable):
         Get: Connected(self: TcpClient) -> bool
         """
         ...
-
     @property
     def ExclusiveAddressUse(self):
         """
@@ -2858,7 +2714,6 @@ class TcpClient(object, IDisposable):
         Set: ExclusiveAddressUse(self: TcpClient) = value
         """
         ...
-
     @property
     def LingerState(self):
         """
@@ -2869,7 +2724,6 @@ class TcpClient(object, IDisposable):
         Set: LingerState(self: TcpClient) = value
         """
         ...
-
     @property
     def NoDelay(self):
         """
@@ -2880,7 +2734,6 @@ class TcpClient(object, IDisposable):
         Set: NoDelay(self: TcpClient) = value
         """
         ...
-
     @property
     def ReceiveBufferSize(self):
         """
@@ -2891,7 +2744,6 @@ class TcpClient(object, IDisposable):
         Set: ReceiveBufferSize(self: TcpClient) = value
         """
         ...
-
     @property
     def ReceiveTimeout(self):
         """
@@ -2902,7 +2754,6 @@ class TcpClient(object, IDisposable):
         Set: ReceiveTimeout(self: TcpClient) = value
         """
         ...
-
     @property
     def SendBufferSize(self):
         """
@@ -2913,7 +2764,6 @@ class TcpClient(object, IDisposable):
         Set: SendBufferSize(self: TcpClient) = value
         """
         ...
-
     @property
     def SendTimeout(self):
         """
@@ -2925,9 +2775,7 @@ class TcpClient(object, IDisposable):
         """
         ...
 
-
-
-class TcpListener: # skipped bases: <type 'object'>
+class TcpListener:  # skipped bases: <type 'object'>
     """
     Listens for connections from TCP network clients.
 
@@ -2937,6 +2785,7 @@ class TcpListener: # skipped bases: <type 'object'>
 
     TcpListener(port: int)
     """
+
     def AcceptSocket(self):
         """
         AcceptSocket(self: TcpListener) -> Socket
@@ -2946,7 +2795,6 @@ class TcpListener: # skipped bases: <type 'object'>
             Returns: A System.Net.Sockets.Socket used to send and receive data.
         """
         ...
-
     def AcceptSocketAsync(self):
         """
         AcceptSocketAsync(self: TcpListener) -> Task[Socket]
@@ -2958,7 +2806,6 @@ class TcpListener: # skipped bases: <type 'object'>
              System.Net.Sockets.Socket used to send and receive data.
         """
         ...
-
     def AcceptTcpClient(self):
         """
         AcceptTcpClient(self: TcpListener) -> TcpClient
@@ -2968,7 +2815,6 @@ class TcpListener: # skipped bases: <type 'object'>
             Returns: A System.Net.Sockets.TcpClient used to send and receive data.
         """
         ...
-
     def AcceptTcpClientAsync(self):
         """
         AcceptTcpClientAsync(self: TcpListener) -> Task[TcpClient]
@@ -2980,7 +2826,6 @@ class TcpListener: # skipped bases: <type 'object'>
              System.Net.Sockets.TcpClient used to send and receive data.
         """
         ...
-
     def AllowNatTraversal(self, allowed):
         """
         AllowNatTraversal(self: TcpListener, allowed: bool)
@@ -2990,7 +2835,6 @@ class TcpListener: # skipped bases: <type 'object'>
             allowed: A Boolean value that specifies whether to enable or disable NAT traversal.
         """
         ...
-
     def BeginAcceptSocket(self, callback, state):
         """
         BeginAcceptSocket(self: TcpListener, callback: AsyncCallback, state: object) -> IAsyncResult
@@ -3004,7 +2848,6 @@ class TcpListener: # skipped bases: <type 'object'>
             Returns: An System.IAsyncResult that references the asynchronous creation of the System.Net.Sockets.Socket.
         """
         ...
-
     def BeginAcceptTcpClient(self, callback, state):
         """
         BeginAcceptTcpClient(self: TcpListener, callback: AsyncCallback, state: object) -> IAsyncResult
@@ -3018,7 +2861,6 @@ class TcpListener: # skipped bases: <type 'object'>
             Returns: An System.IAsyncResult that references the asynchronous creation of the System.Net.Sockets.TcpClient.
         """
         ...
-
     @staticmethod
     def Create(port):
         """
@@ -3031,7 +2873,6 @@ class TcpListener: # skipped bases: <type 'object'>
             Returns: Returns System.Net.Sockets.TcpListener.A new System.Net.Sockets.TcpListener instance to listen on the specified port.
         """
         ...
-
     def EndAcceptSocket(self, asyncResult):
         """
         EndAcceptSocket(self: TcpListener, asyncResult: IAsyncResult) -> Socket
@@ -3043,7 +2884,6 @@ class TcpListener: # skipped bases: <type 'object'>
             Returns: A System.Net.Sockets.Socket.The System.Net.Sockets.Socket used to send and receive data.
         """
         ...
-
     def EndAcceptTcpClient(self, asyncResult):
         """
         EndAcceptTcpClient(self: TcpListener, asyncResult: IAsyncResult) -> TcpClient
@@ -3055,7 +2895,6 @@ class TcpListener: # skipped bases: <type 'object'>
             Returns: A System.Net.Sockets.TcpClient.The System.Net.Sockets.TcpClient used to send and receive data.
         """
         ...
-
     def Pending(self):
         """
         Pending(self: TcpListener) -> bool
@@ -3065,7 +2904,6 @@ class TcpListener: # skipped bases: <type 'object'>
             Returns: ue if connections are pending; otherwise, lse.
         """
         ...
-
     def Start(self, backlog=None):
         """
         Start(self: TcpListener)
@@ -3079,7 +2917,6 @@ class TcpListener: # skipped bases: <type 'object'>
             backlog: The maximum length of the pending connections queue.
         """
         ...
-
     def Stop(self):
         """
         Stop(self: TcpListener)
@@ -3087,12 +2924,10 @@ class TcpListener: # skipped bases: <type 'object'>
             Closes the listener.
         """
         ...
-
     @property
     def Active(self):
-        """ Gets a value that indicates whether System.Net.Sockets.TcpListener is actively listening for client connections. """
+        """Gets a value that indicates whether System.Net.Sockets.TcpListener is actively listening for client connections."""
         ...
-
     @property
     def ExclusiveAddressUse(self):
         """
@@ -3103,7 +2938,6 @@ class TcpListener: # skipped bases: <type 'object'>
         Set: ExclusiveAddressUse(self: TcpListener) = value
         """
         ...
-
     @property
     def LocalEndpoint(self):
         """
@@ -3112,7 +2946,6 @@ class TcpListener: # skipped bases: <type 'object'>
         Get: LocalEndpoint(self: TcpListener) -> EndPoint
         """
         ...
-
     @property
     def Server(self):
         """
@@ -3122,14 +2955,13 @@ class TcpListener: # skipped bases: <type 'object'>
         """
         ...
 
-
-
-class TransmitFileOptions(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class TransmitFileOptions(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     The System.Net.Sockets.TransmitFileOptions enumeration defines values used in file transfer requests.
 
     enum (flags) TransmitFileOptions, values: Disconnect (1), ReuseSocket (2), UseDefaultWorkerThread (0), UseKernelApc (32), UseSystemThread (16), WriteBehind (4)
     """
+
     Disconnect = None
     ReuseSocket = None
     UseDefaultWorkerThread = None
@@ -3137,7 +2969,6 @@ class TransmitFileOptions(Enum): # skipped bases: <type 'IComparable'>, <type 'I
     UseSystemThread = None
     value__ = None
     WriteBehind = None
-
 
 class UdpClient(object, IDisposable):
     """
@@ -3155,6 +2986,7 @@ class UdpClient(object, IDisposable):
 
     UdpClient(hostname: str, port: int)
     """
+
     def AllowNatTraversal(self, allowed):
         """
         AllowNatTraversal(self: UdpClient, allowed: bool)
@@ -3164,7 +2996,6 @@ class UdpClient(object, IDisposable):
             allowed: A Boolean value that specifies whether to enable or disable NAT traversal.
         """
         ...
-
     def BeginReceive(self, requestCallback, state):
         """
         BeginReceive(self: UdpClient, requestCallback: AsyncCallback, state: object) -> IAsyncResult
@@ -3178,7 +3009,6 @@ class UdpClient(object, IDisposable):
             Returns: An System.IAsyncResult object that references the asynchronous receive.
         """
         ...
-
     def BeginSend(self, datagram, bytes, *__args):
         """
         BeginSend(self: UdpClient, datagram: Array[Byte], bytes: int, endPoint: IPEndPoint, requestCallback: AsyncCallback, state: object) -> IAsyncResult
@@ -3230,7 +3060,6 @@ class UdpClient(object, IDisposable):
             Returns: An System.IAsyncResult object that references the asynchronous send.
         """
         ...
-
     def Close(self):
         """
         Close(self: UdpClient)
@@ -3238,7 +3067,6 @@ class UdpClient(object, IDisposable):
             Closes the UDP connection.
         """
         ...
-
     def Connect(self, *__args):
         """
         Connect(self: UdpClient, hostname: str, port: int)
@@ -3264,7 +3092,6 @@ class UdpClient(object, IDisposable):
             endPoint: An System.Net.IPEndPoint that specifies the network endpoint to which you intend to send data.
         """
         ...
-
     def DropMulticastGroup(self, multicastAddr, ifindex=None):
         """
         DropMulticastGroup(self: UdpClient, multicastAddr: IPAddress, ifindex: int)
@@ -3282,7 +3109,6 @@ class UdpClient(object, IDisposable):
             multicastAddr: The System.Net.IPAddress of the multicast group to leave.
         """
         ...
-
     def EndReceive(self, asyncResult, remoteEP):
         """
         EndReceive(self: UdpClient, asyncResult: IAsyncResult, remoteEP: IPEndPoint) -> (Array[Byte], IPEndPoint)
@@ -3296,7 +3122,6 @@ class UdpClient(object, IDisposable):
             Returns: If successful, the number of bytes received. If unsuccessful, this method returns 0.
         """
         ...
-
     def EndSend(self, asyncResult):
         """
         EndSend(self: UdpClient, asyncResult: IAsyncResult) -> int
@@ -3308,7 +3133,6 @@ class UdpClient(object, IDisposable):
             Returns: If successful, the number of bytes sent to the System.Net.Sockets.UdpClient.
         """
         ...
-
     def JoinMulticastGroup(self, *__args):
         """
         JoinMulticastGroup(self: UdpClient, multicastAddr: IPAddress, localAddress: IPAddress)
@@ -3342,7 +3166,6 @@ class UdpClient(object, IDisposable):
             multicastAddr: The multicast System.Net.IPAddress of the group you want to join.
         """
         ...
-
     def Receive(self, remoteEP):
         """
         Receive(self: UdpClient, remoteEP: IPEndPoint) -> (Array[Byte], IPEndPoint)
@@ -3354,7 +3177,6 @@ class UdpClient(object, IDisposable):
             Returns: An array of type System.Byte that contains datagram data.
         """
         ...
-
     def ReceiveAsync(self):
         """
         ReceiveAsync(self: UdpClient) -> Task[UdpReceiveResult]
@@ -3364,7 +3186,6 @@ class UdpClient(object, IDisposable):
             Returns: Returns System.Threading.Tasks.Task.The task object representing the asynchronous operation.
         """
         ...
-
     def Send(self, dgram, bytes, *__args):
         """
         Send(self: UdpClient, dgram: Array[Byte], bytes: int, endPoint: IPEndPoint) -> int
@@ -3404,7 +3225,6 @@ class UdpClient(object, IDisposable):
             Returns: The number of bytes sent.
         """
         ...
-
     def SendAsync(self, datagram, bytes, *__args):
         """
         SendAsync(self: UdpClient, datagram: Array[Byte], bytes: int) -> Task[int]
@@ -3444,12 +3264,10 @@ class UdpClient(object, IDisposable):
             Returns: Returns System.Threading.Tasks.Task.
         """
         ...
-
     @property
     def Active(self):
-        """ Gets or sets a value indicating whether a default remote host has been established. """
+        """Gets or sets a value indicating whether a default remote host has been established."""
         ...
-
     @property
     def Available(self):
         """
@@ -3458,7 +3276,6 @@ class UdpClient(object, IDisposable):
         Get: Available(self: UdpClient) -> int
         """
         ...
-
     @property
     def Client(self):
         """
@@ -3469,7 +3286,6 @@ class UdpClient(object, IDisposable):
         Set: Client(self: UdpClient) = value
         """
         ...
-
     @property
     def DontFragment(self):
         """
@@ -3480,7 +3296,6 @@ class UdpClient(object, IDisposable):
         Set: DontFragment(self: UdpClient) = value
         """
         ...
-
     @property
     def EnableBroadcast(self):
         """
@@ -3491,7 +3306,6 @@ class UdpClient(object, IDisposable):
         Set: EnableBroadcast(self: UdpClient) = value
         """
         ...
-
     @property
     def ExclusiveAddressUse(self):
         """
@@ -3502,7 +3316,6 @@ class UdpClient(object, IDisposable):
         Set: ExclusiveAddressUse(self: UdpClient) = value
         """
         ...
-
     @property
     def MulticastLoopback(self):
         """
@@ -3513,7 +3326,6 @@ class UdpClient(object, IDisposable):
         Set: MulticastLoopback(self: UdpClient) = value
         """
         ...
-
     @property
     def Ttl(self):
         """
@@ -3525,14 +3337,13 @@ class UdpClient(object, IDisposable):
         """
         ...
 
-
-
 class UdpReceiveResult(object, IEquatable[UdpReceiveResult]):
     """
     Presents UDP receive result information from a call to the System.Net.Sockets.UdpClient.ReceiveAsync method.
 
     UdpReceiveResult(buffer: Array[Byte], remoteEndPoint: IPEndPoint)
     """
+
     def GetHashCode(self):
         """
         GetHashCode(self: UdpReceiveResult) -> int
@@ -3542,10 +3353,7 @@ class UdpReceiveResult(object, IEquatable[UdpReceiveResult]):
             Returns: Returns System.Int32.The hash code.
         """
         ...
-
-    def __ne__(self, *args): #cannot find CLR method
-        ...
-
+    def __ne__(self, *args): ...
     @property
     def Buffer(self):
         """
@@ -3554,7 +3362,6 @@ class UdpReceiveResult(object, IEquatable[UdpReceiveResult]):
         Get: Buffer(self: UdpReceiveResult) -> Array[Byte]
         """
         ...
-
     @property
     def RemoteEndPoint(self):
         """

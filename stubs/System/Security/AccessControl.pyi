@@ -8,24 +8,27 @@
 # no functions
 # classes
 
-class AccessControlActions(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class AccessControlActions(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the actions that are permitted for securable objects.
 
     enum (flags) AccessControlActions, values: Change (2), None (0), View (1)
     """
+
     Change = None
-    None = None
+
     value__ = None
     View = None
 
-
-class AccessControlModification(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class AccessControlModification(
+    Enum
+):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the type of access control modification to perform. This enumeration is used by methods of the System.Security.AccessControl.ObjectSecurity class and its descendents.
 
     enum AccessControlModification, values: Add (0), Remove (3), RemoveAll (4), RemoveSpecific (5), Reset (2), Set (1)
     """
+
     Add = None
     Remove = None
     RemoveAll = None
@@ -34,40 +37,39 @@ class AccessControlModification(Enum): # skipped bases: <type 'IComparable'>, <t
     Set = None
     value__ = None
 
-
-class AccessControlSections(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class AccessControlSections(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies which sections of a security descriptor to save or load.
 
     enum (flags) AccessControlSections, values: Access (2), All (15), Audit (1), Group (8), None (0), Owner (4)
     """
+
     Access = None
     All = None
     Audit = None
     Group = None
-    None = None
+
     Owner = None
     value__ = None
 
-
-class AccessControlType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class AccessControlType(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies whether an System.Security.AccessControl.AccessRule object is used to allow or deny access. These values are not flags, and they cannot be combined.
 
     enum AccessControlType, values: Allow (0), Deny (1)
     """
+
     Allow = None
     Deny = None
     value__ = None
 
-
 class AccessRule:
-    """ Represents a combination of a user's identity, an access mask, and an access control type (allow or deny). An System.Security.AccessControl.AccessRule object also contains information about the how the rule is inherited by child objects and how that inheritance is propagated. """
-    @staticmethod # known case of __new__
-    def __new__(cls, *args): #cannot find CLR constructor
-        """ __new__(cls: type, identity: IdentityReference, accessMask: int, isInherited: bool, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, type: AccessControlType) """
-        ...
+    """Represents a combination of a user's identity, an access mask, and an access control type (allow or deny). An System.Security.AccessControl.AccessRule object also contains information about the how the rule is inherited by child objects and how that inheritance is propagated."""
 
+    @staticmethod  # known case of __new__
+    def __new__(cls, *args):  # cannot find CLR constructor
+        """__new__(cls: type, identity: IdentityReference, accessMask: int, isInherited: bool, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, type: AccessControlType)"""
+        ...
     @property
     def AccessControlType(self):
         """
@@ -76,16 +78,14 @@ class AccessRule:
         Get: AccessControlType(self: AccessRule) -> AccessControlType
         """
         ...
-
     @property
     def AccessMask(self):
-        """ Gets the access mask for this rule. """
+        """Gets the access mask for this rule."""
         ...
 
-
-
 class AceEnumerator(object, IEnumerator):
-    """ Provides the ability to iterate through the access control entries (ACEs) in an access control list (ACL). """
+    """Provides the ability to iterate through the access control entries (ACEs) in an access control list (ACL)."""
+
     @property
     def Current(self):
         """
@@ -95,46 +95,45 @@ class AceEnumerator(object, IEnumerator):
         """
         ...
 
-
-
-class AceFlags(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class AceFlags(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the inheritance and auditing behavior of an access control entry (ACE).
 
     enum (flags) AceFlags, values: AuditFlags (192), ContainerInherit (2), FailedAccess (128), InheritanceFlags (15), Inherited (16), InheritOnly (8), None (0), NoPropagateInherit (4), ObjectInherit (1), SuccessfulAccess (64)
     """
+
     AuditFlags = None
     ContainerInherit = None
     FailedAccess = None
     InheritanceFlags = None
     Inherited = None
     InheritOnly = None
-    None = None
+
     NoPropagateInherit = None
     ObjectInherit = None
     SuccessfulAccess = None
     value__ = None
 
-
-class AceQualifier(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class AceQualifier(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the function of an access control entry (ACE).
 
     enum AceQualifier, values: AccessAllowed (0), AccessDenied (1), SystemAlarm (3), SystemAudit (2)
     """
+
     AccessAllowed = None
     AccessDenied = None
     SystemAlarm = None
     SystemAudit = None
     value__ = None
 
-
-class AceType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class AceType(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Defines the available access control entry (ACE) types.
 
     enum AceType, values: AccessAllowed (0), AccessAllowedCallback (9), AccessAllowedCallbackObject (11), AccessAllowedCompound (4), AccessAllowedObject (5), AccessDenied (1), AccessDeniedCallback (10), AccessDeniedCallbackObject (12), AccessDeniedObject (6), MaxDefinedAceType (16), SystemAlarm (3), SystemAlarmCallback (14), SystemAlarmCallbackObject (16), SystemAlarmObject (8), SystemAudit (2), SystemAuditCallback (13), SystemAuditCallbackObject (15), SystemAuditObject (7)
     """
+
     AccessAllowed = None
     AccessAllowedCallback = None
     AccessAllowedCallbackObject = None
@@ -155,31 +154,29 @@ class AceType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'
     SystemAuditObject = None
     value__ = None
 
-
-class AuditFlags(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class AuditFlags(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the conditions for auditing attempts to access a securable object.
 
     enum (flags) AuditFlags, values: Failure (2), None (0), Success (1)
     """
+
     Failure = None
-    None = None
+
     Success = None
     value__ = None
 
-
 class AuditRule:
-    """ Represents a combination of a user's identity and an access mask. An System.Security.AccessControl.AuditRule object also contains information about how the rule is inherited by child objects, how that inheritance is propagated, and for what conditions it is audited. """
-    @staticmethod # known case of __new__
-    def __new__(cls, *args): #cannot find CLR constructor
-        """ __new__(cls: type, identity: IdentityReference, accessMask: int, isInherited: bool, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, auditFlags: AuditFlags) """
-        ...
+    """Represents a combination of a user's identity and an access mask. An System.Security.AccessControl.AuditRule object also contains information about how the rule is inherited by child objects, how that inheritance is propagated, and for what conditions it is audited."""
 
+    @staticmethod  # known case of __new__
+    def __new__(cls, *args):  # cannot find CLR constructor
+        """__new__(cls: type, identity: IdentityReference, accessMask: int, isInherited: bool, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, auditFlags: AuditFlags)"""
+        ...
     @property
     def AccessMask(self):
-        """ Gets the access mask for this rule. """
+        """Gets the access mask for this rule."""
         ...
-
     @property
     def AuditFlags(self):
         """
@@ -189,15 +186,13 @@ class AuditRule:
         """
         ...
 
+class AuthorizationRule:  # skipped bases: <type 'object'>
+    """Determines access to securable objects. The derived classes System.Security.AccessControl.AccessRule and System.Security.AccessControl.AuditRule offer specializations for access and audit functionality."""
 
-
-class AuthorizationRule: # skipped bases: <type 'object'>
-    """ Determines access to securable objects. The derived classes System.Security.AccessControl.AccessRule and System.Security.AccessControl.AuditRule offer specializations for access and audit functionality. """
     @property
     def AccessMask(self):
-        """ Gets the access mask for this rule. """
+        """Gets the access mask for this rule."""
         ...
-
     @property
     def IdentityReference(self):
         """
@@ -206,7 +201,6 @@ class AuthorizationRule: # skipped bases: <type 'object'>
         Get: IdentityReference(self: AuthorizationRule) -> IdentityReference
         """
         ...
-
     @property
     def InheritanceFlags(self):
         """
@@ -215,7 +209,6 @@ class AuthorizationRule: # skipped bases: <type 'object'>
         Get: InheritanceFlags(self: AuthorizationRule) -> InheritanceFlags
         """
         ...
-
     @property
     def IsInherited(self):
         """
@@ -224,7 +217,6 @@ class AuthorizationRule: # skipped bases: <type 'object'>
         Get: IsInherited(self: AuthorizationRule) -> bool
         """
         ...
-
     @property
     def PropagationFlags(self):
         """
@@ -234,14 +226,13 @@ class AuthorizationRule: # skipped bases: <type 'object'>
         """
         ...
 
-
-
-class AuthorizationRuleCollection(ReadOnlyCollectionBase): # skipped bases: <type 'ICollection'>, <type 'IEnumerable'>
+class AuthorizationRuleCollection(ReadOnlyCollectionBase):  # skipped bases: <type 'ICollection'>, <type 'IEnumerable'>
     """
     Represents a collection of System.Security.AccessControl.AuthorizationRule objects.
 
     AuthorizationRuleCollection()
     """
+
     def AddRule(self, rule):
         """
         AddRule(self: AuthorizationRuleCollection, rule: AuthorizationRule)
@@ -251,7 +242,6 @@ class AuthorizationRuleCollection(ReadOnlyCollectionBase): # skipped bases: <typ
             rule: The System.Web.Configuration.AuthorizationRule object to add to the collection.
         """
         ...
-
     def CopyTo(self, rules, index):
         """
         CopyTo(self: AuthorizationRuleCollection, rules: Array[AuthorizationRule], index: int)
@@ -263,20 +253,17 @@ class AuthorizationRuleCollection(ReadOnlyCollectionBase): # skipped bases: <typ
             index: The zero-based index from which to begin copying.
         """
         ...
-
-    def __getitem__(self, *args): #cannot find CLR method
-        """ x.__getitem__(y) <==> x[y] """
+    def __getitem__(self, *args):  # cannot find CLR method
+        """x.__getitem__(y) <==> x[y]"""
         ...
-
     @property
     def InnerList(self):
-        """ Gets the list of elements contained in the System.Collections.ReadOnlyCollectionBase instance. """
+        """Gets the list of elements contained in the System.Collections.ReadOnlyCollectionBase instance."""
         ...
 
+class GenericAce:  # skipped bases: <type 'object'>
+    """Represents an Access Control Entry (ACE), and is the base class for all other ACE classes."""
 
-
-class GenericAce: # skipped bases: <type 'object'>
-    """ Represents an Access Control Entry (ACE), and is the base class for all other ACE classes. """
     def Copy(self):
         """
         Copy(self: GenericAce) -> GenericAce
@@ -286,7 +273,6 @@ class GenericAce: # skipped bases: <type 'object'>
             Returns: The System.Security.AccessControl.GenericAce object that this method creates.
         """
         ...
-
     @staticmethod
     def CreateFromBinaryForm(binaryForm, offset):
         """
@@ -301,7 +287,6 @@ class GenericAce: # skipped bases: <type 'object'>
             Returns: The System.Security.AccessControl.GenericAce object this method creates.
         """
         ...
-
     def Equals(self, o):
         """
         Equals(self: GenericAce, o: object) -> bool
@@ -313,7 +298,6 @@ class GenericAce: # skipped bases: <type 'object'>
             Returns: ue if the specified System.Security.AccessControl.GenericAce object is equal to the current System.Security.AccessControl.GenericAce object; otherwise, lse.
         """
         ...
-
     def GetBinaryForm(self, binaryForm, offset):
         """
         GetBinaryForm(self: GenericAce, binaryForm: Array[Byte], offset: int)
@@ -325,7 +309,6 @@ class GenericAce: # skipped bases: <type 'object'>
             offset: The offset at which to start marshaling.
         """
         ...
-
     def GetHashCode(self):
         """
         GetHashCode(self: GenericAce) -> int
@@ -335,14 +318,10 @@ class GenericAce: # skipped bases: <type 'object'>
             Returns: A hash code for the current System.Security.AccessControl.GenericAce object.
         """
         ...
-
-    def __eq__(self, *args): #cannot find CLR method
-        """ x.__eq__(y) <==> x==y """
+    def __eq__(self, *args):  # cannot find CLR method
+        """x.__eq__(y) <==> x==y"""
         ...
-
-    def __ne__(self, *args): #cannot find CLR method
-        ...
-
+    def __ne__(self, *args): ...
     @property
     def AceFlags(self):
         """
@@ -353,7 +332,6 @@ class GenericAce: # skipped bases: <type 'object'>
         Set: AceFlags(self: GenericAce) = value
         """
         ...
-
     @property
     def AceType(self):
         """
@@ -362,7 +340,6 @@ class GenericAce: # skipped bases: <type 'object'>
         Get: AceType(self: GenericAce) -> AceType
         """
         ...
-
     @property
     def AuditFlags(self):
         """
@@ -371,7 +348,6 @@ class GenericAce: # skipped bases: <type 'object'>
         Get: AuditFlags(self: GenericAce) -> AuditFlags
         """
         ...
-
     @property
     def BinaryLength(self):
         """
@@ -380,7 +356,6 @@ class GenericAce: # skipped bases: <type 'object'>
         Get: BinaryLength(self: GenericAce) -> int
         """
         ...
-
     @property
     def InheritanceFlags(self):
         """
@@ -389,7 +364,6 @@ class GenericAce: # skipped bases: <type 'object'>
         Get: InheritanceFlags(self: GenericAce) -> InheritanceFlags
         """
         ...
-
     @property
     def IsInherited(self):
         """
@@ -398,7 +372,6 @@ class GenericAce: # skipped bases: <type 'object'>
         Get: IsInherited(self: GenericAce) -> bool
         """
         ...
-
     @property
     def PropagationFlags(self):
         """
@@ -408,10 +381,9 @@ class GenericAce: # skipped bases: <type 'object'>
         """
         ...
 
-
-
 class KnownAce(GenericAce):
-    """ Encapsulates all Access Control Entry (ACE) types currently defined by Microsoft Corporation. All System.Security.AccessControl.KnownAce objects contain a 32-bit access mask and a System.Security.Principal.SecurityIdentifier object. """
+    """Encapsulates all Access Control Entry (ACE) types currently defined by Microsoft Corporation. All System.Security.AccessControl.KnownAce objects contain a 32-bit access mask and a System.Security.Principal.SecurityIdentifier object."""
+
     @property
     def AccessMask(self):
         """
@@ -422,7 +394,6 @@ class KnownAce(GenericAce):
         Set: AccessMask(self: KnownAce) = value
         """
         ...
-
     @property
     def SecurityIdentifier(self):
         """
@@ -434,10 +405,9 @@ class KnownAce(GenericAce):
         """
         ...
 
-
-
 class QualifiedAce(KnownAce):
-    """ Represents an Access Control Entry (ACE) that contains a qualifier. The qualifier, represented by an System.Security.AccessControl.AceQualifier object, specifies whether the ACE allows access, denies access, causes system audits, or causes system alarms. The System.Security.AccessControl.QualifiedAce class is the abstract base class for the System.Security.AccessControl.CommonAce and System.Security.AccessControl.ObjectAce classes. """
+    """Represents an Access Control Entry (ACE) that contains a qualifier. The qualifier, represented by an System.Security.AccessControl.AceQualifier object, specifies whether the ACE allows access, denies access, causes system audits, or causes system alarms. The System.Security.AccessControl.QualifiedAce class is the abstract base class for the System.Security.AccessControl.CommonAce and System.Security.AccessControl.ObjectAce classes."""
+
     def GetOpaque(self):
         """
         GetOpaque(self: QualifiedAce) -> Array[Byte]
@@ -447,7 +417,6 @@ class QualifiedAce(KnownAce):
             Returns: An array of byte values that represents the opaque callback data associated with this System.Security.AccessControl.QualifiedAce object.
         """
         ...
-
     def SetOpaque(self, opaque):
         """
         SetOpaque(self: QualifiedAce, opaque: Array[Byte])
@@ -457,7 +426,6 @@ class QualifiedAce(KnownAce):
             opaque: An array of byte values that represents the opaque callback data for this System.Security.AccessControl.QualifiedAce object.
         """
         ...
-
     @property
     def AceQualifier(self):
         """
@@ -466,7 +434,6 @@ class QualifiedAce(KnownAce):
         Get: AceQualifier(self: QualifiedAce) -> AceQualifier
         """
         ...
-
     @property
     def IsCallback(self):
         """
@@ -475,7 +442,6 @@ class QualifiedAce(KnownAce):
         Get: IsCallback(self: QualifiedAce) -> bool
         """
         ...
-
     @property
     def OpaqueLength(self):
         """
@@ -485,14 +451,13 @@ class QualifiedAce(KnownAce):
         """
         ...
 
-
-
 class CommonAce(QualifiedAce):
     """
     Represents an access control entry (ACE).
 
     CommonAce(flags: AceFlags, qualifier: AceQualifier, accessMask: int, sid: SecurityIdentifier, isCallback: bool, opaque: Array[Byte])
     """
+
     def GetBinaryForm(self, binaryForm, offset):
         """
         GetBinaryForm(self: CommonAce, binaryForm: Array[Byte], offset: int)
@@ -504,7 +469,6 @@ class CommonAce(QualifiedAce):
             offset: The offset at which to start marshaling.
         """
         ...
-
     @staticmethod
     def MaxOpaqueLength(isCallback):
         """
@@ -517,12 +481,10 @@ class CommonAce(QualifiedAce):
             Returns: The allowed length of an opaque data BLOB.
         """
         ...
-
-    @staticmethod # known case of __new__
+    @staticmethod  # known case of __new__
     def __new__(cls, flags, qualifier, accessMask, sid, isCallback, opaque):
-        """ __new__(cls: type, flags: AceFlags, qualifier: AceQualifier, accessMask: int, sid: SecurityIdentifier, isCallback: bool, opaque: Array[Byte]) """
+        """__new__(cls: type, flags: AceFlags, qualifier: AceQualifier, accessMask: int, sid: SecurityIdentifier, isCallback: bool, opaque: Array[Byte])"""
         ...
-
     @property
     def BinaryLength(self):
         """
@@ -532,10 +494,9 @@ class CommonAce(QualifiedAce):
         """
         ...
 
+class GenericAcl(object, ICollection):  # skipped bases: <type 'IEnumerable'>
+    """Represents an access control list (ACL) and is the base class for the System.Security.AccessControl.CommonAcl, System.Security.AccessControl.DiscretionaryAcl, System.Security.AccessControl.RawAcl, and System.Security.AccessControl.SystemAcl classes."""
 
-
-class GenericAcl(object, ICollection): # skipped bases: <type 'IEnumerable'>
-    """ Represents an access control list (ACL) and is the base class for the System.Security.AccessControl.CommonAcl, System.Security.AccessControl.DiscretionaryAcl, System.Security.AccessControl.RawAcl, and System.Security.AccessControl.SystemAcl classes. """
     def GetBinaryForm(self, binaryForm, offset):
         """
         GetBinaryForm(self: GenericAcl, binaryForm: Array[Byte], offset: int)
@@ -547,7 +508,6 @@ class GenericAcl(object, ICollection): # skipped bases: <type 'IEnumerable'>
             offset: The offset at which to start marshaling.
         """
         ...
-
     def GetEnumerator(self):
         """
         GetEnumerator(self: GenericAcl) -> AceEnumerator
@@ -557,19 +517,15 @@ class GenericAcl(object, ICollection): # skipped bases: <type 'IEnumerable'>
             Returns: An enumerator object.
         """
         ...
-
-    def __getitem__(self, *args): #cannot find CLR method
-        """ x.__getitem__(y) <==> x[y] """
+    def __getitem__(self, *args):  # cannot find CLR method
+        """x.__getitem__(y) <==> x[y]"""
         ...
-
-    def __len__(self, *args): #cannot find CLR method
-        """ x.__len__() <==> len(x) """
+    def __len__(self, *args):  # cannot find CLR method
+        """x.__len__() <==> len(x)"""
         ...
-
-    def __setitem__(self, *args): #cannot find CLR method
-        """ x.__setitem__(i, y) <==> x[i]= """
+    def __setitem__(self, *args):  # cannot find CLR method
+        """x.__setitem__(i, y) <==> x[i]="""
         ...
-
     @property
     def BinaryLength(self):
         """
@@ -578,7 +534,6 @@ class GenericAcl(object, ICollection): # skipped bases: <type 'IEnumerable'>
         Get: BinaryLength(self: GenericAcl) -> int
         """
         ...
-
     @property
     def Count(self):
         """
@@ -587,7 +542,6 @@ class GenericAcl(object, ICollection): # skipped bases: <type 'IEnumerable'>
         Get: Count(self: GenericAcl) -> int
         """
         ...
-
     @property
     def IsSynchronized(self):
         """
@@ -596,7 +550,6 @@ class GenericAcl(object, ICollection): # skipped bases: <type 'IEnumerable'>
         Get: IsSynchronized(self: GenericAcl) -> bool
         """
         ...
-
     @property
     def Revision(self):
         """
@@ -605,7 +558,6 @@ class GenericAcl(object, ICollection): # skipped bases: <type 'IEnumerable'>
         Get: Revision(self: GenericAcl) -> Byte
         """
         ...
-
     @property
     def SyncRoot(self):
         """
@@ -614,15 +566,13 @@ class GenericAcl(object, ICollection): # skipped bases: <type 'IEnumerable'>
         Get: SyncRoot(self: GenericAcl) -> object
         """
         ...
-
-
     AclRevision = None
     AclRevisionDS = None
     MaxBinaryLength = 65535
 
+class CommonAcl(GenericAcl):  # skipped bases: <type 'ICollection'>, <type 'IEnumerable'>
+    """Represents an access control list (ACL) and is the base class for the System.Security.AccessControl.DiscretionaryAcl and System.Security.AccessControl.SystemAcl classes."""
 
-class CommonAcl(GenericAcl): # skipped bases: <type 'ICollection'>, <type 'IEnumerable'>
-    """ Represents an access control list (ACL) and is the base class for the System.Security.AccessControl.DiscretionaryAcl and System.Security.AccessControl.SystemAcl classes. """
     def Purge(self, sid):
         """
         Purge(self: CommonAcl, sid: SecurityIdentifier)
@@ -632,7 +582,6 @@ class CommonAcl(GenericAcl): # skipped bases: <type 'ICollection'>, <type 'IEnum
             sid: The System.Security.Principal.SecurityIdentifier object to check for.
         """
         ...
-
     def RemoveInheritedAces(self):
         """
         RemoveInheritedAces(self: CommonAcl)
@@ -640,7 +589,6 @@ class CommonAcl(GenericAcl): # skipped bases: <type 'ICollection'>, <type 'IEnum
             Removes all inherited access control entries (ACEs) from this System.Security.AccessControl.CommonAcl object.
         """
         ...
-
     @property
     def BinaryLength(self):
         """
@@ -649,7 +597,6 @@ class CommonAcl(GenericAcl): # skipped bases: <type 'ICollection'>, <type 'IEnum
         Get: BinaryLength(self: CommonAcl) -> int
         """
         ...
-
     @property
     def Count(self):
         """
@@ -658,7 +605,6 @@ class CommonAcl(GenericAcl): # skipped bases: <type 'ICollection'>, <type 'IEnum
         Get: Count(self: CommonAcl) -> int
         """
         ...
-
     @property
     def IsCanonical(self):
         """
@@ -667,7 +613,6 @@ class CommonAcl(GenericAcl): # skipped bases: <type 'ICollection'>, <type 'IEnum
         Get: IsCanonical(self: CommonAcl) -> bool
         """
         ...
-
     @property
     def IsContainer(self):
         """
@@ -676,7 +621,6 @@ class CommonAcl(GenericAcl): # skipped bases: <type 'ICollection'>, <type 'IEnum
         Get: IsContainer(self: CommonAcl) -> bool
         """
         ...
-
     @property
     def IsDS(self):
         """
@@ -685,7 +629,6 @@ class CommonAcl(GenericAcl): # skipped bases: <type 'ICollection'>, <type 'IEnum
         Get: IsDS(self: CommonAcl) -> bool
         """
         ...
-
     @property
     def Revision(self):
         """
@@ -695,11 +638,10 @@ class CommonAcl(GenericAcl): # skipped bases: <type 'ICollection'>, <type 'IEnum
         """
         ...
 
-
-
 class CommonObjectSecurity(ObjectSecurity):
-    """ Controls access to objects without direct manipulation of access control lists (ACLs). This class is the abstract base class for the System.Security.AccessControl.NativeObjectSecurity class. """
-    def AddAccessRule(self, *args): #cannot find CLR method
+    """Controls access to objects without direct manipulation of access control lists (ACLs). This class is the abstract base class for the System.Security.AccessControl.NativeObjectSecurity class."""
+
+    def AddAccessRule(self, *args):  # cannot find CLR method
         """
         AddAccessRule(self: CommonObjectSecurity, rule: AccessRule)
 
@@ -708,8 +650,7 @@ class CommonObjectSecurity(ObjectSecurity):
             rule: The access rule to add.
         """
         ...
-
-    def AddAuditRule(self, *args): #cannot find CLR method
+    def AddAuditRule(self, *args):  # cannot find CLR method
         """
         AddAuditRule(self: CommonObjectSecurity, rule: AuditRule)
 
@@ -718,7 +659,6 @@ class CommonObjectSecurity(ObjectSecurity):
             rule: The audit rule to add.
         """
         ...
-
     def GetAccessRules(self, includeExplicit, includeInherited, targetType):
         """
         GetAccessRules(self: CommonObjectSecurity, includeExplicit: bool, includeInherited: bool, targetType: Type) -> AuthorizationRuleCollection
@@ -736,7 +676,6 @@ class CommonObjectSecurity(ObjectSecurity):
             Returns: The collection of access rules associated with the specified System.Security.Principal.SecurityIdentifier object.
         """
         ...
-
     def GetAuditRules(self, includeExplicit, includeInherited, targetType):
         """
         GetAuditRules(self: CommonObjectSecurity, includeExplicit: bool, includeInherited: bool, targetType: Type) -> AuthorizationRuleCollection
@@ -752,8 +691,7 @@ class CommonObjectSecurity(ObjectSecurity):
             Returns: The collection of audit rules associated with the specified System.Security.Principal.SecurityIdentifier object.
         """
         ...
-
-    def RemoveAccessRule(self, *args): #cannot find CLR method
+    def RemoveAccessRule(self, *args):  # cannot find CLR method
         """
         RemoveAccessRule(self: CommonObjectSecurity, rule: AccessRule) -> bool
 
@@ -766,8 +704,7 @@ class CommonObjectSecurity(ObjectSecurity):
             Returns: ue if the access rule was successfully removed; otherwise, lse.
         """
         ...
-
-    def RemoveAccessRuleAll(self, *args): #cannot find CLR method
+    def RemoveAccessRuleAll(self, *args):  # cannot find CLR method
         """
         RemoveAccessRuleAll(self: CommonObjectSecurity, rule: AccessRule)
 
@@ -776,8 +713,7 @@ class CommonObjectSecurity(ObjectSecurity):
             rule: The access rule to remove.
         """
         ...
-
-    def RemoveAccessRuleSpecific(self, *args): #cannot find CLR method
+    def RemoveAccessRuleSpecific(self, *args):  # cannot find CLR method
         """
         RemoveAccessRuleSpecific(self: CommonObjectSecurity, rule: AccessRule)
 
@@ -786,8 +722,7 @@ class CommonObjectSecurity(ObjectSecurity):
             rule: The access rule to remove.
         """
         ...
-
-    def RemoveAuditRule(self, *args): #cannot find CLR method
+    def RemoveAuditRule(self, *args):  # cannot find CLR method
         """
         RemoveAuditRule(self: CommonObjectSecurity, rule: AuditRule) -> bool
 
@@ -798,8 +733,7 @@ class CommonObjectSecurity(ObjectSecurity):
             Returns: ue if the audit rule was successfully removed; otherwise, lse.
         """
         ...
-
-    def RemoveAuditRuleAll(self, *args): #cannot find CLR method
+    def RemoveAuditRuleAll(self, *args):  # cannot find CLR method
         """
         RemoveAuditRuleAll(self: CommonObjectSecurity, rule: AuditRule)
 
@@ -808,8 +742,7 @@ class CommonObjectSecurity(ObjectSecurity):
             rule: The audit rule to remove.
         """
         ...
-
-    def RemoveAuditRuleSpecific(self, *args): #cannot find CLR method
+    def RemoveAuditRuleSpecific(self, *args):  # cannot find CLR method
         """
         RemoveAuditRuleSpecific(self: CommonObjectSecurity, rule: AuditRule)
 
@@ -818,8 +751,7 @@ class CommonObjectSecurity(ObjectSecurity):
             rule: The audit rule to remove.
         """
         ...
-
-    def ResetAccessRule(self, *args): #cannot find CLR method
+    def ResetAccessRule(self, *args):  # cannot find CLR method
         """
         ResetAccessRule(self: CommonObjectSecurity, rule: AccessRule)
 
@@ -828,8 +760,7 @@ class CommonObjectSecurity(ObjectSecurity):
             rule: The access rule to reset.
         """
         ...
-
-    def SetAccessRule(self, *args): #cannot find CLR method
+    def SetAccessRule(self, *args):  # cannot find CLR method
         """
         SetAccessRule(self: CommonObjectSecurity, rule: AccessRule)
 
@@ -840,8 +771,7 @@ class CommonObjectSecurity(ObjectSecurity):
             rule: The access rule to set.
         """
         ...
-
-    def SetAuditRule(self, *args): #cannot find CLR method
+    def SetAuditRule(self, *args):  # cannot find CLR method
         """
         SetAuditRule(self: CommonObjectSecurity, rule: AuditRule)
 
@@ -852,41 +782,34 @@ class CommonObjectSecurity(ObjectSecurity):
             rule: The audit rule to set.
         """
         ...
-
     @property
     def AccessRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def AuditRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def GroupModified(self):
-        """ Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified."""
         ...
-
     @property
     def IsContainer(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object."""
         ...
-
     @property
     def IsDS(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object."""
         ...
-
     @property
     def OwnerModified(self):
-        """ Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified."""
         ...
 
+class GenericSecurityDescriptor:  # skipped bases: <type 'object'>
+    """Represents a security descriptor. A security descriptor includes an owner, a primary group, a Discretionary Access Control List (DACL), and a System Access Control List (SACL)."""
 
-
-class GenericSecurityDescriptor: # skipped bases: <type 'object'>
-    """ Represents a security descriptor. A security descriptor includes an owner, a primary group, a Discretionary Access Control List (DACL), and a System Access Control List (SACL). """
     def GetBinaryForm(self, binaryForm, offset):
         """
         GetBinaryForm(self: GenericSecurityDescriptor, binaryForm: Array[Byte], offset: int)
@@ -898,7 +821,6 @@ class GenericSecurityDescriptor: # skipped bases: <type 'object'>
             offset: The offset at which to start marshaling.
         """
         ...
-
     def GetSddlForm(self, includeSections):
         """
         GetSddlForm(self: GenericSecurityDescriptor, includeSections: AccessControlSections) -> str
@@ -910,7 +832,6 @@ class GenericSecurityDescriptor: # skipped bases: <type 'object'>
             Returns: The SDDL representation of the specified sections of the security descriptor associated with this System.Security.AccessControl.GenericSecurityDescriptor object.
         """
         ...
-
     @staticmethod
     def IsSddlConversionSupported():
         """
@@ -923,7 +844,6 @@ class GenericSecurityDescriptor: # skipped bases: <type 'object'>
             Returns: ue if the security descriptor associated with this  System.Security.AccessControl.GenericSecurityDescriptor object can be converted to the Security Descriptor Definition Language (SDDL) format; otherwise, lse.
         """
         ...
-
     @property
     def BinaryLength(self):
         """
@@ -932,7 +852,6 @@ class GenericSecurityDescriptor: # skipped bases: <type 'object'>
         Get: BinaryLength(self: GenericSecurityDescriptor) -> int
         """
         ...
-
     @property
     def ControlFlags(self):
         """
@@ -941,7 +860,6 @@ class GenericSecurityDescriptor: # skipped bases: <type 'object'>
         Get: ControlFlags(self: GenericSecurityDescriptor) -> ControlFlags
         """
         ...
-
     @property
     def Group(self):
         """
@@ -952,7 +870,6 @@ class GenericSecurityDescriptor: # skipped bases: <type 'object'>
         Set: Group(self: GenericSecurityDescriptor) = value
         """
         ...
-
     @property
     def Owner(self):
         """
@@ -963,10 +880,7 @@ class GenericSecurityDescriptor: # skipped bases: <type 'object'>
         Set: Owner(self: GenericSecurityDescriptor) = value
         """
         ...
-
-
     Revision = None
-
 
 class CommonSecurityDescriptor(GenericSecurityDescriptor):
     """
@@ -980,6 +894,7 @@ class CommonSecurityDescriptor(GenericSecurityDescriptor):
 
     CommonSecurityDescriptor(isContainer: bool, isDS: bool, binaryForm: Array[Byte], offset: int)
     """
+
     def AddDiscretionaryAcl(self, revision, trusted):
         """
         AddDiscretionaryAcl(self: CommonSecurityDescriptor, revision: Byte, trusted: int)
@@ -993,7 +908,6 @@ class CommonSecurityDescriptor(GenericSecurityDescriptor):
             trusted: The number of Access Control Entries (ACEs) this System.Security.AccessControl.DiscretionaryAcl object can contain. This number is to be used only as a hint.
         """
         ...
-
     def AddSystemAcl(self, revision, trusted):
         """
         AddSystemAcl(self: CommonSecurityDescriptor, revision: Byte, trusted: int)
@@ -1007,7 +921,6 @@ class CommonSecurityDescriptor(GenericSecurityDescriptor):
             trusted: The number of Access Control Entries (ACEs) this System.Security.AccessControl.SystemAcl object can contain. This number is to be used only as a hint.
         """
         ...
-
     def PurgeAccessControl(self, sid):
         """
         PurgeAccessControl(self: CommonSecurityDescriptor, sid: SecurityIdentifier)
@@ -1017,7 +930,6 @@ class CommonSecurityDescriptor(GenericSecurityDescriptor):
             sid: The security identifier for which to remove access rules.
         """
         ...
-
     def PurgeAudit(self, sid):
         """
         PurgeAudit(self: CommonSecurityDescriptor, sid: SecurityIdentifier)
@@ -1027,7 +939,6 @@ class CommonSecurityDescriptor(GenericSecurityDescriptor):
             sid: The security identifier for which to remove audit rules.
         """
         ...
-
     def SetDiscretionaryAclProtection(self, isProtected, preserveInheritance):
         """
         SetDiscretionaryAclProtection(self: CommonSecurityDescriptor, isProtected: bool, preserveInheritance: bool)
@@ -1041,7 +952,6 @@ class CommonSecurityDescriptor(GenericSecurityDescriptor):
             preserveInheritance: ue to keep inherited access rules in the DACL; lse to remove inherited access rules from the DACL.
         """
         ...
-
     def SetSystemAclProtection(self, isProtected, preserveInheritance):
         """
         SetSystemAclProtection(self: CommonSecurityDescriptor, isProtected: bool, preserveInheritance: bool)
@@ -1053,8 +963,7 @@ class CommonSecurityDescriptor(GenericSecurityDescriptor):
             preserveInheritance: ue to keep inherited audit rules in the SACL; lse to remove inherited audit rules from the SACL.
         """
         ...
-
-    @staticmethod # known case of __new__
+    @staticmethod  # known case of __new__
     def __new__(cls, isContainer, isDS, *__args):
         """
         __new__(cls: type, isContainer: bool, isDS: bool, flags: ControlFlags, owner: SecurityIdentifier, group: SecurityIdentifier, systemAcl: SystemAcl, discretionaryAcl: DiscretionaryAcl)
@@ -1066,7 +975,6 @@ class CommonSecurityDescriptor(GenericSecurityDescriptor):
         __new__(cls: type, isContainer: bool, isDS: bool, binaryForm: Array[Byte], offset: int)
         """
         ...
-
     @property
     def ControlFlags(self):
         """
@@ -1075,7 +983,6 @@ class CommonSecurityDescriptor(GenericSecurityDescriptor):
         Get: ControlFlags(self: CommonSecurityDescriptor) -> ControlFlags
         """
         ...
-
     @property
     def DiscretionaryAcl(self):
         """
@@ -1086,7 +993,6 @@ class CommonSecurityDescriptor(GenericSecurityDescriptor):
         Set: DiscretionaryAcl(self: CommonSecurityDescriptor) = value
         """
         ...
-
     @property
     def Group(self):
         """
@@ -1097,7 +1003,6 @@ class CommonSecurityDescriptor(GenericSecurityDescriptor):
         Set: Group(self: CommonSecurityDescriptor) = value
         """
         ...
-
     @property
     def IsContainer(self):
         """
@@ -1106,7 +1011,6 @@ class CommonSecurityDescriptor(GenericSecurityDescriptor):
         Get: IsContainer(self: CommonSecurityDescriptor) -> bool
         """
         ...
-
     @property
     def IsDiscretionaryAclCanonical(self):
         """
@@ -1115,7 +1019,6 @@ class CommonSecurityDescriptor(GenericSecurityDescriptor):
         Get: IsDiscretionaryAclCanonical(self: CommonSecurityDescriptor) -> bool
         """
         ...
-
     @property
     def IsDS(self):
         """
@@ -1124,7 +1027,6 @@ class CommonSecurityDescriptor(GenericSecurityDescriptor):
         Get: IsDS(self: CommonSecurityDescriptor) -> bool
         """
         ...
-
     @property
     def IsSystemAclCanonical(self):
         """
@@ -1133,7 +1035,6 @@ class CommonSecurityDescriptor(GenericSecurityDescriptor):
         Get: IsSystemAclCanonical(self: CommonSecurityDescriptor) -> bool
         """
         ...
-
     @property
     def Owner(self):
         """
@@ -1144,7 +1045,6 @@ class CommonSecurityDescriptor(GenericSecurityDescriptor):
         Set: Owner(self: CommonSecurityDescriptor) = value
         """
         ...
-
     @property
     def SystemAcl(self):
         """
@@ -1156,14 +1056,13 @@ class CommonSecurityDescriptor(GenericSecurityDescriptor):
         """
         ...
 
-
-
 class CompoundAce(KnownAce):
     """
     Represents a compound Access Control Entry (ACE).
 
     CompoundAce(flags: AceFlags, accessMask: int, compoundAceType: CompoundAceType, sid: SecurityIdentifier)
     """
+
     def GetBinaryForm(self, binaryForm, offset):
         """
         GetBinaryForm(self: CompoundAce, binaryForm: Array[Byte], offset: int)
@@ -1175,12 +1074,10 @@ class CompoundAce(KnownAce):
             offset: The offset at which to start marshaling.
         """
         ...
-
-    @staticmethod # known case of __new__
+    @staticmethod  # known case of __new__
     def __new__(cls, flags, accessMask, compoundAceType, sid):
-        """ __new__(cls: type, flags: AceFlags, accessMask: int, compoundAceType: CompoundAceType, sid: SecurityIdentifier) """
+        """__new__(cls: type, flags: AceFlags, accessMask: int, compoundAceType: CompoundAceType, sid: SecurityIdentifier)"""
         ...
-
     @property
     def BinaryLength(self):
         """
@@ -1189,7 +1086,6 @@ class CompoundAce(KnownAce):
         Get: BinaryLength(self: CompoundAce) -> int
         """
         ...
-
     @property
     def CompoundAceType(self):
         """
@@ -1201,24 +1097,23 @@ class CompoundAce(KnownAce):
         """
         ...
 
-
-
-class CompoundAceType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class CompoundAceType(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the type of a System.Security.AccessControl.CompoundAce object.
 
     enum CompoundAceType, values: Impersonation (1)
     """
+
     Impersonation = None
     value__ = None
 
-
-class ControlFlags(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class ControlFlags(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     These flags affect the security descriptor behavior.
 
     enum (flags) ControlFlags, values: DiscretionaryAclAutoInherited (1024), DiscretionaryAclAutoInheritRequired (256), DiscretionaryAclDefaulted (8), DiscretionaryAclPresent (4), DiscretionaryAclProtected (4096), DiscretionaryAclUntrusted (64), GroupDefaulted (2), None (0), OwnerDefaulted (1), RMControlValid (16384), SelfRelative (32768), ServerSecurity (128), SystemAclAutoInherited (2048), SystemAclAutoInheritRequired (512), SystemAclDefaulted (32), SystemAclPresent (16), SystemAclProtected (8192)
     """
+
     DiscretionaryAclAutoInherited = None
     DiscretionaryAclAutoInheritRequired = None
     DiscretionaryAclDefaulted = None
@@ -1226,7 +1121,7 @@ class ControlFlags(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvert
     DiscretionaryAclProtected = None
     DiscretionaryAclUntrusted = None
     GroupDefaulted = None
-    None = None
+
     OwnerDefaulted = None
     RMControlValid = None
     SelfRelative = None
@@ -1238,7 +1133,6 @@ class ControlFlags(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvert
     SystemAclProtected = None
     value__ = None
 
-
 class CryptoKeyAccessRule(AccessRule):
     """
     Represents an access rule for a cryptographic key. An access rule represents a combination of a user's identity, an access mask, and an access control type (allow or deny). An access rule object also contains information about the how the rule is inherited by child objects and how that inheritance is propagated.
@@ -1247,11 +1141,11 @@ class CryptoKeyAccessRule(AccessRule):
 
     CryptoKeyAccessRule(identity: str, cryptoKeyRights: CryptoKeyRights, type: AccessControlType)
     """
+
     @property
     def AccessMask(self):
-        """ Gets the access mask for this rule. """
+        """Gets the access mask for this rule."""
         ...
-
     @property
     def CryptoKeyRights(self):
         """
@@ -1261,8 +1155,6 @@ class CryptoKeyAccessRule(AccessRule):
         """
         ...
 
-
-
 class CryptoKeyAuditRule(AuditRule):
     """
     Represents an audit rule for a cryptographic key. An audit rule represents a combination of a user's identity and an access mask. An audit rule also contains information about the how the rule is inherited by child objects, how that inheritance is propagated, and for what conditions it is audited.
@@ -1271,11 +1163,11 @@ class CryptoKeyAuditRule(AuditRule):
 
     CryptoKeyAuditRule(identity: str, cryptoKeyRights: CryptoKeyRights, flags: AuditFlags)
     """
+
     @property
     def AccessMask(self):
-        """ Gets the access mask for this rule. """
+        """Gets the access mask for this rule."""
         ...
-
     @property
     def CryptoKeyRights(self):
         """
@@ -1285,14 +1177,13 @@ class CryptoKeyAuditRule(AuditRule):
         """
         ...
 
-
-
-class CryptoKeyRights(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class CryptoKeyRights(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the cryptographic key operation for which an authorization rule controls access or auditing.
 
     enum (flags) CryptoKeyRights, values: ChangePermissions (262144), Delete (65536), FullControl (2032027), GenericAll (268435456), GenericExecute (536870912), GenericRead (-2147483648), GenericWrite (1073741824), ReadAttributes (128), ReadData (1), ReadExtendedAttributes (8), ReadPermissions (131072), Synchronize (1048576), TakeOwnership (524288), WriteAttributes (256), WriteData (2), WriteExtendedAttributes (16)
     """
+
     ChangePermissions = None
     Delete = None
     FullControl = None
@@ -1311,46 +1202,37 @@ class CryptoKeyRights(Enum): # skipped bases: <type 'IComparable'>, <type 'IConv
     WriteData = None
     WriteExtendedAttributes = None
 
-
 class NativeObjectSecurity(CommonObjectSecurity):
-    """ Provides the ability to control access to native objects without direct manipulation of Access Control Lists (ACLs). Native object types are defined by the System.Security.AccessControl.ResourceType enumeration. """
-    def ExceptionFromErrorCode(self, *args): #cannot find CLR method
-        """ ExceptionFromErrorCode(object: object, method: IntPtr) """
-        ...
+    """Provides the ability to control access to native objects without direct manipulation of Access Control Lists (ACLs). Native object types are defined by the System.Security.AccessControl.ResourceType enumeration."""
 
+    def ExceptionFromErrorCode(self, *args):  # cannot find CLR method
+        """ExceptionFromErrorCode(object: object, method: IntPtr)"""
+        ...
     @property
     def AccessRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def AuditRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def GroupModified(self):
-        """ Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified."""
         ...
-
     @property
     def IsContainer(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object."""
         ...
-
     @property
     def IsDS(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object."""
         ...
-
     @property
     def OwnerModified(self):
-        """ Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified."""
         ...
-
-
     ExceptionFromErrorCode = None
-
 
 class CryptoKeySecurity(NativeObjectSecurity):
     """
@@ -1360,6 +1242,7 @@ class CryptoKeySecurity(NativeObjectSecurity):
 
     CryptoKeySecurity(securityDescriptor: CommonSecurityDescriptor)
     """
+
     def AccessRuleFactory(self, identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, type):
         """
         AccessRuleFactory(self: CryptoKeySecurity, identityReference: IdentityReference, accessMask: int, isInherited: bool, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, type: AccessControlType) -> AccessRule
@@ -1381,7 +1264,6 @@ class CryptoKeySecurity(NativeObjectSecurity):
             Returns: The System.Security.AccessControl.AccessRule object that this method creates.
         """
         ...
-
     def AuditRuleFactory(self, identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, flags):
         """
         AuditRuleFactory(self: CryptoKeySecurity, identityReference: IdentityReference, accessMask: int, isInherited: bool, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, flags: AuditFlags) -> AuditRule
@@ -1403,7 +1285,6 @@ class CryptoKeySecurity(NativeObjectSecurity):
             Returns: The System.Security.AccessControl.AuditRule object that this method creates.
         """
         ...
-
     @property
     def AccessRightType(self):
         """
@@ -1412,12 +1293,10 @@ class CryptoKeySecurity(NativeObjectSecurity):
         Get: AccessRightType(self: CryptoKeySecurity) -> Type
         """
         ...
-
     @property
     def AccessRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def AccessRuleType(self):
         """
@@ -1426,12 +1305,10 @@ class CryptoKeySecurity(NativeObjectSecurity):
         Get: AccessRuleType(self: CryptoKeySecurity) -> Type
         """
         ...
-
     @property
     def AuditRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def AuditRuleType(self):
         """
@@ -1440,28 +1317,22 @@ class CryptoKeySecurity(NativeObjectSecurity):
         Get: AuditRuleType(self: CryptoKeySecurity) -> Type
         """
         ...
-
     @property
     def GroupModified(self):
-        """ Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified."""
         ...
-
     @property
     def IsContainer(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object."""
         ...
-
     @property
     def IsDS(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object."""
         ...
-
     @property
     def OwnerModified(self):
-        """ Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified."""
         ...
-
-
 
 class CustomAce(GenericAce):
     """
@@ -1469,6 +1340,7 @@ class CustomAce(GenericAce):
 
     CustomAce(type: AceType, flags: AceFlags, opaque: Array[Byte])
     """
+
     def GetOpaque(self):
         """
         GetOpaque(self: CustomAce) -> Array[Byte]
@@ -1478,7 +1350,6 @@ class CustomAce(GenericAce):
             Returns: An array of byte values that represents the opaque data associated with this System.Security.AccessControl.CustomAce object.
         """
         ...
-
     def SetOpaque(self, opaque):
         """
         SetOpaque(self: CustomAce, opaque: Array[Byte])
@@ -1488,12 +1359,10 @@ class CustomAce(GenericAce):
             opaque: An array of byte values that represents the opaque callback data for this System.Security.AccessControl.CustomAce object.
         """
         ...
-
-    @staticmethod # known case of __new__
+    @staticmethod  # known case of __new__
     def __new__(cls, type, flags, opaque):
-        """ __new__(cls: type, type: AceType, flags: AceFlags, opaque: Array[Byte]) """
+        """__new__(cls: type, type: AceType, flags: AceFlags, opaque: Array[Byte])"""
         ...
-
     @property
     def BinaryLength(self):
         """
@@ -1502,7 +1371,6 @@ class CustomAce(GenericAce):
         Get: BinaryLength(self: CustomAce) -> int
         """
         ...
-
     @property
     def OpaqueLength(self):
         """
@@ -1511,14 +1379,12 @@ class CustomAce(GenericAce):
         Get: OpaqueLength(self: CustomAce) -> int
         """
         ...
-
-
     MaxOpaqueLength = 65531
 
-
 class DirectoryObjectSecurity(ObjectSecurity):
-    """ Provides the ability to control access to directory objects without direct manipulation of Access Control Lists (ACLs). """
-    def AddAccessRule(self, *args): #cannot find CLR method
+    """Provides the ability to control access to directory objects without direct manipulation of Access Control Lists (ACLs)."""
+
+    def AddAccessRule(self, *args):  # cannot find CLR method
         """
         AddAccessRule(self: DirectoryObjectSecurity, rule: ObjectAccessRule)
 
@@ -1527,8 +1393,7 @@ class DirectoryObjectSecurity(ObjectSecurity):
             rule: The access rule to add.
         """
         ...
-
-    def AddAuditRule(self, *args): #cannot find CLR method
+    def AddAuditRule(self, *args):  # cannot find CLR method
         """
         AddAuditRule(self: DirectoryObjectSecurity, rule: ObjectAuditRule)
 
@@ -1537,7 +1402,6 @@ class DirectoryObjectSecurity(ObjectSecurity):
             rule: The audit rule to add.
         """
         ...
-
     def GetAccessRules(self, includeExplicit, includeInherited, targetType):
         """
         GetAccessRules(self: DirectoryObjectSecurity, includeExplicit: bool, includeInherited: bool, targetType: Type) -> AuthorizationRuleCollection
@@ -1553,7 +1417,6 @@ class DirectoryObjectSecurity(ObjectSecurity):
             Returns: The collection of access rules associated with the specified System.Security.Principal.SecurityIdentifier object.
         """
         ...
-
     def GetAuditRules(self, includeExplicit, includeInherited, targetType):
         """
         GetAuditRules(self: DirectoryObjectSecurity, includeExplicit: bool, includeInherited: bool, targetType: Type) -> AuthorizationRuleCollection
@@ -1569,8 +1432,7 @@ class DirectoryObjectSecurity(ObjectSecurity):
             Returns: The collection of audit rules associated with the specified System.Security.Principal.SecurityIdentifier object.
         """
         ...
-
-    def RemoveAccessRule(self, *args): #cannot find CLR method
+    def RemoveAccessRule(self, *args):  # cannot find CLR method
         """
         RemoveAccessRule(self: DirectoryObjectSecurity, rule: ObjectAccessRule) -> bool
 
@@ -1583,8 +1445,7 @@ class DirectoryObjectSecurity(ObjectSecurity):
             Returns: ue if the access rule was successfully removed; otherwise, lse.
         """
         ...
-
-    def RemoveAccessRuleAll(self, *args): #cannot find CLR method
+    def RemoveAccessRuleAll(self, *args):  # cannot find CLR method
         """
         RemoveAccessRuleAll(self: DirectoryObjectSecurity, rule: ObjectAccessRule)
 
@@ -1593,8 +1454,7 @@ class DirectoryObjectSecurity(ObjectSecurity):
             rule: The access rule to remove.
         """
         ...
-
-    def RemoveAccessRuleSpecific(self, *args): #cannot find CLR method
+    def RemoveAccessRuleSpecific(self, *args):  # cannot find CLR method
         """
         RemoveAccessRuleSpecific(self: DirectoryObjectSecurity, rule: ObjectAccessRule)
 
@@ -1603,8 +1463,7 @@ class DirectoryObjectSecurity(ObjectSecurity):
             rule: The access rule to remove.
         """
         ...
-
-    def RemoveAuditRule(self, *args): #cannot find CLR method
+    def RemoveAuditRule(self, *args):  # cannot find CLR method
         """
         RemoveAuditRule(self: DirectoryObjectSecurity, rule: ObjectAuditRule) -> bool
 
@@ -1615,8 +1474,7 @@ class DirectoryObjectSecurity(ObjectSecurity):
             Returns: ue if the audit rule was successfully removed; otherwise, lse.
         """
         ...
-
-    def RemoveAuditRuleAll(self, *args): #cannot find CLR method
+    def RemoveAuditRuleAll(self, *args):  # cannot find CLR method
         """
         RemoveAuditRuleAll(self: DirectoryObjectSecurity, rule: ObjectAuditRule)
 
@@ -1625,8 +1483,7 @@ class DirectoryObjectSecurity(ObjectSecurity):
             rule: The audit rule to remove.
         """
         ...
-
-    def RemoveAuditRuleSpecific(self, *args): #cannot find CLR method
+    def RemoveAuditRuleSpecific(self, *args):  # cannot find CLR method
         """
         RemoveAuditRuleSpecific(self: DirectoryObjectSecurity, rule: ObjectAuditRule)
 
@@ -1635,8 +1492,7 @@ class DirectoryObjectSecurity(ObjectSecurity):
             rule: The audit rule to remove.
         """
         ...
-
-    def ResetAccessRule(self, *args): #cannot find CLR method
+    def ResetAccessRule(self, *args):  # cannot find CLR method
         """
         ResetAccessRule(self: DirectoryObjectSecurity, rule: ObjectAccessRule)
 
@@ -1645,8 +1501,7 @@ class DirectoryObjectSecurity(ObjectSecurity):
             rule: The access rule to reset.
         """
         ...
-
-    def SetAccessRule(self, *args): #cannot find CLR method
+    def SetAccessRule(self, *args):  # cannot find CLR method
         """
         SetAccessRule(self: DirectoryObjectSecurity, rule: ObjectAccessRule)
 
@@ -1657,8 +1512,7 @@ class DirectoryObjectSecurity(ObjectSecurity):
             rule: The access rule to set.
         """
         ...
-
-    def SetAuditRule(self, *args): #cannot find CLR method
+    def SetAuditRule(self, *args):  # cannot find CLR method
         """
         SetAuditRule(self: DirectoryObjectSecurity, rule: ObjectAuditRule)
 
@@ -1669,41 +1523,34 @@ class DirectoryObjectSecurity(ObjectSecurity):
             rule: The audit rule to set.
         """
         ...
-
     @property
     def AccessRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def AuditRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def GroupModified(self):
-        """ Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified."""
         ...
-
     @property
     def IsContainer(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object."""
         ...
-
     @property
     def IsDS(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object."""
         ...
-
     @property
     def OwnerModified(self):
-        """ Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified."""
         ...
 
-
-
 class FileSystemSecurity(NativeObjectSecurity):
-    """ Represents the access control and audit security for a file or directory. """
+    """Represents the access control and audit security for a file or directory."""
+
     def AccessRuleFactory(self, identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, type):
         """
         AccessRuleFactory(self: FileSystemSecurity, identityReference: IdentityReference, accessMask: int, isInherited: bool, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, type: AccessControlType) -> AccessRule
@@ -1725,7 +1572,6 @@ class FileSystemSecurity(NativeObjectSecurity):
             Returns: A new System.Security.AccessControl.FileSystemAccessRule object that represents a new access control rule for the specified user, with the specified access rights, access control, and flags.
         """
         ...
-
     def AuditRuleFactory(self, identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, flags):
         """
         AuditRuleFactory(self: FileSystemSecurity, identityReference: IdentityReference, accessMask: int, isInherited: bool, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, flags: AuditFlags) -> AuditRule
@@ -1747,7 +1593,6 @@ class FileSystemSecurity(NativeObjectSecurity):
             Returns: A new System.Security.AccessControl.FileSystemAuditRule object representing the specified audit rule for the specified user.
         """
         ...
-
     @property
     def AccessRightType(self):
         """
@@ -1756,12 +1601,10 @@ class FileSystemSecurity(NativeObjectSecurity):
         Get: AccessRightType(self: FileSystemSecurity) -> Type
         """
         ...
-
     @property
     def AccessRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def AccessRuleType(self):
         """
@@ -1770,12 +1613,10 @@ class FileSystemSecurity(NativeObjectSecurity):
         Get: AccessRuleType(self: FileSystemSecurity) -> Type
         """
         ...
-
     @property
     def AuditRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def AuditRuleType(self):
         """
@@ -1784,28 +1625,22 @@ class FileSystemSecurity(NativeObjectSecurity):
         Get: AuditRuleType(self: FileSystemSecurity) -> Type
         """
         ...
-
     @property
     def GroupModified(self):
-        """ Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified."""
         ...
-
     @property
     def IsContainer(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object."""
         ...
-
     @property
     def IsDS(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object."""
         ...
-
     @property
     def OwnerModified(self):
-        """ Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified."""
         ...
-
-
 
 class DirectorySecurity(FileSystemSecurity):
     """
@@ -1815,7 +1650,8 @@ class DirectorySecurity(FileSystemSecurity):
 
     DirectorySecurity(name: str, includeSections: AccessControlSections)
     """
-    @staticmethod # known case of __new__
+
+    @staticmethod  # known case of __new__
     def __new__(cls, name=None, includeSections=None):
         """
         __new__(cls: type)
@@ -1823,40 +1659,32 @@ class DirectorySecurity(FileSystemSecurity):
         __new__(cls: type, name: str, includeSections: AccessControlSections)
         """
         ...
-
     @property
     def AccessRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def AuditRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def GroupModified(self):
-        """ Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified."""
         ...
-
     @property
     def IsContainer(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object."""
         ...
-
     @property
     def IsDS(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object."""
         ...
-
     @property
     def OwnerModified(self):
-        """ Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified."""
         ...
 
-
-
-class DiscretionaryAcl(CommonAcl): # skipped bases: <type 'ICollection'>, <type 'IEnumerable'>
+class DiscretionaryAcl(CommonAcl):  # skipped bases: <type 'ICollection'>, <type 'IEnumerable'>
     """
     Represents a Discretionary Access Control List (DACL).
 
@@ -1866,6 +1694,7 @@ class DiscretionaryAcl(CommonAcl): # skipped bases: <type 'ICollection'>, <type 
 
     DiscretionaryAcl(isContainer: bool, isDS: bool, rawAcl: RawAcl)
     """
+
     def AddAccess(self, accessType, sid, *__args):
         """
         AddAccess(self: DiscretionaryAcl, accessType: AccessControlType, sid: SecurityIdentifier, accessMask: int, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags)
@@ -1915,7 +1744,6 @@ class DiscretionaryAcl(CommonAcl): # skipped bases: <type 'ICollection'>, <type 
             inheritedObjectType: The identity of the class of child objects which can inherit the new ACE.
         """
         ...
-
     def RemoveAccess(self, accessType, sid, *__args):
         """
         RemoveAccess(self: DiscretionaryAcl, accessType: AccessControlType, sid: SecurityIdentifier, accessMask: int, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags) -> bool
@@ -1971,7 +1799,6 @@ class DiscretionaryAcl(CommonAcl): # skipped bases: <type 'ICollection'>, <type 
             Returns: ue if this method successfully removes the specified access; otherwise, lse.
         """
         ...
-
     def RemoveAccessSpecific(self, accessType, sid, *__args):
         """
         RemoveAccessSpecific(self: DiscretionaryAcl, accessType: AccessControlType, sid: SecurityIdentifier, accessMask: int, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags)
@@ -2021,7 +1848,6 @@ class DiscretionaryAcl(CommonAcl): # skipped bases: <type 'ICollection'>, <type 
             inheritedObjectType: The identity of the class of child objects which can inherit the removed ACE.
         """
         ...
-
     def SetAccess(self, accessType, sid, *__args):
         """
         SetAccess(self: DiscretionaryAcl, accessType: AccessControlType, sid: SecurityIdentifier, accessMask: int, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags)
@@ -2069,8 +1895,7 @@ class DiscretionaryAcl(CommonAcl): # skipped bases: <type 'ICollection'>, <type 
             inheritedObjectType: The identity of the class of child objects which can inherit the new ACE.
         """
         ...
-
-    @staticmethod # known case of __new__
+    @staticmethod  # known case of __new__
     def __new__(cls, isContainer, isDS, *__args):
         """
         __new__(cls: type, isContainer: bool, isDS: bool, capacity: int)
@@ -2081,7 +1906,6 @@ class DiscretionaryAcl(CommonAcl): # skipped bases: <type 'ICollection'>, <type 
         """
         ...
 
-
 class EventWaitHandleAccessRule(AccessRule):
     """
     Represents a set of access rights allowed or denied for a user or group. This class cannot be inherited.
@@ -2090,11 +1914,11 @@ class EventWaitHandleAccessRule(AccessRule):
 
     EventWaitHandleAccessRule(identity: str, eventRights: EventWaitHandleRights, type: AccessControlType)
     """
+
     @property
     def AccessMask(self):
-        """ Gets the access mask for this rule. """
+        """Gets the access mask for this rule."""
         ...
-
     @property
     def EventWaitHandleRights(self):
         """
@@ -2104,19 +1928,17 @@ class EventWaitHandleAccessRule(AccessRule):
         """
         ...
 
-
-
 class EventWaitHandleAuditRule(AuditRule):
     """
     Represents a set of access rights to be audited for a user or group. This class cannot be inherited.
 
     EventWaitHandleAuditRule(identity: IdentityReference, eventRights: EventWaitHandleRights, flags: AuditFlags)
     """
+
     @property
     def AccessMask(self):
-        """ Gets the access mask for this rule. """
+        """Gets the access mask for this rule."""
         ...
-
     @property
     def EventWaitHandleRights(self):
         """
@@ -2126,14 +1948,13 @@ class EventWaitHandleAuditRule(AuditRule):
         """
         ...
 
-
-
-class EventWaitHandleRights(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class EventWaitHandleRights(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the access control rights that can be applied to named system event objects.
 
     enum (flags) EventWaitHandleRights, values: ChangePermissions (262144), Delete (65536), FullControl (2031619), Modify (2), ReadPermissions (131072), Synchronize (1048576), TakeOwnership (524288)
     """
+
     ChangePermissions = None
     Delete = None
     FullControl = None
@@ -2143,13 +1964,13 @@ class EventWaitHandleRights(Enum): # skipped bases: <type 'IComparable'>, <type 
     TakeOwnership = None
     value__ = None
 
-
 class EventWaitHandleSecurity(NativeObjectSecurity):
     """
     Represents the Windows access control security applied to a named system wait handle. This class cannot be inherited.
 
     EventWaitHandleSecurity()
     """
+
     def AccessRuleFactory(self, identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, type):
         """
         AccessRuleFactory(self: EventWaitHandleSecurity, identityReference: IdentityReference, accessMask: int, isInherited: bool, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, type: AccessControlType) -> AccessRule
@@ -2171,7 +1992,6 @@ class EventWaitHandleSecurity(NativeObjectSecurity):
             Returns: An System.Security.AccessControl.EventWaitHandleAccessRule object representing the specified rights for the specified user.
         """
         ...
-
     def AuditRuleFactory(self, identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, flags):
         """
         AuditRuleFactory(self: EventWaitHandleSecurity, identityReference: IdentityReference, accessMask: int, isInherited: bool, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, flags: AuditFlags) -> AuditRule
@@ -2195,7 +2015,6 @@ class EventWaitHandleSecurity(NativeObjectSecurity):
              value can be cast safely to the derived class.
         """
         ...
-
     @property
     def AccessRightType(self):
         """
@@ -2204,12 +2023,10 @@ class EventWaitHandleSecurity(NativeObjectSecurity):
         Get: AccessRightType(self: EventWaitHandleSecurity) -> Type
         """
         ...
-
     @property
     def AccessRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def AccessRuleType(self):
         """
@@ -2218,12 +2035,10 @@ class EventWaitHandleSecurity(NativeObjectSecurity):
         Get: AccessRuleType(self: EventWaitHandleSecurity) -> Type
         """
         ...
-
     @property
     def AuditRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def AuditRuleType(self):
         """
@@ -2232,28 +2047,22 @@ class EventWaitHandleSecurity(NativeObjectSecurity):
         Get: AuditRuleType(self: EventWaitHandleSecurity) -> Type
         """
         ...
-
     @property
     def GroupModified(self):
-        """ Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified."""
         ...
-
     @property
     def IsContainer(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object."""
         ...
-
     @property
     def IsDS(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object."""
         ...
-
     @property
     def OwnerModified(self):
-        """ Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified."""
         ...
-
-
 
 class FileSecurity(FileSystemSecurity):
     """
@@ -2263,7 +2072,8 @@ class FileSecurity(FileSystemSecurity):
 
     FileSecurity(fileName: str, includeSections: AccessControlSections)
     """
-    @staticmethod # known case of __new__
+
+    @staticmethod  # known case of __new__
     def __new__(cls, fileName=None, includeSections=None):
         """
         __new__(cls: type)
@@ -2271,38 +2081,30 @@ class FileSecurity(FileSystemSecurity):
         __new__(cls: type, fileName: str, includeSections: AccessControlSections)
         """
         ...
-
     @property
     def AccessRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def AuditRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def GroupModified(self):
-        """ Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified."""
         ...
-
     @property
     def IsContainer(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object."""
         ...
-
     @property
     def IsDS(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object."""
         ...
-
     @property
     def OwnerModified(self):
-        """ Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified."""
         ...
-
-
 
 class FileSystemAccessRule(AccessRule):
     """
@@ -2316,11 +2118,11 @@ class FileSystemAccessRule(AccessRule):
 
     FileSystemAccessRule(identity: str, fileSystemRights: FileSystemRights, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, type: AccessControlType)
     """
+
     @property
     def AccessMask(self):
-        """ Gets the access mask for this rule. """
+        """Gets the access mask for this rule."""
         ...
-
     @property
     def FileSystemRights(self):
         """
@@ -2329,8 +2131,6 @@ class FileSystemAccessRule(AccessRule):
         Get: FileSystemRights(self: FileSystemAccessRule) -> FileSystemRights
         """
         ...
-
-
 
 class FileSystemAuditRule(AuditRule):
     """
@@ -2344,11 +2144,11 @@ class FileSystemAuditRule(AuditRule):
 
     FileSystemAuditRule(identity: str, fileSystemRights: FileSystemRights, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, flags: AuditFlags)
     """
+
     @property
     def AccessMask(self):
-        """ Gets the access mask for this rule. """
+        """Gets the access mask for this rule."""
         ...
-
     @property
     def FileSystemRights(self):
         """
@@ -2358,14 +2158,13 @@ class FileSystemAuditRule(AuditRule):
         """
         ...
 
-
-
-class FileSystemRights(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class FileSystemRights(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Defines the access rights to use when creating access and audit rules.
 
     enum (flags) FileSystemRights, values: AppendData (4), ChangePermissions (262144), CreateDirectories (4), CreateFiles (2), Delete (65536), DeleteSubdirectoriesAndFiles (64), ExecuteFile (32), FullControl (2032127), ListDirectory (1), Modify (197055), Read (131209), ReadAndExecute (131241), ReadAttributes (128), ReadData (1), ReadExtendedAttributes (8), ReadPermissions (131072), Synchronize (1048576), TakeOwnership (524288), Traverse (32), Write (278), WriteAttributes (256), WriteData (2), WriteExtendedAttributes (16)
     """
+
     AppendData = None
     ChangePermissions = None
     CreateDirectories = None
@@ -2391,18 +2190,17 @@ class FileSystemRights(Enum): # skipped bases: <type 'IComparable'>, <type 'ICon
     WriteData = None
     WriteExtendedAttributes = None
 
-
-class InheritanceFlags(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class InheritanceFlags(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Inheritance flags specify the semantics of inheritance for access control entries (ACEs).
 
     enum (flags) InheritanceFlags, values: ContainerInherit (1), None (0), ObjectInherit (2)
     """
+
     ContainerInherit = None
-    None = None
+
     ObjectInherit = None
     value__ = None
-
 
 class MutexAccessRule(AccessRule):
     """
@@ -2412,11 +2210,11 @@ class MutexAccessRule(AccessRule):
 
     MutexAccessRule(identity: str, eventRights: MutexRights, type: AccessControlType)
     """
+
     @property
     def AccessMask(self):
-        """ Gets the access mask for this rule. """
+        """Gets the access mask for this rule."""
         ...
-
     @property
     def MutexRights(self):
         """
@@ -2426,19 +2224,17 @@ class MutexAccessRule(AccessRule):
         """
         ...
 
-
-
 class MutexAuditRule(AuditRule):
     """
     Represents a set of access rights to be audited for a user or group. This class cannot be inherited.
 
     MutexAuditRule(identity: IdentityReference, eventRights: MutexRights, flags: AuditFlags)
     """
+
     @property
     def AccessMask(self):
-        """ Gets the access mask for this rule. """
+        """Gets the access mask for this rule."""
         ...
-
     @property
     def MutexRights(self):
         """
@@ -2448,14 +2244,13 @@ class MutexAuditRule(AuditRule):
         """
         ...
 
-
-
-class MutexRights(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class MutexRights(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the access control rights that can be applied to named system mutex objects.
 
     enum (flags) MutexRights, values: ChangePermissions (262144), Delete (65536), FullControl (2031617), Modify (1), ReadPermissions (131072), Synchronize (1048576), TakeOwnership (524288)
     """
+
     ChangePermissions = None
     Delete = None
     FullControl = None
@@ -2465,7 +2260,6 @@ class MutexRights(Enum): # skipped bases: <type 'IComparable'>, <type 'IConverti
     TakeOwnership = None
     value__ = None
 
-
 class MutexSecurity(NativeObjectSecurity):
     """
     Represents the Windows access control security for a named mutex. This class cannot be inherited.
@@ -2474,6 +2268,7 @@ class MutexSecurity(NativeObjectSecurity):
 
     MutexSecurity(name: str, includeSections: AccessControlSections)
     """
+
     def AccessRuleFactory(self, identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, type):
         """
         AccessRuleFactory(self: MutexSecurity, identityReference: IdentityReference, accessMask: int, isInherited: bool, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, type: AccessControlType) -> AccessRule
@@ -2495,7 +2290,6 @@ class MutexSecurity(NativeObjectSecurity):
             Returns: A System.Security.AccessControl.MutexAccessRule object representing the specified rights for the specified user.
         """
         ...
-
     def AuditRuleFactory(self, identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, flags):
         """
         AuditRuleFactory(self: MutexSecurity, identityReference: IdentityReference, accessMask: int, isInherited: bool, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, flags: AuditFlags) -> AuditRule
@@ -2519,7 +2313,6 @@ class MutexSecurity(NativeObjectSecurity):
              be cast safely to the derived class.
         """
         ...
-
     @property
     def AccessRightType(self):
         """
@@ -2528,12 +2321,10 @@ class MutexSecurity(NativeObjectSecurity):
         Get: AccessRightType(self: MutexSecurity) -> Type
         """
         ...
-
     @property
     def AccessRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def AccessRuleType(self):
         """
@@ -2542,12 +2333,10 @@ class MutexSecurity(NativeObjectSecurity):
         Get: AccessRuleType(self: MutexSecurity) -> Type
         """
         ...
-
     @property
     def AuditRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def AuditRuleType(self):
         """
@@ -2556,36 +2345,30 @@ class MutexSecurity(NativeObjectSecurity):
         Get: AuditRuleType(self: MutexSecurity) -> Type
         """
         ...
-
     @property
     def GroupModified(self):
-        """ Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified."""
         ...
-
     @property
     def IsContainer(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object."""
         ...
-
     @property
     def IsDS(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object."""
         ...
-
     @property
     def OwnerModified(self):
-        """ Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified."""
         ...
-
-
 
 class ObjectAccessRule(AccessRule):
-    """ Represents a combination of a user's identity, an access mask, and an access control type (allow or deny). An System.Security.AccessControl.ObjectAccessRule object also contains information about the type of object to which the rule applies, the type of child object that can inherit the rule, how the rule is inherited by child objects, and how that inheritance is propagated. """
+    """Represents a combination of a user's identity, an access mask, and an access control type (allow or deny). An System.Security.AccessControl.ObjectAccessRule object also contains information about the type of object to which the rule applies, the type of child object that can inherit the rule, how the rule is inherited by child objects, and how that inheritance is propagated."""
+
     @property
     def AccessMask(self):
-        """ Gets the access mask for this rule. """
+        """Gets the access mask for this rule."""
         ...
-
     @property
     def InheritedObjectType(self):
         """
@@ -2594,7 +2377,6 @@ class ObjectAccessRule(AccessRule):
         Get: InheritedObjectType(self: ObjectAccessRule) -> Guid
         """
         ...
-
     @property
     def ObjectFlags(self):
         """
@@ -2603,7 +2385,6 @@ class ObjectAccessRule(AccessRule):
         Get: ObjectFlags(self: ObjectAccessRule) -> ObjectAceFlags
         """
         ...
-
     @property
     def ObjectType(self):
         """
@@ -2613,14 +2394,13 @@ class ObjectAccessRule(AccessRule):
         """
         ...
 
-
-
 class ObjectAce(QualifiedAce):
     """
     Controls access to Directory Services objects. This class represents an Access Control Entry (ACE) associated with a directory object.
 
     ObjectAce(aceFlags: AceFlags, qualifier: AceQualifier, accessMask: int, sid: SecurityIdentifier, flags: ObjectAceFlags, type: Guid, inheritedType: Guid, isCallback: bool, opaque: Array[Byte])
     """
+
     def GetBinaryForm(self, binaryForm, offset):
         """
         GetBinaryForm(self: ObjectAce, binaryForm: Array[Byte], offset: int)
@@ -2632,7 +2412,6 @@ class ObjectAce(QualifiedAce):
             offset: The offset at which to start marshaling.
         """
         ...
-
     @staticmethod
     def MaxOpaqueLength(isCallback):
         """
@@ -2645,12 +2424,10 @@ class ObjectAce(QualifiedAce):
             Returns: The maximum allowed length, in bytes, of an opaque data BLOB for callback Access Control Entries (ACEs).
         """
         ...
-
-    @staticmethod # known case of __new__
+    @staticmethod  # known case of __new__
     def __new__(cls, aceFlags, qualifier, accessMask, sid, flags, type, inheritedType, isCallback, opaque):
-        """ __new__(cls: type, aceFlags: AceFlags, qualifier: AceQualifier, accessMask: int, sid: SecurityIdentifier, flags: ObjectAceFlags, type: Guid, inheritedType: Guid, isCallback: bool, opaque: Array[Byte]) """
+        """__new__(cls: type, aceFlags: AceFlags, qualifier: AceQualifier, accessMask: int, sid: SecurityIdentifier, flags: ObjectAceFlags, type: Guid, inheritedType: Guid, isCallback: bool, opaque: Array[Byte])"""
         ...
-
     @property
     def BinaryLength(self):
         """
@@ -2659,7 +2436,6 @@ class ObjectAce(QualifiedAce):
         Get: BinaryLength(self: ObjectAce) -> int
         """
         ...
-
     @property
     def InheritedObjectAceType(self):
         """
@@ -2670,7 +2446,6 @@ class ObjectAce(QualifiedAce):
         Set: InheritedObjectAceType(self: ObjectAce) = value
         """
         ...
-
     @property
     def ObjectAceFlags(self):
         """
@@ -2681,7 +2456,6 @@ class ObjectAce(QualifiedAce):
         Set: ObjectAceFlags(self: ObjectAce) = value
         """
         ...
-
     @property
     def ObjectAceType(self):
         """
@@ -2693,27 +2467,25 @@ class ObjectAce(QualifiedAce):
         """
         ...
 
-
-
-class ObjectAceFlags(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class ObjectAceFlags(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the presence of object types for Access Control Entries (ACEs).
 
     enum (flags) ObjectAceFlags, values: InheritedObjectAceTypePresent (2), None (0), ObjectAceTypePresent (1)
     """
+
     InheritedObjectAceTypePresent = None
-    None = None
+
     ObjectAceTypePresent = None
     value__ = None
 
-
 class ObjectAuditRule(AuditRule):
-    """ Represents a combination of a user's identity, an access mask, and audit conditions. An System.Security.AccessControl.ObjectAuditRule object also contains information about the type of object to which the rule applies, the type of child object that can inherit the rule, how the rule is inherited by child objects, and how that inheritance is propagated. """
+    """Represents a combination of a user's identity, an access mask, and audit conditions. An System.Security.AccessControl.ObjectAuditRule object also contains information about the type of object to which the rule applies, the type of child object that can inherit the rule, how the rule is inherited by child objects, and how that inheritance is propagated."""
+
     @property
     def AccessMask(self):
-        """ Gets the access mask for this rule. """
+        """Gets the access mask for this rule."""
         ...
-
     @property
     def InheritedObjectType(self):
         """
@@ -2722,7 +2494,6 @@ class ObjectAuditRule(AuditRule):
         Get: InheritedObjectType(self: ObjectAuditRule) -> Guid
         """
         ...
-
     @property
     def ObjectFlags(self):
         """
@@ -2731,7 +2502,6 @@ class ObjectAuditRule(AuditRule):
         Get: ObjectFlags(self: ObjectAuditRule) -> ObjectAceFlags
         """
         ...
-
     @property
     def ObjectType(self):
         """
@@ -2741,10 +2511,9 @@ class ObjectAuditRule(AuditRule):
         """
         ...
 
-
-
 class ObjectSecurity:
-    """ Provides the ability to control access to objects without direct manipulation of Access Control Lists (ACLs). This class is the abstract base class for the System.Security.AccessControl.CommonObjectSecurity and System.Security.AccessControl.DirectoryObjectSecurity classes. """
+    """Provides the ability to control access to objects without direct manipulation of Access Control Lists (ACLs). This class is the abstract base class for the System.Security.AccessControl.CommonObjectSecurity and System.Security.AccessControl.DirectoryObjectSecurity classes."""
+
     def AccessRuleFactory(self, identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, type):
         """
         AccessRuleFactory(self: ObjectSecurity, identityReference: IdentityReference, accessMask: int, isInherited: bool, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, type: AccessControlType) -> AccessRule
@@ -2766,7 +2535,6 @@ class ObjectSecurity:
             Returns: The System.Security.AccessControl.AccessRule object that this method creates.
         """
         ...
-
     def AuditRuleFactory(self, identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, flags):
         """
         AuditRuleFactory(self: ObjectSecurity, identityReference: IdentityReference, accessMask: int, isInherited: bool, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, flags: AuditFlags) -> AuditRule
@@ -2788,7 +2556,6 @@ class ObjectSecurity:
             Returns: The System.Security.AccessControl.AuditRule object that this method creates.
         """
         ...
-
     def GetGroup(self, targetType):
         """
         GetGroup(self: ObjectSecurity, targetType: Type) -> IdentityReference
@@ -2800,7 +2567,6 @@ class ObjectSecurity:
             Returns: The primary group associated with the specified owner.
         """
         ...
-
     def GetOwner(self, targetType):
         """
         GetOwner(self: ObjectSecurity, targetType: Type) -> IdentityReference
@@ -2812,7 +2578,6 @@ class ObjectSecurity:
             Returns: The owner associated with the specified group.
         """
         ...
-
     def GetSecurityDescriptorBinaryForm(self):
         """
         GetSecurityDescriptorBinaryForm(self: ObjectSecurity) -> Array[Byte]
@@ -2824,7 +2589,6 @@ class ObjectSecurity:
              System.Security.AccessControl.ObjectSecurity object.
         """
         ...
-
     def GetSecurityDescriptorSddlForm(self, includeSections):
         """
         GetSecurityDescriptorSddlForm(self: ObjectSecurity, includeSections: AccessControlSections) -> str
@@ -2836,7 +2600,6 @@ class ObjectSecurity:
             Returns: The SDDL representation of the specified sections of the security descriptor associated with this System.Security.AccessControl.ObjectSecurity object.
         """
         ...
-
     @staticmethod
     def IsSddlConversionSupported():
         """
@@ -2847,8 +2610,7 @@ class ObjectSecurity:
             Returns: ue if the security descriptor associated with this  System.Security.AccessControl.ObjectSecurity object can be converted to the Security Descriptor Definition Language (SDDL) format; otherwise, lse.
         """
         ...
-
-# Error generating skeleton for function ModifyAccess: 'type' object has no attribute '__bases__'
+    # Error generating skeleton for function ModifyAccess: 'type' object has no attribute '__bases__'
 
     def ModifyAccessRule(self, modification, rule, modified):
         """
@@ -2863,8 +2625,7 @@ class ObjectSecurity:
             Returns: ue if the DACL is successfully modified; otherwise, lse.
         """
         ...
-
-# Error generating skeleton for function ModifyAudit: 'type' object has no attribute '__bases__'
+    # Error generating skeleton for function ModifyAudit: 'type' object has no attribute '__bases__'
 
     def ModifyAuditRule(self, modification, rule, modified):
         """
@@ -2879,8 +2640,7 @@ class ObjectSecurity:
             Returns: ue if the SACL is successfully modified; otherwise, lse.
         """
         ...
-
-# Error generating skeleton for function Persist: 'type' object has no attribute '__bases__'
+    # Error generating skeleton for function Persist: 'type' object has no attribute '__bases__'
 
     def PurgeAccessRules(self, identity):
         """
@@ -2891,7 +2651,6 @@ class ObjectSecurity:
             identity: The System.Security.Principal.IdentityReference for which to remove all access rules.
         """
         ...
-
     def PurgeAuditRules(self, identity):
         """
         PurgeAuditRules(self: ObjectSecurity, identity: IdentityReference)
@@ -2901,10 +2660,9 @@ class ObjectSecurity:
             identity: The System.Security.Principal.IdentityReference for which to remove all audit rules.
         """
         ...
+    # Error generating skeleton for function ReadLock: 'type' object has no attribute '__bases__'
 
-# Error generating skeleton for function ReadLock: 'type' object has no attribute '__bases__'
-
-# Error generating skeleton for function ReadUnlock: 'type' object has no attribute '__bases__'
+    # Error generating skeleton for function ReadUnlock: 'type' object has no attribute '__bases__'
 
     def SetAccessRuleProtection(self, isProtected, preserveInheritance):
         """
@@ -2917,7 +2675,6 @@ class ObjectSecurity:
             preserveInheritance: ue to preserve inherited access rules; lse to remove inherited access rules. This parameter is ignored if isProtected is lse.
         """
         ...
-
     def SetAuditRuleProtection(self, isProtected, preserveInheritance):
         """
         SetAuditRuleProtection(self: ObjectSecurity, isProtected: bool, preserveInheritance: bool)
@@ -2929,7 +2686,6 @@ class ObjectSecurity:
             preserveInheritance: ue to preserve inherited audit rules; lse to remove inherited audit rules. This parameter is ignored if isProtected is lse.
         """
         ...
-
     def SetGroup(self, identity):
         """
         SetGroup(self: ObjectSecurity, identity: IdentityReference)
@@ -2939,7 +2695,6 @@ class ObjectSecurity:
             identity: The primary group to set.
         """
         ...
-
     def SetOwner(self, identity):
         """
         SetOwner(self: ObjectSecurity, identity: IdentityReference)
@@ -2949,7 +2704,6 @@ class ObjectSecurity:
             identity: The owner to set.
         """
         ...
-
     def SetSecurityDescriptorBinaryForm(self, binaryForm, includeSections=None):
         """
         SetSecurityDescriptorBinaryForm(self: ObjectSecurity, binaryForm: Array[Byte])
@@ -2967,7 +2721,6 @@ class ObjectSecurity:
             includeSections: The sections (access rules, audit rules, owner, primary group) of the security descriptor to set.
         """
         ...
-
     def SetSecurityDescriptorSddlForm(self, sddlForm, includeSections=None):
         """
         SetSecurityDescriptorSddlForm(self: ObjectSecurity, sddlForm: str)
@@ -2985,13 +2738,12 @@ class ObjectSecurity:
             includeSections: The sections (access rules, audit rules, owner, primary group) of the security descriptor to set.
         """
         ...
+    # Error generating skeleton for function WriteLock: 'type' object has no attribute '__bases__'
 
-# Error generating skeleton for function WriteLock: 'type' object has no attribute '__bases__'
+    # Error generating skeleton for function WriteUnlock: 'type' object has no attribute '__bases__'
 
-# Error generating skeleton for function WriteUnlock: 'type' object has no attribute '__bases__'
-
-    @staticmethod # known case of __new__
-    def __new__(cls, *args): #cannot find CLR constructor
+    @staticmethod  # known case of __new__
+    def __new__(cls, *args):  # cannot find CLR constructor
         """
         __new__(cls: type)
 
@@ -3000,8 +2752,7 @@ class ObjectSecurity:
         __new__(cls: type, securityDescriptor: CommonSecurityDescriptor)
         """
         ...
-
-# Error generating skeleton for function __repr__: 'type' object has no attribute '__bases__'
+    # Error generating skeleton for function __repr__: 'type' object has no attribute '__bases__'
 
     @property
     def AccessRightType(self):
@@ -3011,12 +2762,10 @@ class ObjectSecurity:
         Get: AccessRightType(self: ObjectSecurity) -> Type
         """
         ...
-
     @property
     def AccessRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def AccessRuleType(self):
         """
@@ -3025,7 +2774,6 @@ class ObjectSecurity:
         Get: AccessRuleType(self: ObjectSecurity) -> Type
         """
         ...
-
     @property
     def AreAccessRulesCanonical(self):
         """
@@ -3034,7 +2782,6 @@ class ObjectSecurity:
         Get: AreAccessRulesCanonical(self: ObjectSecurity) -> bool
         """
         ...
-
     @property
     def AreAccessRulesProtected(self):
         """
@@ -3043,7 +2790,6 @@ class ObjectSecurity:
         Get: AreAccessRulesProtected(self: ObjectSecurity) -> bool
         """
         ...
-
     @property
     def AreAuditRulesCanonical(self):
         """
@@ -3052,7 +2798,6 @@ class ObjectSecurity:
         Get: AreAuditRulesCanonical(self: ObjectSecurity) -> bool
         """
         ...
-
     @property
     def AreAuditRulesProtected(self):
         """
@@ -3061,12 +2806,10 @@ class ObjectSecurity:
         Get: AreAuditRulesProtected(self: ObjectSecurity) -> bool
         """
         ...
-
     @property
     def AuditRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def AuditRuleType(self):
         """
@@ -3075,30 +2818,26 @@ class ObjectSecurity:
         Get: AuditRuleType(self: ObjectSecurity) -> Type
         """
         ...
-
     @property
     def GroupModified(self):
-        """ Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified."""
         ...
-
     @property
     def IsContainer(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object."""
         ...
-
     @property
     def IsDS(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object."""
         ...
-
     @property
     def OwnerModified(self):
-        """ Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified."""
         ...
 
-
-
-class PrivilegeNotHeldException(UnauthorizedAccessException): # skipped bases: <type '_Exception'>, <type 'ISerializable'>
+class PrivilegeNotHeldException(
+    UnauthorizedAccessException
+):  # skipped bases: <type '_Exception'>, <type 'ISerializable'>
     """
     The exception that is thrown when a method in the System.Security.AccessControl namespace attempts to enable a privilege that it does not have.
 
@@ -3108,6 +2847,7 @@ class PrivilegeNotHeldException(UnauthorizedAccessException): # skipped bases: <
 
     PrivilegeNotHeldException(privilege: str, inner: Exception)
     """
+
     def GetObjectData(self, info, context):
         """
         GetObjectData(self: PrivilegeNotHeldException, info: SerializationInfo, context: StreamingContext)
@@ -3119,7 +2859,6 @@ class PrivilegeNotHeldException(UnauthorizedAccessException): # skipped bases: <
             context: The System.Runtime.Serialization.StreamingContext that contains contextual information about the source or destination.
         """
         ...
-
     @property
     def PrivilegeName(self):
         """
@@ -3128,24 +2867,21 @@ class PrivilegeNotHeldException(UnauthorizedAccessException): # skipped bases: <
         Get: PrivilegeName(self: PrivilegeNotHeldException) -> str
         """
         ...
-
-
     SerializeObjectState = None
 
-
-class PropagationFlags(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class PropagationFlags(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies how Access Control Entries (ACEs) are propagated to child objects.  These flags are significant only if inheritance flags are present.
 
     enum (flags) PropagationFlags, values: InheritOnly (2), None (0), NoPropagateInherit (1)
     """
+
     InheritOnly = None
-    None = None
+
     NoPropagateInherit = None
     value__ = None
 
-
-class RawAcl(GenericAcl): # skipped bases: <type 'ICollection'>, <type 'IEnumerable'>
+class RawAcl(GenericAcl):  # skipped bases: <type 'ICollection'>, <type 'IEnumerable'>
     """
     Represents an Access Control List (ACL).
 
@@ -3153,6 +2889,7 @@ class RawAcl(GenericAcl): # skipped bases: <type 'ICollection'>, <type 'IEnumera
 
     RawAcl(binaryForm: Array[Byte], offset: int)
     """
+
     def InsertAce(self, index, ace):
         """
         InsertAce(self: RawAcl, index: int, ace: GenericAce)
@@ -3164,7 +2901,6 @@ class RawAcl(GenericAcl): # skipped bases: <type 'ICollection'>, <type 'IEnumera
             ace: The ACE to insert.
         """
         ...
-
     def RemoveAce(self, index):
         """
         RemoveAce(self: RawAcl, index: int)
@@ -3174,8 +2910,7 @@ class RawAcl(GenericAcl): # skipped bases: <type 'ICollection'>, <type 'IEnumera
             index: The zero-based index of the ACE to remove.
         """
         ...
-
-    @staticmethod # known case of __new__
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, revision: Byte, capacity: int)
@@ -3183,7 +2918,6 @@ class RawAcl(GenericAcl): # skipped bases: <type 'ICollection'>, <type 'IEnumera
         __new__(cls: type, binaryForm: Array[Byte], offset: int)
         """
         ...
-
     @property
     def BinaryLength(self):
         """
@@ -3192,7 +2926,6 @@ class RawAcl(GenericAcl): # skipped bases: <type 'ICollection'>, <type 'IEnumera
         Get: BinaryLength(self: RawAcl) -> int
         """
         ...
-
     @property
     def Count(self):
         """
@@ -3201,7 +2934,6 @@ class RawAcl(GenericAcl): # skipped bases: <type 'ICollection'>, <type 'IEnumera
         Get: Count(self: RawAcl) -> int
         """
         ...
-
     @property
     def Revision(self):
         """
@@ -3210,8 +2942,6 @@ class RawAcl(GenericAcl): # skipped bases: <type 'ICollection'>, <type 'IEnumera
         Get: Revision(self: RawAcl) -> Byte
         """
         ...
-
-
 
 class RawSecurityDescriptor(GenericSecurityDescriptor):
     """
@@ -3223,6 +2953,7 @@ class RawSecurityDescriptor(GenericSecurityDescriptor):
 
     RawSecurityDescriptor(binaryForm: Array[Byte], offset: int)
     """
+
     def SetFlags(self, flags):
         """
         SetFlags(self: RawSecurityDescriptor, flags: ControlFlags)
@@ -3232,8 +2963,7 @@ class RawSecurityDescriptor(GenericSecurityDescriptor):
             flags: One or more values of the System.Security.AccessControl.ControlFlags enumeration combined with a logical OR operation.
         """
         ...
-
-    @staticmethod # known case of __new__
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, flags: ControlFlags, owner: SecurityIdentifier, group: SecurityIdentifier, systemAcl: RawAcl, discretionaryAcl: RawAcl)
@@ -3243,7 +2973,6 @@ class RawSecurityDescriptor(GenericSecurityDescriptor):
         __new__(cls: type, binaryForm: Array[Byte], offset: int)
         """
         ...
-
     @property
     def ControlFlags(self):
         """
@@ -3252,7 +2981,6 @@ class RawSecurityDescriptor(GenericSecurityDescriptor):
         Get: ControlFlags(self: RawSecurityDescriptor) -> ControlFlags
         """
         ...
-
     @property
     def DiscretionaryAcl(self):
         """
@@ -3263,7 +2991,6 @@ class RawSecurityDescriptor(GenericSecurityDescriptor):
         Set: DiscretionaryAcl(self: RawSecurityDescriptor) = value
         """
         ...
-
     @property
     def Group(self):
         """
@@ -3274,7 +3001,6 @@ class RawSecurityDescriptor(GenericSecurityDescriptor):
         Set: Group(self: RawSecurityDescriptor) = value
         """
         ...
-
     @property
     def Owner(self):
         """
@@ -3285,7 +3011,6 @@ class RawSecurityDescriptor(GenericSecurityDescriptor):
         Set: Owner(self: RawSecurityDescriptor) = value
         """
         ...
-
     @property
     def ResourceManagerControl(self):
         """
@@ -3296,7 +3021,6 @@ class RawSecurityDescriptor(GenericSecurityDescriptor):
         Set: ResourceManagerControl(self: RawSecurityDescriptor) = value
         """
         ...
-
     @property
     def SystemAcl(self):
         """
@@ -3307,8 +3031,6 @@ class RawSecurityDescriptor(GenericSecurityDescriptor):
         Set: SystemAcl(self: RawSecurityDescriptor) = value
         """
         ...
-
-
 
 class RegistryAccessRule(AccessRule):
     """
@@ -3322,11 +3044,11 @@ class RegistryAccessRule(AccessRule):
 
     RegistryAccessRule(identity: str, registryRights: RegistryRights, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, type: AccessControlType)
     """
+
     @property
     def AccessMask(self):
-        """ Gets the access mask for this rule. """
+        """Gets the access mask for this rule."""
         ...
-
     @property
     def RegistryRights(self):
         """
@@ -3336,8 +3058,6 @@ class RegistryAccessRule(AccessRule):
         """
         ...
 
-
-
 class RegistryAuditRule(AuditRule):
     """
     Represents a set of access rights to be audited for a user or group. This class cannot be inherited.
@@ -3346,11 +3066,11 @@ class RegistryAuditRule(AuditRule):
 
     RegistryAuditRule(identity: str, registryRights: RegistryRights, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, flags: AuditFlags)
     """
+
     @property
     def AccessMask(self):
-        """ Gets the access mask for this rule. """
+        """Gets the access mask for this rule."""
         ...
-
     @property
     def RegistryRights(self):
         """
@@ -3360,14 +3080,13 @@ class RegistryAuditRule(AuditRule):
         """
         ...
 
-
-
-class RegistryRights(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class RegistryRights(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the access control rights that can be applied to registry objects.
 
     enum (flags) RegistryRights, values: ChangePermissions (262144), CreateLink (32), CreateSubKey (4), Delete (65536), EnumerateSubKeys (8), ExecuteKey (131097), FullControl (983103), Notify (16), QueryValues (1), ReadKey (131097), ReadPermissions (131072), SetValue (2), TakeOwnership (524288), WriteKey (131078)
     """
+
     ChangePermissions = None
     CreateLink = None
     CreateSubKey = None
@@ -3384,13 +3103,13 @@ class RegistryRights(Enum): # skipped bases: <type 'IComparable'>, <type 'IConve
     value__ = None
     WriteKey = None
 
-
 class RegistrySecurity(NativeObjectSecurity):
     """
     Represents the Windows access control security for a registry key. This class cannot be inherited.
 
     RegistrySecurity()
     """
+
     def AccessRuleFactory(self, identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, type):
         """
         AccessRuleFactory(self: RegistrySecurity, identityReference: IdentityReference, accessMask: int, isInherited: bool, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, type: AccessControlType) -> AccessRule
@@ -3412,7 +3131,6 @@ class RegistrySecurity(NativeObjectSecurity):
             Returns: A System.Security.AccessControl.RegistryAccessRule object representing the specified rights for the specified user.
         """
         ...
-
     def AuditRuleFactory(self, identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, flags):
         """
         AuditRuleFactory(self: RegistrySecurity, identityReference: IdentityReference, accessMask: int, isInherited: bool, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, flags: AuditFlags) -> AuditRule
@@ -3436,7 +3154,6 @@ class RegistrySecurity(NativeObjectSecurity):
              System.Security.AccessControl.AuditRule, but the return value can be cast safely to the derived class.
         """
         ...
-
     @property
     def AccessRightType(self):
         """
@@ -3445,12 +3162,10 @@ class RegistrySecurity(NativeObjectSecurity):
         Get: AccessRightType(self: RegistrySecurity) -> Type
         """
         ...
-
     @property
     def AccessRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def AccessRuleType(self):
         """
@@ -3459,12 +3174,10 @@ class RegistrySecurity(NativeObjectSecurity):
         Get: AccessRuleType(self: RegistrySecurity) -> Type
         """
         ...
-
     @property
     def AuditRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def AuditRuleType(self):
         """
@@ -3473,35 +3186,30 @@ class RegistrySecurity(NativeObjectSecurity):
         Get: AuditRuleType(self: RegistrySecurity) -> Type
         """
         ...
-
     @property
     def GroupModified(self):
-        """ Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified."""
         ...
-
     @property
     def IsContainer(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object."""
         ...
-
     @property
     def IsDS(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object."""
         ...
-
     @property
     def OwnerModified(self):
-        """ Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified."""
         ...
 
-
-
-class ResourceType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class ResourceType(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the defined native object types.
 
     enum ResourceType, values: DSObject (8), DSObjectAll (9), FileObject (1), KernelObject (6), LMShare (5), Printer (3), ProviderDefined (10), RegistryKey (4), RegistryWow6432Key (12), Service (2), Unknown (0), WindowObject (7), WmiGuidObject (11)
     """
+
     DSObject = None
     DSObjectAll = None
     FileObject = None
@@ -3517,19 +3225,18 @@ class ResourceType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvert
     WindowObject = None
     WmiGuidObject = None
 
-
-class SecurityInfos(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SecurityInfos(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the section of a security descriptor to be queried or set.
 
     enum (flags) SecurityInfos, values: DiscretionaryAcl (4), Group (2), Owner (1), SystemAcl (8)
     """
+
     DiscretionaryAcl = None
     Group = None
     Owner = None
     SystemAcl = None
     value__ = None
-
 
 class SemaphoreAccessRule(AccessRule):
     """
@@ -3539,11 +3246,11 @@ class SemaphoreAccessRule(AccessRule):
 
     SemaphoreAccessRule(identity: str, eventRights: SemaphoreRights, type: AccessControlType)
     """
+
     @property
     def AccessMask(self):
-        """ Gets the access mask for this rule. """
+        """Gets the access mask for this rule."""
         ...
-
     @property
     def SemaphoreRights(self):
         """
@@ -3553,19 +3260,17 @@ class SemaphoreAccessRule(AccessRule):
         """
         ...
 
-
-
 class SemaphoreAuditRule(AuditRule):
     """
     Represents a set of access rights to be audited for a user or group. This class cannot be inherited.
 
     SemaphoreAuditRule(identity: IdentityReference, eventRights: SemaphoreRights, flags: AuditFlags)
     """
+
     @property
     def AccessMask(self):
-        """ Gets the access mask for this rule. """
+        """Gets the access mask for this rule."""
         ...
-
     @property
     def SemaphoreRights(self):
         """
@@ -3575,14 +3280,13 @@ class SemaphoreAuditRule(AuditRule):
         """
         ...
 
-
-
-class SemaphoreRights(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SemaphoreRights(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the access control rights that can be applied to named system semaphore objects.
 
     enum (flags) SemaphoreRights, values: ChangePermissions (262144), Delete (65536), FullControl (2031619), Modify (2), ReadPermissions (131072), Synchronize (1048576), TakeOwnership (524288)
     """
+
     ChangePermissions = None
     Delete = None
     FullControl = None
@@ -3592,7 +3296,6 @@ class SemaphoreRights(Enum): # skipped bases: <type 'IComparable'>, <type 'IConv
     TakeOwnership = None
     value__ = None
 
-
 class SemaphoreSecurity(NativeObjectSecurity):
     """
     Represents the Windows access control security for a named semaphore. This class cannot be inherited.
@@ -3601,6 +3304,7 @@ class SemaphoreSecurity(NativeObjectSecurity):
 
     SemaphoreSecurity(name: str, includeSections: AccessControlSections)
     """
+
     def AccessRuleFactory(self, identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, type):
         """
         AccessRuleFactory(self: SemaphoreSecurity, identityReference: IdentityReference, accessMask: int, isInherited: bool, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, type: AccessControlType) -> AccessRule
@@ -3622,7 +3326,6 @@ class SemaphoreSecurity(NativeObjectSecurity):
             Returns: A System.Security.AccessControl.SemaphoreAccessRule object representing the specified rights for the specified user.
         """
         ...
-
     def AuditRuleFactory(self, identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, flags):
         """
         AuditRuleFactory(self: SemaphoreSecurity, identityReference: IdentityReference, accessMask: int, isInherited: bool, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, flags: AuditFlags) -> AuditRule
@@ -3646,7 +3349,6 @@ class SemaphoreSecurity(NativeObjectSecurity):
              can be cast safely to the derived class.
         """
         ...
-
     @property
     def AccessRightType(self):
         """
@@ -3655,12 +3357,10 @@ class SemaphoreSecurity(NativeObjectSecurity):
         Get: AccessRightType(self: SemaphoreSecurity) -> Type
         """
         ...
-
     @property
     def AccessRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the access rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def AccessRuleType(self):
         """
@@ -3669,12 +3369,10 @@ class SemaphoreSecurity(NativeObjectSecurity):
         Get: AccessRuleType(self: SemaphoreSecurity) -> Type
         """
         ...
-
     @property
     def AuditRulesModified(self):
-        """ Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified. """
+        """Gets or sets a Boolean value that specifies whether the audit rules associated with this System.Security.AccessControl.ObjectSecurity object have been modified."""
         ...
-
     @property
     def AuditRuleType(self):
         """
@@ -3683,30 +3381,24 @@ class SemaphoreSecurity(NativeObjectSecurity):
         Get: AuditRuleType(self: SemaphoreSecurity) -> Type
         """
         ...
-
     @property
     def GroupModified(self):
-        """ Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the group associated with the securable object has been modified."""
         ...
-
     @property
     def IsContainer(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a container object."""
         ...
-
     @property
     def IsDS(self):
-        """ Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object. """
+        """Gets a Boolean value that specifies whether this System.Security.AccessControl.ObjectSecurity object is a directory object."""
         ...
-
     @property
     def OwnerModified(self):
-        """ Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified. """
+        """Gets or sets a Boolean value that specifies whether the owner of the securable object has been modified."""
         ...
 
-
-
-class SystemAcl(CommonAcl): # skipped bases: <type 'ICollection'>, <type 'IEnumerable'>
+class SystemAcl(CommonAcl):  # skipped bases: <type 'ICollection'>, <type 'IEnumerable'>
     """
     Represents a System Access Control List (SACL).
 
@@ -3716,6 +3408,7 @@ class SystemAcl(CommonAcl): # skipped bases: <type 'ICollection'>, <type 'IEnume
 
     SystemAcl(isContainer: bool, isDS: bool, rawAcl: RawAcl)
     """
+
     def AddAudit(self, *__args):
         """
         AddAudit(self: SystemAcl, auditFlags: AuditFlags, sid: SecurityIdentifier, accessMask: int, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags)
@@ -3763,7 +3456,6 @@ class SystemAcl(CommonAcl): # skipped bases: <type 'ICollection'>, <type 'IEnume
             inheritedObjectType: The identity of the class of child objects which can inherit the new audit rule.
         """
         ...
-
     def RemoveAudit(self, *__args):
         """
         RemoveAudit(self: SystemAcl, auditFlags: AuditFlags, sid: SecurityIdentifier, accessMask: int, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags) -> bool
@@ -3815,7 +3507,6 @@ class SystemAcl(CommonAcl): # skipped bases: <type 'ICollection'>, <type 'IEnume
             Returns: ue if this method successfully removes the specified audit rule; otherwise, lse.
         """
         ...
-
     def RemoveAuditSpecific(self, *__args):
         """
         RemoveAuditSpecific(self: SystemAcl, auditFlags: AuditFlags, sid: SecurityIdentifier, accessMask: int, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags)
@@ -3861,7 +3552,6 @@ class SystemAcl(CommonAcl): # skipped bases: <type 'ICollection'>, <type 'IEnume
             inheritedObjectType: The identity of the class of child objects which can inherit the removed audit rule.
         """
         ...
-
     def SetAudit(self, *__args):
         """
         SetAudit(self: SystemAcl, auditFlags: AuditFlags, sid: SecurityIdentifier, accessMask: int, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags)
@@ -3907,8 +3597,7 @@ class SystemAcl(CommonAcl): # skipped bases: <type 'ICollection'>, <type 'IEnume
             inheritedObjectType: The identity of the class of child objects which can inherit the new audit rule.
         """
         ...
-
-    @staticmethod # known case of __new__
+    @staticmethod  # known case of __new__
     def __new__(cls, isContainer, isDS, *__args):
         """
         __new__(cls: type, isContainer: bool, isDS: bool, capacity: int)

@@ -777,7 +777,7 @@ class PlcSystemBlockGroup(
         """
         ...
     @property
-    def Name(self):
+    def Name(self) -> str:
         """
         The name of the Plc system block group
 

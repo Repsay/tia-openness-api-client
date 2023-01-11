@@ -8,12 +8,13 @@
 # no functions
 # classes
 
-class AllowPartiallyTrustedCallersAttribute(Attribute): # skipped bases: <type '_Attribute'>
+class AllowPartiallyTrustedCallersAttribute(Attribute):  # skipped bases: <type '_Attribute'>
     """
     Allows an assembly to be called by partially trusted code. Without this declaration, only fully trusted callers are able to use the assembly. This class cannot be inherited.
 
     AllowPartiallyTrustedCallersAttribute()
     """
+
     @property
     def PartialTrustVisibilityLevel(self):
         """
@@ -25,10 +26,9 @@ class AllowPartiallyTrustedCallersAttribute(Attribute): # skipped bases: <type '
         """
         ...
 
+class CodeAccessPermission(object, IPermission, IStackWalk):  # skipped bases: <type 'ISecurityEncodable'>
+    """Defines the underlying structure of all code access permissions."""
 
-
-class CodeAccessPermission(object, IPermission, IStackWalk): # skipped bases: <type 'ISecurityEncodable'>
-    """ Defines the underlying structure of all code access permissions. """
     def Equals(self, obj):
         """
         Equals(self: CodeAccessPermission, obj: object) -> bool
@@ -40,7 +40,6 @@ class CodeAccessPermission(object, IPermission, IStackWalk): # skipped bases: <t
             Returns: ue if the specified System.Security.CodeAccessPermission object is equal to the current System.Security.CodeAccessPermission; otherwise, lse.
         """
         ...
-
     def FromXml(self, elem):
         """
         FromXml(self: CodeAccessPermission, elem: SecurityElement)
@@ -50,7 +49,6 @@ class CodeAccessPermission(object, IPermission, IStackWalk): # skipped bases: <t
             elem: The XML encoding to use to reconstruct the security object.
         """
         ...
-
     def GetHashCode(self):
         """
         GetHashCode(self: CodeAccessPermission) -> int
@@ -60,7 +58,6 @@ class CodeAccessPermission(object, IPermission, IStackWalk): # skipped bases: <t
             Returns: A hash code for the current System.Security.CodeAccessPermission object.
         """
         ...
-
     @staticmethod
     def RevertAll():
         """
@@ -69,7 +66,6 @@ class CodeAccessPermission(object, IPermission, IStackWalk): # skipped bases: <t
             Causes all previous overrides for the current frame to be removed and no longer in effect.
         """
         ...
-
     @staticmethod
     def RevertAssert():
         """
@@ -78,7 +74,6 @@ class CodeAccessPermission(object, IPermission, IStackWalk): # skipped bases: <t
             Causes any previous System.Security.CodeAccessPermission.Assert for the current frame to be removed and no longer in effect.
         """
         ...
-
     @staticmethod
     def RevertDeny():
         """
@@ -87,7 +82,6 @@ class CodeAccessPermission(object, IPermission, IStackWalk): # skipped bases: <t
             Causes any previous System.Security.CodeAccessPermission.Deny for the current frame to be removed and no longer in effect.
         """
         ...
-
     @staticmethod
     def RevertPermitOnly():
         """
@@ -96,7 +90,6 @@ class CodeAccessPermission(object, IPermission, IStackWalk): # skipped bases: <t
             Causes any previous System.Security.CodeAccessPermission.PermitOnly for the current frame to be removed and no longer in effect.
         """
         ...
-
     def ToString(self):
         """
         ToString(self: CodeAccessPermission) -> str
@@ -106,7 +99,6 @@ class CodeAccessPermission(object, IPermission, IStackWalk): # skipped bases: <t
             Returns: A string representation of the current permission object.
         """
         ...
-
     def ToXml(self):
         """
         ToXml(self: CodeAccessPermission) -> SecurityElement
@@ -116,16 +108,12 @@ class CodeAccessPermission(object, IPermission, IStackWalk): # skipped bases: <t
             Returns: An XML encoding of the security object, including any state information.
         """
         ...
-
-    def __eq__(self, *args): #cannot find CLR method
-        """ x.__eq__(y) <==> x==y """
+    def __eq__(self, *args):  # cannot find CLR method
+        """x.__eq__(y) <==> x==y"""
         ...
+    def __ne__(self, *args): ...
 
-    def __ne__(self, *args): #cannot find CLR method
-        ...
-
-
-class HostProtectionException(SystemException): # skipped bases: <type '_Exception'>, <type 'ISerializable'>
+class HostProtectionException(SystemException):  # skipped bases: <type '_Exception'>, <type 'ISerializable'>
     """
     The exception that is thrown when a denied host resource is detected.
 
@@ -137,6 +125,7 @@ class HostProtectionException(SystemException): # skipped bases: <type '_Excepti
 
     HostProtectionException(message: str, protectedResources: HostProtectionResource, demandedResources: HostProtectionResource)
     """
+
     @property
     def DemandedResources(self):
         """
@@ -145,7 +134,6 @@ class HostProtectionException(SystemException): # skipped bases: <type '_Excepti
         Get: DemandedResources(self: HostProtectionException) -> HostProtectionResource
         """
         ...
-
     @property
     def ProtectedResources(self):
         """
@@ -154,17 +142,15 @@ class HostProtectionException(SystemException): # skipped bases: <type '_Excepti
         Get: ProtectedResources(self: HostProtectionException) -> HostProtectionResource
         """
         ...
-
-
     SerializeObjectState = None
 
-
-class HostSecurityManager: # skipped bases: <type 'object'>
+class HostSecurityManager:  # skipped bases: <type 'object'>
     """
     Allows the control and customization of security behavior for application domains.
 
     HostSecurityManager()
     """
+
     def DetermineApplicationTrust(self, applicationEvidence, activatorEvidence, context):
         """
         DetermineApplicationTrust(self: HostSecurityManager, applicationEvidence: Evidence, activatorEvidence: Evidence, context: TrustManagerContext) -> ApplicationTrust
@@ -180,7 +166,6 @@ class HostSecurityManager: # skipped bases: <type 'object'>
             Returns: An object that contains trust information about the application.
         """
         ...
-
     def GenerateAppDomainEvidence(self, evidenceType):
         """
         GenerateAppDomainEvidence(self: HostSecurityManager, evidenceType: Type) -> EvidenceBase
@@ -192,7 +177,6 @@ class HostSecurityManager: # skipped bases: <type 'object'>
             Returns: The requested application domain evidence.
         """
         ...
-
     def GenerateAssemblyEvidence(self, evidenceType, assembly):
         """
         GenerateAssemblyEvidence(self: HostSecurityManager, evidenceType: Type, assembly: Assembly) -> EvidenceBase
@@ -206,7 +190,6 @@ class HostSecurityManager: # skipped bases: <type 'object'>
             Returns: The requested assembly evidence.
         """
         ...
-
     def GetHostSuppliedAppDomainEvidenceTypes(self):
         """
         GetHostSuppliedAppDomainEvidenceTypes(self: HostSecurityManager) -> Array[Type]
@@ -216,7 +199,6 @@ class HostSecurityManager: # skipped bases: <type 'object'>
             Returns: An array of evidence types.
         """
         ...
-
     def GetHostSuppliedAssemblyEvidenceTypes(self, assembly):
         """
         GetHostSuppliedAssemblyEvidenceTypes(self: HostSecurityManager, assembly: Assembly) -> Array[Type]
@@ -228,7 +210,6 @@ class HostSecurityManager: # skipped bases: <type 'object'>
             Returns: An array of evidence types.
         """
         ...
-
     def ProvideAppDomainEvidence(self, inputEvidence):
         """
         ProvideAppDomainEvidence(self: HostSecurityManager, inputEvidence: Evidence) -> Evidence
@@ -240,7 +221,6 @@ class HostSecurityManager: # skipped bases: <type 'object'>
             Returns: The evidence to be used for the System.AppDomain.
         """
         ...
-
     def ProvideAssemblyEvidence(self, loadedAssembly, inputEvidence):
         """
         ProvideAssemblyEvidence(self: HostSecurityManager, loadedAssembly: Assembly, inputEvidence: Evidence) -> Evidence
@@ -254,7 +234,6 @@ class HostSecurityManager: # skipped bases: <type 'object'>
             Returns: The evidence to be used for the assembly.
         """
         ...
-
     def ResolvePolicy(self, evidence):
         """
         ResolvePolicy(self: HostSecurityManager, evidence: Evidence) -> PermissionSet
@@ -266,7 +245,6 @@ class HostSecurityManager: # skipped bases: <type 'object'>
             Returns: The permission set that can be granted by the security system.
         """
         ...
-
     @property
     def DomainPolicy(self):
         """
@@ -275,7 +253,6 @@ class HostSecurityManager: # skipped bases: <type 'object'>
         Get: DomainPolicy(self: HostSecurityManager) -> PolicyLevel
         """
         ...
-
     @property
     def Flags(self):
         """
@@ -285,26 +262,27 @@ class HostSecurityManager: # skipped bases: <type 'object'>
         """
         ...
 
-
-
-class HostSecurityManagerOptions(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class HostSecurityManagerOptions(
+    Enum
+):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the security policy components to be used by the host security manager.
 
     enum (flags) HostSecurityManagerOptions, values: AllFlags (31), HostAppDomainEvidence (1), HostAssemblyEvidence (4), HostDetermineApplicationTrust (8), HostPolicyLevel (2), HostResolvePolicy (16), None (0)
     """
+
     AllFlags = None
     HostAppDomainEvidence = None
     HostAssemblyEvidence = None
     HostDetermineApplicationTrust = None
     HostPolicyLevel = None
     HostResolvePolicy = None
-    None = None
+
     value__ = None
 
-
 class IEvidenceFactory:
-    """ Gets an object's System.Security.Policy.Evidence. """
+    """Gets an object's System.Security.Policy.Evidence."""
+
     @property
     def Evidence(self):
         """
@@ -314,10 +292,9 @@ class IEvidenceFactory:
         """
         ...
 
-
-
 class ISecurityEncodable:
-    """ Defines the methods that convert permission object state to and from XML element representation. """
+    """Defines the methods that convert permission object state to and from XML element representation."""
+
     def FromXml(self, e):
         """
         FromXml(self: ISecurityEncodable, e: SecurityElement)
@@ -327,7 +304,6 @@ class ISecurityEncodable:
             e: The XML encoding to use to reconstruct the security object.
         """
         ...
-
     def ToXml(self):
         """
         ToXml(self: ISecurityEncodable) -> SecurityElement
@@ -338,9 +314,9 @@ class ISecurityEncodable:
         """
         ...
 
-
 class IPermission(ISecurityEncodable):
-    """ Defines methods implemented by permission types. """
+    """Defines methods implemented by permission types."""
+
     def Copy(self):
         """
         Copy(self: IPermission) -> IPermission
@@ -350,7 +326,6 @@ class IPermission(ISecurityEncodable):
             Returns: A copy of the current permission.
         """
         ...
-
     def Demand(self):
         """
         Demand(self: IPermission)
@@ -358,7 +333,6 @@ class IPermission(ISecurityEncodable):
             Throws a System.Security.SecurityException at run time if the security requirement is not met.
         """
         ...
-
     def Intersect(self, target):
         """
         Intersect(self: IPermission, target: IPermission) -> IPermission
@@ -370,7 +344,6 @@ class IPermission(ISecurityEncodable):
             Returns: A new permission that represents the intersection of the current permission and the specified permission. This new permission is ll if the intersection is empty.
         """
         ...
-
     def IsSubsetOf(self, target):
         """
         IsSubsetOf(self: IPermission, target: IPermission) -> bool
@@ -382,7 +355,6 @@ class IPermission(ISecurityEncodable):
             Returns: ue if the current permission is a subset of the specified permission; otherwise, lse.
         """
         ...
-
     def Union(self, target):
         """
         Union(self: IPermission, target: IPermission) -> IPermission
@@ -395,9 +367,9 @@ class IPermission(ISecurityEncodable):
         """
         ...
 
-
 class ISecurityPolicyEncodable:
-    """ Supports the methods that convert permission object state to and from an XML element representation. """
+    """Supports the methods that convert permission object state to and from an XML element representation."""
+
     def FromXml(self, e, level):
         """
         FromXml(self: ISecurityPolicyEncodable, e: SecurityElement, level: PolicyLevel)
@@ -409,7 +381,6 @@ class ISecurityPolicyEncodable:
             level: The policy-level context to resolve named permission set references.
         """
         ...
-
     def ToXml(self, level):
         """
         ToXml(self: ISecurityPolicyEncodable, level: PolicyLevel) -> SecurityElement
@@ -422,9 +393,9 @@ class ISecurityPolicyEncodable:
         """
         ...
 
-
 class IStackWalk:
-    """ Manages the stack walk that determines whether all callers in the call stack have the required permissions to access a protected resource. """
+    """Manages the stack walk that determines whether all callers in the call stack have the required permissions to access a protected resource."""
+
     def Assert(self):
         """
         Assert(self: IStackWalk)
@@ -432,7 +403,6 @@ class IStackWalk:
             Asserts that the calling code can access the resource identified by the current permission object, even if callers higher in the stack have not been granted permission to access the resource.
         """
         ...
-
     def Demand(self):
         """
         Demand(self: IStackWalk)
@@ -440,7 +410,6 @@ class IStackWalk:
             Determines at run time whether all callers in the call stack have been granted the permission specified by the current permission object.
         """
         ...
-
     def Deny(self):
         """
         Deny(self: IStackWalk)
@@ -448,7 +417,6 @@ class IStackWalk:
             Causes every System.Security.IStackWalk.Demand for the current object that passes through the calling code to fail.
         """
         ...
-
     def PermitOnly(self):
         """
         PermitOnly(self: IStackWalk)
@@ -457,8 +425,9 @@ class IStackWalk:
         """
         ...
 
-
-class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeserializationCallback): # skipped bases: <type 'IEnumerable'>
+class PermissionSet(
+    object, ISecurityEncodable, ICollection, IStackWalk, IDeserializationCallback
+):  # skipped bases: <type 'IEnumerable'>
     """
     Represents a collection that can contain many different types of permissions.
 
@@ -466,6 +435,7 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
 
     PermissionSet(permSet: PermissionSet)
     """
+
     def AddPermission(self, perm):
         """
         AddPermission(self: PermissionSet, perm: IPermission) -> IPermission
@@ -477,8 +447,7 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
             Returns: The union of the permission added and any permission of the same type that already exists in the System.Security.PermissionSet.
         """
         ...
-
-    def AddPermissionImpl(self, *args): #cannot find CLR method
+    def AddPermissionImpl(self, *args):  # cannot find CLR method
         """
         AddPermissionImpl(self: PermissionSet, perm: IPermission) -> IPermission
 
@@ -489,7 +458,6 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
             Returns: The union of the permission added and any permission of the same type that already exists in the System.Security.PermissionSet, or ll if perm is ll.
         """
         ...
-
     def ContainsNonCodeAccessPermissions(self):
         """
         ContainsNonCodeAccessPermissions(self: PermissionSet) -> bool
@@ -499,7 +467,6 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
             Returns: ue if the System.Security.PermissionSet contains permissions that are not derived from System.Security.CodeAccessPermission; otherwise, lse.
         """
         ...
-
     @staticmethod
     def ConvertPermissionSet(inFormat, inData, outFormat):
         """
@@ -516,7 +483,6 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
             Returns: An encrypted permission set with the specified output format.
         """
         ...
-
     def Copy(self):
         """
         Copy(self: PermissionSet) -> PermissionSet
@@ -526,7 +492,6 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
             Returns: A copy of the System.Security.PermissionSet.
         """
         ...
-
     def Equals(self, obj):
         """
         Equals(self: PermissionSet, obj: object) -> bool
@@ -538,7 +503,6 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
             Returns: ue if the specified object is equal to the current System.Security.PermissionSet object; otherwise, lse.
         """
         ...
-
     def GetEnumerator(self):
         """
         GetEnumerator(self: PermissionSet) -> IEnumerator
@@ -548,8 +512,7 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
             Returns: An enumerator object for the permissions of the set.
         """
         ...
-
-    def GetEnumeratorImpl(self, *args): #cannot find CLR method
+    def GetEnumeratorImpl(self, *args):  # cannot find CLR method
         """
         GetEnumeratorImpl(self: PermissionSet) -> IEnumerator
 
@@ -558,7 +521,6 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
             Returns: An enumerator object for the permissions of the set.
         """
         ...
-
     def GetHashCode(self):
         """
         GetHashCode(self: PermissionSet) -> int
@@ -568,7 +530,6 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
             Returns: A hash code for the current System.Security.PermissionSet object.
         """
         ...
-
     def GetPermission(self, permClass):
         """
         GetPermission(self: PermissionSet, permClass: Type) -> IPermission
@@ -580,8 +541,7 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
             Returns: A copy of the permission object of the type specified by the permClass parameter contained in the System.Security.PermissionSet, or ll if none exists.
         """
         ...
-
-    def GetPermissionImpl(self, *args): #cannot find CLR method
+    def GetPermissionImpl(self, *args):  # cannot find CLR method
         """
         GetPermissionImpl(self: PermissionSet, permClass: Type) -> IPermission
 
@@ -592,7 +552,6 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
             Returns: A copy of the permission object, of the type specified by the permClass parameter, contained in the System.Security.PermissionSet, or ll if none exists.
         """
         ...
-
     def Intersect(self, other):
         """
         Intersect(self: PermissionSet, other: PermissionSet) -> PermissionSet
@@ -604,7 +563,6 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
             Returns: A new permission set that represents the intersection of the current System.Security.PermissionSet and the specified target. This object is ll if the intersection is empty.
         """
         ...
-
     def IsEmpty(self):
         """
         IsEmpty(self: PermissionSet) -> bool
@@ -614,7 +572,6 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
             Returns: ue if the System.Security.PermissionSet is empty; otherwise, lse.
         """
         ...
-
     def IsSubsetOf(self, target):
         """
         IsSubsetOf(self: PermissionSet, target: PermissionSet) -> bool
@@ -626,7 +583,6 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
             Returns: ue if the current System.Security.PermissionSet is a subset of the target parameter; otherwise, lse.
         """
         ...
-
     def IsUnrestricted(self):
         """
         IsUnrestricted(self: PermissionSet) -> bool
@@ -636,7 +592,6 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
             Returns: ue if the System.Security.PermissionSet is restricted; otherwise, lse.
         """
         ...
-
     def RemovePermission(self, permClass):
         """
         RemovePermission(self: PermissionSet, permClass: Type) -> IPermission
@@ -648,8 +603,7 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
             Returns: The permission removed from the set.
         """
         ...
-
-    def RemovePermissionImpl(self, *args): #cannot find CLR method
+    def RemovePermissionImpl(self, *args):  # cannot find CLR method
         """
         RemovePermissionImpl(self: PermissionSet, permClass: Type) -> IPermission
 
@@ -660,7 +614,6 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
             Returns: The permission removed from the set.
         """
         ...
-
     @staticmethod
     def RevertAssert():
         """
@@ -669,7 +622,6 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
             Causes any previous System.Security.CodeAccessPermission.Assert for the current frame to be removed and no longer be in effect.
         """
         ...
-
     def SetPermission(self, perm):
         """
         SetPermission(self: PermissionSet, perm: IPermission) -> IPermission
@@ -681,8 +633,7 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
             Returns: The set permission.
         """
         ...
-
-    def SetPermissionImpl(self, *args): #cannot find CLR method
+    def SetPermissionImpl(self, *args):  # cannot find CLR method
         """
         SetPermissionImpl(self: PermissionSet, perm: IPermission) -> IPermission
 
@@ -693,7 +644,6 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
             Returns: The set permission.
         """
         ...
-
     def ToString(self):
         """
         ToString(self: PermissionSet) -> str
@@ -703,7 +653,6 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
             Returns: A representation of the System.Security.PermissionSet.
         """
         ...
-
     def Union(self, other):
         """
         Union(self: PermissionSet, other: PermissionSet) -> PermissionSet
@@ -715,18 +664,13 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
             Returns: A new permission set that represents the union of the current System.Security.PermissionSet and the specified System.Security.PermissionSet.
         """
         ...
-
-    def __eq__(self, *args): #cannot find CLR method
-        """ x.__eq__(y) <==> x==y """
+    def __eq__(self, *args):  # cannot find CLR method
+        """x.__eq__(y) <==> x==y"""
         ...
-
-    def __len__(self, *args): #cannot find CLR method
-        """ x.__len__() <==> len(x) """
+    def __len__(self, *args):  # cannot find CLR method
+        """x.__len__() <==> len(x)"""
         ...
-
-    def __ne__(self, *args): #cannot find CLR method
-        ...
-
+    def __ne__(self, *args): ...
     @property
     def Count(self):
         """
@@ -735,7 +679,6 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
         Get: Count(self: PermissionSet) -> int
         """
         ...
-
     @property
     def IsReadOnly(self):
         """
@@ -744,7 +687,6 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
         Get: IsReadOnly(self: PermissionSet) -> bool
         """
         ...
-
     @property
     def IsSynchronized(self):
         """
@@ -753,7 +695,6 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
         Get: IsSynchronized(self: PermissionSet) -> bool
         """
         ...
-
     @property
     def SyncRoot(self):
         """
@@ -763,9 +704,9 @@ class PermissionSet(object, ISecurityEncodable, ICollection, IStackWalk, IDeseri
         """
         ...
 
-
-
-class NamedPermissionSet(PermissionSet): # skipped bases: <type 'ISecurityEncodable'>, <type 'ICollection'>, <type 'IEnumerable'>, <type 'IDeserializationCallback'>, <type 'IStackWalk'>
+class NamedPermissionSet(
+    PermissionSet
+):  # skipped bases: <type 'ISecurityEncodable'>, <type 'ICollection'>, <type 'IEnumerable'>, <type 'IDeserializationCallback'>, <type 'IStackWalk'>
     """
     Defines a permission set that has a name and description associated with it. This class cannot be inherited.
 
@@ -777,6 +718,7 @@ class NamedPermissionSet(PermissionSet): # skipped bases: <type 'ISecurityEncoda
 
     NamedPermissionSet(permSet: NamedPermissionSet)
     """
+
     @property
     def Description(self):
         """
@@ -787,7 +729,6 @@ class NamedPermissionSet(PermissionSet): # skipped bases: <type 'ISecurityEncoda
         Set: Description(self: NamedPermissionSet) = value
         """
         ...
-
     @property
     def Name(self):
         """
@@ -799,38 +740,41 @@ class NamedPermissionSet(PermissionSet): # skipped bases: <type 'ISecurityEncoda
         """
         ...
 
-
-
-class PartialTrustVisibilityLevel(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class PartialTrustVisibilityLevel(
+    Enum
+):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the default partial-trust visibility for code that is marked with the System.Security.AllowPartiallyTrustedCallersAttribute (APTCA) attribute.
 
     enum PartialTrustVisibilityLevel, values: NotVisibleByDefault (1), VisibleToAllHosts (0)
     """
+
     NotVisibleByDefault = None
     value__ = None
     VisibleToAllHosts = None
 
-
-class PolicyLevelType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class PolicyLevelType(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the type of a managed code policy level.
 
     enum PolicyLevelType, values: AppDomain (3), Enterprise (2), Machine (1), User (0)
     """
+
     AppDomain = None
     Enterprise = None
     Machine = None
     User = None
     value__ = None
 
-
-class ReadOnlyPermissionSet(PermissionSet): # skipped bases: <type 'ISecurityEncodable'>, <type 'ICollection'>, <type 'IEnumerable'>, <type 'IDeserializationCallback'>, <type 'IStackWalk'>
+class ReadOnlyPermissionSet(
+    PermissionSet
+):  # skipped bases: <type 'ISecurityEncodable'>, <type 'ICollection'>, <type 'IEnumerable'>, <type 'IDeserializationCallback'>, <type 'IStackWalk'>
     """
     Represents a read-only collection that can contain many different types of permissions.
 
     ReadOnlyPermissionSet(permissionSetXml: SecurityElement)
     """
+
     @property
     def IsReadOnly(self):
         """
@@ -840,8 +784,6 @@ class ReadOnlyPermissionSet(PermissionSet): # skipped bases: <type 'ISecurityEnc
         """
         ...
 
-
-
 class SecureString(object, IDisposable):
     """
     Represents text that should be kept confidential, such as by deleting it from computer memory when no longer needed. This class cannot be inherited.
@@ -850,6 +792,7 @@ class SecureString(object, IDisposable):
 
     SecureString(value: Char*, length: int)
     """
+
     def AppendChar(self, c):
         """
         AppendChar(self: SecureString, c: Char)
@@ -859,7 +802,6 @@ class SecureString(object, IDisposable):
             c: A character to append to this secure string.
         """
         ...
-
     def Clear(self):
         """
         Clear(self: SecureString)
@@ -867,7 +809,6 @@ class SecureString(object, IDisposable):
             Deletes the value of the current secure string.
         """
         ...
-
     def Copy(self):
         """
         Copy(self: SecureString) -> SecureString
@@ -877,7 +818,6 @@ class SecureString(object, IDisposable):
             Returns: A duplicate of this secure string.
         """
         ...
-
     def InsertAt(self, index, c):
         """
         InsertAt(self: SecureString, index: int, c: Char)
@@ -889,7 +829,6 @@ class SecureString(object, IDisposable):
             c: The character to insert.
         """
         ...
-
     def IsReadOnly(self):
         """
         IsReadOnly(self: SecureString) -> bool
@@ -899,7 +838,6 @@ class SecureString(object, IDisposable):
             Returns: ue if this secure string is marked read-only; otherwise, lse.
         """
         ...
-
     def MakeReadOnly(self):
         """
         MakeReadOnly(self: SecureString)
@@ -907,7 +845,6 @@ class SecureString(object, IDisposable):
             Makes the text value of this secure string read-only.
         """
         ...
-
     def RemoveAt(self, index):
         """
         RemoveAt(self: SecureString, index: int)
@@ -917,7 +854,6 @@ class SecureString(object, IDisposable):
             index: The index position of a character in this secure string.
         """
         ...
-
     def SetAt(self, index, c):
         """
         SetAt(self: SecureString, index: int, c: Char)
@@ -929,7 +865,6 @@ class SecureString(object, IDisposable):
             c: A character that replaces the existing character.
         """
         ...
-
     @property
     def Length(self):
         """
@@ -939,10 +874,9 @@ class SecureString(object, IDisposable):
         """
         ...
 
+class SecureStringMarshal:  # skipped bases: <type 'object'>
+    """Provides a collection of methods for allocating unmanaged memory and copying unmanaged memory blocks."""
 
-
-class SecureStringMarshal: # skipped bases: <type 'object'>
-    """ Provides a collection of methods for allocating unmanaged memory and copying unmanaged memory blocks. """
     @staticmethod
     def SecureStringToCoTaskMemAnsi(s):
         """
@@ -955,7 +889,6 @@ class SecureStringMarshal: # skipped bases: <type 'object'>
             Returns: The address, in unmanaged memory, where the s parameter was copied to, or 0 if a null object was supplied.
         """
         ...
-
     @staticmethod
     def SecureStringToCoTaskMemUnicode(s):
         """
@@ -968,7 +901,6 @@ class SecureStringMarshal: # skipped bases: <type 'object'>
             Returns: The address, in unmanaged memory, where the s parameter was copied to, or 0 if a null object was supplied.
         """
         ...
-
     @staticmethod
     def SecureStringToGlobalAllocAnsi(s):
         """
@@ -981,7 +913,6 @@ class SecureStringMarshal: # skipped bases: <type 'object'>
             Returns: The address, in unmanaged memory, to where the s parameter was copied, or 0 if a null object was supplied.
         """
         ...
-
     @staticmethod
     def SecureStringToGlobalAllocUnicode(s):
         """
@@ -994,17 +925,16 @@ class SecureStringMarshal: # skipped bases: <type 'object'>
             Returns: The address, in unmanaged memory, where s was copied, or 0 if s is a System.Security.SecureString object whose length is 0.
         """
         ...
-
     __all__ = [
-        'SecureStringToCoTaskMemAnsi',
-        'SecureStringToCoTaskMemUnicode',
-        'SecureStringToGlobalAllocAnsi',
-        'SecureStringToGlobalAllocUnicode',
+        "SecureStringToCoTaskMemAnsi",
+        "SecureStringToCoTaskMemUnicode",
+        "SecureStringToGlobalAllocAnsi",
+        "SecureStringToGlobalAllocUnicode",
     ]
 
-
 class SecurityContext(object, IDisposable):
-    """ Encapsulates and propagates all security-related data for execution contexts transferred across threads. This class cannot be inherited. """
+    """Encapsulates and propagates all security-related data for execution contexts transferred across threads. This class cannot be inherited."""
+
     @staticmethod
     def Capture():
         """
@@ -1015,7 +945,6 @@ class SecurityContext(object, IDisposable):
             Returns: The security context for the current thread.
         """
         ...
-
     def CreateCopy(self):
         """
         CreateCopy(self: SecurityContext) -> SecurityContext
@@ -1025,7 +954,6 @@ class SecurityContext(object, IDisposable):
             Returns: The security context for the current thread.
         """
         ...
-
     @staticmethod
     def IsFlowSuppressed():
         """
@@ -1036,7 +964,6 @@ class SecurityContext(object, IDisposable):
             Returns: ue if the flow has been suppressed; otherwise, lse.
         """
         ...
-
     @staticmethod
     def IsWindowsIdentityFlowSuppressed():
         """
@@ -1047,7 +974,6 @@ class SecurityContext(object, IDisposable):
             Returns: ue if the flow has been suppressed; otherwise, lse.
         """
         ...
-
     @staticmethod
     def RestoreFlow():
         """
@@ -1056,7 +982,6 @@ class SecurityContext(object, IDisposable):
             Restores the flow of the security context across asynchronous threads.
         """
         ...
-
     @staticmethod
     def Run(securityContext, callback, state):
         """
@@ -1071,7 +996,6 @@ class SecurityContext(object, IDisposable):
             state: The object to pass to the callback method.
         """
         ...
-
     @staticmethod
     def SuppressFlow():
         """
@@ -1082,7 +1006,6 @@ class SecurityContext(object, IDisposable):
             Returns: An System.Threading.AsyncFlowControl structure for restoring the flow.
         """
         ...
-
     @staticmethod
     def SuppressFlowWindowsIdentity():
         """
@@ -1094,19 +1017,18 @@ class SecurityContext(object, IDisposable):
         """
         ...
 
-
-class SecurityContextSource(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SecurityContextSource(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Identifies the source for the security context.
 
     enum SecurityContextSource, values: CurrentAppDomain (0), CurrentAssembly (1)
     """
+
     CurrentAppDomain = None
     CurrentAssembly = None
     value__ = None
 
-
-class SecurityCriticalAttribute(Attribute): # skipped bases: <type '_Attribute'>
+class SecurityCriticalAttribute(Attribute):  # skipped bases: <type '_Attribute'>
     """
     Specifies that code or an assembly performs security-critical operations.
 
@@ -1114,7 +1036,8 @@ class SecurityCriticalAttribute(Attribute): # skipped bases: <type '_Attribute'>
 
     SecurityCriticalAttribute(scope: SecurityCriticalScope)
     """
-    @staticmethod # known case of __new__
+
+    @staticmethod  # known case of __new__
     def __new__(cls, scope=None):
         """
         __new__(cls: type)
@@ -1122,7 +1045,6 @@ class SecurityCriticalAttribute(Attribute): # skipped bases: <type '_Attribute'>
         __new__(cls: type, scope: SecurityCriticalScope)
         """
         ...
-
     @property
     def Scope(self):
         """
@@ -1132,18 +1054,16 @@ class SecurityCriticalAttribute(Attribute): # skipped bases: <type '_Attribute'>
         """
         ...
 
-
-
-class SecurityCriticalScope(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SecurityCriticalScope(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the scope of a System.Security.SecurityCriticalAttribute.
 
     enum SecurityCriticalScope, values: Everything (1), Explicit (0)
     """
+
     Everything = None
     Explicit = None
     value__ = None
-
 
 class SecurityElement(object, ISecurityElementFactory):
     """
@@ -1153,6 +1073,7 @@ class SecurityElement(object, ISecurityElementFactory):
 
     SecurityElement(tag: str, text: str)
     """
+
     def AddAttribute(self, name, value):
         """
         AddAttribute(self: SecurityElement, name: str, value: str)
@@ -1164,7 +1085,6 @@ class SecurityElement(object, ISecurityElementFactory):
             value: The value of the attribute.
         """
         ...
-
     def AddChild(self, child):
         """
         AddChild(self: SecurityElement, child: SecurityElement)
@@ -1174,7 +1094,6 @@ class SecurityElement(object, ISecurityElementFactory):
             child: The child element to add.
         """
         ...
-
     def Attribute(self, name):
         """
         Attribute(self: SecurityElement, name: str) -> str
@@ -1186,7 +1105,6 @@ class SecurityElement(object, ISecurityElementFactory):
             Returns: The value associated with the named attribute, or ll if no attribute with name exists.
         """
         ...
-
     def Copy(self):
         """
         Copy(self: SecurityElement) -> SecurityElement
@@ -1196,7 +1114,6 @@ class SecurityElement(object, ISecurityElementFactory):
             Returns: A copy of the current System.Security.SecurityElement object.
         """
         ...
-
     def Equal(self, other):
         """
         Equal(self: SecurityElement, other: SecurityElement) -> bool
@@ -1208,7 +1125,6 @@ class SecurityElement(object, ISecurityElementFactory):
             Returns: ue if the tag, attribute names and values, child elements, and text fields in the current XML element are identical to their counterparts in the other parameter; otherwise, lse.
         """
         ...
-
     @staticmethod
     def Escape(str):
         """
@@ -1221,7 +1137,6 @@ class SecurityElement(object, ISecurityElementFactory):
             Returns: The input string with invalid characters replaced.
         """
         ...
-
     @staticmethod
     def FromString(xml):
         """
@@ -1234,7 +1149,6 @@ class SecurityElement(object, ISecurityElementFactory):
             Returns: A System.Security.SecurityElement created from the XML.
         """
         ...
-
     @staticmethod
     def IsValidAttributeName(name):
         """
@@ -1247,7 +1161,6 @@ class SecurityElement(object, ISecurityElementFactory):
             Returns: ue if the name parameter is a valid XML attribute name; otherwise, lse.
         """
         ...
-
     @staticmethod
     def IsValidAttributeValue(value):
         """
@@ -1260,7 +1173,6 @@ class SecurityElement(object, ISecurityElementFactory):
             Returns: ue if the value parameter is a valid XML attribute value; otherwise, lse.
         """
         ...
-
     @staticmethod
     def IsValidTag(tag):
         """
@@ -1273,7 +1185,6 @@ class SecurityElement(object, ISecurityElementFactory):
             Returns: ue if the tag parameter is a valid XML tag; otherwise, lse.
         """
         ...
-
     @staticmethod
     def IsValidText(text):
         """
@@ -1286,7 +1197,6 @@ class SecurityElement(object, ISecurityElementFactory):
             Returns: ue if the text parameter is a valid XML text element; otherwise, lse.
         """
         ...
-
     def SearchForChildByTag(self, tag):
         """
         SearchForChildByTag(self: SecurityElement, tag: str) -> SecurityElement
@@ -1298,7 +1208,6 @@ class SecurityElement(object, ISecurityElementFactory):
             Returns: The first child XML element with the specified tag value, or ll if no child element with tag exists.
         """
         ...
-
     def SearchForTextOfTag(self, tag):
         """
         SearchForTextOfTag(self: SecurityElement, tag: str) -> str
@@ -1310,7 +1219,6 @@ class SecurityElement(object, ISecurityElementFactory):
             Returns: The text contents of the first child element with the specified tag value.
         """
         ...
-
     def ToString(self):
         """
         ToString(self: SecurityElement) -> str
@@ -1320,7 +1228,6 @@ class SecurityElement(object, ISecurityElementFactory):
             Returns: The XML element and its contents.
         """
         ...
-
     @property
     def Attributes(self):
         """
@@ -1331,7 +1238,6 @@ class SecurityElement(object, ISecurityElementFactory):
         Set: Attributes(self: SecurityElement) = value
         """
         ...
-
     @property
     def Children(self):
         """
@@ -1342,7 +1248,6 @@ class SecurityElement(object, ISecurityElementFactory):
         Set: Children(self: SecurityElement) = value
         """
         ...
-
     @property
     def Tag(self):
         """
@@ -1353,7 +1258,6 @@ class SecurityElement(object, ISecurityElementFactory):
         Set: Tag(self: SecurityElement) = value
         """
         ...
-
     @property
     def Text(self):
         """
@@ -1365,9 +1269,7 @@ class SecurityElement(object, ISecurityElementFactory):
         """
         ...
 
-
-
-class SecurityException(SystemException): # skipped bases: <type '_Exception'>, <type 'ISerializable'>
+class SecurityException(SystemException):  # skipped bases: <type '_Exception'>, <type 'ISerializable'>
     """
     The exception that is thrown when a security error is detected.
 
@@ -1385,6 +1287,7 @@ class SecurityException(SystemException): # skipped bases: <type '_Exception'>, 
 
     SecurityException(message: str, deny: object, permitOnly: object, method: MethodInfo, demanded: object, permThatFailed: IPermission)
     """
+
     @property
     def Action(self):
         """
@@ -1395,7 +1298,6 @@ class SecurityException(SystemException): # skipped bases: <type '_Exception'>, 
         Set: Action(self: SecurityException) = value
         """
         ...
-
     @property
     def Demanded(self):
         """
@@ -1406,7 +1308,6 @@ class SecurityException(SystemException): # skipped bases: <type '_Exception'>, 
         Set: Demanded(self: SecurityException) = value
         """
         ...
-
     @property
     def DenySetInstance(self):
         """
@@ -1417,7 +1318,6 @@ class SecurityException(SystemException): # skipped bases: <type '_Exception'>, 
         Set: DenySetInstance(self: SecurityException) = value
         """
         ...
-
     @property
     def FailedAssemblyInfo(self):
         """
@@ -1428,7 +1328,6 @@ class SecurityException(SystemException): # skipped bases: <type '_Exception'>, 
         Set: FailedAssemblyInfo(self: SecurityException) = value
         """
         ...
-
     @property
     def FirstPermissionThatFailed(self):
         """
@@ -1439,7 +1338,6 @@ class SecurityException(SystemException): # skipped bases: <type '_Exception'>, 
         Set: FirstPermissionThatFailed(self: SecurityException) = value
         """
         ...
-
     @property
     def GrantedSet(self):
         """
@@ -1450,7 +1348,6 @@ class SecurityException(SystemException): # skipped bases: <type '_Exception'>, 
         Set: GrantedSet(self: SecurityException) = value
         """
         ...
-
     @property
     def Method(self):
         """
@@ -1461,7 +1358,6 @@ class SecurityException(SystemException): # skipped bases: <type '_Exception'>, 
         Set: Method(self: SecurityException) = value
         """
         ...
-
     @property
     def PermissionState(self):
         """
@@ -1472,7 +1368,6 @@ class SecurityException(SystemException): # skipped bases: <type '_Exception'>, 
         Set: PermissionState(self: SecurityException) = value
         """
         ...
-
     @property
     def PermissionType(self):
         """
@@ -1483,7 +1378,6 @@ class SecurityException(SystemException): # skipped bases: <type '_Exception'>, 
         Set: PermissionType(self: SecurityException) = value
         """
         ...
-
     @property
     def PermitOnlySetInstance(self):
         """
@@ -1494,7 +1388,6 @@ class SecurityException(SystemException): # skipped bases: <type '_Exception'>, 
         Set: PermitOnlySetInstance(self: SecurityException) = value
         """
         ...
-
     @property
     def RefusedSet(self):
         """
@@ -1505,7 +1398,6 @@ class SecurityException(SystemException): # skipped bases: <type '_Exception'>, 
         Set: RefusedSet(self: SecurityException) = value
         """
         ...
-
     @property
     def Url(self):
         """
@@ -1516,7 +1408,6 @@ class SecurityException(SystemException): # skipped bases: <type '_Exception'>, 
         Set: Url(self: SecurityException) = value
         """
         ...
-
     @property
     def Zone(self):
         """
@@ -1527,13 +1418,11 @@ class SecurityException(SystemException): # skipped bases: <type '_Exception'>, 
         Set: Zone(self: SecurityException) = value
         """
         ...
-
-
     SerializeObjectState = None
 
+class SecurityManager:  # skipped bases: <type 'object'>
+    """Provides the main access point for classes interacting with the security system. This class cannot be inherited."""
 
-class SecurityManager: # skipped bases: <type 'object'>
-    """ Provides the main access point for classes interacting with the security system. This class cannot be inherited. """
     @staticmethod
     def CurrentThreadRequiresSecurityContextCapture():
         """
@@ -1546,7 +1435,6 @@ class SecurityManager: # skipped bases: <type 'object'>
              if the common language runtime cannot guarantee that the stack contains none of these.
         """
         ...
-
     @staticmethod
     def GetStandardSandbox(evidence):
         """
@@ -1559,7 +1447,6 @@ class SecurityManager: # skipped bases: <type 'object'>
             Returns: A permission set that can be used as a grant set for the application that has the provided evidence.
         """
         ...
-
     @staticmethod
     def GetZoneAndOrigin(zone, origin):
         """
@@ -1568,7 +1455,6 @@ class SecurityManager: # skipped bases: <type 'object'>
             Gets the granted zone identity and URL identity permission sets for the current assembly.
         """
         ...
-
     @staticmethod
     def IsGranted(perm):
         """
@@ -1581,7 +1467,6 @@ class SecurityManager: # skipped bases: <type 'object'>
             Returns: ue if the permissions granted to the caller include the permission perm; otherwise, lse.
         """
         ...
-
     @staticmethod
     def LoadPolicyLevelFromFile(path, type):
         """
@@ -1596,7 +1481,6 @@ class SecurityManager: # skipped bases: <type 'object'>
             Returns: The loaded policy level.
         """
         ...
-
     @staticmethod
     def LoadPolicyLevelFromString(str, type):
         """
@@ -1611,7 +1495,6 @@ class SecurityManager: # skipped bases: <type 'object'>
             Returns: The loaded policy level.
         """
         ...
-
     @staticmethod
     def PolicyHierarchy():
         """
@@ -1622,7 +1505,6 @@ class SecurityManager: # skipped bases: <type 'object'>
             Returns: An enumerator for System.Security.Policy.PolicyLevel objects that compose the security policy hierarchy.
         """
         ...
-
     @staticmethod
     def ResolvePolicy(*__args):
         """
@@ -1657,7 +1539,6 @@ class SecurityManager: # skipped bases: <type 'object'>
             Returns: The set of permissions that is appropriate for all of the provided evidence.
         """
         ...
-
     @staticmethod
     def ResolvePolicyGroups(evidence):
         """
@@ -1670,7 +1551,6 @@ class SecurityManager: # skipped bases: <type 'object'>
             Returns: An enumeration of the set of code groups matching the evidence.
         """
         ...
-
     @staticmethod
     def ResolveSystemPolicy(evidence):
         """
@@ -1683,7 +1563,6 @@ class SecurityManager: # skipped bases: <type 'object'>
             Returns: The set of permissions that can be granted by the security system.
         """
         ...
-
     @staticmethod
     def SavePolicy():
         """
@@ -1692,7 +1571,6 @@ class SecurityManager: # skipped bases: <type 'object'>
             Saves the modified security policy state.
         """
         ...
-
     @staticmethod
     def SavePolicyLevel(level):
         """
@@ -1703,36 +1581,34 @@ class SecurityManager: # skipped bases: <type 'object'>
             level: The policy level object to be saved.
         """
         ...
-
     CheckExecutionRights = True
     SecurityEnabled = True
     __all__ = [
-        'CurrentThreadRequiresSecurityContextCapture',
-        'GetStandardSandbox',
-        'GetZoneAndOrigin',
-        'IsGranted',
-        'LoadPolicyLevelFromFile',
-        'LoadPolicyLevelFromString',
-        'PolicyHierarchy',
-        'ResolvePolicy',
-        'ResolvePolicyGroups',
-        'ResolveSystemPolicy',
-        'SavePolicy',
-        'SavePolicyLevel',
+        "CurrentThreadRequiresSecurityContextCapture",
+        "GetStandardSandbox",
+        "GetZoneAndOrigin",
+        "IsGranted",
+        "LoadPolicyLevelFromFile",
+        "LoadPolicyLevelFromString",
+        "PolicyHierarchy",
+        "ResolvePolicy",
+        "ResolvePolicyGroups",
+        "ResolveSystemPolicy",
+        "SavePolicy",
+        "SavePolicyLevel",
     ]
 
-
-class SecurityRulesAttribute(Attribute): # skipped bases: <type '_Attribute'>
+class SecurityRulesAttribute(Attribute):  # skipped bases: <type '_Attribute'>
     """
     Indicates the set of security rules the common language runtime should enforce for an assembly.
 
     SecurityRulesAttribute(ruleSet: SecurityRuleSet)
     """
-    @staticmethod # known case of __new__
-    def __new__(cls, ruleSet):
-        """ __new__(cls: type, ruleSet: SecurityRuleSet) """
-        ...
 
+    @staticmethod  # known case of __new__
+    def __new__(cls, ruleSet):
+        """__new__(cls: type, ruleSet: SecurityRuleSet)"""
+        ...
     @property
     def RuleSet(self):
         """
@@ -1741,7 +1617,6 @@ class SecurityRulesAttribute(Attribute): # skipped bases: <type '_Attribute'>
         Get: RuleSet(self: SecurityRulesAttribute) -> SecurityRuleSet
         """
         ...
-
     @property
     def SkipVerificationInFullTrust(self):
         """
@@ -1753,30 +1628,30 @@ class SecurityRulesAttribute(Attribute): # skipped bases: <type '_Attribute'>
         """
         ...
 
-
-
-class SecurityRuleSet(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SecurityRuleSet(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Identifies the set of security rules the common language runtime should enforce for an assembly.
 
     enum SecurityRuleSet, values: Level1 (1), Level2 (2), None (0)
     """
+
     Level1 = None
     Level2 = None
-    None = None
+
     value__ = None
 
-
-class SecuritySafeCriticalAttribute(Attribute): # skipped bases: <type '_Attribute'>
+class SecuritySafeCriticalAttribute(Attribute):  # skipped bases: <type '_Attribute'>
     """
     Identifies types or members as security-critical and safely accessible by transparent code.
 
     SecuritySafeCriticalAttribute()
     """
+
     pass
 
-class SecurityState: # skipped bases: <type 'object'>
-    """ Provides a base class for requesting the security status of an action from the System.AppDomainManager object. """
+class SecurityState:  # skipped bases: <type 'object'>
+    """Provides a base class for requesting the security status of an action from the System.AppDomainManager object."""
+
     def EnsureState(self):
         """
         EnsureState(self: SecurityState)
@@ -1784,7 +1659,6 @@ class SecurityState: # skipped bases: <type 'object'>
             When overridden in a derived class, ensures that the state that is represented by System.Security.SecurityState is available on the host.
         """
         ...
-
     def IsStateAvailable(self):
         """
         IsStateAvailable(self: SecurityState) -> bool
@@ -1795,29 +1669,31 @@ class SecurityState: # skipped bases: <type 'object'>
         """
         ...
 
-
-class SecurityTransparentAttribute(Attribute): # skipped bases: <type '_Attribute'>
+class SecurityTransparentAttribute(Attribute):  # skipped bases: <type '_Attribute'>
     """
     Specifies that an assembly cannot cause an elevation of privilege.
 
     SecurityTransparentAttribute()
     """
+
     pass
 
-class SecurityTreatAsSafeAttribute(Attribute): # skipped bases: <type '_Attribute'>
+class SecurityTreatAsSafeAttribute(Attribute):  # skipped bases: <type '_Attribute'>
     """
     Identifies which of the nonpublic System.Security.SecurityCriticalAttribute members are accessible by transparent code within the assembly.
 
     SecurityTreatAsSafeAttribute()
     """
+
     pass
 
-class SecurityZone(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SecurityZone(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Defines the integer values corresponding to security zones used by security policy.
 
     enum SecurityZone, values: Internet (3), Intranet (1), MyComputer (0), NoZone (-1), Trusted (2), Untrusted (4)
     """
+
     Internet = None
     Intranet = None
     MyComputer = None
@@ -1826,24 +1702,25 @@ class SecurityZone(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvert
     Untrusted = None
     value__ = None
 
-
-class SuppressUnmanagedCodeSecurityAttribute(Attribute): # skipped bases: <type '_Attribute'>
+class SuppressUnmanagedCodeSecurityAttribute(Attribute):  # skipped bases: <type '_Attribute'>
     """
     Allows managed code to call into unmanaged code without a stack walk. This class cannot be inherited.
 
     SuppressUnmanagedCodeSecurityAttribute()
     """
+
     pass
 
-class UnverifiableCodeAttribute(Attribute): # skipped bases: <type '_Attribute'>
+class UnverifiableCodeAttribute(Attribute):  # skipped bases: <type '_Attribute'>
     """
     Marks modules containing unverifiable code. This class cannot be inherited.
 
     UnverifiableCodeAttribute()
     """
+
     pass
 
-class VerificationException(SystemException): # skipped bases: <type '_Exception'>, <type 'ISerializable'>
+class VerificationException(SystemException):  # skipped bases: <type '_Exception'>, <type 'ISerializable'>
     """
     The exception that is thrown when the security policy requires code to be type safe and the verification process is unable to verify that the code is type safe.
 
@@ -1853,10 +1730,10 @@ class VerificationException(SystemException): # skipped bases: <type '_Exception
 
     VerificationException(message: str, innerException: Exception)
     """
+
     SerializeObjectState = None
 
-
-class XmlSyntaxException(SystemException): # skipped bases: <type '_Exception'>, <type 'ISerializable'>
+class XmlSyntaxException(SystemException):  # skipped bases: <type '_Exception'>, <type 'ISerializable'>
     """
     The exception that is thrown when there is a syntax error in XML parsing. This class cannot be inherited.
 
@@ -1870,7 +1747,7 @@ class XmlSyntaxException(SystemException): # skipped bases: <type '_Exception'>,
 
     XmlSyntaxException(lineNumber: int, message: str)
     """
-    SerializeObjectState = None
 
+    SerializeObjectState = None
 
 # variables with complex values

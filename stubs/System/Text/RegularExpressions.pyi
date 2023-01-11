@@ -8,8 +8,9 @@
 # no functions
 # classes
 
-class Capture: # skipped bases: <type 'object'>
-    """ Represents the results from a single successful subexpression capture. """
+class Capture:  # skipped bases: <type 'object'>
+    """Represents the results from a single successful subexpression capture."""
+
     def ToString(self):
         """
         ToString(self: Capture) -> str
@@ -19,7 +20,6 @@ class Capture: # skipped bases: <type 'object'>
             Returns: The substring that was captured by the match.
         """
         ...
-
     @property
     def Index(self):
         """
@@ -28,7 +28,6 @@ class Capture: # skipped bases: <type 'object'>
         Get: Index(self: Capture) -> int
         """
         ...
-
     @property
     def Length(self):
         """
@@ -37,7 +36,6 @@ class Capture: # skipped bases: <type 'object'>
         Get: Length(self: Capture) -> int
         """
         ...
-
     @property
     def Value(self):
         """
@@ -47,10 +45,9 @@ class Capture: # skipped bases: <type 'object'>
         """
         ...
 
+class CaptureCollection(object, ICollection):  # skipped bases: <type 'IEnumerable'>
+    """Represents the set of captures made by a single capturing group."""
 
-
-class CaptureCollection(object, ICollection): # skipped bases: <type 'IEnumerable'>
-    """ Represents the set of captures made by a single capturing group. """
     def GetEnumerator(self):
         """
         GetEnumerator(self: CaptureCollection) -> IEnumerator
@@ -60,15 +57,12 @@ class CaptureCollection(object, ICollection): # skipped bases: <type 'IEnumerabl
             Returns: An object that contains all System.Text.RegularExpressions.Capture objects within the System.Text.RegularExpressions.CaptureCollection.
         """
         ...
-
-    def __getitem__(self, *args): #cannot find CLR method
-        """ x.__getitem__(y) <==> x[y] """
+    def __getitem__(self, *args):  # cannot find CLR method
+        """x.__getitem__(y) <==> x[y]"""
         ...
-
-    def __len__(self, *args): #cannot find CLR method
-        """ x.__len__() <==> len(x) """
+    def __len__(self, *args):  # cannot find CLR method
+        """x.__len__() <==> len(x)"""
         ...
-
     @property
     def Count(self):
         """
@@ -77,7 +71,6 @@ class CaptureCollection(object, ICollection): # skipped bases: <type 'IEnumerabl
         Get: Count(self: CaptureCollection) -> int
         """
         ...
-
     @property
     def IsReadOnly(self):
         """
@@ -86,7 +79,6 @@ class CaptureCollection(object, ICollection): # skipped bases: <type 'IEnumerabl
         Get: IsReadOnly(self: CaptureCollection) -> bool
         """
         ...
-
     @property
     def IsSynchronized(self):
         """
@@ -95,7 +87,6 @@ class CaptureCollection(object, ICollection): # skipped bases: <type 'IEnumerabl
         Get: IsSynchronized(self: CaptureCollection) -> bool
         """
         ...
-
     @property
     def SyncRoot(self):
         """
@@ -105,10 +96,9 @@ class CaptureCollection(object, ICollection): # skipped bases: <type 'IEnumerabl
         """
         ...
 
-
-
 class Group(Capture):
-    """ Represents the results from a single capturing group. """
+    """Represents the results from a single capturing group."""
+
     @staticmethod
     def Synchronized(inner):
         """
@@ -121,7 +111,6 @@ class Group(Capture):
             Returns: A regular expression oup object.
         """
         ...
-
     @property
     def Captures(self):
         """
@@ -130,7 +119,6 @@ class Group(Capture):
         Get: Captures(self: Group) -> CaptureCollection
         """
         ...
-
     @property
     def Name(self):
         """
@@ -139,7 +127,6 @@ class Group(Capture):
         Get: Name(self: Group) -> str
         """
         ...
-
     @property
     def Success(self):
         """
@@ -149,10 +136,9 @@ class Group(Capture):
         """
         ...
 
+class GroupCollection(object, ICollection):  # skipped bases: <type 'IEnumerable'>
+    """Returns the set of captured groups in a single match."""
 
-
-class GroupCollection(object, ICollection): # skipped bases: <type 'IEnumerable'>
-    """ Returns the set of captured groups in a single match. """
     def GetEnumerator(self):
         """
         GetEnumerator(self: GroupCollection) -> IEnumerator
@@ -162,15 +148,12 @@ class GroupCollection(object, ICollection): # skipped bases: <type 'IEnumerable'
             Returns: An enumerator that contains all System.Text.RegularExpressions.Group objects in the System.Text.RegularExpressions.GroupCollection.
         """
         ...
-
-    def __getitem__(self, *args): #cannot find CLR method
-        """ x.__getitem__(y) <==> x[y]x.__getitem__(y) <==> x[y] """
+    def __getitem__(self, *args):  # cannot find CLR method
+        """x.__getitem__(y) <==> x[y]x.__getitem__(y) <==> x[y]"""
         ...
-
-    def __len__(self, *args): #cannot find CLR method
-        """ x.__len__() <==> len(x) """
+    def __len__(self, *args):  # cannot find CLR method
+        """x.__len__() <==> len(x)"""
         ...
-
     @property
     def Count(self):
         """
@@ -179,7 +162,6 @@ class GroupCollection(object, ICollection): # skipped bases: <type 'IEnumerable'
         Get: Count(self: GroupCollection) -> int
         """
         ...
-
     @property
     def IsReadOnly(self):
         """
@@ -188,7 +170,6 @@ class GroupCollection(object, ICollection): # skipped bases: <type 'IEnumerable'
         Get: IsReadOnly(self: GroupCollection) -> bool
         """
         ...
-
     @property
     def IsSynchronized(self):
         """
@@ -197,7 +178,6 @@ class GroupCollection(object, ICollection): # skipped bases: <type 'IEnumerable'
         Get: IsSynchronized(self: GroupCollection) -> bool
         """
         ...
-
     @property
     def SyncRoot(self):
         """
@@ -207,10 +187,9 @@ class GroupCollection(object, ICollection): # skipped bases: <type 'IEnumerable'
         """
         ...
 
-
-
 class Match(Group):
-    """ Represents the results from a single regular expression match. """
+    """Represents the results from a single regular expression match."""
+
     def NextMatch(self):
         """
         NextMatch(self: Match) -> Match
@@ -220,7 +199,6 @@ class Match(Group):
             Returns: The next regular expression match.
         """
         ...
-
     def Result(self, replacement):
         """
         Result(self: Match, replacement: str) -> str
@@ -232,7 +210,6 @@ class Match(Group):
             Returns: The expanded version of the replacement parameter.
         """
         ...
-
     @property
     def Groups(self):
         """
@@ -241,13 +218,11 @@ class Match(Group):
         Get: Groups(self: Match) -> GroupCollection
         """
         ...
-
-
     Empty = None
 
+class MatchCollection(object, ICollection):  # skipped bases: <type 'IEnumerable'>
+    """Represents the set of successful matches found by iteratively applying a regular expression pattern to the input string."""
 
-class MatchCollection(object, ICollection): # skipped bases: <type 'IEnumerable'>
-    """ Represents the set of successful matches found by iteratively applying a regular expression pattern to the input string. """
     def GetEnumerator(self):
         """
         GetEnumerator(self: MatchCollection) -> IEnumerator
@@ -257,15 +232,12 @@ class MatchCollection(object, ICollection): # skipped bases: <type 'IEnumerable'
             Returns: An object that contains all System.Text.RegularExpressions.Match objects within the System.Text.RegularExpressions.MatchCollection.
         """
         ...
-
-    def __getitem__(self, *args): #cannot find CLR method
-        """ x.__getitem__(y) <==> x[y] """
+    def __getitem__(self, *args):  # cannot find CLR method
+        """x.__getitem__(y) <==> x[y]"""
         ...
-
-    def __len__(self, *args): #cannot find CLR method
-        """ x.__len__() <==> len(x) """
+    def __len__(self, *args):  # cannot find CLR method
+        """x.__len__() <==> len(x)"""
         ...
-
     @property
     def Count(self):
         """
@@ -274,7 +246,6 @@ class MatchCollection(object, ICollection): # skipped bases: <type 'IEnumerable'
         Get: Count(self: MatchCollection) -> int
         """
         ...
-
     @property
     def IsReadOnly(self):
         """
@@ -283,7 +254,6 @@ class MatchCollection(object, ICollection): # skipped bases: <type 'IEnumerable'
         Get: IsReadOnly(self: MatchCollection) -> bool
         """
         ...
-
     @property
     def IsSynchronized(self):
         """
@@ -292,7 +262,6 @@ class MatchCollection(object, ICollection): # skipped bases: <type 'IEnumerable'
         Get: IsSynchronized(self: MatchCollection) -> bool
         """
         ...
-
     @property
     def SyncRoot(self):
         """
@@ -302,26 +271,22 @@ class MatchCollection(object, ICollection): # skipped bases: <type 'IEnumerable'
         """
         ...
 
-
-
-class MatchEvaluator(MulticastDelegate): # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
+class MatchEvaluator(MulticastDelegate):  # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
     """
     Represents the method that is called each time a regular expression match is found during a erload:System.Text.RegularExpressions.Regex.Replace method operation.
 
     MatchEvaluator(object: object, method: IntPtr)
     """
+
     def BeginInvoke(self, match, callback, object):
-        """ BeginInvoke(self: MatchEvaluator, match: Match, callback: AsyncCallback, object: object) -> IAsyncResult """
+        """BeginInvoke(self: MatchEvaluator, match: Match, callback: AsyncCallback, object: object) -> IAsyncResult"""
         ...
-
     def EndInvoke(self, result):
-        """ EndInvoke(self: MatchEvaluator, result: IAsyncResult) -> str """
+        """EndInvoke(self: MatchEvaluator, result: IAsyncResult) -> str"""
         ...
-
     def Invoke(self, match):
-        """ Invoke(self: MatchEvaluator, match: Match) -> str """
+        """Invoke(self: MatchEvaluator, match: Match) -> str"""
         ...
-
 
 class Regex(object, ISerializable):
     """
@@ -333,6 +298,7 @@ class Regex(object, ISerializable):
 
     Regex(pattern: str, options: RegexOptions, matchTimeout: TimeSpan)
     """
+
     @staticmethod
     def CompileToAssembly(regexinfos, assemblyname, attributes=None, resourceFile=None):
         """
@@ -367,13 +333,12 @@ class Regex(object, ISerializable):
             resourceFile: The name of the Win32 resource file to include in the assembly.
         """
         ...
-
     @staticmethod
     def Escape(str):
         """
         Escape(str: str) -> str
 
-            Escapes a minimal set of characters (\, *, +, ?, |, {, [, (,), ^, $,., #, and white space) by replacing them with their escape codes. This instructs the regular expression engine to interpret these characters literally rather than 
+            Escapes a minimal set of characters (\, *, +, ?, |, {, [, (,), ^, $,., #, and white space) by replacing them with their escape codes. This instructs the regular expression engine to interpret these characters literally rather than
 
              as metacharacters.
 
@@ -382,7 +347,6 @@ class Regex(object, ISerializable):
             Returns: A string of characters with metacharacters converted to their escaped form.
         """
         ...
-
     def GetGroupNames(self):
         """
         GetGroupNames(self: Regex) -> Array[str]
@@ -392,7 +356,6 @@ class Regex(object, ISerializable):
             Returns: A string array of group names.
         """
         ...
-
     def GetGroupNumbers(self):
         """
         GetGroupNumbers(self: Regex) -> Array[int]
@@ -402,7 +365,6 @@ class Regex(object, ISerializable):
             Returns: An integer array of group numbers.
         """
         ...
-
     def GroupNameFromNumber(self, i):
         """
         GroupNameFromNumber(self: Regex, i: int) -> str
@@ -414,7 +376,6 @@ class Regex(object, ISerializable):
             Returns: A string that contains the group name associated with the specified group number. If there is no group name that corresponds to i, the method returns System.String.Empty.
         """
         ...
-
     def GroupNumberFromName(self, name):
         """
         GroupNumberFromName(self: Regex, name: str) -> int
@@ -426,15 +387,13 @@ class Regex(object, ISerializable):
             Returns: The group number that corresponds to the specified group name, or -1 if name is not a valid group name.
         """
         ...
-
-    def InitializeReferences(self, *args): #cannot find CLR method
+    def InitializeReferences(self, *args):  # cannot find CLR method
         """
         InitializeReferences(self: Regex)
 
             Used by a System.Text.RegularExpressions.Regex object generated by the erload:System.Text.RegularExpressions.Regex.CompileToAssembly method.
         """
         ...
-
     @staticmethod
     def IsMatch(input, *__args):
         """
@@ -493,7 +452,6 @@ class Regex(object, ISerializable):
             Returns: ue if the regular expression finds a match; otherwise, lse.
         """
         ...
-
     @staticmethod
     def Match(input, *__args):
         """
@@ -564,7 +522,6 @@ class Regex(object, ISerializable):
             Returns: An object that contains information about the match.
         """
         ...
-
     @staticmethod
     def Matches(input, *__args):
         """
@@ -623,7 +580,6 @@ class Regex(object, ISerializable):
             Returns: A collection of the System.Text.RegularExpressions.Match objects found by the search. If no matches are found, the method returns an empty collection object.
         """
         ...
-
     @staticmethod
     def Replace(input, *__args):
         """
@@ -655,7 +611,7 @@ class Regex(object, ISerializable):
 
         Replace(input: str, pattern: str, replacement: str, options: RegexOptions, matchTimeout: TimeSpan) -> str
 
-            In a specified input string, replaces all strings that match a specified regular expression with a specified replacement string. Additional parameters specify options that modify the matching operation and a time-out interval if no 
+            In a specified input string, replaces all strings that match a specified regular expression with a specified replacement string. Additional parameters specify options that modify the matching operation and a time-out interval if no
 
              match is found.
 
@@ -679,7 +635,7 @@ class Regex(object, ISerializable):
 
             replacement: The replacement string.
 
-            Returns: A new string that is identical to the input string, except that the replacement string takes the place of each matched string. If the regular expression pattern is not matched in the current instance, the method returns the current 
+            Returns: A new string that is identical to the input string, except that the replacement string takes the place of each matched string. If the regular expression pattern is not matched in the current instance, the method returns the current
 
              instance unchanged.
 
@@ -693,7 +649,7 @@ class Regex(object, ISerializable):
 
             count: The maximum number of times the replacement can occur.
 
-            Returns: A new string that is identical to the input string, except that the replacement string takes the place of each matched string. If the regular expression pattern is not matched in the current instance, the method returns the current 
+            Returns: A new string that is identical to the input string, except that the replacement string takes the place of each matched string. If the regular expression pattern is not matched in the current instance, the method returns the current
 
              instance unchanged.
 
@@ -709,7 +665,7 @@ class Regex(object, ISerializable):
 
             startat: The character position in the input string where the search begins.
 
-            Returns: A new string that is identical to the input string, except that the replacement string takes the place of each matched string. If the regular expression pattern is not matched in the current instance, the method returns the current 
+            Returns: A new string that is identical to the input string, except that the replacement string takes the place of each matched string. If the regular expression pattern is not matched in the current instance, the method returns the current
 
              instance unchanged.
 
@@ -741,7 +697,7 @@ class Regex(object, ISerializable):
 
         Replace(input: str, pattern: str, evaluator: MatchEvaluator, options: RegexOptions, matchTimeout: TimeSpan) -> str
 
-            In a specified input string, replaces all substrings that match a specified regular expression with a string returned by a System.Text.RegularExpressions.MatchEvaluator delegate. Additional parameters specify options that modify the 
+            In a specified input string, replaces all substrings that match a specified regular expression with a string returned by a System.Text.RegularExpressions.MatchEvaluator delegate. Additional parameters specify options that modify the
 
              matching operation and a time-out interval if no match is found.
 
@@ -765,7 +721,7 @@ class Regex(object, ISerializable):
 
             evaluator: A custom method that examines each match and returns either the original matched string or a replacement string.
 
-            Returns: A new string that is identical to the input string, except that a replacement string takes the place of each matched string. If the regular expression pattern is not matched in the current instance, the method returns the current 
+            Returns: A new string that is identical to the input string, except that a replacement string takes the place of each matched string. If the regular expression pattern is not matched in the current instance, the method returns the current
 
              instance unchanged.
 
@@ -779,7 +735,7 @@ class Regex(object, ISerializable):
 
             count: The maximum number of times the replacement will occur.
 
-            Returns: A new string that is identical to the input string, except that a replacement string takes the place of each matched string. If the regular expression pattern is not matched in the current instance, the method returns the current 
+            Returns: A new string that is identical to the input string, except that a replacement string takes the place of each matched string. If the regular expression pattern is not matched in the current instance, the method returns the current
 
              instance unchanged.
 
@@ -795,12 +751,11 @@ class Regex(object, ISerializable):
 
             startat: The character position in the input string where the search begins.
 
-            Returns: A new string that is identical to the input string, except that a replacement string takes the place of each matched string. If the regular expression pattern is not matched in the current instance, the method returns the current 
+            Returns: A new string that is identical to the input string, except that a replacement string takes the place of each matched string. If the regular expression pattern is not matched in the current instance, the method returns the current
 
              instance unchanged.
         """
         ...
-
     @staticmethod
     def Split(input, *__args):
         """
@@ -828,7 +783,7 @@ class Regex(object, ISerializable):
 
         Split(input: str, pattern: str, options: RegexOptions, matchTimeout: TimeSpan) -> Array[str]
 
-            Splits an input string into an array of substrings at the positions defined by a specified regular expression pattern. Additional parameters specify options that modify the matching operation and a time-out interval if no match is 
+            Splits an input string into an array of substrings at the positions defined by a specified regular expression pattern. Additional parameters specify options that modify the matching operation and a time-out interval if no match is
 
              found.
 
@@ -862,7 +817,7 @@ class Regex(object, ISerializable):
 
         Split(self: Regex, input: str, count: int, startat: int) -> Array[str]
 
-            Splits an input string a specified maximum number of times into an array of substrings, at the positions defined by a regular expression specified in the System.Text.RegularExpressions.Regex constructor. The search for the regular 
+            Splits an input string a specified maximum number of times into an array of substrings, at the positions defined by a regular expression specified in the System.Text.RegularExpressions.Regex constructor. The search for the regular
 
              expression pattern starts at a specified character position in the input string.
 
@@ -875,7 +830,6 @@ class Regex(object, ISerializable):
             Returns: An array of strings.
         """
         ...
-
     def ToString(self):
         """
         ToString(self: Regex) -> str
@@ -885,7 +839,6 @@ class Regex(object, ISerializable):
             Returns: The pattern parameter that was passed into the gex constructor.
         """
         ...
-
     @staticmethod
     def Unescape(str):
         """
@@ -898,8 +851,7 @@ class Regex(object, ISerializable):
             Returns: A string of characters with any escaped characters converted to their unescaped form.
         """
         ...
-
-    def UseOptionC(self, *args): #cannot find CLR method
+    def UseOptionC(self, *args):  # cannot find CLR method
         """
         UseOptionC(self: Regex) -> bool
 
@@ -908,8 +860,7 @@ class Regex(object, ISerializable):
             Returns: ue if the System.Text.RegularExpressions.Regex.Options property contains the System.Text.RegularExpressions.RegexOptions.Compiled option; otherwise, lse.
         """
         ...
-
-    def UseOptionR(self, *args): #cannot find CLR method
+    def UseOptionR(self, *args):  # cannot find CLR method
         """
         UseOptionR(self: Regex) -> bool
 
@@ -918,8 +869,7 @@ class Regex(object, ISerializable):
             Returns: ue if the System.Text.RegularExpressions.Regex.Options property contains the System.Text.RegularExpressions.RegexOptions.RightToLeft option; otherwise, lse.
         """
         ...
-
-    def ValidateMatchTimeout(self, *args): #cannot find CLR method
+    def ValidateMatchTimeout(self, *args):  # cannot find CLR method
         """
         ValidateMatchTimeout(matchTimeout: TimeSpan)
 
@@ -928,17 +878,14 @@ class Regex(object, ISerializable):
             matchTimeout: The time-out interval to check.
         """
         ...
-
     @property
     def CapNames(self):
-        """ Gets or sets a dictionary that maps named capturing groups to their index values. """
+        """Gets or sets a dictionary that maps named capturing groups to their index values."""
         ...
-
     @property
     def Caps(self):
-        """ Gets or sets a dictionary that maps numbered capturing groups to their index values. """
+        """Gets or sets a dictionary that maps numbered capturing groups to their index values."""
         ...
-
     @property
     def MatchTimeout(self):
         """
@@ -947,7 +894,6 @@ class Regex(object, ISerializable):
         Get: MatchTimeout(self: Regex) -> TimeSpan
         """
         ...
-
     @property
     def Options(self):
         """
@@ -956,7 +902,6 @@ class Regex(object, ISerializable):
         Get: Options(self: Regex) -> RegexOptions
         """
         ...
-
     @property
     def RightToLeft(self):
         """
@@ -965,8 +910,6 @@ class Regex(object, ISerializable):
         Get: RightToLeft(self: Regex) -> bool
         """
         ...
-
-
     CacheSize = 15
     capnames = None
     caps = None
@@ -978,8 +921,7 @@ class Regex(object, ISerializable):
     pattern = None
     roptions = None
 
-
-class RegexCompilationInfo: # skipped bases: <type 'object'>
+class RegexCompilationInfo:  # skipped bases: <type 'object'>
     """
     Provides information about a regular expression that is used to compile a regular expression to a stand-alone assembly.
 
@@ -987,6 +929,7 @@ class RegexCompilationInfo: # skipped bases: <type 'object'>
 
     RegexCompilationInfo(pattern: str, options: RegexOptions, name: str, fullnamespace: str, ispublic: bool, matchTimeout: TimeSpan)
     """
+
     @property
     def IsPublic(self):
         """
@@ -997,7 +940,6 @@ class RegexCompilationInfo: # skipped bases: <type 'object'>
         Set: IsPublic(self: RegexCompilationInfo) = value
         """
         ...
-
     @property
     def MatchTimeout(self):
         """
@@ -1008,7 +950,6 @@ class RegexCompilationInfo: # skipped bases: <type 'object'>
         Set: MatchTimeout(self: RegexCompilationInfo) = value
         """
         ...
-
     @property
     def Name(self):
         """
@@ -1019,7 +960,6 @@ class RegexCompilationInfo: # skipped bases: <type 'object'>
         Set: Name(self: RegexCompilationInfo) = value
         """
         ...
-
     @property
     def Namespace(self):
         """
@@ -1030,7 +970,6 @@ class RegexCompilationInfo: # skipped bases: <type 'object'>
         Set: Namespace(self: RegexCompilationInfo) = value
         """
         ...
-
     @property
     def Options(self):
         """
@@ -1041,7 +980,6 @@ class RegexCompilationInfo: # skipped bases: <type 'object'>
         Set: Options(self: RegexCompilationInfo) = value
         """
         ...
-
     @property
     def Pattern(self):
         """
@@ -1053,9 +991,7 @@ class RegexCompilationInfo: # skipped bases: <type 'object'>
         """
         ...
 
-
-
-class RegexMatchTimeoutException(TimeoutException): # skipped bases: <type '_Exception'>, <type 'ISerializable'>
+class RegexMatchTimeoutException(TimeoutException):  # skipped bases: <type '_Exception'>, <type 'ISerializable'>
     """
     The exception that is thrown when the execution time of a regular expression pattern-matching method exceeds its time-out interval.
 
@@ -1067,6 +1003,7 @@ class RegexMatchTimeoutException(TimeoutException): # skipped bases: <type '_Exc
 
     RegexMatchTimeoutException(message: str, inner: Exception)
     """
+
     @property
     def Input(self):
         """
@@ -1075,7 +1012,6 @@ class RegexMatchTimeoutException(TimeoutException): # skipped bases: <type '_Exc
         Get: Input(self: RegexMatchTimeoutException) -> str
         """
         ...
-
     @property
     def MatchTimeout(self):
         """
@@ -1084,7 +1020,6 @@ class RegexMatchTimeoutException(TimeoutException): # skipped bases: <type '_Exc
         Get: MatchTimeout(self: RegexMatchTimeoutException) -> TimeSpan
         """
         ...
-
     @property
     def Pattern(self):
         """
@@ -1093,17 +1028,15 @@ class RegexMatchTimeoutException(TimeoutException): # skipped bases: <type '_Exc
         Get: Pattern(self: RegexMatchTimeoutException) -> str
         """
         ...
-
-
     SerializeObjectState = None
 
-
-class RegexOptions(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class RegexOptions(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Provides enumerated values to use to set regular expression options.
 
     enum (flags) RegexOptions, values: Compiled (8), CultureInvariant (512), ECMAScript (256), ExplicitCapture (4), IgnoreCase (1), IgnorePatternWhitespace (32), Multiline (2), None (0), RightToLeft (64), Singleline (16)
     """
+
     Compiled = None
     CultureInvariant = None
     ECMAScript = None
@@ -1111,15 +1044,15 @@ class RegexOptions(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvert
     IgnoreCase = None
     IgnorePatternWhitespace = None
     Multiline = None
-    None = None
+
     RightToLeft = None
     Singleline = None
     value__ = None
 
+class RegexRunner:  # skipped bases: <type 'object'>
+    """The System.Text.RegularExpressions.RegexRunner class is the base class for compiled regular expressions."""
 
-class RegexRunner: # skipped bases: <type 'object'>
-    """ The System.Text.RegularExpressions.RegexRunner class is the base class for compiled regular expressions. """
-    def Capture(self, *args): #cannot find CLR method
+    def Capture(self, *args):  # cannot find CLR method
         """
         Capture(self: RegexRunner, capnum: int, start: int, end: int)
 
@@ -1132,8 +1065,7 @@ class RegexRunner: # skipped bases: <type 'object'>
             end: The ending position of the capture.
         """
         ...
-
-    def CharInClass(self, *args): #cannot find CLR method
+    def CharInClass(self, *args):  # cannot find CLR method
         """
         CharInClass(ch: Char, charClass: str) -> bool
 
@@ -1146,8 +1078,7 @@ class RegexRunner: # skipped bases: <type 'object'>
             Returns: ue if the ch parameter is in the character class specified by the charClass parameter.
         """
         ...
-
-    def CharInSet(self, *args): #cannot find CLR method
+    def CharInSet(self, *args):  # cannot find CLR method
         """
         CharInSet(ch: Char, set: str, category: str) -> bool
 
@@ -1162,16 +1093,14 @@ class RegexRunner: # skipped bases: <type 'object'>
             Returns: Returns System.Boolean.
         """
         ...
-
-    def CheckTimeout(self, *args): #cannot find CLR method
+    def CheckTimeout(self, *args):  # cannot find CLR method
         """
         CheckTimeout(self: RegexRunner)
 
             Used by a System.Text.RegularExpressions.Regex object generated by the erload:System.Text.RegularExpressions.Regex.CompileToAssembly method.
         """
         ...
-
-    def Crawl(self, *args): #cannot find CLR method
+    def Crawl(self, *args):  # cannot find CLR method
         """
         Crawl(self: RegexRunner, i: int)
 
@@ -1180,8 +1109,7 @@ class RegexRunner: # skipped bases: <type 'object'>
             i: A number to save.
         """
         ...
-
-    def Crawlpos(self, *args): #cannot find CLR method
+    def Crawlpos(self, *args):  # cannot find CLR method
         """
         Crawlpos(self: RegexRunner) -> int
 
@@ -1190,40 +1118,35 @@ class RegexRunner: # skipped bases: <type 'object'>
             Returns: Returns System.Int32.
         """
         ...
-
-    def DoubleCrawl(self, *args): #cannot find CLR method
+    def DoubleCrawl(self, *args):  # cannot find CLR method
         """
         DoubleCrawl(self: RegexRunner)
 
             Used by a System.Text.RegularExpressions.Regex object generated by the erload:System.Text.RegularExpressions.Regex.CompileToAssembly method.
         """
         ...
-
-    def DoubleStack(self, *args): #cannot find CLR method
+    def DoubleStack(self, *args):  # cannot find CLR method
         """
         DoubleStack(self: RegexRunner)
 
             Used by a System.Text.RegularExpressions.Regex object generated by the erload:System.Text.RegularExpressions.Regex.CompileToAssembly method.
         """
         ...
-
-    def DoubleTrack(self, *args): #cannot find CLR method
+    def DoubleTrack(self, *args):  # cannot find CLR method
         """
         DoubleTrack(self: RegexRunner)
 
             Used by a System.Text.RegularExpressions.Regex object generated by the erload:System.Text.RegularExpressions.Regex.CompileToAssembly method.
         """
         ...
-
-    def EnsureStorage(self, *args): #cannot find CLR method
+    def EnsureStorage(self, *args):  # cannot find CLR method
         """
         EnsureStorage(self: RegexRunner)
 
             Used by a System.Text.RegularExpressions.Regex object generated by the erload:System.Text.RegularExpressions.Regex.CompileToAssembly method.
         """
         ...
-
-    def FindFirstChar(self, *args): #cannot find CLR method
+    def FindFirstChar(self, *args):  # cannot find CLR method
         """
         FindFirstChar(self: RegexRunner) -> bool
 
@@ -1232,24 +1155,21 @@ class RegexRunner: # skipped bases: <type 'object'>
             Returns: Returns System.Boolean.
         """
         ...
-
-    def Go(self, *args): #cannot find CLR method
+    def Go(self, *args):  # cannot find CLR method
         """
         Go(self: RegexRunner)
 
             Used by a System.Text.RegularExpressions.Regex object generated by the erload:System.Text.RegularExpressions.Regex.CompileToAssembly method.
         """
         ...
-
-    def InitTrackCount(self, *args): #cannot find CLR method
+    def InitTrackCount(self, *args):  # cannot find CLR method
         """
         InitTrackCount(self: RegexRunner)
 
             Used by a System.Text.RegularExpressions.Regex object generated by the erload:System.Text.RegularExpressions.Regex.CompileToAssembly method.
         """
         ...
-
-    def IsBoundary(self, *args): #cannot find CLR method
+    def IsBoundary(self, *args):  # cannot find CLR method
         """
         IsBoundary(self: RegexRunner, index: int, startpos: int, endpos: int) -> bool
 
@@ -1264,8 +1184,7 @@ class RegexRunner: # skipped bases: <type 'object'>
             Returns: Returns System.Boolean.
         """
         ...
-
-    def IsECMABoundary(self, *args): #cannot find CLR method
+    def IsECMABoundary(self, *args):  # cannot find CLR method
         """
         IsECMABoundary(self: RegexRunner, index: int, startpos: int, endpos: int) -> bool
 
@@ -1280,8 +1199,7 @@ class RegexRunner: # skipped bases: <type 'object'>
             Returns: Returns System.Boolean.
         """
         ...
-
-    def IsMatched(self, *args): #cannot find CLR method
+    def IsMatched(self, *args):  # cannot find CLR method
         """
         IsMatched(self: RegexRunner, cap: int) -> bool
 
@@ -1292,8 +1210,7 @@ class RegexRunner: # skipped bases: <type 'object'>
             Returns: Returns System.Boolean.
         """
         ...
-
-    def MatchIndex(self, *args): #cannot find CLR method
+    def MatchIndex(self, *args):  # cannot find CLR method
         """
         MatchIndex(self: RegexRunner, cap: int) -> int
 
@@ -1304,8 +1221,7 @@ class RegexRunner: # skipped bases: <type 'object'>
             Returns: Returns System.Int32.
         """
         ...
-
-    def MatchLength(self, *args): #cannot find CLR method
+    def MatchLength(self, *args):  # cannot find CLR method
         """
         MatchLength(self: RegexRunner, cap: int) -> int
 
@@ -1316,8 +1232,7 @@ class RegexRunner: # skipped bases: <type 'object'>
             Returns: Returns System.Int32.
         """
         ...
-
-    def Popcrawl(self, *args): #cannot find CLR method
+    def Popcrawl(self, *args):  # cannot find CLR method
         """
         Popcrawl(self: RegexRunner) -> int
 
@@ -1326,8 +1241,7 @@ class RegexRunner: # skipped bases: <type 'object'>
             Returns: Returns System.Int32.
         """
         ...
-
-    def Scan(self, *args): #cannot find CLR method
+    def Scan(self, *args):  # cannot find CLR method
         """
         Scan(self: RegexRunner, regex: Regex, text: str, textbeg: int, textend: int, textstart: int, prevlen: int, quick: bool) -> Match
 
@@ -1372,8 +1286,7 @@ class RegexRunner: # skipped bases: <type 'object'>
             Returns: A match.
         """
         ...
-
-    def TransferCapture(self, *args): #cannot find CLR method
+    def TransferCapture(self, *args):  # cannot find CLR method
         """
         TransferCapture(self: RegexRunner, capnum: int, uncapnum: int, start: int, end: int)
 
@@ -1388,15 +1301,13 @@ class RegexRunner: # skipped bases: <type 'object'>
             end: The ending position.
         """
         ...
-
-    def Uncapture(self, *args): #cannot find CLR method
+    def Uncapture(self, *args):  # cannot find CLR method
         """
         Uncapture(self: RegexRunner)
 
             Used by a System.Text.RegularExpressions.Regex object generated by the erload:System.Text.RegularExpressions.Regex.CompileToAssembly method.
         """
         ...
-
     runcrawl = None
     runcrawlpos = None
     runmatch = None
@@ -1412,10 +1323,10 @@ class RegexRunner: # skipped bases: <type 'object'>
     runtrackcount = None
     runtrackpos = None
 
+class RegexRunnerFactory:  # skipped bases: <type 'object'>
+    """Creates a System.Text.RegularExpressions.RegexRunner class for a compiled regular expression."""
 
-class RegexRunnerFactory: # skipped bases: <type 'object'>
-    """ Creates a System.Text.RegularExpressions.RegexRunner class for a compiled regular expression. """
-    def CreateInstance(self, *args): #cannot find CLR method
+    def CreateInstance(self, *args):  # cannot find CLR method
         """
         CreateInstance(self: RegexRunnerFactory) -> RegexRunner
 
@@ -1424,5 +1335,3 @@ class RegexRunnerFactory: # skipped bases: <type 'object'>
             Returns: A System.Text.RegularExpressions.RegexRunner object designed to execute a specific compiled regular expression.
         """
         ...
-
-

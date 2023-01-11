@@ -1,19 +1,14 @@
+from abc import abstractmethod
+from typing import Any, Optional, Protocol
 
 
-from typing import Optional, Protocol, TypeVar, Generic
-
-P = TypeVar("P")
-_V = TypeVar("_V")
-
-class TiaObject(Generic[_V], Protocol):
+class TiaObject(Protocol):
     @property
-    def value(self) -> Optional[_V]:
+    @abstractmethod
+    def value(self) -> Optional[Any]:
         ...
 
     @value.setter
-    def value(self, value: Optional[_V]) -> None:
-        ...
-
-    @value.getter
-    def value(self) -> Optional[_V]:
+    @abstractmethod
+    def value(self, value: Optional[Any]) -> None:
         ...

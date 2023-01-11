@@ -55,7 +55,7 @@ class ComponentGuaranteesOptions(Enum): # skipped bases: <type 'IComparable'>, <
     enum (flags) ComponentGuaranteesOptions, values: Exchange (1), None (0), SideBySide (4), Stable (2)
     """
     Exchange = None
-    None = None
+
     SideBySide = None
     Stable = None
     value__ = None
@@ -201,7 +201,7 @@ class ResourceScope(Enum): # skipped bases: <type 'IComparable'>, <type 'IConver
     Assembly = None
     Library = None
     Machine = None
-    None = None
+
     Private = None
     Process = None
     value__ = None

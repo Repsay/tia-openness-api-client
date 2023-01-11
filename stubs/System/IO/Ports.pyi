@@ -8,46 +8,46 @@
 # no functions
 # classes
 
-class Handshake(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class Handshake(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the control protocol used in establishing a serial port communication for a System.IO.Ports.SerialPort object.
 
     enum Handshake, values: None (0), RequestToSend (2), RequestToSendXOnXOff (3), XOnXOff (1)
     """
-    None = None
+
     RequestToSend = None
     RequestToSendXOnXOff = None
     value__ = None
     XOnXOff = None
 
-
-class Parity(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class Parity(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the parity bit for a System.IO.Ports.SerialPort object.
 
     enum Parity, values: Even (2), Mark (3), None (0), Odd (1), Space (4)
     """
+
     Even = None
     Mark = None
-    None = None
+
     Odd = None
     Space = None
     value__ = None
 
-
-class SerialData(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SerialData(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the type of character that was received on the serial port of the System.IO.Ports.SerialPort object.
 
     enum SerialData, values: Chars (1), Eof (2)
     """
+
     Chars = None
     Eof = None
     value__ = None
 
-
 class SerialDataReceivedEventArgs(EventArgs):
-    """ Provides data for the System.IO.Ports.SerialPort.DataReceived event. """
+    """Provides data for the System.IO.Ports.SerialPort.DataReceived event."""
+
     @property
     def EventType(self):
         """
@@ -57,33 +57,30 @@ class SerialDataReceivedEventArgs(EventArgs):
         """
         ...
 
-
-
-class SerialDataReceivedEventHandler(MulticastDelegate): # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
+class SerialDataReceivedEventHandler(MulticastDelegate):  # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
     """
     Represents the method that will handle the System.IO.Ports.SerialPort.DataReceived event of a System.IO.Ports.SerialPort object.
 
     SerialDataReceivedEventHandler(object: object, method: IntPtr)
     """
+
     def BeginInvoke(self, sender, e, callback, object):
-        """ BeginInvoke(self: SerialDataReceivedEventHandler, sender: object, e: SerialDataReceivedEventArgs, callback: AsyncCallback, object: object) -> IAsyncResult """
+        """BeginInvoke(self: SerialDataReceivedEventHandler, sender: object, e: SerialDataReceivedEventArgs, callback: AsyncCallback, object: object) -> IAsyncResult"""
         ...
-
     def EndInvoke(self, result):
-        """ EndInvoke(self: SerialDataReceivedEventHandler, result: IAsyncResult) """
+        """EndInvoke(self: SerialDataReceivedEventHandler, result: IAsyncResult)"""
         ...
-
     def Invoke(self, sender, e):
-        """ Invoke(self: SerialDataReceivedEventHandler, sender: object, e: SerialDataReceivedEventArgs) """
+        """Invoke(self: SerialDataReceivedEventHandler, sender: object, e: SerialDataReceivedEventArgs)"""
         ...
 
-
-class SerialError(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SerialError(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies errors that occur on the System.IO.Ports.SerialPort object.
 
     enum SerialError, values: Frame (8), Overrun (2), RXOver (1), RXParity (4), TXFull (256)
     """
+
     Frame = None
     Overrun = None
     RXOver = None
@@ -91,9 +88,9 @@ class SerialError(Enum): # skipped bases: <type 'IComparable'>, <type 'IConverti
     TXFull = None
     value__ = None
 
-
 class SerialErrorReceivedEventArgs(EventArgs):
-    """ Prepares data for the System.IO.Ports.SerialPort.ErrorReceived event. """
+    """Prepares data for the System.IO.Ports.SerialPort.ErrorReceived event."""
+
     @property
     def EventType(self):
         """
@@ -103,33 +100,30 @@ class SerialErrorReceivedEventArgs(EventArgs):
         """
         ...
 
-
-
-class SerialErrorReceivedEventHandler(MulticastDelegate): # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
+class SerialErrorReceivedEventHandler(MulticastDelegate):  # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
     """
     Represents the method that will handle the System.IO.Ports.SerialPort.ErrorReceived event of a System.IO.Ports.SerialPort object.
 
     SerialErrorReceivedEventHandler(object: object, method: IntPtr)
     """
+
     def BeginInvoke(self, sender, e, callback, object):
-        """ BeginInvoke(self: SerialErrorReceivedEventHandler, sender: object, e: SerialErrorReceivedEventArgs, callback: AsyncCallback, object: object) -> IAsyncResult """
+        """BeginInvoke(self: SerialErrorReceivedEventHandler, sender: object, e: SerialErrorReceivedEventArgs, callback: AsyncCallback, object: object) -> IAsyncResult"""
         ...
-
     def EndInvoke(self, result):
-        """ EndInvoke(self: SerialErrorReceivedEventHandler, result: IAsyncResult) """
+        """EndInvoke(self: SerialErrorReceivedEventHandler, result: IAsyncResult)"""
         ...
-
     def Invoke(self, sender, e):
-        """ Invoke(self: SerialErrorReceivedEventHandler, sender: object, e: SerialErrorReceivedEventArgs) """
+        """Invoke(self: SerialErrorReceivedEventHandler, sender: object, e: SerialErrorReceivedEventArgs)"""
         ...
 
-
-class SerialPinChange(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SerialPinChange(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the type of change that occurred on the System.IO.Ports.SerialPort object.
 
     enum SerialPinChange, values: Break (64), CDChanged (32), CtsChanged (8), DsrChanged (16), Ring (256)
     """
+
     Break = None
     CDChanged = None
     CtsChanged = None
@@ -137,9 +131,9 @@ class SerialPinChange(Enum): # skipped bases: <type 'IComparable'>, <type 'IConv
     Ring = None
     value__ = None
 
-
 class SerialPinChangedEventArgs(EventArgs):
-    """ Provides data for the System.IO.Ports.SerialPort.PinChanged event. """
+    """Provides data for the System.IO.Ports.SerialPort.PinChanged event."""
+
     @property
     def EventType(self):
         """
@@ -149,28 +143,24 @@ class SerialPinChangedEventArgs(EventArgs):
         """
         ...
 
-
-
-class SerialPinChangedEventHandler(MulticastDelegate): # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
+class SerialPinChangedEventHandler(MulticastDelegate):  # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
     """
     Represents the method that will handle the System.IO.Ports.SerialPort.PinChanged event of a System.IO.Ports.SerialPort object.
 
     SerialPinChangedEventHandler(object: object, method: IntPtr)
     """
+
     def BeginInvoke(self, sender, e, callback, object):
-        """ BeginInvoke(self: SerialPinChangedEventHandler, sender: object, e: SerialPinChangedEventArgs, callback: AsyncCallback, object: object) -> IAsyncResult """
+        """BeginInvoke(self: SerialPinChangedEventHandler, sender: object, e: SerialPinChangedEventArgs, callback: AsyncCallback, object: object) -> IAsyncResult"""
         ...
-
     def EndInvoke(self, result):
-        """ EndInvoke(self: SerialPinChangedEventHandler, result: IAsyncResult) """
+        """EndInvoke(self: SerialPinChangedEventHandler, result: IAsyncResult)"""
         ...
-
     def Invoke(self, sender, e):
-        """ Invoke(self: SerialPinChangedEventHandler, sender: object, e: SerialPinChangedEventArgs) """
+        """Invoke(self: SerialPinChangedEventHandler, sender: object, e: SerialPinChangedEventArgs)"""
         ...
 
-
-class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposable'>
+class SerialPort(Component):  # skipped bases: <type 'IComponent'>, <type 'IDisposable'>
     """
     Represents a serial port resource.To browse the .NET Framework source code for this type, see the Reference Source.
 
@@ -188,6 +178,7 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
 
     SerialPort(portName: str, baudRate: int, parity: Parity, dataBits: int, stopBits: StopBits)
     """
+
     def Close(self):
         """
         Close(self: SerialPort)
@@ -195,7 +186,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
             Closes the port connection, sets the System.IO.Ports.SerialPort.IsOpen property to lse, and disposes of the internal System.IO.Stream object.
         """
         ...
-
     def DiscardInBuffer(self):
         """
         DiscardInBuffer(self: SerialPort)
@@ -203,7 +193,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
             Discards data from the serial driver's receive buffer.
         """
         ...
-
     def DiscardOutBuffer(self):
         """
         DiscardOutBuffer(self: SerialPort)
@@ -211,7 +200,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
             Discards data from the serial driver's transmit buffer.
         """
         ...
-
     @staticmethod
     def GetPortNames():
         """
@@ -222,7 +210,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
             Returns: An array of serial port names for the current computer.
         """
         ...
-
     def Open(self):
         """
         Open(self: SerialPort)
@@ -230,7 +217,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
             Opens a new serial port connection.
         """
         ...
-
     def Read(self, buffer, offset, count):
         """
         Read(self: SerialPort, buffer: Array[Byte], offset: int, count: int) -> int
@@ -258,7 +244,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
             Returns: The number of characters read.
         """
         ...
-
     def ReadByte(self):
         """
         ReadByte(self: SerialPort) -> int
@@ -268,7 +253,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
             Returns: The byte, cast to an System.Int32, or -1 if the end of the stream has been read.
         """
         ...
-
     def ReadChar(self):
         """
         ReadChar(self: SerialPort) -> int
@@ -278,7 +262,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
             Returns: The character that was read.
         """
         ...
-
     def ReadExisting(self):
         """
         ReadExisting(self: SerialPort) -> str
@@ -288,7 +271,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
             Returns: The contents of the stream and the input buffer of the System.IO.Ports.SerialPort object.
         """
         ...
-
     def ReadLine(self):
         """
         ReadLine(self: SerialPort) -> str
@@ -298,7 +280,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
             Returns: The contents of the input buffer up to the first occurrence of a System.IO.Ports.SerialPort.NewLine value.
         """
         ...
-
     def ReadTo(self, value):
         """
         ReadTo(self: SerialPort, value: str) -> str
@@ -310,7 +291,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
             Returns: The contents of the input buffer up to the specified value.
         """
         ...
-
     def Write(self, *__args):
         """
         Write(self: SerialPort, text: str)
@@ -340,7 +320,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
             count: The number of bytes to write.
         """
         ...
-
     def WriteLine(self, text):
         """
         WriteLine(self: SerialPort, text: str)
@@ -350,8 +329,7 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
             text: The string to write to the output buffer.
         """
         ...
-
-    @staticmethod # known case of __new__
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, container: IContainer)
@@ -369,7 +347,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         __new__(cls: type, portName: str, baudRate: int, parity: Parity, dataBits: int, stopBits: StopBits)
         """
         ...
-
     @property
     def BaseStream(self):
         """
@@ -378,7 +355,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Get: BaseStream(self: SerialPort) -> Stream
         """
         ...
-
     @property
     def BaudRate(self):
         """
@@ -389,7 +365,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Set: BaudRate(self: SerialPort) = value
         """
         ...
-
     @property
     def BreakState(self):
         """
@@ -400,7 +375,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Set: BreakState(self: SerialPort) = value
         """
         ...
-
     @property
     def BytesToRead(self):
         """
@@ -409,7 +383,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Get: BytesToRead(self: SerialPort) -> int
         """
         ...
-
     @property
     def BytesToWrite(self):
         """
@@ -418,12 +391,10 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Get: BytesToWrite(self: SerialPort) -> int
         """
         ...
-
     @property
     def CanRaiseEvents(self):
-        """ Gets a value indicating whether the component can raise an event. """
+        """Gets a value indicating whether the component can raise an event."""
         ...
-
     @property
     def CDHolding(self):
         """
@@ -432,7 +403,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Get: CDHolding(self: SerialPort) -> bool
         """
         ...
-
     @property
     def CtsHolding(self):
         """
@@ -441,7 +411,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Get: CtsHolding(self: SerialPort) -> bool
         """
         ...
-
     @property
     def DataBits(self):
         """
@@ -452,12 +421,10 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Set: DataBits(self: SerialPort) = value
         """
         ...
-
     @property
     def DesignMode(self):
-        """ Gets a value that indicates whether the System.ComponentModel.Component is currently in design mode. """
+        """Gets a value that indicates whether the System.ComponentModel.Component is currently in design mode."""
         ...
-
     @property
     def DiscardNull(self):
         """
@@ -468,7 +435,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Set: DiscardNull(self: SerialPort) = value
         """
         ...
-
     @property
     def DsrHolding(self):
         """
@@ -477,7 +443,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Get: DsrHolding(self: SerialPort) -> bool
         """
         ...
-
     @property
     def DtrEnable(self):
         """
@@ -488,7 +453,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Set: DtrEnable(self: SerialPort) = value
         """
         ...
-
     @property
     def Encoding(self):
         """
@@ -499,12 +463,10 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Set: Encoding(self: SerialPort) = value
         """
         ...
-
     @property
     def Events(self):
-        """ Gets the list of event handlers that are attached to this System.ComponentModel.Component. """
+        """Gets the list of event handlers that are attached to this System.ComponentModel.Component."""
         ...
-
     @property
     def Handshake(self):
         """
@@ -515,7 +477,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Set: Handshake(self: SerialPort) = value
         """
         ...
-
     @property
     def IsOpen(self):
         """
@@ -524,7 +485,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Get: IsOpen(self: SerialPort) -> bool
         """
         ...
-
     @property
     def NewLine(self):
         """
@@ -535,7 +495,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Set: NewLine(self: SerialPort) = value
         """
         ...
-
     @property
     def Parity(self):
         """
@@ -546,7 +505,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Set: Parity(self: SerialPort) = value
         """
         ...
-
     @property
     def ParityReplace(self):
         """
@@ -557,7 +515,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Set: ParityReplace(self: SerialPort) = value
         """
         ...
-
     @property
     def PortName(self):
         """
@@ -568,7 +525,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Set: PortName(self: SerialPort) = value
         """
         ...
-
     @property
     def ReadBufferSize(self):
         """
@@ -579,7 +535,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Set: ReadBufferSize(self: SerialPort) = value
         """
         ...
-
     @property
     def ReadTimeout(self):
         """
@@ -590,7 +545,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Set: ReadTimeout(self: SerialPort) = value
         """
         ...
-
     @property
     def ReceivedBytesThreshold(self):
         """
@@ -601,7 +555,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Set: ReceivedBytesThreshold(self: SerialPort) = value
         """
         ...
-
     @property
     def RtsEnable(self):
         """
@@ -612,7 +565,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Set: RtsEnable(self: SerialPort) = value
         """
         ...
-
     @property
     def StopBits(self):
         """
@@ -623,7 +575,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Set: StopBits(self: SerialPort) = value
         """
         ...
-
     @property
     def WriteBufferSize(self):
         """
@@ -634,7 +585,6 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Set: WriteBufferSize(self: SerialPort) = value
         """
         ...
-
     @property
     def WriteTimeout(self):
         """
@@ -645,21 +595,18 @@ class SerialPort(Component): # skipped bases: <type 'IComponent'>, <type 'IDispo
         Set: WriteTimeout(self: SerialPort) = value
         """
         ...
-
-
     DataReceived = None
     ErrorReceived = None
     InfiniteTimeout = -1
     PinChanged = None
 
-
-class StopBits(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class StopBits(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the number of stop bits used on the System.IO.Ports.SerialPort object.
 
     enum StopBits, values: None (0), One (1), OnePointFive (3), Two (2)
     """
-    None = None
+
     One = None
     OnePointFive = None
     Two = None

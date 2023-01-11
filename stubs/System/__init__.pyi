@@ -9,8 +9,6 @@
 # classes
 import enum
 from typing import Generic, Optional, TypeVar
-
-from Security import IEvidenceFactory
 from System.Collections import (IComparer, IEnumerator, IEqualityComparer,
                                 IList, IStructuralComparable,
                                 IStructuralEquatable)

@@ -8,12 +8,13 @@
 # no functions
 # classes
 
-class OpenFlags(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class OpenFlags(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the way to open the X.509 certificate store.
 
     enum (flags) OpenFlags, values: IncludeArchived (8), MaxAllowed (2), OpenExistingOnly (4), ReadOnly (0), ReadWrite (1)
     """
+
     IncludeArchived = None
     MaxAllowed = None
     OpenExistingOnly = None
@@ -21,13 +22,13 @@ class OpenFlags(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertibl
     ReadWrite = None
     value__ = None
 
-
-class PublicKey: # skipped bases: <type 'object'>
+class PublicKey:  # skipped bases: <type 'object'>
     """
     Represents a certificate's public key information. This class cannot be inherited.
 
     PublicKey(oid: Oid, parameters: AsnEncodedData, keyValue: AsnEncodedData)
     """
+
     @property
     def EncodedKeyValue(self):
         """
@@ -36,7 +37,6 @@ class PublicKey: # skipped bases: <type 'object'>
         Get: EncodedKeyValue(self: PublicKey) -> AsnEncodedData
         """
         ...
-
     @property
     def EncodedParameters(self):
         """
@@ -45,7 +45,6 @@ class PublicKey: # skipped bases: <type 'object'>
         Get: EncodedParameters(self: PublicKey) -> AsnEncodedData
         """
         ...
-
     @property
     def Key(self):
         """
@@ -54,7 +53,6 @@ class PublicKey: # skipped bases: <type 'object'>
         Get: Key(self: PublicKey) -> AsymmetricAlgorithm
         """
         ...
-
     @property
     def Oid(self):
         """
@@ -64,25 +62,24 @@ class PublicKey: # skipped bases: <type 'object'>
         """
         ...
 
-
-
-class StoreLocation(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class StoreLocation(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the location of the X.509 certificate store.
 
     enum StoreLocation, values: CurrentUser (1), LocalMachine (2)
     """
+
     CurrentUser = None
     LocalMachine = None
     value__ = None
 
-
-class StoreName(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class StoreName(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the name of the X.509 certificate store to open.
 
     enum StoreName, values: AddressBook (1), AuthRoot (2), CertificateAuthority (3), Disallowed (4), My (5), Root (6), TrustedPeople (7), TrustedPublisher (8)
     """
+
     AddressBook = None
     AuthRoot = None
     CertificateAuthority = None
@@ -92,7 +89,6 @@ class StoreName(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertibl
     TrustedPeople = None
     TrustedPublisher = None
     value__ = None
-
 
 class X500DistinguishedName(AsnEncodedData):
     """
@@ -108,6 +104,7 @@ class X500DistinguishedName(AsnEncodedData):
 
     X500DistinguishedName(distinguishedName: str, flag: X500DistinguishedNameFlags)
     """
+
     def Decode(self, flag):
         """
         Decode(self: X500DistinguishedName, flag: X500DistinguishedNameFlags) -> str
@@ -119,7 +116,6 @@ class X500DistinguishedName(AsnEncodedData):
             Returns: The decoded distinguished name.
         """
         ...
-
     @property
     def Name(self):
         """
@@ -129,18 +125,19 @@ class X500DistinguishedName(AsnEncodedData):
         """
         ...
 
-
-
-class X500DistinguishedNameFlags(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class X500DistinguishedNameFlags(
+    Enum
+):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies characteristics of the X.500 distinguished name.
 
     enum (flags) X500DistinguishedNameFlags, values: DoNotUsePlusSign (32), DoNotUseQuotes (64), ForceUTF8Encoding (16384), None (0), Reversed (1), UseCommas (128), UseNewLines (256), UseSemicolons (16), UseT61Encoding (8192), UseUTF8Encoding (4096)
     """
+
     DoNotUsePlusSign = None
     DoNotUseQuotes = None
     ForceUTF8Encoding = None
-    None = None
+
     Reversed = None
     UseCommas = None
     UseNewLines = None
@@ -148,7 +145,6 @@ class X500DistinguishedNameFlags(Enum): # skipped bases: <type 'IComparable'>, <
     UseT61Encoding = None
     UseUTF8Encoding = None
     value__ = None
-
 
 class X509Extension(AsnEncodedData):
     """
@@ -160,6 +156,7 @@ class X509Extension(AsnEncodedData):
 
     X509Extension(oid: Oid, rawData: Array[Byte], critical: bool)
     """
+
     @property
     def Critical(self):
         """
@@ -171,8 +168,6 @@ class X509Extension(AsnEncodedData):
         """
         ...
 
-
-
 class X509BasicConstraintsExtension(X509Extension):
     """
     Defines the constraints set on a certificate. This class cannot be inherited.
@@ -183,6 +178,7 @@ class X509BasicConstraintsExtension(X509Extension):
 
     X509BasicConstraintsExtension(encodedBasicConstraints: AsnEncodedData, critical: bool)
     """
+
     @property
     def CertificateAuthority(self):
         """
@@ -191,7 +187,6 @@ class X509BasicConstraintsExtension(X509Extension):
         Get: CertificateAuthority(self: X509BasicConstraintsExtension) -> bool
         """
         ...
-
     @property
     def HasPathLengthConstraint(self):
         """
@@ -200,7 +195,6 @@ class X509BasicConstraintsExtension(X509Extension):
         Get: HasPathLengthConstraint(self: X509BasicConstraintsExtension) -> bool
         """
         ...
-
     @property
     def PathLengthConstraint(self):
         """
@@ -209,8 +203,6 @@ class X509BasicConstraintsExtension(X509Extension):
         Get: PathLengthConstraint(self: X509BasicConstraintsExtension) -> int
         """
         ...
-
-
 
 class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializable):
     """
@@ -244,6 +236,7 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
 
     X509Certificate(info: SerializationInfo, context: StreamingContext)
     """
+
     @staticmethod
     def CreateFromCertFile(filename):
         """
@@ -256,7 +249,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
             Returns: The newly created X.509 certificate.
         """
         ...
-
     @staticmethod
     def CreateFromSignedFile(filename):
         """
@@ -269,7 +261,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
             Returns: The newly created X.509 certificate.
         """
         ...
-
     def Equals(self, *__args):
         """
         Equals(self: X509Certificate, obj: object) -> bool
@@ -289,12 +280,11 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
             Returns: ue if the current System.Security.Cryptography.X509Certificates.X509Certificate object is equal to the object specified by the other parameter; otherwise, lse.
         """
         ...
-
     def Export(self, contentType, password=None):
         """
         Export(self: X509Certificate, contentType: X509ContentType) -> Array[Byte]
 
-            Exports the current System.Security.Cryptography.X509Certificates.X509Certificate object to a byte array in a format described by one of the 
+            Exports the current System.Security.Cryptography.X509Certificates.X509Certificate object to a byte array in a format described by one of the
 
              System.Security.Cryptography.X509Certificates.X509ContentType values.
 
@@ -304,7 +294,7 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
 
         Export(self: X509Certificate, contentType: X509ContentType, password: str) -> Array[Byte]
 
-            Exports the current System.Security.Cryptography.X509Certificates.X509Certificate object to a byte array in a format described by one of the 
+            Exports the current System.Security.Cryptography.X509Certificates.X509Certificate object to a byte array in a format described by one of the
 
              System.Security.Cryptography.X509Certificates.X509ContentType values, and using the specified password.
 
@@ -325,8 +315,7 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
             Returns: A byte array that represents the current System.Security.Cryptography.X509Certificates.X509Certificate object.
         """
         ...
-
-    def FormatDate(self, *args): #cannot find CLR method
+    def FormatDate(self, *args):  # cannot find CLR method
         """
         FormatDate(date: DateTime) -> str
 
@@ -337,7 +326,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
             Returns: A string representation of the value of the System.DateTime object.
         """
         ...
-
     def GetCertHash(self, hashAlgorithm=None):
         """
         GetCertHash(self: X509Certificate) -> Array[Byte]
@@ -349,7 +337,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
         GetCertHash(self: X509Certificate, hashAlgorithm: HashAlgorithmName) -> Array[Byte]
         """
         ...
-
     def GetCertHashString(self, hashAlgorithm=None):
         """
         GetCertHashString(self: X509Certificate) -> str
@@ -361,7 +348,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
         GetCertHashString(self: X509Certificate, hashAlgorithm: HashAlgorithmName) -> str
         """
         ...
-
     def GetEffectiveDateString(self):
         """
         GetEffectiveDateString(self: X509Certificate) -> str
@@ -371,7 +357,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
             Returns: The effective date for this X.509 certificate.
         """
         ...
-
     def GetExpirationDateString(self):
         """
         GetExpirationDateString(self: X509Certificate) -> str
@@ -381,7 +366,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
             Returns: The expiration date for this X.509 certificate.
         """
         ...
-
     def GetFormat(self):
         """
         GetFormat(self: X509Certificate) -> str
@@ -391,7 +375,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
             Returns: The format of this X.509 certificate.
         """
         ...
-
     def GetHashCode(self):
         """
         GetHashCode(self: X509Certificate) -> int
@@ -401,7 +384,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
             Returns: The hash code for the X.509 certificate as an integer.
         """
         ...
-
     def GetIssuerName(self):
         """
         GetIssuerName(self: X509Certificate) -> str
@@ -411,7 +393,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
             Returns: The name of the certification authority that issued the X.509 certificate.
         """
         ...
-
     def GetKeyAlgorithm(self):
         """
         GetKeyAlgorithm(self: X509Certificate) -> str
@@ -421,7 +402,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
             Returns: The key algorithm information for this X.509 certificate as a string.
         """
         ...
-
     def GetKeyAlgorithmParameters(self):
         """
         GetKeyAlgorithmParameters(self: X509Certificate) -> Array[Byte]
@@ -431,7 +411,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
             Returns: The key algorithm parameters for the X.509 certificate as an array of bytes.
         """
         ...
-
     def GetKeyAlgorithmParametersString(self):
         """
         GetKeyAlgorithmParametersString(self: X509Certificate) -> str
@@ -441,7 +420,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
             Returns: The key algorithm parameters for the X.509 certificate as a hexadecimal string.
         """
         ...
-
     def GetName(self):
         """
         GetName(self: X509Certificate) -> str
@@ -451,7 +429,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
             Returns: The name of the principal to which the certificate was issued.
         """
         ...
-
     def GetPublicKey(self):
         """
         GetPublicKey(self: X509Certificate) -> Array[Byte]
@@ -461,7 +438,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
             Returns: The public key for the X.509 certificate as an array of bytes.
         """
         ...
-
     def GetPublicKeyString(self):
         """
         GetPublicKeyString(self: X509Certificate) -> str
@@ -471,7 +447,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
             Returns: The public key for the X.509 certificate as a hexadecimal string.
         """
         ...
-
     def GetRawCertData(self):
         """
         GetRawCertData(self: X509Certificate) -> Array[Byte]
@@ -481,7 +456,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
             Returns: A byte array containing the X.509 certificate data.
         """
         ...
-
     def GetRawCertDataString(self):
         """
         GetRawCertDataString(self: X509Certificate) -> str
@@ -491,7 +465,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
             Returns: The X.509 certificate data as a hexadecimal string.
         """
         ...
-
     def GetSerialNumber(self):
         """
         GetSerialNumber(self: X509Certificate) -> Array[Byte]
@@ -501,7 +474,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
             Returns: The serial number of the X.509 certificate as an array of bytes.
         """
         ...
-
     def GetSerialNumberString(self):
         """
         GetSerialNumberString(self: X509Certificate) -> str
@@ -511,7 +483,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
             Returns: The serial number of the X.509 certificate as a hexadecimal string.
         """
         ...
-
     def Import(self, *__args):
         """
         Import(self: X509Certificate, rawData: Array[Byte])
@@ -522,7 +493,7 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
 
         Import(self: X509Certificate, rawData: Array[Byte], password: str, keyStorageFlags: X509KeyStorageFlags)
 
-            Populates the System.Security.Cryptography.X509Certificates.X509Certificate object using data from a byte array, a password, and flags for determining how the private 
+            Populates the System.Security.Cryptography.X509Certificates.X509Certificate object using data from a byte array, a password, and flags for determining how the private
 
              key is imported.
 
@@ -550,7 +521,7 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
 
         Import(self: X509Certificate, fileName: str, password: str, keyStorageFlags: X509KeyStorageFlags)
 
-            Populates the System.Security.Cryptography.X509Certificates.X509Certificate object with information from a certificate file, a password, and a 
+            Populates the System.Security.Cryptography.X509Certificates.X509Certificate object with information from a certificate file, a password, and a
 
              System.Security.Cryptography.X509Certificates.X509KeyStorageFlags value.
 
@@ -571,7 +542,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
             keyStorageFlags: A bitwise combination of the enumeration values that control where and how to import the certificate.
         """
         ...
-
     def Reset(self):
         """
         Reset(self: X509Certificate)
@@ -579,7 +549,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
             Resets the state of the System.Security.Cryptography.X509Certificates.X509Certificate2 object.
         """
         ...
-
     def ToString(self, fVerbose=None):
         """
         ToString(self: X509Certificate) -> str
@@ -597,14 +566,10 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
             Returns: A string representation of the current System.Security.Cryptography.X509Certificates.X509Certificate object.
         """
         ...
-
-    def __eq__(self, *args): #cannot find CLR method
-        """ x.__eq__(y) <==> x==yx.__eq__(y) <==> x==y """
+    def __eq__(self, *args):  # cannot find CLR method
+        """x.__eq__(y) <==> x==yx.__eq__(y) <==> x==y"""
         ...
-
-    def __ne__(self, *args): #cannot find CLR method
-        ...
-
+    def __ne__(self, *args): ...
     @property
     def Handle(self):
         """
@@ -613,7 +578,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
         Get: Handle(self: X509Certificate) -> IntPtr
         """
         ...
-
     @property
     def Issuer(self):
         """
@@ -622,7 +586,6 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
         Get: Issuer(self: X509Certificate) -> str
         """
         ...
-
     @property
     def Subject(self):
         """
@@ -632,9 +595,9 @@ class X509Certificate(object, IDisposable, IDeserializationCallback, ISerializab
         """
         ...
 
-
-
-class X509Certificate2(X509Certificate): # skipped bases: <type 'ISerializable'>, <type 'IDeserializationCallback'>, <type 'IDisposable'>
+class X509Certificate2(
+    X509Certificate
+):  # skipped bases: <type 'ISerializable'>, <type 'IDeserializationCallback'>, <type 'IDisposable'>
     """
     Represents an X.509 certificate.
 
@@ -664,6 +627,7 @@ class X509Certificate2(X509Certificate): # skipped bases: <type 'ISerializable'>
 
     X509Certificate2(certificate: X509Certificate)
     """
+
     @staticmethod
     def GetCertContentType(*__args):
         """
@@ -684,7 +648,6 @@ class X509Certificate2(X509Certificate): # skipped bases: <type 'ISerializable'>
             Returns: An System.Security.Cryptography.X509Certificates.X509ContentType object.
         """
         ...
-
     def GetNameInfo(self, nameType, forIssuer):
         """
         GetNameInfo(self: X509Certificate2, nameType: X509NameType, forIssuer: bool) -> str
@@ -698,7 +661,6 @@ class X509Certificate2(X509Certificate): # skipped bases: <type 'ISerializable'>
             Returns: The name of the certificate.
         """
         ...
-
     def Verify(self):
         """
         Verify(self: X509Certificate2) -> bool
@@ -708,7 +670,6 @@ class X509Certificate2(X509Certificate): # skipped bases: <type 'ISerializable'>
             Returns: ue if the validation succeeds; lse if the validation fails.
         """
         ...
-
     @property
     def Archived(self):
         """
@@ -719,7 +680,6 @@ class X509Certificate2(X509Certificate): # skipped bases: <type 'ISerializable'>
         Set: Archived(self: X509Certificate2) = value
         """
         ...
-
     @property
     def Extensions(self):
         """
@@ -728,7 +688,6 @@ class X509Certificate2(X509Certificate): # skipped bases: <type 'ISerializable'>
         Get: Extensions(self: X509Certificate2) -> X509ExtensionCollection
         """
         ...
-
     @property
     def FriendlyName(self):
         """
@@ -739,7 +698,6 @@ class X509Certificate2(X509Certificate): # skipped bases: <type 'ISerializable'>
         Set: FriendlyName(self: X509Certificate2) = value
         """
         ...
-
     @property
     def HasPrivateKey(self):
         """
@@ -748,7 +706,6 @@ class X509Certificate2(X509Certificate): # skipped bases: <type 'ISerializable'>
         Get: HasPrivateKey(self: X509Certificate2) -> bool
         """
         ...
-
     @property
     def IssuerName(self):
         """
@@ -757,7 +714,6 @@ class X509Certificate2(X509Certificate): # skipped bases: <type 'ISerializable'>
         Get: IssuerName(self: X509Certificate2) -> X500DistinguishedName
         """
         ...
-
     @property
     def NotAfter(self):
         """
@@ -766,7 +722,6 @@ class X509Certificate2(X509Certificate): # skipped bases: <type 'ISerializable'>
         Get: NotAfter(self: X509Certificate2) -> DateTime
         """
         ...
-
     @property
     def NotBefore(self):
         """
@@ -775,7 +730,6 @@ class X509Certificate2(X509Certificate): # skipped bases: <type 'ISerializable'>
         Get: NotBefore(self: X509Certificate2) -> DateTime
         """
         ...
-
     @property
     def PrivateKey(self):
         """
@@ -786,7 +740,6 @@ class X509Certificate2(X509Certificate): # skipped bases: <type 'ISerializable'>
         Set: PrivateKey(self: X509Certificate2) = value
         """
         ...
-
     @property
     def PublicKey(self):
         """
@@ -795,7 +748,6 @@ class X509Certificate2(X509Certificate): # skipped bases: <type 'ISerializable'>
         Get: PublicKey(self: X509Certificate2) -> PublicKey
         """
         ...
-
     @property
     def RawData(self):
         """
@@ -804,7 +756,6 @@ class X509Certificate2(X509Certificate): # skipped bases: <type 'ISerializable'>
         Get: RawData(self: X509Certificate2) -> Array[Byte]
         """
         ...
-
     @property
     def SerialNumber(self):
         """
@@ -813,7 +764,6 @@ class X509Certificate2(X509Certificate): # skipped bases: <type 'ISerializable'>
         Get: SerialNumber(self: X509Certificate2) -> str
         """
         ...
-
     @property
     def SignatureAlgorithm(self):
         """
@@ -822,7 +772,6 @@ class X509Certificate2(X509Certificate): # skipped bases: <type 'ISerializable'>
         Get: SignatureAlgorithm(self: X509Certificate2) -> Oid
         """
         ...
-
     @property
     def SubjectName(self):
         """
@@ -831,7 +780,6 @@ class X509Certificate2(X509Certificate): # skipped bases: <type 'ISerializable'>
         Get: SubjectName(self: X509Certificate2) -> X500DistinguishedName
         """
         ...
-
     @property
     def Thumbprint(self):
         """
@@ -840,7 +788,6 @@ class X509Certificate2(X509Certificate): # skipped bases: <type 'ISerializable'>
         Get: Thumbprint(self: X509Certificate2) -> str
         """
         ...
-
     @property
     def Version(self):
         """
@@ -850,9 +797,9 @@ class X509Certificate2(X509Certificate): # skipped bases: <type 'ISerializable'>
         """
         ...
 
-
-
-class X509CertificateCollection(CollectionBase): # skipped bases: <type 'IList'>, <type 'ICollection'>, <type 'IEnumerable'>
+class X509CertificateCollection(
+    CollectionBase
+):  # skipped bases: <type 'IList'>, <type 'ICollection'>, <type 'IEnumerable'>
     """
     Defines a collection that stores System.Security.Cryptography.X509Certificates.X509Certificate objects.
 
@@ -862,49 +809,48 @@ class X509CertificateCollection(CollectionBase): # skipped bases: <type 'IList'>
 
     X509CertificateCollection(value: Array[X509Certificate])
     """
+
     def Add(self, value):
         """
         Add(self: X509CertificateCollection, value: X509Certificate) -> int
 
-            Adds an System.Security.Cryptography.X509Certificates.X509Certificate with the specified value to the current 
+            Adds an System.Security.Cryptography.X509Certificates.X509Certificate with the specified value to the current
 
              System.Security.Cryptography.X509Certificates.X509CertificateCollection.
 
             value: The System.Security.Cryptography.X509Certificates.X509Certificate to add to the current System.Security.Cryptography.X509Certificates.X509CertificateCollection.
 
-            Returns: The index into the current System.Security.Cryptography.X509Certificates.X509CertificateCollection at which the new 
+            Returns: The index into the current System.Security.Cryptography.X509Certificates.X509CertificateCollection at which the new
 
              System.Security.Cryptography.X509Certificates.X509Certificate was inserted.
         """
         ...
-
     def AddRange(self, value):
         """
         AddRange(self: X509CertificateCollection, value: Array[X509Certificate])
 
-            Copies the elements of an array of type System.Security.Cryptography.X509Certificates.X509Certificate to the end of the current 
+            Copies the elements of an array of type System.Security.Cryptography.X509Certificates.X509Certificate to the end of the current
 
              System.Security.Cryptography.X509Certificates.X509CertificateCollection.
 
-            value: The array of type System.Security.Cryptography.X509Certificates.X509Certificate containing the objects to add to the current 
+            value: The array of type System.Security.Cryptography.X509Certificates.X509Certificate containing the objects to add to the current
 
              System.Security.Cryptography.X509Certificates.X509CertificateCollection.
 
         AddRange(self: X509CertificateCollection, value: X509CertificateCollection)
 
-            Copies the elements of the specified System.Security.Cryptography.X509Certificates.X509CertificateCollection to the end of the current 
+            Copies the elements of the specified System.Security.Cryptography.X509Certificates.X509CertificateCollection to the end of the current
 
              System.Security.Cryptography.X509Certificates.X509CertificateCollection.
 
             value: The System.Security.Cryptography.X509Certificates.X509CertificateCollection containing the objects to add to the collection.
         """
         ...
-
     def Contains(self, value):
         """
         Contains(self: X509CertificateCollection, value: X509Certificate) -> bool
 
-            Gets a value indicating whether the current System.Security.Cryptography.X509Certificates.X509CertificateCollection contains the specified 
+            Gets a value indicating whether the current System.Security.Cryptography.X509Certificates.X509CertificateCollection contains the specified
 
              System.Security.Cryptography.X509Certificates.X509Certificate.
 
@@ -913,12 +859,11 @@ class X509CertificateCollection(CollectionBase): # skipped bases: <type 'IList'>
             Returns: ue if the System.Security.Cryptography.X509Certificates.X509Certificate is contained in this collection; otherwise, lse.
         """
         ...
-
     def CopyTo(self, array, index):
         """
         CopyTo(self: X509CertificateCollection, array: Array[X509Certificate], index: int)
 
-            Copies the System.Security.Cryptography.X509Certificates.X509Certificate values in the current System.Security.Cryptography.X509Certificates.X509CertificateCollection 
+            Copies the System.Security.Cryptography.X509Certificates.X509Certificate values in the current System.Security.Cryptography.X509Certificates.X509CertificateCollection
 
              to a one-dimensional System.Array instance at the specified index.
 
@@ -927,7 +872,6 @@ class X509CertificateCollection(CollectionBase): # skipped bases: <type 'IList'>
             index: The index into array to begin copying.
         """
         ...
-
     def GetHashCode(self):
         """
         GetHashCode(self: X509CertificateCollection) -> int
@@ -937,28 +881,26 @@ class X509CertificateCollection(CollectionBase): # skipped bases: <type 'IList'>
             Returns: A hash value based on all values contained in the current System.Security.Cryptography.X509Certificates.X509CertificateCollection.
         """
         ...
-
     def IndexOf(self, value):
         """
         IndexOf(self: X509CertificateCollection, value: X509Certificate) -> int
 
-            Returns the index of the specified System.Security.Cryptography.X509Certificates.X509Certificate in the current 
+            Returns the index of the specified System.Security.Cryptography.X509Certificates.X509Certificate in the current
 
              System.Security.Cryptography.X509Certificates.X509CertificateCollection.
 
             value: The System.Security.Cryptography.X509Certificates.X509Certificate to locate.
 
-            Returns: The index of the System.Security.Cryptography.X509Certificates.X509Certificate specified by the value parameter in the 
+            Returns: The index of the System.Security.Cryptography.X509Certificates.X509Certificate specified by the value parameter in the
 
              System.Security.Cryptography.X509Certificates.X509CertificateCollection, if found; otherwise, -1.
         """
         ...
-
     def Insert(self, index, value):
         """
         Insert(self: X509CertificateCollection, index: int, value: X509Certificate)
 
-            Inserts a System.Security.Cryptography.X509Certificates.X509Certificate into the current System.Security.Cryptography.X509Certificates.X509CertificateCollection at the 
+            Inserts a System.Security.Cryptography.X509Certificates.X509Certificate into the current System.Security.Cryptography.X509Certificates.X509CertificateCollection at the
 
              specified index.
 
@@ -967,50 +909,42 @@ class X509CertificateCollection(CollectionBase): # skipped bases: <type 'IList'>
             value: The System.Security.Cryptography.X509Certificates.X509Certificate to insert.
         """
         ...
-
     def Remove(self, value):
         """
         Remove(self: X509CertificateCollection, value: X509Certificate)
 
-            Removes a specific System.Security.Cryptography.X509Certificates.X509Certificate from the current 
+            Removes a specific System.Security.Cryptography.X509Certificates.X509Certificate from the current
 
              System.Security.Cryptography.X509Certificates.X509CertificateCollection.
 
             value: The System.Security.Cryptography.X509Certificates.X509Certificate to remove from the current System.Security.Cryptography.X509Certificates.X509CertificateCollection.
         """
         ...
-
-    def X509CertificateEnumerator(self, *args): #cannot find CLR method
-        """ X509CertificateEnumerator(mappings: X509CertificateCollection) """
+    def X509CertificateEnumerator(self, *args):  # cannot find CLR method
+        """X509CertificateEnumerator(mappings: X509CertificateCollection)"""
         ...
-
-    def __add__(self, *args): #cannot find CLR method
-        """ x.__add__(y) <==> x+y """
+    def __add__(self, *args):  # cannot find CLR method
+        """x.__add__(y) <==> x+y"""
         ...
-
-    def __getitem__(self, *args): #cannot find CLR method
-        """ x.__getitem__(y) <==> x[y] """
+    def __getitem__(self, *args):  # cannot find CLR method
+        """x.__getitem__(y) <==> x[y]"""
         ...
-
-    def __setitem__(self, *args): #cannot find CLR method
-        """ x.__setitem__(i, y) <==> x[i]= """
+    def __setitem__(self, *args):  # cannot find CLR method
+        """x.__setitem__(i, y) <==> x[i]="""
         ...
-
     @property
     def InnerList(self):
-        """ Gets an System.Collections.ArrayList containing the list of elements in the System.Collections.CollectionBase instance. """
+        """Gets an System.Collections.ArrayList containing the list of elements in the System.Collections.CollectionBase instance."""
         ...
-
     @property
     def List(self):
-        """ Gets an System.Collections.IList containing the list of elements in the System.Collections.CollectionBase instance. """
+        """Gets an System.Collections.IList containing the list of elements in the System.Collections.CollectionBase instance."""
         ...
-
-
     X509CertificateEnumerator = None
 
-
-class X509Certificate2Collection(X509CertificateCollection): # skipped bases: <type 'IList'>, <type 'ICollection'>, <type 'IEnumerable'>
+class X509Certificate2Collection(
+    X509CertificateCollection
+):  # skipped bases: <type 'IList'>, <type 'ICollection'>, <type 'IEnumerable'>
     """
     Represents a collection of System.Security.Cryptography.X509Certificates.X509Certificate2 objects. This class cannot be inherited.
 
@@ -1022,6 +956,7 @@ class X509Certificate2Collection(X509CertificateCollection): # skipped bases: <t
 
     X509Certificate2Collection(certificates: Array[X509Certificate2])
     """
+
     def Export(self, contentType, password=None):
         """
         Export(self: X509Certificate2Collection, contentType: X509ContentType) -> Array[Byte]
@@ -1043,12 +978,11 @@ class X509Certificate2Collection(X509CertificateCollection): # skipped bases: <t
             Returns: X.509 certificate information in a byte array.
         """
         ...
-
     def Find(self, findType, findValue, validOnly):
         """
         Find(self: X509Certificate2Collection, findType: X509FindType, findValue: object, validOnly: bool) -> X509Certificate2Collection
 
-            Searches an System.Security.Cryptography.X509Certificates.X509Certificate2Collection object using the search criteria specified by the 
+            Searches an System.Security.Cryptography.X509Certificates.X509Certificate2Collection object using the search criteria specified by the
 
              System.Security.Cryptography.X509Certificates.X509FindType enumeration and the findValue object.
 
@@ -1061,7 +995,6 @@ class X509Certificate2Collection(X509CertificateCollection): # skipped bases: <t
             Returns: An System.Security.Cryptography.X509Certificates.X509Certificate2Collection object.
         """
         ...
-
     def Import(self, *__args):
         """
         Import(self: X509Certificate2Collection, rawData: Array[Byte])
@@ -1078,7 +1011,7 @@ class X509Certificate2Collection(X509CertificateCollection): # skipped bases: <t
 
         Import(self: X509Certificate2Collection, rawData: Array[Byte], password: str, keyStorageFlags: X509KeyStorageFlags)
 
-            Imports a certificate, in the form of a byte array that requires a password to access the certificate, into a 
+            Imports a certificate, in the form of a byte array that requires a password to access the certificate, into a
 
              System.Security.Cryptography.X509Certificates.X509Certificate2Collection object.
 
@@ -1099,12 +1032,11 @@ class X509Certificate2Collection(X509CertificateCollection): # skipped bases: <t
             keyStorageFlags: A bitwise combination of the enumeration values that control how and where the certificate is imported.
         """
         ...
-
     def RemoveRange(self, certificates):
         """
         RemoveRange(self: X509Certificate2Collection, certificates: Array[X509Certificate2])
 
-            Removes multiple System.Security.Cryptography.X509Certificates.X509Certificate2 objects in an array from an 
+            Removes multiple System.Security.Cryptography.X509Certificates.X509Certificate2 objects in an array from an
 
              System.Security.Cryptography.X509Certificates.X509Certificate2Collection object.
 
@@ -1112,28 +1044,25 @@ class X509Certificate2Collection(X509CertificateCollection): # skipped bases: <t
 
         RemoveRange(self: X509Certificate2Collection, certificates: X509Certificate2Collection)
 
-            Removes multiple System.Security.Cryptography.X509Certificates.X509Certificate2 objects in an System.Security.Cryptography.X509Certificates.X509Certificate2Collection 
+            Removes multiple System.Security.Cryptography.X509Certificates.X509Certificate2 objects in an System.Security.Cryptography.X509Certificates.X509Certificate2Collection
 
              object from another System.Security.Cryptography.X509Certificates.X509Certificate2Collection object.
 
             certificates: An System.Security.Cryptography.X509Certificates.X509Certificate2Collection object.
         """
         ...
-
     @property
     def InnerList(self):
-        """ Gets an System.Collections.ArrayList containing the list of elements in the System.Collections.CollectionBase instance. """
+        """Gets an System.Collections.ArrayList containing the list of elements in the System.Collections.CollectionBase instance."""
         ...
-
     @property
     def List(self):
-        """ Gets an System.Collections.IList containing the list of elements in the System.Collections.CollectionBase instance. """
+        """Gets an System.Collections.IList containing the list of elements in the System.Collections.CollectionBase instance."""
         ...
 
-
-
 class X509Certificate2Enumerator(object, IEnumerator):
-    """ Supports a simple iteration over a System.Security.Cryptography.X509Certificates.X509Certificate2Collection object. This class cannot be inherited. """
+    """Supports a simple iteration over a System.Security.Cryptography.X509Certificates.X509Certificate2Collection object. This class cannot be inherited."""
+
     @property
     def Current(self):
         """
@@ -1142,8 +1071,6 @@ class X509Certificate2Enumerator(object, IEnumerator):
         Get: Current(self: X509Certificate2Enumerator) -> X509Certificate2
         """
         ...
-
-
 
 class X509Chain(object, IDisposable):
     """
@@ -1155,6 +1082,7 @@ class X509Chain(object, IDisposable):
 
     X509Chain(chainContext: IntPtr)
     """
+
     def Build(self, certificate):
         """
         Build(self: X509Chain, certificate: X509Certificate2) -> bool
@@ -1166,20 +1094,18 @@ class X509Chain(object, IDisposable):
             Returns: ue if the X.509 certificate is valid; otherwise, lse.
         """
         ...
-
     @staticmethod
     def Create():
         """
         Create() -> X509Chain
 
-            Creates an System.Security.Cryptography.X509Certificates.X509Chain object after querying for the mapping defined in the CryptoConfig file, and maps the chain to that 
+            Creates an System.Security.Cryptography.X509Certificates.X509Chain object after querying for the mapping defined in the CryptoConfig file, and maps the chain to that
 
              mapping.
 
             Returns: An System.Security.Cryptography.X509Certificates.X509Chain object.
         """
         ...
-
     def Reset(self):
         """
         Reset(self: X509Chain)
@@ -1187,7 +1113,6 @@ class X509Chain(object, IDisposable):
             Clears the current System.Security.Cryptography.X509Certificates.X509Chain object.
         """
         ...
-
     @property
     def ChainContext(self):
         """
@@ -1196,7 +1121,6 @@ class X509Chain(object, IDisposable):
         Get: ChainContext(self: X509Chain) -> IntPtr
         """
         ...
-
     @property
     def ChainElements(self):
         """
@@ -1205,7 +1129,6 @@ class X509Chain(object, IDisposable):
         Get: ChainElements(self: X509Chain) -> X509ChainElementCollection
         """
         ...
-
     @property
     def ChainPolicy(self):
         """
@@ -1216,7 +1139,6 @@ class X509Chain(object, IDisposable):
         Set: ChainPolicy(self: X509Chain) = value
         """
         ...
-
     @property
     def ChainStatus(self):
         """
@@ -1225,7 +1147,6 @@ class X509Chain(object, IDisposable):
         Get: ChainStatus(self: X509Chain) -> Array[X509ChainStatus]
         """
         ...
-
     @property
     def SafeHandle(self):
         """
@@ -1235,10 +1156,9 @@ class X509Chain(object, IDisposable):
         """
         ...
 
+class X509ChainElement:  # skipped bases: <type 'object'>
+    """Represents an element of an X.509 chain."""
 
-
-class X509ChainElement: # skipped bases: <type 'object'>
-    """ Represents an element of an X.509 chain. """
     @property
     def Certificate(self):
         """
@@ -1247,7 +1167,6 @@ class X509ChainElement: # skipped bases: <type 'object'>
         Get: Certificate(self: X509ChainElement) -> X509Certificate2
         """
         ...
-
     @property
     def ChainElementStatus(self):
         """
@@ -1256,7 +1175,6 @@ class X509ChainElement: # skipped bases: <type 'object'>
         Get: ChainElementStatus(self: X509ChainElement) -> Array[X509ChainStatus]
         """
         ...
-
     @property
     def Information(self):
         """
@@ -1266,10 +1184,9 @@ class X509ChainElement: # skipped bases: <type 'object'>
         """
         ...
 
+class X509ChainElementCollection(object, ICollection):  # skipped bases: <type 'IEnumerable'>
+    """Represents a collection of System.Security.Cryptography.X509Certificates.X509ChainElement objects. This class cannot be inherited."""
 
-
-class X509ChainElementCollection(object, ICollection): # skipped bases: <type 'IEnumerable'>
-    """ Represents a collection of System.Security.Cryptography.X509Certificates.X509ChainElement objects. This class cannot be inherited. """
     def GetEnumerator(self):
         """
         GetEnumerator(self: X509ChainElementCollection) -> X509ChainElementEnumerator
@@ -1279,15 +1196,12 @@ class X509ChainElementCollection(object, ICollection): # skipped bases: <type 'I
             Returns: An System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator object.
         """
         ...
-
-    def __getitem__(self, *args): #cannot find CLR method
-        """ x.__getitem__(y) <==> x[y] """
+    def __getitem__(self, *args):  # cannot find CLR method
+        """x.__getitem__(y) <==> x[y]"""
         ...
-
-    def __len__(self, *args): #cannot find CLR method
-        """ x.__len__() <==> len(x) """
+    def __len__(self, *args):  # cannot find CLR method
+        """x.__len__() <==> len(x)"""
         ...
-
     @property
     def Count(self):
         """
@@ -1296,7 +1210,6 @@ class X509ChainElementCollection(object, ICollection): # skipped bases: <type 'I
         Get: Count(self: X509ChainElementCollection) -> int
         """
         ...
-
     @property
     def IsSynchronized(self):
         """
@@ -1305,7 +1218,6 @@ class X509ChainElementCollection(object, ICollection): # skipped bases: <type 'I
         Get: IsSynchronized(self: X509ChainElementCollection) -> bool
         """
         ...
-
     @property
     def SyncRoot(self):
         """
@@ -1315,10 +1227,9 @@ class X509ChainElementCollection(object, ICollection): # skipped bases: <type 'I
         """
         ...
 
-
-
 class X509ChainElementEnumerator(object, IEnumerator):
-    """ Supports a simple iteration over an System.Security.Cryptography.X509Certificates.X509ChainElementCollection. This class cannot be inherited. """
+    """Supports a simple iteration over an System.Security.Cryptography.X509Certificates.X509ChainElementCollection. This class cannot be inherited."""
+
     @property
     def Current(self):
         """
@@ -1328,14 +1239,13 @@ class X509ChainElementEnumerator(object, IEnumerator):
         """
         ...
 
-
-
-class X509ChainPolicy: # skipped bases: <type 'object'>
+class X509ChainPolicy:  # skipped bases: <type 'object'>
     """
     Represents the chain policy to be applied when building an X509 certificate chain. This class cannot be inherited.
 
     X509ChainPolicy()
     """
+
     def Reset(self):
         """
         Reset(self: X509ChainPolicy)
@@ -1343,7 +1253,6 @@ class X509ChainPolicy: # skipped bases: <type 'object'>
             Resets the System.Security.Cryptography.X509Certificates.X509ChainPolicy members to their default values.
         """
         ...
-
     @property
     def ApplicationPolicy(self):
         """
@@ -1352,7 +1261,6 @@ class X509ChainPolicy: # skipped bases: <type 'object'>
         Get: ApplicationPolicy(self: X509ChainPolicy) -> OidCollection
         """
         ...
-
     @property
     def CertificatePolicy(self):
         """
@@ -1361,7 +1269,6 @@ class X509ChainPolicy: # skipped bases: <type 'object'>
         Get: CertificatePolicy(self: X509ChainPolicy) -> OidCollection
         """
         ...
-
     @property
     def ExtraStore(self):
         """
@@ -1370,7 +1277,6 @@ class X509ChainPolicy: # skipped bases: <type 'object'>
         Get: ExtraStore(self: X509ChainPolicy) -> X509Certificate2Collection
         """
         ...
-
     @property
     def RevocationFlag(self):
         """
@@ -1381,7 +1287,6 @@ class X509ChainPolicy: # skipped bases: <type 'object'>
         Set: RevocationFlag(self: X509ChainPolicy) = value
         """
         ...
-
     @property
     def RevocationMode(self):
         """
@@ -1392,7 +1297,6 @@ class X509ChainPolicy: # skipped bases: <type 'object'>
         Set: RevocationMode(self: X509ChainPolicy) = value
         """
         ...
-
     @property
     def UrlRetrievalTimeout(self):
         """
@@ -1403,7 +1307,6 @@ class X509ChainPolicy: # skipped bases: <type 'object'>
         Set: UrlRetrievalTimeout(self: X509ChainPolicy) = value
         """
         ...
-
     @property
     def VerificationFlags(self):
         """
@@ -1414,7 +1317,6 @@ class X509ChainPolicy: # skipped bases: <type 'object'>
         Set: VerificationFlags(self: X509ChainPolicy) = value
         """
         ...
-
     @property
     def VerificationTime(self):
         """
@@ -1426,10 +1328,9 @@ class X509ChainPolicy: # skipped bases: <type 'object'>
         """
         ...
 
+class X509ChainStatus:  # skipped bases: <type 'object'>
+    """Provides a simple structure for storing X509 chain status and error information."""
 
-
-class X509ChainStatus: # skipped bases: <type 'object'>
-    """ Provides a simple structure for storing X509 chain status and error information. """
     @property
     def Status(self):
         """
@@ -1440,7 +1341,6 @@ class X509ChainStatus: # skipped bases: <type 'object'>
         Set: Status(self: X509ChainStatus) = value
         """
         ...
-
     @property
     def StatusInformation(self):
         """
@@ -1452,14 +1352,13 @@ class X509ChainStatus: # skipped bases: <type 'object'>
         """
         ...
 
-
-
-class X509ChainStatusFlags(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class X509ChainStatusFlags(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Defines the status of an X509 chain.
 
     enum (flags) X509ChainStatusFlags, values: CtlNotSignatureValid (262144), CtlNotTimeValid (131072), CtlNotValidForUsage (524288), Cyclic (128), ExplicitDistrust (67108864), HasExcludedNameConstraint (32768), HasNotDefinedNameConstraint (8192), HasNotPermittedNameConstraint (16384), HasNotSupportedCriticalExtension (134217728), HasNotSupportedNameConstraint (4096), HasWeakSignature (1048576), InvalidBasicConstraints (1024), InvalidExtension (256), InvalidNameConstraints (2048), InvalidPolicyConstraints (512), NoError (0), NoIssuanceChainPolicy (33554432), NotSignatureValid (8), NotTimeNested (2), NotTimeValid (1), NotValidForUsage (16), OfflineRevocation (16777216), PartialChain (65536), RevocationStatusUnknown (64), Revoked (4), UntrustedRoot (32)
     """
+
     CtlNotSignatureValid = None
     CtlNotTimeValid = None
     CtlNotValidForUsage = None
@@ -1488,13 +1387,13 @@ class X509ChainStatusFlags(Enum): # skipped bases: <type 'IComparable'>, <type '
     UntrustedRoot = None
     value__ = None
 
-
-class X509ContentType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class X509ContentType(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the format of an X.509 certificate.
 
     enum X509ContentType, values: Authenticode (6), Cert (1), Pfx (3), Pkcs12 (3), Pkcs7 (5), SerializedCert (2), SerializedStore (4), Unknown (0)
     """
+
     Authenticode = None
     Cert = None
     Pfx = None
@@ -1504,7 +1403,6 @@ class X509ContentType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConv
     SerializedStore = None
     Unknown = None
     value__ = None
-
 
 class X509EnhancedKeyUsageExtension(X509Extension):
     """
@@ -1516,6 +1414,7 @@ class X509EnhancedKeyUsageExtension(X509Extension):
 
     X509EnhancedKeyUsageExtension(encodedEnhancedKeyUsages: AsnEncodedData, critical: bool)
     """
+
     @property
     def EnhancedKeyUsages(self):
         """
@@ -1525,14 +1424,13 @@ class X509EnhancedKeyUsageExtension(X509Extension):
         """
         ...
 
-
-
-class X509ExtensionCollection(object, ICollection): # skipped bases: <type 'IEnumerable'>
+class X509ExtensionCollection(object, ICollection):  # skipped bases: <type 'IEnumerable'>
     """
     Represents a collection of System.Security.Cryptography.X509Certificates.X509Extension objects. This class cannot be inherited.
 
     X509ExtensionCollection()
     """
+
     def Add(self, extension):
         """
         Add(self: X509ExtensionCollection, extension: X509Extension) -> int
@@ -1544,31 +1442,26 @@ class X509ExtensionCollection(object, ICollection): # skipped bases: <type 'IEnu
             Returns: The index at which the extension parameter was added.
         """
         ...
-
     def GetEnumerator(self):
         """
         GetEnumerator(self: X509ExtensionCollection) -> X509ExtensionEnumerator
 
             Returns an enumerator that can iterate through an System.Security.Cryptography.X509Certificates.X509ExtensionCollection object.
 
-            Returns: An System.Security.Cryptography.X509Certificates.X509ExtensionEnumerator object to use to iterate through the 
+            Returns: An System.Security.Cryptography.X509Certificates.X509ExtensionEnumerator object to use to iterate through the
 
              System.Security.Cryptography.X509Certificates.X509ExtensionCollection object.
         """
         ...
-
-    def __add__(self, *args): #cannot find CLR method
-        """ x.__add__(y) <==> x+y """
+    def __add__(self, *args):  # cannot find CLR method
+        """x.__add__(y) <==> x+y"""
         ...
-
-    def __getitem__(self, *args): #cannot find CLR method
-        """ x.__getitem__(y) <==> x[y]x.__getitem__(y) <==> x[y] """
+    def __getitem__(self, *args):  # cannot find CLR method
+        """x.__getitem__(y) <==> x[y]x.__getitem__(y) <==> x[y]"""
         ...
-
-    def __len__(self, *args): #cannot find CLR method
-        """ x.__len__() <==> len(x) """
+    def __len__(self, *args):  # cannot find CLR method
+        """x.__len__() <==> len(x)"""
         ...
-
     @property
     def Count(self):
         """
@@ -1577,7 +1470,6 @@ class X509ExtensionCollection(object, ICollection): # skipped bases: <type 'IEnu
         Get: Count(self: X509ExtensionCollection) -> int
         """
         ...
-
     @property
     def IsSynchronized(self):
         """
@@ -1586,7 +1478,6 @@ class X509ExtensionCollection(object, ICollection): # skipped bases: <type 'IEnu
         Get: IsSynchronized(self: X509ExtensionCollection) -> bool
         """
         ...
-
     @property
     def SyncRoot(self):
         """
@@ -1596,10 +1487,9 @@ class X509ExtensionCollection(object, ICollection): # skipped bases: <type 'IEnu
         """
         ...
 
-
-
 class X509ExtensionEnumerator(object, IEnumerator):
-    """ Supports a simple iteration over a System.Security.Cryptography.X509Certificates.X509ExtensionCollection. This class cannot be inherited. """
+    """Supports a simple iteration over a System.Security.Cryptography.X509Certificates.X509ExtensionCollection. This class cannot be inherited."""
+
     @property
     def Current(self):
         """
@@ -1609,14 +1499,13 @@ class X509ExtensionEnumerator(object, IEnumerator):
         """
         ...
 
-
-
-class X509FindType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class X509FindType(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the type of value the System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean) method searches for.
 
     enum X509FindType, values: FindByApplicationPolicy (10), FindByCertificatePolicy (11), FindByExtension (12), FindByIssuerDistinguishedName (4), FindByIssuerName (3), FindByKeyUsage (13), FindBySerialNumber (5), FindBySubjectDistinguishedName (2), FindBySubjectKeyIdentifier (14), FindBySubjectName (1), FindByTemplateName (9), FindByThumbprint (0), FindByTimeExpired (8), FindByTimeNotYetValid (7), FindByTimeValid (6)
     """
+
     FindByApplicationPolicy = None
     FindByCertificatePolicy = None
     FindByExtension = None
@@ -1634,26 +1523,26 @@ class X509FindType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvert
     FindByTimeValid = None
     value__ = None
 
-
-class X509IncludeOption(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class X509IncludeOption(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies how much of the X.509 certificate chain should be included in the X.509 data.
 
     enum X509IncludeOption, values: EndCertOnly (2), ExcludeRoot (1), None (0), WholeChain (3)
     """
+
     EndCertOnly = None
     ExcludeRoot = None
-    None = None
+
     value__ = None
     WholeChain = None
 
-
-class X509KeyStorageFlags(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class X509KeyStorageFlags(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Defines where and how to import the private key of an X.509 certificate.
 
     enum (flags) X509KeyStorageFlags, values: DefaultKeySet (0), EphemeralKeySet (32), Exportable (4), MachineKeySet (2), PersistKeySet (16), UserKeySet (1), UserProtected (8)
     """
+
     DefaultKeySet = None
     EphemeralKeySet = None
     Exportable = None
@@ -1662,7 +1551,6 @@ class X509KeyStorageFlags(Enum): # skipped bases: <type 'IComparable'>, <type 'I
     UserKeySet = None
     UserProtected = None
     value__ = None
-
 
 class X509KeyUsageExtension(X509Extension):
     """
@@ -1674,6 +1562,7 @@ class X509KeyUsageExtension(X509Extension):
 
     X509KeyUsageExtension(encodedKeyUsage: AsnEncodedData, critical: bool)
     """
+
     @property
     def KeyUsages(self):
         """
@@ -1683,14 +1572,13 @@ class X509KeyUsageExtension(X509Extension):
         """
         ...
 
-
-
-class X509KeyUsageFlags(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class X509KeyUsageFlags(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Defines how the certificate key can be used. If this value is not defined, the key can be used for any purpose.
 
     enum (flags) X509KeyUsageFlags, values: CrlSign (2), DataEncipherment (16), DecipherOnly (32768), DigitalSignature (128), EncipherOnly (1), KeyAgreement (8), KeyCertSign (4), KeyEncipherment (32), None (0), NonRepudiation (64)
     """
+
     CrlSign = None
     DataEncipherment = None
     DecipherOnly = None
@@ -1699,17 +1587,17 @@ class X509KeyUsageFlags(Enum): # skipped bases: <type 'IComparable'>, <type 'ICo
     KeyAgreement = None
     KeyCertSign = None
     KeyEncipherment = None
-    None = None
+
     NonRepudiation = None
     value__ = None
 
-
-class X509NameType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class X509NameType(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the type of name the X509 certificate contains.
 
     enum X509NameType, values: DnsFromAlternativeName (4), DnsName (3), EmailName (1), SimpleName (0), UpnName (2), UrlName (5)
     """
+
     DnsFromAlternativeName = None
     DnsName = None
     EmailName = None
@@ -1718,30 +1606,29 @@ class X509NameType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvert
     UrlName = None
     value__ = None
 
-
-class X509RevocationFlag(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class X509RevocationFlag(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies which X509 certificates in the chain should be checked for revocation.
 
     enum X509RevocationFlag, values: EndCertificateOnly (0), EntireChain (1), ExcludeRoot (2)
     """
+
     EndCertificateOnly = None
     EntireChain = None
     ExcludeRoot = None
     value__ = None
 
-
-class X509RevocationMode(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class X509RevocationMode(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the mode used to check for X509 certificate revocation.
 
     enum X509RevocationMode, values: NoCheck (0), Offline (2), Online (1)
     """
+
     NoCheck = None
     Offline = None
     Online = None
     value__ = None
-
 
 class X509Store(object, IDisposable):
     """
@@ -1761,6 +1648,7 @@ class X509Store(object, IDisposable):
 
     X509Store(storeHandle: IntPtr)
     """
+
     def Add(self, certificate):
         """
         Add(self: X509Store, certificate: X509Certificate2)
@@ -1770,7 +1658,6 @@ class X509Store(object, IDisposable):
             certificate: The certificate to add.
         """
         ...
-
     def AddRange(self, certificates):
         """
         AddRange(self: X509Store, certificates: X509Certificate2Collection)
@@ -1780,7 +1667,6 @@ class X509Store(object, IDisposable):
             certificates: The collection of certificates to add.
         """
         ...
-
     def Close(self):
         """
         Close(self: X509Store)
@@ -1788,7 +1674,6 @@ class X509Store(object, IDisposable):
             Closes an X.509 certificate store.
         """
         ...
-
     def Open(self, flags):
         """
         Open(self: X509Store, flags: OpenFlags)
@@ -1798,7 +1683,6 @@ class X509Store(object, IDisposable):
             flags: A bitwise combination of enumeration values that specifies the way to open the X.509 certificate store.
         """
         ...
-
     def Remove(self, certificate):
         """
         Remove(self: X509Store, certificate: X509Certificate2)
@@ -1808,7 +1692,6 @@ class X509Store(object, IDisposable):
             certificate: The certificate to remove.
         """
         ...
-
     def RemoveRange(self, certificates):
         """
         RemoveRange(self: X509Store, certificates: X509Certificate2Collection)
@@ -1818,11 +1701,9 @@ class X509Store(object, IDisposable):
             certificates: A range of certificates to remove.
         """
         ...
-
-    def __add__(self, *args): #cannot find CLR method
-        """ x.__add__(y) <==> x+y """
+    def __add__(self, *args):  # cannot find CLR method
+        """x.__add__(y) <==> x+y"""
         ...
-
     @property
     def Certificates(self):
         """
@@ -1831,7 +1712,6 @@ class X509Store(object, IDisposable):
         Get: Certificates(self: X509Store) -> X509Certificate2Collection
         """
         ...
-
     @property
     def Location(self):
         """
@@ -1840,7 +1720,6 @@ class X509Store(object, IDisposable):
         Get: Location(self: X509Store) -> StoreLocation
         """
         ...
-
     @property
     def Name(self):
         """
@@ -1849,7 +1728,6 @@ class X509Store(object, IDisposable):
         Get: Name(self: X509Store) -> str
         """
         ...
-
     @property
     def StoreHandle(self):
         """
@@ -1858,8 +1736,6 @@ class X509Store(object, IDisposable):
         Get: StoreHandle(self: X509Store) -> IntPtr
         """
         ...
-
-
 
 class X509SubjectKeyIdentifierExtension(X509Extension):
     """
@@ -1877,6 +1753,7 @@ class X509SubjectKeyIdentifierExtension(X509Extension):
 
     X509SubjectKeyIdentifierExtension(key: PublicKey, algorithm: X509SubjectKeyIdentifierHashAlgorithm, critical: bool)
     """
+
     @property
     def SubjectKeyIdentifier(self):
         """
@@ -1886,26 +1763,27 @@ class X509SubjectKeyIdentifierExtension(X509Extension):
         """
         ...
 
-
-
-class X509SubjectKeyIdentifierHashAlgorithm(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class X509SubjectKeyIdentifierHashAlgorithm(
+    Enum
+):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Defines the type of hash algorithm to use with the System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierExtension class.
 
     enum X509SubjectKeyIdentifierHashAlgorithm, values: CapiSha1 (2), Sha1 (0), ShortSha1 (1)
     """
+
     CapiSha1 = None
     Sha1 = None
     ShortSha1 = None
     value__ = None
 
-
-class X509VerificationFlags(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class X509VerificationFlags(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies conditions under which verification of certificates in the X509 chain should be conducted.
 
     enum (flags) X509VerificationFlags, values: AllFlags (4095), AllowUnknownCertificateAuthority (16), IgnoreCertificateAuthorityRevocationUnknown (1024), IgnoreCtlNotTimeValid (2), IgnoreCtlSignerRevocationUnknown (512), IgnoreEndRevocationUnknown (256), IgnoreInvalidBasicConstraints (8), IgnoreInvalidName (64), IgnoreInvalidPolicy (128), IgnoreNotTimeNested (4), IgnoreNotTimeValid (1), IgnoreRootRevocationUnknown (2048), IgnoreWrongUsage (32), NoFlag (0)
     """
+
     AllFlags = None
     AllowUnknownCertificateAuthority = None
     IgnoreCertificateAuthorityRevocationUnknown = None
@@ -1921,5 +1799,3 @@ class X509VerificationFlags(Enum): # skipped bases: <type 'IComparable'>, <type 
     IgnoreWrongUsage = None
     NoFlag = None
     value__ = None
-
-

@@ -8,18 +8,17 @@
 # no functions
 # classes
 
-class AuthenticatedStream(Stream): # skipped bases: <type 'IDisposable'>
-    """ Provides methods for passing credentials across a stream and requesting or performing authentication for client-server applications. """
-    @staticmethod # known case of __new__
-    def __new__(cls, *args): #cannot find CLR constructor
-        """ __new__(cls: type, innerStream: Stream, leaveInnerStreamOpen: bool) """
-        ...
+class AuthenticatedStream(Stream):  # skipped bases: <type 'IDisposable'>
+    """Provides methods for passing credentials across a stream and requesting or performing authentication for client-server applications."""
 
+    @staticmethod  # known case of __new__
+    def __new__(cls, *args):  # cannot find CLR constructor
+        """__new__(cls: type, innerStream: Stream, leaveInnerStreamOpen: bool)"""
+        ...
     @property
     def InnerStream(self):
-        """ Gets the stream used by this System.Net.Security.AuthenticatedStream for sending and receiving data. """
+        """Gets the stream used by this System.Net.Security.AuthenticatedStream for sending and receiving data."""
         ...
-
     @property
     def IsAuthenticated(self):
         """
@@ -28,7 +27,6 @@ class AuthenticatedStream(Stream): # skipped bases: <type 'IDisposable'>
         Get: IsAuthenticated(self: AuthenticatedStream) -> bool
         """
         ...
-
     @property
     def IsEncrypted(self):
         """
@@ -37,7 +35,6 @@ class AuthenticatedStream(Stream): # skipped bases: <type 'IDisposable'>
         Get: IsEncrypted(self: AuthenticatedStream) -> bool
         """
         ...
-
     @property
     def IsMutuallyAuthenticated(self):
         """
@@ -46,7 +43,6 @@ class AuthenticatedStream(Stream): # skipped bases: <type 'IDisposable'>
         Get: IsMutuallyAuthenticated(self: AuthenticatedStream) -> bool
         """
         ...
-
     @property
     def IsServer(self):
         """
@@ -55,7 +51,6 @@ class AuthenticatedStream(Stream): # skipped bases: <type 'IDisposable'>
         Get: IsServer(self: AuthenticatedStream) -> bool
         """
         ...
-
     @property
     def IsSigned(self):
         """
@@ -64,7 +59,6 @@ class AuthenticatedStream(Stream): # skipped bases: <type 'IDisposable'>
         Get: IsSigned(self: AuthenticatedStream) -> bool
         """
         ...
-
     @property
     def LeaveInnerStreamOpen(self):
         """
@@ -74,52 +68,52 @@ class AuthenticatedStream(Stream): # skipped bases: <type 'IDisposable'>
         """
         ...
 
-
-
-class AuthenticationLevel(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class AuthenticationLevel(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies client requirements for authentication and impersonation when using the System.Net.WebRequest class and derived classes to request a resource.
 
     enum AuthenticationLevel, values: MutualAuthRequested (1), MutualAuthRequired (2), None (0)
     """
+
     MutualAuthRequested = None
     MutualAuthRequired = None
-    None = None
+
     value__ = None
 
-
-class EncryptionPolicy(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class EncryptionPolicy(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     The EncryptionPolicy to use.
 
     enum EncryptionPolicy, values: AllowNoEncryption (1), NoEncryption (2), RequireEncryption (0)
     """
+
     AllowNoEncryption = None
     NoEncryption = None
     RequireEncryption = None
     value__ = None
 
-
-class LocalCertificateSelectionCallback(MulticastDelegate): # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
+class LocalCertificateSelectionCallback(
+    MulticastDelegate
+):  # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
     """
     Selects the local Secure Sockets Layer (SSL) certificate used for authentication.
 
     LocalCertificateSelectionCallback(object: object, method: IntPtr)
     """
-    def BeginInvoke(self, sender, targetHost, localCertificates, remoteCertificate, acceptableIssuers, callback, object):
-        """ BeginInvoke(self: LocalCertificateSelectionCallback, sender: object, targetHost: str, localCertificates: X509CertificateCollection, remoteCertificate: X509Certificate, acceptableIssuers: Array[str], callback: AsyncCallback, object: object) -> IAsyncResult """
-        ...
 
+    def BeginInvoke(
+        self, sender, targetHost, localCertificates, remoteCertificate, acceptableIssuers, callback, object
+    ):
+        """BeginInvoke(self: LocalCertificateSelectionCallback, sender: object, targetHost: str, localCertificates: X509CertificateCollection, remoteCertificate: X509Certificate, acceptableIssuers: Array[str], callback: AsyncCallback, object: object) -> IAsyncResult"""
+        ...
     def EndInvoke(self, result):
-        """ EndInvoke(self: LocalCertificateSelectionCallback, result: IAsyncResult) -> X509Certificate """
+        """EndInvoke(self: LocalCertificateSelectionCallback, result: IAsyncResult) -> X509Certificate"""
         ...
-
     def Invoke(self, sender, targetHost, localCertificates, remoteCertificate, acceptableIssuers):
-        """ Invoke(self: LocalCertificateSelectionCallback, sender: object, targetHost: str, localCertificates: X509CertificateCollection, remoteCertificate: X509Certificate, acceptableIssuers: Array[str]) -> X509Certificate """
+        """Invoke(self: LocalCertificateSelectionCallback, sender: object, targetHost: str, localCertificates: X509CertificateCollection, remoteCertificate: X509Certificate, acceptableIssuers: Array[str]) -> X509Certificate"""
         ...
 
-
-class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
+class NegotiateStream(AuthenticatedStream):  # skipped bases: <type 'IDisposable'>
     """
     Provides a stream that uses the Negotiate security protocol to authenticate the client, and optionally the server, in client-server communication.
 
@@ -127,6 +121,7 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
 
     NegotiateStream(innerStream: Stream, leaveInnerStreamOpen: bool)
     """
+
     def AuthenticateAsClient(self, credential=None, *__args):
         """
         AuthenticateAsClient(self: NegotiateStream)
@@ -143,7 +138,7 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
 
         AuthenticateAsClient(self: NegotiateStream, credential: NetworkCredential, binding: ChannelBinding, targetName: str)
 
-            Called by clients to authenticate the client, and optionally the server, in a client-server connection. The authentication process uses the specified client credential 
+            Called by clients to authenticate the client, and optionally the server, in a client-server connection. The authentication process uses the specified client credential
 
              and the channel binding.
 
@@ -155,7 +150,7 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
 
         AuthenticateAsClient(self: NegotiateStream, credential: NetworkCredential, targetName: str, requiredProtectionLevel: ProtectionLevel, allowedImpersonationLevel: TokenImpersonationLevel)
 
-            Called by clients to authenticate the client, and optionally the server, in a client-server connection. The authentication process uses the specified credentials and 
+            Called by clients to authenticate the client, and optionally the server, in a client-server connection. The authentication process uses the specified credentials and
 
              authentication options.
 
@@ -169,7 +164,7 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
 
         AuthenticateAsClient(self: NegotiateStream, credential: NetworkCredential, binding: ChannelBinding, targetName: str, requiredProtectionLevel: ProtectionLevel, allowedImpersonationLevel: TokenImpersonationLevel)
 
-            Called by clients to authenticate the client, and optionally the server, in a client-server connection. The authentication process uses the specified credential, 
+            Called by clients to authenticate the client, and optionally the server, in a client-server connection. The authentication process uses the specified credential,
 
              authentication options, and channel binding.
 
@@ -184,7 +179,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
             allowedImpersonationLevel: One of the System.Security.Principal.TokenImpersonationLevel values, indicating how the server can use the client's credentials to access resources.
         """
         ...
-
     def AuthenticateAsClientAsync(self, credential=None, *__args):
         """
         AuthenticateAsClientAsync(self: NegotiateStream) -> Task
@@ -195,7 +189,7 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
 
         AuthenticateAsClientAsync(self: NegotiateStream, credential: NetworkCredential, targetName: str) -> Task
 
-            Called by clients to authenticate the client, and optionally the server, in a client-server connection as an asynchronous operation. The authentication process uses 
+            Called by clients to authenticate the client, and optionally the server, in a client-server connection as an asynchronous operation. The authentication process uses
 
              the specified client credential.
 
@@ -207,7 +201,7 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
 
         AuthenticateAsClientAsync(self: NegotiateStream, credential: NetworkCredential, targetName: str, requiredProtectionLevel: ProtectionLevel, allowedImpersonationLevel: TokenImpersonationLevel) -> Task
 
-            Called by clients to authenticate the client, and optionally the server, in a client-server connection as an asynchronous operation. The authentication process uses 
+            Called by clients to authenticate the client, and optionally the server, in a client-server connection as an asynchronous operation. The authentication process uses
 
              the specified credentials and authentication options.
 
@@ -223,7 +217,7 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
 
         AuthenticateAsClientAsync(self: NegotiateStream, credential: NetworkCredential, binding: ChannelBinding, targetName: str) -> Task
 
-            Called by clients to authenticate the client, and optionally the server, in a client-server connection as an asynchronous operation. The authentication process uses 
+            Called by clients to authenticate the client, and optionally the server, in a client-server connection as an asynchronous operation. The authentication process uses
 
              the specified client credential and the channel binding.
 
@@ -237,7 +231,7 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
 
         AuthenticateAsClientAsync(self: NegotiateStream, credential: NetworkCredential, binding: ChannelBinding, targetName: str, requiredProtectionLevel: ProtectionLevel, allowedImpersonationLevel: TokenImpersonationLevel) -> Task
 
-            Called by clients to authenticate the client, and optionally the server, in a client-server connection as an asynchronous operation. The authentication process uses 
+            Called by clients to authenticate the client, and optionally the server, in a client-server connection as an asynchronous operation. The authentication process uses
 
              the specified credential, authentication options, and channel binding.
 
@@ -254,7 +248,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
             Returns: Returns System.Threading.Tasks.TaskThe task object representing the asynchronous operation.
         """
         ...
-
     def AuthenticateAsServer(self, *__args):
         """
         AuthenticateAsServer(self: NegotiateStream)
@@ -263,7 +256,7 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
 
         AuthenticateAsServer(self: NegotiateStream, policy: ExtendedProtectionPolicy)
 
-            Called by servers to authenticate the client, and optionally the server, in a client-server connection. The authentication process uses the specified extended 
+            Called by servers to authenticate the client, and optionally the server, in a client-server connection. The authentication process uses the specified extended
 
              protection policy.
 
@@ -271,7 +264,7 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
 
         AuthenticateAsServer(self: NegotiateStream, credential: NetworkCredential, requiredProtectionLevel: ProtectionLevel, requiredImpersonationLevel: TokenImpersonationLevel)
 
-            Called by servers to authenticate the client, and optionally the server, in a client-server connection. The authentication process uses the specified server 
+            Called by servers to authenticate the client, and optionally the server, in a client-server connection. The authentication process uses the specified server
 
              credentials and authentication options.
 
@@ -283,7 +276,7 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
 
         AuthenticateAsServer(self: NegotiateStream, credential: NetworkCredential, policy: ExtendedProtectionPolicy, requiredProtectionLevel: ProtectionLevel, requiredImpersonationLevel: TokenImpersonationLevel)
 
-            Called by servers to authenticate the client, and optionally the server, in a client-server connection. The authentication process uses the specified server 
+            Called by servers to authenticate the client, and optionally the server, in a client-server connection. The authentication process uses the specified server
 
              credentials, authentication options, and extended protection policy.
 
@@ -296,7 +289,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
             requiredImpersonationLevel: One of the System.Security.Principal.TokenImpersonationLevel values, indicating how the server can use the client's credentials to access resources.
         """
         ...
-
     def AuthenticateAsServerAsync(self, *__args):
         """
         AuthenticateAsServerAsync(self: NegotiateStream) -> Task
@@ -307,7 +299,7 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
 
         AuthenticateAsServerAsync(self: NegotiateStream, policy: ExtendedProtectionPolicy) -> Task
 
-            Called by servers to authenticate the client, and optionally the server, in a client-server connection as an asynchronous operation. The authentication process uses 
+            Called by servers to authenticate the client, and optionally the server, in a client-server connection as an asynchronous operation. The authentication process uses
 
              the specified extended protection policy.
 
@@ -317,7 +309,7 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
 
         AuthenticateAsServerAsync(self: NegotiateStream, credential: NetworkCredential, requiredProtectionLevel: ProtectionLevel, requiredImpersonationLevel: TokenImpersonationLevel) -> Task
 
-            Called by servers to authenticate the client, and optionally the server, in a client-server connection as an asynchronous operation. The authentication process uses 
+            Called by servers to authenticate the client, and optionally the server, in a client-server connection as an asynchronous operation. The authentication process uses
 
              the specified server credentials and authentication options.
 
@@ -331,7 +323,7 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
 
         AuthenticateAsServerAsync(self: NegotiateStream, credential: NetworkCredential, policy: ExtendedProtectionPolicy, requiredProtectionLevel: ProtectionLevel, requiredImpersonationLevel: TokenImpersonationLevel) -> Task
 
-            Called by servers to authenticate the client, and optionally the server, in a client-server connection as an asynchronous operation. The authentication process uses 
+            Called by servers to authenticate the client, and optionally the server, in a client-server connection as an asynchronous operation. The authentication process uses
 
              the specified server credentials, authentication options, and extended protection policy.
 
@@ -346,7 +338,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
             Returns: Returns System.Threading.Tasks.TaskThe task object representing the asynchronous operation.
         """
         ...
-
     def BeginAuthenticateAsClient(self, *__args):
         """
         BeginAuthenticateAsClient(self: NegotiateStream, asyncCallback: AsyncCallback, asyncState: object) -> IAsyncResult
@@ -361,7 +352,7 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
 
         BeginAuthenticateAsClient(self: NegotiateStream, credential: NetworkCredential, targetName: str, asyncCallback: AsyncCallback, asyncState: object) -> IAsyncResult
 
-            Called by clients to begin an asynchronous operation to authenticate the client, and optionally the server, in a client-server connection. The authentication process 
+            Called by clients to begin an asynchronous operation to authenticate the client, and optionally the server, in a client-server connection. The authentication process
 
              uses the specified credentials. This method does not block.
 
@@ -377,7 +368,7 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
 
         BeginAuthenticateAsClient(self: NegotiateStream, credential: NetworkCredential, binding: ChannelBinding, targetName: str, asyncCallback: AsyncCallback, asyncState: object) -> IAsyncResult
 
-            Called by clients to begin an asynchronous operation to authenticate the client, and optionally the server, in a client-server connection. The authentication process 
+            Called by clients to begin an asynchronous operation to authenticate the client, and optionally the server, in a client-server connection. The authentication process
 
              uses the specified credentials and channel binding. This method does not block.
 
@@ -395,7 +386,7 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
 
         BeginAuthenticateAsClient(self: NegotiateStream, credential: NetworkCredential, targetName: str, requiredProtectionLevel: ProtectionLevel, allowedImpersonationLevel: TokenImpersonationLevel, asyncCallback: AsyncCallback, asyncState: object) -> IAsyncResult
 
-            Called by clients to begin an asynchronous operation to authenticate the client, and optionally the server, in a client-server connection. The authentication process 
+            Called by clients to begin an asynchronous operation to authenticate the client, and optionally the server, in a client-server connection. The authentication process
 
              uses the specified credentials and authentication options. This method does not block.
 
@@ -415,7 +406,7 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
 
         BeginAuthenticateAsClient(self: NegotiateStream, credential: NetworkCredential, binding: ChannelBinding, targetName: str, requiredProtectionLevel: ProtectionLevel, allowedImpersonationLevel: TokenImpersonationLevel, asyncCallback: AsyncCallback, asyncState: object) -> IAsyncResult
 
-            Called by clients to begin an asynchronous operation to authenticate the client, and optionally the server, in a client-server connection. The authentication process 
+            Called by clients to begin an asynchronous operation to authenticate the client, and optionally the server, in a client-server connection. The authentication process
 
              uses the specified credentials, authentication options, and channel binding. This method does not block.
 
@@ -436,7 +427,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
             Returns: An System.IAsyncResult object indicating the status of the asynchronous operation.
         """
         ...
-
     def BeginAuthenticateAsServer(self, *__args):
         """
         BeginAuthenticateAsServer(self: NegotiateStream, asyncCallback: AsyncCallback, asyncState: object) -> IAsyncResult
@@ -451,7 +441,7 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
 
         BeginAuthenticateAsServer(self: NegotiateStream, policy: ExtendedProtectionPolicy, asyncCallback: AsyncCallback, asyncState: object) -> IAsyncResult
 
-            Called by servers to begin an asynchronous operation to authenticate the client, and optionally the server, in a client-server connection. The authentication process 
+            Called by servers to begin an asynchronous operation to authenticate the client, and optionally the server, in a client-server connection. The authentication process
 
              uses the specified extended protection policy. This method does not block.
 
@@ -465,7 +455,7 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
 
         BeginAuthenticateAsServer(self: NegotiateStream, credential: NetworkCredential, requiredProtectionLevel: ProtectionLevel, requiredImpersonationLevel: TokenImpersonationLevel, asyncCallback: AsyncCallback, asyncState: object) -> IAsyncResult
 
-            Called by servers to begin an asynchronous operation to authenticate the client, and optionally the server, in a client-server connection. The authentication process 
+            Called by servers to begin an asynchronous operation to authenticate the client, and optionally the server, in a client-server connection. The authentication process
 
              uses the specified server credentials and authentication options. This method does not block.
 
@@ -483,7 +473,7 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
 
         BeginAuthenticateAsServer(self: NegotiateStream, credential: NetworkCredential, policy: ExtendedProtectionPolicy, requiredProtectionLevel: ProtectionLevel, requiredImpersonationLevel: TokenImpersonationLevel, asyncCallback: AsyncCallback, asyncState: object) -> IAsyncResult
 
-            Called by servers to begin an asynchronous operation to authenticate the client, and optionally the server, in a client-server connection. The authentication process 
+            Called by servers to begin an asynchronous operation to authenticate the client, and optionally the server, in a client-server connection. The authentication process
 
              uses the specified server credentials, authentication options, and extended protection policy. This method does not block.
 
@@ -502,7 +492,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
             Returns: An System.IAsyncResult object indicating the status of the asynchronous operation.
         """
         ...
-
     def BeginRead(self, buffer, offset, count, asyncCallback, asyncState):
         """
         BeginRead(self: NegotiateStream, buffer: Array[Byte], offset: int, count: int, asyncCallback: AsyncCallback, asyncState: object) -> IAsyncResult
@@ -522,7 +511,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
             Returns: An System.IAsyncResult object indicating the status of the asynchronous operation.
         """
         ...
-
     def BeginWrite(self, buffer, offset, count, asyncCallback, asyncState):
         """
         BeginWrite(self: NegotiateStream, buffer: Array[Byte], offset: int, count: int, asyncCallback: AsyncCallback, asyncState: object) -> IAsyncResult
@@ -542,7 +530,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
             Returns: An System.IAsyncResult object indicating the status of the asynchronous operation.
         """
         ...
-
     def EndAuthenticateAsClient(self, asyncResult):
         """
         EndAuthenticateAsClient(self: NegotiateStream, asyncResult: IAsyncResult)
@@ -552,7 +539,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
             asyncResult: An System.IAsyncResult instance returned by a call to erload:System.Net.Security.NegotiateStream.BeginAuthenticateAsClient.
         """
         ...
-
     def EndAuthenticateAsServer(self, asyncResult):
         """
         EndAuthenticateAsServer(self: NegotiateStream, asyncResult: IAsyncResult)
@@ -562,37 +548,34 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
             asyncResult: An System.IAsyncResult instance returned by a call to erload:System.Net.Security.NegotiateStream.BeginAuthenticateAsServer.
         """
         ...
-
     def EndRead(self, asyncResult):
         """
         EndRead(self: NegotiateStream, asyncResult: IAsyncResult) -> int
 
-            Ends an asynchronous read operation that was started with a call to 
+            Ends an asynchronous read operation that was started with a call to
 
              System.Net.Security.NegotiateStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object).
 
-            asyncResult: An System.IAsyncResult instance returned by a call to 
+            asyncResult: An System.IAsyncResult instance returned by a call to
 
              System.Net.Security.NegotiateStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)
 
             Returns: A System.Int32 value that specifies the number of bytes read from the underlying stream.
         """
         ...
-
     def EndWrite(self, asyncResult):
         """
         EndWrite(self: NegotiateStream, asyncResult: IAsyncResult)
 
-            Ends an asynchronous write operation that was started with a call to 
+            Ends an asynchronous write operation that was started with a call to
 
              System.Net.Security.NegotiateStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object).
 
-            asyncResult: An System.IAsyncResult instance returned by a call to 
+            asyncResult: An System.IAsyncResult instance returned by a call to
 
              System.Net.Security.NegotiateStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)
         """
         ...
-
     def Flush(self):
         """
         Flush(self: NegotiateStream)
@@ -600,7 +583,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
             Causes any buffered data to be written to the underlying device.
         """
         ...
-
     def Read(self, buffer, offset, count):
         """
         Read(self: NegotiateStream, buffer: Array[Byte], offset: int, count: int) -> int
@@ -616,7 +598,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
             Returns: A System.Int32 value that specifies the number of bytes read from the underlying stream. When there is no more data to be read, returns 0.
         """
         ...
-
     def Seek(self, offset, origin):
         """
         Seek(self: NegotiateStream, offset: Int64, origin: SeekOrigin) -> Int64
@@ -630,7 +611,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
             Returns: Always throws a System.NotSupportedException.
         """
         ...
-
     def SetLength(self, value):
         """
         SetLength(self: NegotiateStream, value: Int64)
@@ -640,7 +620,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
             value: An System.Int64 value that specifies the length of the stream.
         """
         ...
-
     def Write(self, buffer, offset, count):
         """
         Write(self: NegotiateStream, buffer: Array[Byte], offset: int, count: int)
@@ -654,7 +633,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
             count: A System.Int32 containing the number of bytes to read from buffer.
         """
         ...
-
     @property
     def CanRead(self):
         """
@@ -663,7 +641,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
         Get: CanRead(self: NegotiateStream) -> bool
         """
         ...
-
     @property
     def CanSeek(self):
         """
@@ -672,7 +649,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
         Get: CanSeek(self: NegotiateStream) -> bool
         """
         ...
-
     @property
     def CanTimeout(self):
         """
@@ -681,7 +657,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
         Get: CanTimeout(self: NegotiateStream) -> bool
         """
         ...
-
     @property
     def CanWrite(self):
         """
@@ -690,7 +665,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
         Get: CanWrite(self: NegotiateStream) -> bool
         """
         ...
-
     @property
     def ImpersonationLevel(self):
         """
@@ -699,12 +673,10 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
         Get: ImpersonationLevel(self: NegotiateStream) -> TokenImpersonationLevel
         """
         ...
-
     @property
     def InnerStream(self):
-        """ Gets the stream used by this System.Net.Security.AuthenticatedStream for sending and receiving data. """
+        """Gets the stream used by this System.Net.Security.AuthenticatedStream for sending and receiving data."""
         ...
-
     @property
     def IsAuthenticated(self):
         """
@@ -713,7 +685,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
         Get: IsAuthenticated(self: NegotiateStream) -> bool
         """
         ...
-
     @property
     def IsEncrypted(self):
         """
@@ -722,7 +693,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
         Get: IsEncrypted(self: NegotiateStream) -> bool
         """
         ...
-
     @property
     def IsMutuallyAuthenticated(self):
         """
@@ -731,7 +701,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
         Get: IsMutuallyAuthenticated(self: NegotiateStream) -> bool
         """
         ...
-
     @property
     def IsServer(self):
         """
@@ -740,7 +709,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
         Get: IsServer(self: NegotiateStream) -> bool
         """
         ...
-
     @property
     def IsSigned(self):
         """
@@ -749,7 +717,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
         Get: IsSigned(self: NegotiateStream) -> bool
         """
         ...
-
     @property
     def Length(self):
         """
@@ -758,7 +725,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
         Get: Length(self: NegotiateStream) -> Int64
         """
         ...
-
     @property
     def Position(self):
         """
@@ -769,7 +735,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
         Set: Position(self: NegotiateStream) = value
         """
         ...
-
     @property
     def ReadTimeout(self):
         """
@@ -780,7 +745,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
         Set: ReadTimeout(self: NegotiateStream) = value
         """
         ...
-
     @property
     def RemoteIdentity(self):
         """
@@ -789,7 +753,6 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
         Get: RemoteIdentity(self: NegotiateStream) -> IIdentity
         """
         ...
-
     @property
     def WriteTimeout(self):
         """
@@ -801,53 +764,50 @@ class NegotiateStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'
         """
         ...
 
-
-
-class ProtectionLevel(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class ProtectionLevel(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Indicates the security services requested for an authenticated stream.
 
     enum ProtectionLevel, values: EncryptAndSign (2), None (0), Sign (1)
     """
+
     EncryptAndSign = None
-    None = None
+
     Sign = None
     value__ = None
 
-
-class RemoteCertificateValidationCallback(MulticastDelegate): # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
+class RemoteCertificateValidationCallback(
+    MulticastDelegate
+):  # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
     """
     Verifies the remote Secure Sockets Layer (SSL) certificate used for authentication.
 
     RemoteCertificateValidationCallback(object: object, method: IntPtr)
     """
+
     def BeginInvoke(self, sender, certificate, chain, sslPolicyErrors, callback, object):
-        """ BeginInvoke(self: RemoteCertificateValidationCallback, sender: object, certificate: X509Certificate, chain: X509Chain, sslPolicyErrors: SslPolicyErrors, callback: AsyncCallback, object: object) -> IAsyncResult """
+        """BeginInvoke(self: RemoteCertificateValidationCallback, sender: object, certificate: X509Certificate, chain: X509Chain, sslPolicyErrors: SslPolicyErrors, callback: AsyncCallback, object: object) -> IAsyncResult"""
         ...
-
     def EndInvoke(self, result):
-        """ EndInvoke(self: RemoteCertificateValidationCallback, result: IAsyncResult) -> bool """
+        """EndInvoke(self: RemoteCertificateValidationCallback, result: IAsyncResult) -> bool"""
         ...
-
     def Invoke(self, sender, certificate, chain, sslPolicyErrors):
-        """ Invoke(self: RemoteCertificateValidationCallback, sender: object, certificate: X509Certificate, chain: X509Chain, sslPolicyErrors: SslPolicyErrors) -> bool """
+        """Invoke(self: RemoteCertificateValidationCallback, sender: object, certificate: X509Certificate, chain: X509Chain, sslPolicyErrors: SslPolicyErrors) -> bool"""
         ...
 
-
-class SslPolicyErrors(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SslPolicyErrors(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Enumerates Secure Socket Layer (SSL) policy errors.
 
     enum (flags) SslPolicyErrors, values: None (0), RemoteCertificateChainErrors (4), RemoteCertificateNameMismatch (2), RemoteCertificateNotAvailable (1)
     """
-    None = None
+
     RemoteCertificateChainErrors = None
     RemoteCertificateNameMismatch = None
     RemoteCertificateNotAvailable = None
     value__ = None
 
-
-class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
+class SslStream(AuthenticatedStream):  # skipped bases: <type 'IDisposable'>
     """
     Provides a stream used for client-server communication that uses the Secure Socket Layer (SSL) security protocol to authenticate the server and optionally the client.
 
@@ -861,11 +821,12 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
 
     SslStream(innerStream: Stream, leaveInnerStreamOpen: bool, userCertificateValidationCallback: RemoteCertificateValidationCallback, userCertificateSelectionCallback: LocalCertificateSelectionCallback, encryptionPolicy: EncryptionPolicy)
     """
+
     def AuthenticateAsClient(self, targetHost, clientCertificates=None, *__args):
         """
         AuthenticateAsClient(self: SslStream, targetHost: str, clientCertificates: X509CertificateCollection, enabledSslProtocols: SslProtocols, checkCertificateRevocation: bool)
 
-            Called by clients to authenticate the server and optionally the client in a client-server connection. The authentication process uses the specified certificate 
+            Called by clients to authenticate the server and optionally the client in a client-server connection. The authentication process uses the specified certificate
 
              collection and SSL protocol.
 
@@ -885,7 +846,7 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
 
         AuthenticateAsClient(self: SslStream, targetHost: str, clientCertificates: X509CertificateCollection, checkCertificateRevocation: bool)
 
-            Called by clients to authenticate the server and optionally the client in a client-server connection. The authentication process uses the specified certificate 
+            Called by clients to authenticate the server and optionally the client in a client-server connection. The authentication process uses the specified certificate
 
              collection, and the system default SSL protocol.
 
@@ -896,12 +857,11 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
             checkCertificateRevocation: A System.Boolean value that specifies whether the certificate revocation list is checked during authentication.
         """
         ...
-
     def AuthenticateAsClientAsync(self, targetHost, clientCertificates=None, *__args):
         """
         AuthenticateAsClientAsync(self: SslStream, targetHost: str, clientCertificates: X509CertificateCollection, checkCertificateRevocation: bool) -> Task
 
-            Called by clients to authenticate the server and optionally the client in a client-server connection as an asynchronous operation. The authentication process uses the 
+            Called by clients to authenticate the server and optionally the client in a client-server connection as an asynchronous operation. The authentication process uses the
 
              specified certificate collection and the system default SSL protocol.
 
@@ -923,7 +883,7 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
 
         AuthenticateAsClientAsync(self: SslStream, targetHost: str, clientCertificates: X509CertificateCollection, enabledSslProtocols: SslProtocols, checkCertificateRevocation: bool) -> Task
 
-            Called by clients to authenticate the server and optionally the client in a client-server connection as an asynchronous operation. The authentication process uses the 
+            Called by clients to authenticate the server and optionally the client in a client-server connection as an asynchronous operation. The authentication process uses the
 
              specified certificate collection and SSL protocol.
 
@@ -938,7 +898,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
             Returns: Returns System.Threading.Tasks.TaskThe task object representing the asynchronous operation.
         """
         ...
-
     def AuthenticateAsServer(self, serverCertificate, clientCertificateRequired=None, *__args):
         """
         AuthenticateAsServer(self: SslStream, serverCertificate: X509Certificate)
@@ -949,13 +908,13 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
 
         AuthenticateAsServer(self: SslStream, serverCertificate: X509Certificate, clientCertificateRequired: bool, checkCertificateRevocation: bool)
 
-            Called by servers to authenticate the server and optionally the client in a client-server connection using the specified certificates and requirements, and using the 
+            Called by servers to authenticate the server and optionally the client in a client-server connection using the specified certificates and requirements, and using the
 
              sytem default security protocol.
 
             serverCertificate: The X509Certificate used to authenticate the server.
 
-            clientCertificateRequired: A System.Boolean value that specifies whether the client is asked for a certificate for authentication. Note that this is only a request -- if no certificate is 
+            clientCertificateRequired: A System.Boolean value that specifies whether the client is asked for a certificate for authentication. Note that this is only a request -- if no certificate is
 
              provided, the server still accepts the connection request.
 
@@ -963,13 +922,13 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
 
         AuthenticateAsServer(self: SslStream, serverCertificate: X509Certificate, clientCertificateRequired: bool, enabledSslProtocols: SslProtocols, checkCertificateRevocation: bool)
 
-            Called by servers to authenticate the server and optionally the client in a client-server connection using the specified certificates, requirements and security 
+            Called by servers to authenticate the server and optionally the client in a client-server connection using the specified certificates, requirements and security
 
              protocol.
 
             serverCertificate: The X509Certificate used to authenticate the server.
 
-            clientCertificateRequired: A System.Boolean value that specifies whether the client is asked for a certificate for authentication. Note that this is only a request -- if no certificate is 
+            clientCertificateRequired: A System.Boolean value that specifies whether the client is asked for a certificate for authentication. Note that this is only a request -- if no certificate is
 
              provided, the server still accepts the connection request.
 
@@ -978,18 +937,17 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
             checkCertificateRevocation: A System.Boolean value that specifies whether the certificate revocation list is checked during authentication.
         """
         ...
-
     def AuthenticateAsServerAsync(self, serverCertificate, clientCertificateRequired=None, *__args):
         """
         AuthenticateAsServerAsync(self: SslStream, serverCertificate: X509Certificate, clientCertificateRequired: bool, checkCertificateRevocation: bool) -> Task
 
-            Called by servers to authenticate the server and optionally the client in a client-server connection using the specified certificates, requirements and security 
+            Called by servers to authenticate the server and optionally the client in a client-server connection using the specified certificates, requirements and security
 
              protocol as an asynchronous operation.
 
             serverCertificate: The X509Certificate used to authenticate the server.
 
-            clientCertificateRequired: A System.Boolean value that specifies whether the client is asked for a certificate for authentication. Note that this is only a request -- if no certificate is 
+            clientCertificateRequired: A System.Boolean value that specifies whether the client is asked for a certificate for authentication. Note that this is only a request -- if no certificate is
 
              provided, the server still accepts the connection request.
 
@@ -1007,13 +965,13 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
 
         AuthenticateAsServerAsync(self: SslStream, serverCertificate: X509Certificate, clientCertificateRequired: bool, enabledSslProtocols: SslProtocols, checkCertificateRevocation: bool) -> Task
 
-            Called by servers to authenticate the server and optionally the client in a client-server connection using the specified certificates, requirements and security 
+            Called by servers to authenticate the server and optionally the client in a client-server connection using the specified certificates, requirements and security
 
              protocol as an asynchronous operation.
 
             serverCertificate: The X509Certificate used to authenticate the server.
 
-            clientCertificateRequired: A System.Boolean value that specifies whether the client is asked for a certificate for authentication. Note that this is only a request -- if no certificate is 
+            clientCertificateRequired: A System.Boolean value that specifies whether the client is asked for a certificate for authentication. Note that this is only a request -- if no certificate is
 
              provided, the server still accepts the connection request.
 
@@ -1024,7 +982,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
             Returns: Returns System.Threading.Tasks.TaskThe task object representing the asynchronous operation.
         """
         ...
-
     def BeginAuthenticateAsClient(self, targetHost, *__args):
         """
         BeginAuthenticateAsClient(self: SslStream, targetHost: str, asyncCallback: AsyncCallback, asyncState: object) -> IAsyncResult
@@ -1041,7 +998,7 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
 
         BeginAuthenticateAsClient(self: SslStream, targetHost: str, clientCertificates: X509CertificateCollection, checkCertificateRevocation: bool, asyncCallback: AsyncCallback, asyncState: object) -> IAsyncResult
 
-            Called by clients to begin an asynchronous operation to authenticate the server and optionally the client using the specified certificates and the system default 
+            Called by clients to begin an asynchronous operation to authenticate the server and optionally the client using the specified certificates and the system default
 
              security protocol.
 
@@ -1076,7 +1033,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
             Returns: An System.IAsyncResult object that indicates the status of the asynchronous operation.
         """
         ...
-
     def BeginAuthenticateAsServer(self, serverCertificate, *__args):
         """
         BeginAuthenticateAsServer(self: SslStream, serverCertificate: X509Certificate, asyncCallback: AsyncCallback, asyncState: object) -> IAsyncResult
@@ -1093,13 +1049,13 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
 
         BeginAuthenticateAsServer(self: SslStream, serverCertificate: X509Certificate, clientCertificateRequired: bool, checkCertificateRevocation: bool, asyncCallback: AsyncCallback, asyncState: object) -> IAsyncResult
 
-            Called by servers to begin an asynchronous operation to authenticate the server and optionally the client using the specified certificates and requirements, and the 
+            Called by servers to begin an asynchronous operation to authenticate the server and optionally the client using the specified certificates and requirements, and the
 
              system default security protocol.
 
             serverCertificate: The X509Certificate used to authenticate the server.
 
-            clientCertificateRequired: A System.Boolean value that specifies whether the client is asked for a certificate for authentication. Note that this is only a request -- if no certificate is 
+            clientCertificateRequired: A System.Boolean value that specifies whether the client is asked for a certificate for authentication. Note that this is only a request -- if no certificate is
 
              provided, the server still accepts the connection request.
 
@@ -1113,13 +1069,13 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
 
         BeginAuthenticateAsServer(self: SslStream, serverCertificate: X509Certificate, clientCertificateRequired: bool, enabledSslProtocols: SslProtocols, checkCertificateRevocation: bool, asyncCallback: AsyncCallback, asyncState: object) -> IAsyncResult
 
-            Called by servers to begin an asynchronous operation to authenticate the server and optionally the client using the specified certificates, requirements and security 
+            Called by servers to begin an asynchronous operation to authenticate the server and optionally the client using the specified certificates, requirements and security
 
              protocol.
 
             serverCertificate: The X509Certificate used to authenticate the server.
 
-            clientCertificateRequired: A System.Boolean value that specifies whether the client is asked for a certificate for authentication. Note that this is only a request -- if no certificate is 
+            clientCertificateRequired: A System.Boolean value that specifies whether the client is asked for a certificate for authentication. Note that this is only a request -- if no certificate is
 
              provided, the server still accepts the connection request.
 
@@ -1134,7 +1090,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
             Returns: An System.IAsyncResult object that indicates the status of the asynchronous operation.
         """
         ...
-
     def BeginRead(self, buffer, offset, count, asyncCallback, asyncState):
         """
         BeginRead(self: SslStream, buffer: Array[Byte], offset: int, count: int, asyncCallback: AsyncCallback, asyncState: object) -> IAsyncResult
@@ -1154,7 +1109,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
             Returns: An System.IAsyncResult object that indicates the status of the asynchronous operation.
         """
         ...
-
     def BeginWrite(self, buffer, offset, count, asyncCallback, asyncState):
         """
         BeginWrite(self: SslStream, buffer: Array[Byte], offset: int, count: int, asyncCallback: AsyncCallback, asyncState: object) -> IAsyncResult
@@ -1174,7 +1128,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
             Returns: An System.IAsyncResult object indicating the status of the asynchronous operation.
         """
         ...
-
     def EndAuthenticateAsClient(self, asyncResult):
         """
         EndAuthenticateAsClient(self: SslStream, asyncResult: IAsyncResult)
@@ -1184,7 +1137,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
             asyncResult: An System.IAsyncResult instance returned by a call to erload:System.Net.Security.SslStream.BeginAuthenticateAsServer.
         """
         ...
-
     def EndAuthenticateAsServer(self, asyncResult):
         """
         EndAuthenticateAsServer(self: SslStream, asyncResult: IAsyncResult)
@@ -1194,37 +1146,34 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
             asyncResult: An System.IAsyncResult instance returned by a call to erload:System.Net.Security.SslStream.BeginAuthenticateAsClient.
         """
         ...
-
     def EndRead(self, asyncResult):
         """
         EndRead(self: SslStream, asyncResult: IAsyncResult) -> int
 
-            Ends an asynchronous read operation started with a previous call to 
+            Ends an asynchronous read operation started with a previous call to
 
              System.Net.Security.SslStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object).
 
-            asyncResult: An System.IAsyncResult instance returned by a call to 
+            asyncResult: An System.IAsyncResult instance returned by a call to
 
              System.Net.Security.SslStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)
 
             Returns: A System.Int32 value that specifies the number of bytes read from the underlying stream.
         """
         ...
-
     def EndWrite(self, asyncResult):
         """
         EndWrite(self: SslStream, asyncResult: IAsyncResult)
 
-            Ends an asynchronous write operation started with a previous call to 
+            Ends an asynchronous write operation started with a previous call to
 
              System.Net.Security.SslStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object).
 
-            asyncResult: An System.IAsyncResult instance returned by a call to 
+            asyncResult: An System.IAsyncResult instance returned by a call to
 
              System.Net.Security.SslStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)
         """
         ...
-
     def Flush(self):
         """
         Flush(self: SslStream)
@@ -1232,7 +1181,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
             Causes any buffered data to be written to the underlying device.
         """
         ...
-
     def Read(self, buffer, offset, count):
         """
         Read(self: SslStream, buffer: Array[Byte], offset: int, count: int) -> int
@@ -1248,7 +1196,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
             Returns: A System.Int32 value that specifies the number of bytes read. When there is no more data to be read, returns 0.
         """
         ...
-
     def Seek(self, offset, origin):
         """
         Seek(self: SslStream, offset: Int64, origin: SeekOrigin) -> Int64
@@ -1262,7 +1209,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
             Returns: Always throws a System.NotSupportedException.
         """
         ...
-
     def SetLength(self, value):
         """
         SetLength(self: SslStream, value: Int64)
@@ -1272,7 +1218,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
             value: An System.Int64 value that specifies the length of the stream.
         """
         ...
-
     def ShutdownAsync(self):
         """
         ShutdownAsync(self: SslStream) -> Task
@@ -1282,7 +1227,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
             Returns: The task object representing the asynchronous operation.
         """
         ...
-
     def Write(self, buffer, offset=None, count=None):
         """
         Write(self: SslStream, buffer: Array[Byte], offset: int, count: int)
@@ -1302,7 +1246,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
             buffer: A System.Byte array that supplies the bytes written to the stream.
         """
         ...
-
     @property
     def CanRead(self):
         """
@@ -1311,7 +1254,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Get: CanRead(self: SslStream) -> bool
         """
         ...
-
     @property
     def CanSeek(self):
         """
@@ -1320,7 +1262,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Get: CanSeek(self: SslStream) -> bool
         """
         ...
-
     @property
     def CanTimeout(self):
         """
@@ -1329,7 +1270,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Get: CanTimeout(self: SslStream) -> bool
         """
         ...
-
     @property
     def CanWrite(self):
         """
@@ -1338,7 +1278,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Get: CanWrite(self: SslStream) -> bool
         """
         ...
-
     @property
     def CheckCertRevocationStatus(self):
         """
@@ -1347,7 +1286,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Get: CheckCertRevocationStatus(self: SslStream) -> bool
         """
         ...
-
     @property
     def CipherAlgorithm(self):
         """
@@ -1356,7 +1294,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Get: CipherAlgorithm(self: SslStream) -> CipherAlgorithmType
         """
         ...
-
     @property
     def CipherStrength(self):
         """
@@ -1365,7 +1302,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Get: CipherStrength(self: SslStream) -> int
         """
         ...
-
     @property
     def HashAlgorithm(self):
         """
@@ -1374,7 +1310,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Get: HashAlgorithm(self: SslStream) -> HashAlgorithmType
         """
         ...
-
     @property
     def HashStrength(self):
         """
@@ -1383,12 +1318,10 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Get: HashStrength(self: SslStream) -> int
         """
         ...
-
     @property
     def InnerStream(self):
-        """ Gets the stream used by this System.Net.Security.AuthenticatedStream for sending and receiving data. """
+        """Gets the stream used by this System.Net.Security.AuthenticatedStream for sending and receiving data."""
         ...
-
     @property
     def IsAuthenticated(self):
         """
@@ -1397,7 +1330,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Get: IsAuthenticated(self: SslStream) -> bool
         """
         ...
-
     @property
     def IsEncrypted(self):
         """
@@ -1406,7 +1338,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Get: IsEncrypted(self: SslStream) -> bool
         """
         ...
-
     @property
     def IsMutuallyAuthenticated(self):
         """
@@ -1415,7 +1346,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Get: IsMutuallyAuthenticated(self: SslStream) -> bool
         """
         ...
-
     @property
     def IsServer(self):
         """
@@ -1424,7 +1354,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Get: IsServer(self: SslStream) -> bool
         """
         ...
-
     @property
     def IsSigned(self):
         """
@@ -1433,7 +1362,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Get: IsSigned(self: SslStream) -> bool
         """
         ...
-
     @property
     def KeyExchangeAlgorithm(self):
         """
@@ -1442,7 +1370,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Get: KeyExchangeAlgorithm(self: SslStream) -> ExchangeAlgorithmType
         """
         ...
-
     @property
     def KeyExchangeStrength(self):
         """
@@ -1451,7 +1378,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Get: KeyExchangeStrength(self: SslStream) -> int
         """
         ...
-
     @property
     def Length(self):
         """
@@ -1460,7 +1386,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Get: Length(self: SslStream) -> Int64
         """
         ...
-
     @property
     def LocalCertificate(self):
         """
@@ -1469,7 +1394,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Get: LocalCertificate(self: SslStream) -> X509Certificate
         """
         ...
-
     @property
     def Position(self):
         """
@@ -1480,7 +1404,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Set: Position(self: SslStream) = value
         """
         ...
-
     @property
     def ReadTimeout(self):
         """
@@ -1491,7 +1414,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Set: ReadTimeout(self: SslStream) = value
         """
         ...
-
     @property
     def RemoteCertificate(self):
         """
@@ -1500,7 +1422,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Get: RemoteCertificate(self: SslStream) -> X509Certificate
         """
         ...
-
     @property
     def SslProtocol(self):
         """
@@ -1509,7 +1430,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Get: SslProtocol(self: SslStream) -> SslProtocols
         """
         ...
-
     @property
     def TransportContext(self):
         """
@@ -1518,7 +1438,6 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Get: TransportContext(self: SslStream) -> TransportContext
         """
         ...
-
     @property
     def WriteTimeout(self):
         """
@@ -1529,6 +1448,3 @@ class SslStream(AuthenticatedStream): # skipped bases: <type 'IDisposable'>
         Set: WriteTimeout(self: SslStream) = value
         """
         ...
-
-
-

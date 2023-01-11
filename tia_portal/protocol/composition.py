@@ -1,24 +1,22 @@
 from __future__ import annotations
-from typing import Any, Generic, Optional, Protocol, Self, TypeVar
+from typing import Any, Optional, Protocol, Self, TypeVar, Iterator
 
-from objects import TiaObject
+from tia_portal.protocol.objects import TiaObject
 
 T = TypeVar("T", covariant=True)
-_V = TypeVar("_V")
-P = TypeVar("P")
 
 
-class Composition(TiaObject[_V], Generic[T, _V], Protocol):
+class Composition(TiaObject, Protocol[T]):
     def __init__(self, parent: Any):
         ...
 
-    def __iter__(self) -> T:
+    def __iter__(self) -> Iterator[T]:
         ...
 
-class CompositionItem(TiaObject[_V], Generic[_V], Protocol):
-    def __init__(self, parent: Composition[Self, _V], name: str):
+    def find(self, name: str) -> Optional[T]:
         ...
 
-    @staticmethod
-    def find(object: Composition[T, Any], name: str) -> Optional[T]:
+
+class CompositionItem(TiaObject, Protocol):
+    def __init__(self, parent: Composition[Self], name: str):  # type: ignore
         ...

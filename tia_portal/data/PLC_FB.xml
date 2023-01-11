@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Document>
+<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../tia-portal-schemas/workspace/document.xsd">
   <Engineering version="V15.1" />
   <DocumentInfo>
     <Created>2022-12-20T09:13:23.6419598Z</Created>
@@ -92,7 +92,7 @@
       <Name>PLC_FB</Name>
       <Number>510</Number>
       <ProgrammingLanguage>FBD</ProgrammingLanguage>
-      <SetENOAutomatically>False</SetENOAutomatically>
+      <SetENOAutomatically>false</SetENOAutomatically>
     </AttributeList>
     <ObjectList>
       <MultilingualText ID="1" CompositionName="Comment">

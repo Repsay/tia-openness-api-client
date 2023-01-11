@@ -8,27 +8,28 @@
 # no functions
 # classes
 
-class HttpCacheAgeControl(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class HttpCacheAgeControl(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the meaning of time values that control caching behavior for resources obtained using System.Net.HttpWebRequest objects.
 
     enum HttpCacheAgeControl, values: MaxAge (2), MaxAgeAndMaxStale (6), MaxAgeAndMinFresh (3), MaxStale (4), MinFresh (1), None (0)
     """
+
     MaxAge = None
     MaxAgeAndMaxStale = None
     MaxAgeAndMinFresh = None
     MaxStale = None
     MinFresh = None
-    None = None
+
     value__ = None
 
-
-class HttpRequestCacheLevel(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class HttpRequestCacheLevel(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies caching behavior for resources obtained using the Hypertext Transfer protocol (HTTP).
 
     enum HttpRequestCacheLevel, values: BypassCache (1), CacheIfAvailable (3), CacheOnly (2), CacheOrNextCacheOnly (7), Default (0), NoCacheNoStore (6), Refresh (8), Reload (5), Revalidate (4)
     """
+
     BypassCache = None
     CacheIfAvailable = None
     CacheOnly = None
@@ -40,8 +41,7 @@ class HttpRequestCacheLevel(Enum): # skipped bases: <type 'IComparable'>, <type 
     Revalidate = None
     value__ = None
 
-
-class RequestCachePolicy: # skipped bases: <type 'object'>
+class RequestCachePolicy:  # skipped bases: <type 'object'>
     """
     Defines an application's caching requirements for resources obtained by using System.Net.WebRequest objects.
 
@@ -49,6 +49,7 @@ class RequestCachePolicy: # skipped bases: <type 'object'>
 
     RequestCachePolicy(level: RequestCacheLevel)
     """
+
     def ToString(self):
         """
         ToString(self: RequestCachePolicy) -> str
@@ -58,7 +59,6 @@ class RequestCachePolicy: # skipped bases: <type 'object'>
             Returns: A System.String containing the System.Net.Cache.RequestCachePolicy.Level for this instance.
         """
         ...
-
     @property
     def Level(self):
         """
@@ -67,8 +67,6 @@ class RequestCachePolicy: # skipped bases: <type 'object'>
         Get: Level(self: RequestCachePolicy) -> RequestCacheLevel
         """
         ...
-
-
 
 class HttpRequestCachePolicy(RequestCachePolicy):
     """
@@ -86,6 +84,7 @@ class HttpRequestCachePolicy(RequestCachePolicy):
 
     HttpRequestCachePolicy(cacheAgeControl: HttpCacheAgeControl, maxAge: TimeSpan, freshOrStale: TimeSpan, cacheSyncDate: DateTime)
     """
+
     @property
     def CacheSyncDate(self):
         """
@@ -94,7 +93,6 @@ class HttpRequestCachePolicy(RequestCachePolicy):
         Get: CacheSyncDate(self: HttpRequestCachePolicy) -> DateTime
         """
         ...
-
     @property
     def Level(self):
         """
@@ -103,7 +101,6 @@ class HttpRequestCachePolicy(RequestCachePolicy):
         Get: Level(self: HttpRequestCachePolicy) -> HttpRequestCacheLevel
         """
         ...
-
     @property
     def MaxAge(self):
         """
@@ -112,7 +109,6 @@ class HttpRequestCachePolicy(RequestCachePolicy):
         Get: MaxAge(self: HttpRequestCachePolicy) -> TimeSpan
         """
         ...
-
     @property
     def MaxStale(self):
         """
@@ -121,7 +117,6 @@ class HttpRequestCachePolicy(RequestCachePolicy):
         Get: MaxStale(self: HttpRequestCachePolicy) -> TimeSpan
         """
         ...
-
     @property
     def MinFresh(self):
         """
@@ -131,14 +126,13 @@ class HttpRequestCachePolicy(RequestCachePolicy):
         """
         ...
 
-
-
-class RequestCacheLevel(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class RequestCacheLevel(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies caching behavior for resources obtained using System.Net.WebRequest and its derived classes.
 
     enum RequestCacheLevel, values: BypassCache (1), CacheIfAvailable (3), CacheOnly (2), Default (0), NoCacheNoStore (6), Reload (5), Revalidate (4)
     """
+
     BypassCache = None
     CacheIfAvailable = None
     CacheOnly = None
@@ -147,5 +141,3 @@ class RequestCacheLevel(Enum): # skipped bases: <type 'IComparable'>, <type 'ICo
     Reload = None
     Revalidate = None
     value__ = None
-
-

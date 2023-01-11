@@ -88,7 +88,7 @@ class AuthenticationSchemes(Enum): # skipped bases: <type 'IComparable'>, <type 
     Digest = None
     IntegratedWindowsAuthentication = None
     Negotiate = None
-    None = None
+
     Ntlm = None
     value__ = None
 
@@ -712,7 +712,7 @@ class DecompressionMethods(Enum): # skipped bases: <type 'IComparable'>, <type '
     """
     Deflate = None
     GZip = None
-    None = None
+
     value__ = None
 
 
@@ -4577,7 +4577,7 @@ class IPAddress: # skipped bases: <type 'object'>
     IPv6Loopback = None
     IPv6None = None
     Loopback = None
-    None = None
+
 
 
 class IPEndPoint(EndPoint):

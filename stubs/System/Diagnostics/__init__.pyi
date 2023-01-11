@@ -10,10 +10,10 @@
 
 from typing import Optional
 
+class Switch:  # skipped bases: <type 'object'>
+    """Provides an abstract base class to create new debugging and tracing switches."""
 
-class Switch: # skipped bases: <type 'object'>
-    """ Provides an abstract base class to create new debugging and tracing switches. """
-    def GetSupportedAttributes(self, *args): #cannot find CLR method
+    def GetSupportedAttributes(self, *args):  # cannot find CLR method
         """
         GetSupportedAttributes(self: Switch) -> Array[str]
 
@@ -22,23 +22,20 @@ class Switch: # skipped bases: <type 'object'>
             Returns: A string array that contains the names of the custom attributes supported by the switch, or ll if there no custom attributes are supported.
         """
         ...
-
-    def OnSwitchSettingChanged(self, *args): #cannot find CLR method
+    def OnSwitchSettingChanged(self, *args):  # cannot find CLR method
         """
         OnSwitchSettingChanged(self: Switch)
 
             Invoked when the System.Diagnostics.Switch.SwitchSetting property is changed.
         """
         ...
-
-    def OnValueChanged(self, *args): #cannot find CLR method
+    def OnValueChanged(self, *args):  # cannot find CLR method
         """
         OnValueChanged(self: Switch)
 
             Invoked when the System.Diagnostics.Switch.Value property is changed.
         """
         ...
-
     @property
     def Attributes(self):
         """
@@ -47,7 +44,6 @@ class Switch: # skipped bases: <type 'object'>
         Get: Attributes(self: Switch) -> StringDictionary
         """
         ...
-
     @property
     def Description(self):
         """
@@ -56,7 +52,6 @@ class Switch: # skipped bases: <type 'object'>
         Get: Description(self: Switch) -> str
         """
         ...
-
     @property
     def DisplayName(self):
         """
@@ -65,18 +60,14 @@ class Switch: # skipped bases: <type 'object'>
         Get: DisplayName(self: Switch) -> str
         """
         ...
-
     @property
     def SwitchSetting(self):
-        """ Gets or sets the current setting for this switch. """
+        """Gets or sets the current setting for this switch."""
         ...
-
     @property
     def Value(self):
-        """ Gets or sets the value of the switch. """
+        """Gets or sets the value of the switch."""
         ...
-
-
 
 class BooleanSwitch(Switch):
     """
@@ -86,6 +77,7 @@ class BooleanSwitch(Switch):
 
     BooleanSwitch(displayName: str, description: str, defaultSwitchValue: str)
     """
+
     @property
     def Enabled(self):
         """
@@ -96,30 +88,26 @@ class BooleanSwitch(Switch):
         Set: Enabled(self: BooleanSwitch) = value
         """
         ...
-
     @property
     def SwitchSetting(self):
-        """ Gets or sets the current setting for this switch. """
+        """Gets or sets the current setting for this switch."""
         ...
-
     @property
     def Value(self):
-        """ Gets or sets the value of the switch. """
+        """Gets or sets the value of the switch."""
         ...
 
-
-
-class ConditionalAttribute(Attribute): # skipped bases: <type '_Attribute'>
+class ConditionalAttribute(Attribute):  # skipped bases: <type '_Attribute'>
     """
     Indicates to compilers that a method call or attribute should be ignored unless a specified conditional compilation symbol is defined.
 
     ConditionalAttribute(conditionString: str)
     """
-    @staticmethod # known case of __new__
-    def __new__(cls, conditionString):
-        """ __new__(cls: type, conditionString: str) """
-        ...
 
+    @staticmethod  # known case of __new__
+    def __new__(cls, conditionString):
+        """__new__(cls: type, conditionString: str)"""
+        ...
     @property
     def ConditionString(self):
         """
@@ -129,10 +117,9 @@ class ConditionalAttribute(Attribute): # skipped bases: <type '_Attribute'>
         """
         ...
 
-
-
 class TraceListener(MarshalByRefObject, IDisposable):
-    """ Provides the stract base class for the listeners who monitor trace and debug output. """
+    """Provides the stract base class for the listeners who monitor trace and debug output."""
+
     def Close(self):
         """
         Close(self: TraceListener)
@@ -140,7 +127,6 @@ class TraceListener(MarshalByRefObject, IDisposable):
             When overridden in a derived class, closes the output stream so it no longer receives tracing or debugging output.
         """
         ...
-
     def Fail(self, message, detailMessage=None):
         """
         Fail(self: TraceListener, message: str)
@@ -158,7 +144,6 @@ class TraceListener(MarshalByRefObject, IDisposable):
             detailMessage: A detailed message to emit.
         """
         ...
-
     def Flush(self):
         """
         Flush(self: TraceListener)
@@ -166,8 +151,7 @@ class TraceListener(MarshalByRefObject, IDisposable):
             When overridden in a derived class, flushes the output buffer.
         """
         ...
-
-    def GetSupportedAttributes(self, *args): #cannot find CLR method
+    def GetSupportedAttributes(self, *args):  # cannot find CLR method
         """
         GetSupportedAttributes(self: TraceListener) -> Array[str]
 
@@ -176,7 +160,6 @@ class TraceListener(MarshalByRefObject, IDisposable):
             Returns: A string array naming the custom attributes supported by the trace listener, or ll if there are no custom attributes.
         """
         ...
-
     def TraceData(self, eventCache, source, eventType, id, data):
         """
         TraceData(self: TraceListener, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int, data: object)
@@ -208,7 +191,6 @@ class TraceListener(MarshalByRefObject, IDisposable):
             data: An array of objects to emit as data.
         """
         ...
-
     def TraceEvent(self, eventCache, source, eventType, id, *__args):
         """
         TraceEvent(self: TraceListener, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int)
@@ -254,7 +236,6 @@ class TraceListener(MarshalByRefObject, IDisposable):
             args: An ject array containing zero or more objects to format.
         """
         ...
-
     def TraceTransfer(self, eventCache, source, id, message, relatedActivityId):
         """
         TraceTransfer(self: TraceListener, eventCache: TraceEventCache, source: str, id: int, message: str, relatedActivityId: Guid)
@@ -272,7 +253,6 @@ class TraceListener(MarshalByRefObject, IDisposable):
             relatedActivityId: A System.Guid  object identifying a related activity.
         """
         ...
-
     def Write(self, *__args):
         """
         Write(self: TraceListener, o: object)
@@ -304,15 +284,13 @@ class TraceListener(MarshalByRefObject, IDisposable):
             category: A category name used to organize the output.
         """
         ...
-
-    def WriteIndent(self, *args): #cannot find CLR method
+    def WriteIndent(self, *args):  # cannot find CLR method
         """
         WriteIndent(self: TraceListener)
 
             Writes the indent to the listener you create when you implement this class, and resets the System.Diagnostics.TraceListener.NeedIndent property to lse.
         """
         ...
-
     def WriteLine(self, *__args):
         """
         WriteLine(self: TraceListener, o: object)
@@ -344,16 +322,14 @@ class TraceListener(MarshalByRefObject, IDisposable):
             category: A category name used to organize the output.
         """
         ...
-
-    @staticmethod # known case of __new__
-    def __new__(cls, *args): #cannot find CLR constructor
+    @staticmethod  # known case of __new__
+    def __new__(cls, *args):  # cannot find CLR constructor
         """
         __new__(cls: type)
 
         __new__(cls: type, name: str)
         """
         ...
-
     @property
     def Attributes(self):
         """
@@ -362,7 +338,6 @@ class TraceListener(MarshalByRefObject, IDisposable):
         Get: Attributes(self: TraceListener) -> StringDictionary
         """
         ...
-
     @property
     def Filter(self):
         """
@@ -373,7 +348,6 @@ class TraceListener(MarshalByRefObject, IDisposable):
         Set: Filter(self: TraceListener) = value
         """
         ...
-
     @property
     def IndentLevel(self):
         """
@@ -384,7 +358,6 @@ class TraceListener(MarshalByRefObject, IDisposable):
         Set: IndentLevel(self: TraceListener) = value
         """
         ...
-
     @property
     def IndentSize(self):
         """
@@ -395,7 +368,6 @@ class TraceListener(MarshalByRefObject, IDisposable):
         Set: IndentSize(self: TraceListener) = value
         """
         ...
-
     @property
     def IsThreadSafe(self):
         """
@@ -404,7 +376,6 @@ class TraceListener(MarshalByRefObject, IDisposable):
         Get: IsThreadSafe(self: TraceListener) -> bool
         """
         ...
-
     @property
     def Name(self):
         """
@@ -415,12 +386,10 @@ class TraceListener(MarshalByRefObject, IDisposable):
         Set: Name(self: TraceListener) = value
         """
         ...
-
     @property
     def NeedIndent(self):
-        """ Gets or sets a value indicating whether to indent the output. """
+        """Gets or sets a value indicating whether to indent the output."""
         ...
-
     @property
     def TraceOutputOptions(self):
         """
@@ -432,9 +401,7 @@ class TraceListener(MarshalByRefObject, IDisposable):
         """
         ...
 
-
-
-class TextWriterTraceListener(TraceListener): # skipped bases: <type 'IDisposable'>
+class TextWriterTraceListener(TraceListener):  # skipped bases: <type 'IDisposable'>
     """
     Directs tracing or debugging output to a System.IO.TextWriter or to a System.IO.Stream, such as System.IO.FileStream.
 
@@ -452,11 +419,11 @@ class TextWriterTraceListener(TraceListener): # skipped bases: <type 'IDisposabl
 
     TextWriterTraceListener(fileName: str, name: str)
     """
+
     @property
     def NeedIndent(self):
-        """ Gets or sets a value indicating whether to indent the output. """
+        """Gets or sets a value indicating whether to indent the output."""
         ...
-
     @property
     def Writer(self):
         """
@@ -468,9 +435,7 @@ class TextWriterTraceListener(TraceListener): # skipped bases: <type 'IDisposabl
         """
         ...
 
-
-
-class ConsoleTraceListener(TextWriterTraceListener): # skipped bases: <type 'IDisposable'>
+class ConsoleTraceListener(TextWriterTraceListener):  # skipped bases: <type 'IDisposable'>
     """
     Directs tracing or debugging output to either the standard output or the standard error stream.
 
@@ -478,15 +443,15 @@ class ConsoleTraceListener(TextWriterTraceListener): # skipped bases: <type 'IDi
 
     ConsoleTraceListener(useErrorStream: bool)
     """
+
     @property
     def NeedIndent(self):
-        """ Gets or sets a value indicating whether to indent the output. """
+        """Gets or sets a value indicating whether to indent the output."""
         ...
 
+class CorrelationManager:  # skipped bases: <type 'object'>
+    """Correlates traces that are part of a logical transaction."""
 
-
-class CorrelationManager: # skipped bases: <type 'object'>
-    """ Correlates traces that are part of a logical transaction. """
     def StartLogicalOperation(self, operationId=None):
         """
         StartLogicalOperation(self: CorrelationManager, operationId: object)
@@ -500,7 +465,6 @@ class CorrelationManager: # skipped bases: <type 'object'>
             Starts a logical operation on a thread.
         """
         ...
-
     def StopLogicalOperation(self):
         """
         StopLogicalOperation(self: CorrelationManager)
@@ -508,7 +472,6 @@ class CorrelationManager: # skipped bases: <type 'object'>
             Stops the current logical operation.
         """
         ...
-
     @property
     def ActivityId(self):
         """
@@ -519,7 +482,6 @@ class CorrelationManager: # skipped bases: <type 'object'>
         Set: ActivityId(self: CorrelationManager) = value
         """
         ...
-
     @property
     def LogicalOperationStack(self):
         """
@@ -529,9 +491,7 @@ class CorrelationManager: # skipped bases: <type 'object'>
         """
         ...
 
-
-
-class CounterCreationData: # skipped bases: <type 'object'>
+class CounterCreationData:  # skipped bases: <type 'object'>
     """
     Defines the counter type, name, and Help string for a custom counter.
 
@@ -539,6 +499,7 @@ class CounterCreationData: # skipped bases: <type 'object'>
 
     CounterCreationData(counterName: str, counterHelp: str, counterType: PerformanceCounterType)
     """
+
     @property
     def CounterHelp(self):
         """
@@ -549,7 +510,6 @@ class CounterCreationData: # skipped bases: <type 'object'>
         Set: CounterHelp(self: CounterCreationData) = value
         """
         ...
-
     @property
     def CounterName(self):
         """
@@ -560,7 +520,6 @@ class CounterCreationData: # skipped bases: <type 'object'>
         Set: CounterName(self: CounterCreationData) = value
         """
         ...
-
     @property
     def CounterType(self):
         """
@@ -572,9 +531,9 @@ class CounterCreationData: # skipped bases: <type 'object'>
         """
         ...
 
-
-
-class CounterCreationDataCollection(CollectionBase): # skipped bases: <type 'IList'>, <type 'ICollection'>, <type 'IEnumerable'>
+class CounterCreationDataCollection(
+    CollectionBase
+):  # skipped bases: <type 'IList'>, <type 'ICollection'>, <type 'IEnumerable'>
     """
     Provides a strongly typed collection of System.Diagnostics.CounterCreationData objects.
 
@@ -584,6 +543,7 @@ class CounterCreationDataCollection(CollectionBase): # skipped bases: <type 'ILi
 
     CounterCreationDataCollection(value: Array[CounterCreationData])
     """
+
     def Add(self, value):
         """
         Add(self: CounterCreationDataCollection, value: CounterCreationData) -> int
@@ -595,7 +555,6 @@ class CounterCreationDataCollection(CollectionBase): # skipped bases: <type 'ILi
             Returns: The index of the new System.Diagnostics.CounterCreationData object.
         """
         ...
-
     def AddRange(self, value):
         """
         AddRange(self: CounterCreationDataCollection, value: Array[CounterCreationData])
@@ -611,7 +570,6 @@ class CounterCreationDataCollection(CollectionBase): # skipped bases: <type 'ILi
             value: A collection of System.Diagnostics.CounterCreationData instances to append to the existing collection.
         """
         ...
-
     def Contains(self, value):
         """
         Contains(self: CounterCreationDataCollection, value: CounterCreationData) -> bool
@@ -623,7 +581,6 @@ class CounterCreationDataCollection(CollectionBase): # skipped bases: <type 'ILi
             Returns: ue if the specified System.Diagnostics.CounterCreationData object exists in the collection; otherwise, lse.
         """
         ...
-
     def CopyTo(self, array, index):
         """
         CopyTo(self: CounterCreationDataCollection, array: Array[CounterCreationData], index: int)
@@ -635,7 +592,6 @@ class CounterCreationDataCollection(CollectionBase): # skipped bases: <type 'ILi
             index: The location at which to add the new instances.
         """
         ...
-
     def IndexOf(self, value):
         """
         IndexOf(self: CounterCreationDataCollection, value: CounterCreationData) -> int
@@ -647,7 +603,6 @@ class CounterCreationDataCollection(CollectionBase): # skipped bases: <type 'ILi
             Returns: The zero-based index of the specified System.Diagnostics.CounterCreationData, if it is found, in the collection; otherwise, -1.
         """
         ...
-
     def Insert(self, index, value):
         """
         Insert(self: CounterCreationDataCollection, index: int, value: CounterCreationData)
@@ -659,7 +614,6 @@ class CounterCreationDataCollection(CollectionBase): # skipped bases: <type 'ILi
             value: The System.Diagnostics.CounterCreationData to insert into the collection.
         """
         ...
-
     def Remove(self, value):
         """
         Remove(self: CounterCreationDataCollection, value: CounterCreationData)
@@ -669,32 +623,25 @@ class CounterCreationDataCollection(CollectionBase): # skipped bases: <type 'ILi
             value: The System.Diagnostics.CounterCreationData to remove from the collection.
         """
         ...
-
-    def __add__(self, *args): #cannot find CLR method
-        """ x.__add__(y) <==> x+y """
+    def __add__(self, *args):  # cannot find CLR method
+        """x.__add__(y) <==> x+y"""
         ...
-
-    def __getitem__(self, *args): #cannot find CLR method
-        """ x.__getitem__(y) <==> x[y] """
+    def __getitem__(self, *args):  # cannot find CLR method
+        """x.__getitem__(y) <==> x[y]"""
         ...
-
-    def __setitem__(self, *args): #cannot find CLR method
-        """ x.__setitem__(i, y) <==> x[i]= """
+    def __setitem__(self, *args):  # cannot find CLR method
+        """x.__setitem__(i, y) <==> x[i]="""
         ...
-
     @property
     def InnerList(self):
-        """ Gets an System.Collections.ArrayList containing the list of elements in the System.Collections.CollectionBase instance. """
+        """Gets an System.Collections.ArrayList containing the list of elements in the System.Collections.CollectionBase instance."""
         ...
-
     @property
     def List(self):
-        """ Gets an System.Collections.IList containing the list of elements in the System.Collections.CollectionBase instance. """
+        """Gets an System.Collections.IList containing the list of elements in the System.Collections.CollectionBase instance."""
         ...
 
-
-
-class CounterSample: # skipped bases: <type 'object'>
+class CounterSample:  # skipped bases: <type 'object'>
     """
     Defines a structure that holds the raw data for a performance counter.
 
@@ -702,6 +649,7 @@ class CounterSample: # skipped bases: <type 'object'>
 
     CounterSample(rawValue: Int64, baseValue: Int64, counterFrequency: Int64, systemFrequency: Int64, timeStamp: Int64, timeStamp100nSec: Int64, counterType: PerformanceCounterType, counterTimeStamp: Int64)
     """
+
     @staticmethod
     def Calculate(counterSample, nextCounterSample=None):
         """
@@ -724,7 +672,6 @@ class CounterSample: # skipped bases: <type 'object'>
             Returns: The calculated performance value.
         """
         ...
-
     def Equals(self, *__args):
         """
         Equals(self: CounterSample, o: object) -> bool
@@ -744,7 +691,6 @@ class CounterSample: # skipped bases: <type 'object'>
             Returns: ue if sample is equal to the current instance; otherwise, lse.
         """
         ...
-
     def GetHashCode(self):
         """
         GetHashCode(self: CounterSample) -> int
@@ -754,14 +700,10 @@ class CounterSample: # skipped bases: <type 'object'>
             Returns: A hash code for the current counter sample.
         """
         ...
-
-    def __eq__(self, *args): #cannot find CLR method
-        """ x.__eq__(y) <==> x==y """
+    def __eq__(self, *args):  # cannot find CLR method
+        """x.__eq__(y) <==> x==y"""
         ...
-
-    def __ne__(self, *args): #cannot find CLR method
-        ...
-
+    def __ne__(self, *args): ...
     @property
     def BaseValue(self):
         """
@@ -770,7 +712,6 @@ class CounterSample: # skipped bases: <type 'object'>
         Get: BaseValue(self: CounterSample) -> Int64
         """
         ...
-
     @property
     def CounterFrequency(self):
         """
@@ -779,7 +720,6 @@ class CounterSample: # skipped bases: <type 'object'>
         Get: CounterFrequency(self: CounterSample) -> Int64
         """
         ...
-
     @property
     def CounterTimeStamp(self):
         """
@@ -788,7 +728,6 @@ class CounterSample: # skipped bases: <type 'object'>
         Get: CounterTimeStamp(self: CounterSample) -> Int64
         """
         ...
-
     @property
     def CounterType(self):
         """
@@ -797,7 +736,6 @@ class CounterSample: # skipped bases: <type 'object'>
         Get: CounterType(self: CounterSample) -> PerformanceCounterType
         """
         ...
-
     @property
     def RawValue(self):
         """
@@ -806,7 +744,6 @@ class CounterSample: # skipped bases: <type 'object'>
         Get: RawValue(self: CounterSample) -> Int64
         """
         ...
-
     @property
     def SystemFrequency(self):
         """
@@ -815,7 +752,6 @@ class CounterSample: # skipped bases: <type 'object'>
         Get: SystemFrequency(self: CounterSample) -> Int64
         """
         ...
-
     @property
     def TimeStamp(self):
         """
@@ -824,7 +760,6 @@ class CounterSample: # skipped bases: <type 'object'>
         Get: TimeStamp(self: CounterSample) -> Int64
         """
         ...
-
     @property
     def TimeStamp100nSec(self):
         """
@@ -833,13 +768,11 @@ class CounterSample: # skipped bases: <type 'object'>
         Get: TimeStamp100nSec(self: CounterSample) -> Int64
         """
         ...
-
-
     Empty = None
 
+class CounterSampleCalculator:  # skipped bases: <type 'object'>
+    """Provides a set of utility functions for interpreting performance counter data."""
 
-class CounterSampleCalculator: # skipped bases: <type 'object'>
-    """ Provides a set of utility functions for interpreting performance counter data. """
     @staticmethod
     def ComputeCounterValue(*__args):
         """
@@ -862,14 +795,13 @@ class CounterSampleCalculator: # skipped bases: <type 'object'>
             Returns: A floating-point representation of the performance counter's calculated value.
         """
         ...
-
     __all__ = [
-        'ComputeCounterValue',
+        "ComputeCounterValue",
     ]
 
-
 class DataReceivedEventArgs(EventArgs):
-    """ Provides data for the System.Diagnostics.Process.OutputDataReceived and System.Diagnostics.Process.ErrorDataReceived events. """
+    """Provides data for the System.Diagnostics.Process.OutputDataReceived and System.Diagnostics.Process.ErrorDataReceived events."""
+
     @property
     def Data(self):
         """
@@ -879,29 +811,26 @@ class DataReceivedEventArgs(EventArgs):
         """
         ...
 
-
-
-class DataReceivedEventHandler(MulticastDelegate): # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
+class DataReceivedEventHandler(MulticastDelegate):  # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
     """
     Represents the method that will handle the System.Diagnostics.Process.OutputDataReceived event or System.Diagnostics.Process.ErrorDataReceived event of a System.Diagnostics.Process.
 
     DataReceivedEventHandler(object: object, method: IntPtr)
     """
+
     def BeginInvoke(self, sender, e, callback, object):
-        """ BeginInvoke(self: DataReceivedEventHandler, sender: object, e: DataReceivedEventArgs, callback: AsyncCallback, object: object) -> IAsyncResult """
+        """BeginInvoke(self: DataReceivedEventHandler, sender: object, e: DataReceivedEventArgs, callback: AsyncCallback, object: object) -> IAsyncResult"""
         ...
-
     def EndInvoke(self, result):
-        """ EndInvoke(self: DataReceivedEventHandler, result: IAsyncResult) """
+        """EndInvoke(self: DataReceivedEventHandler, result: IAsyncResult)"""
         ...
-
     def Invoke(self, sender, e):
-        """ Invoke(self: DataReceivedEventHandler, sender: object, e: DataReceivedEventArgs) """
+        """Invoke(self: DataReceivedEventHandler, sender: object, e: DataReceivedEventArgs)"""
         ...
 
+class Debug:  # skipped bases: <type 'object'>
+    """Provides a set of methods and properties that help debug your code."""
 
-class Debug: # skipped bases: <type 'object'>
-    """ Provides a set of methods and properties that help debug your code. """
     @staticmethod
     def Assert(condition, message=None, *__args):
         """
@@ -942,7 +871,6 @@ class Debug: # skipped bases: <type 'object'>
             args: An object array that contains zero or more objects to format.
         """
         ...
-
     @staticmethod
     def Close():
         """
@@ -951,7 +879,6 @@ class Debug: # skipped bases: <type 'object'>
             Flushes the output buffer and then calls the ose method on each of the System.Diagnostics.Debug.Listeners.
         """
         ...
-
     @staticmethod
     def Fail(message, detailMessage=None):
         """
@@ -970,7 +897,6 @@ class Debug: # skipped bases: <type 'object'>
             detailMessage: A detailed message to emit.
         """
         ...
-
     @staticmethod
     def Flush():
         """
@@ -979,7 +905,6 @@ class Debug: # skipped bases: <type 'object'>
             Flushes the output buffer and causes buffered data to write to the System.Diagnostics.Debug.Listeners collection.
         """
         ...
-
     @staticmethod
     def Indent():
         """
@@ -988,7 +913,6 @@ class Debug: # skipped bases: <type 'object'>
             Increases the current System.Diagnostics.Debug.IndentLevel by one.
         """
         ...
-
     @staticmethod
     def Print(*__args):
         """
@@ -1007,7 +931,6 @@ class Debug: # skipped bases: <type 'object'>
             args: An object array containing zero or more objects to format.
         """
         ...
-
     @staticmethod
     def Unindent():
         """
@@ -1016,7 +939,6 @@ class Debug: # skipped bases: <type 'object'>
             Decreases the current System.Diagnostics.Debug.IndentLevel by one.
         """
         ...
-
     @staticmethod
     def Write(*__args):
         """
@@ -1049,7 +971,6 @@ class Debug: # skipped bases: <type 'object'>
             category: A category name used to organize the output.
         """
         ...
-
     @staticmethod
     def WriteIf(condition, *__args):
         """
@@ -1090,7 +1011,6 @@ class Debug: # skipped bases: <type 'object'>
             category: A category name used to organize the output.
         """
         ...
-
     @staticmethod
     def WriteLine(*__args):
         """
@@ -1131,7 +1051,6 @@ class Debug: # skipped bases: <type 'object'>
             args: An object array that contains zero or more objects to format.
         """
         ...
-
     @staticmethod
     def WriteLineIf(condition, *__args):
         """
@@ -1172,27 +1091,25 @@ class Debug: # skipped bases: <type 'object'>
             category: A category name used to organize the output.
         """
         ...
-
     AutoFlush = False
     IndentLevel = 0
     IndentSize = 4
     Listeners = None
     __all__ = [
-        'Assert',
-        'Close',
-        'Fail',
-        'Flush',
-        'Indent',
-        'Print',
-        'Unindent',
-        'Write',
-        'WriteIf',
-        'WriteLine',
-        'WriteLineIf',
+        "Assert",
+        "Close",
+        "Fail",
+        "Flush",
+        "Indent",
+        "Print",
+        "Unindent",
+        "Write",
+        "WriteIf",
+        "WriteLine",
+        "WriteLineIf",
     ]
 
-
-class DebuggableAttribute(Attribute): # skipped bases: <type '_Attribute'>
+class DebuggableAttribute(Attribute):  # skipped bases: <type '_Attribute'>
     """
     Modifies code generation for runtime just-in-time (JIT) debugging. This class cannot be inherited.
 
@@ -1200,11 +1117,11 @@ class DebuggableAttribute(Attribute): # skipped bases: <type '_Attribute'>
 
     DebuggableAttribute(modes: DebuggingModes)
     """
-    def DebuggingModes(self, *args): #cannot find CLR method
-        """ enum (flags) DebuggingModes, values: Default (1), DisableOptimizations (256), EnableEditAndContinue (4), IgnoreSymbolStoreSequencePoints (2), None (0) """
-        ...
 
-    @staticmethod # known case of __new__
+    def DebuggingModes(self, *args):  # cannot find CLR method
+        """enum (flags) DebuggingModes, values: Default (1), DisableOptimizations (256), EnableEditAndContinue (4), IgnoreSymbolStoreSequencePoints (2), None (0)"""
+        ...
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, isJITTrackingEnabled: bool, isJITOptimizerDisabled: bool)
@@ -1212,7 +1129,6 @@ class DebuggableAttribute(Attribute): # skipped bases: <type '_Attribute'>
         __new__(cls: type, modes: DebuggingModes)
         """
         ...
-
     @property
     def DebuggingFlags(self):
         """
@@ -1221,7 +1137,6 @@ class DebuggableAttribute(Attribute): # skipped bases: <type '_Attribute'>
         Get: DebuggingFlags(self: DebuggableAttribute) -> DebuggingModes
         """
         ...
-
     @property
     def IsJITOptimizerDisabled(self):
         """
@@ -1230,7 +1145,6 @@ class DebuggableAttribute(Attribute): # skipped bases: <type '_Attribute'>
         Get: IsJITOptimizerDisabled(self: DebuggableAttribute) -> bool
         """
         ...
-
     @property
     def IsJITTrackingEnabled(self):
         """
@@ -1239,17 +1153,15 @@ class DebuggableAttribute(Attribute): # skipped bases: <type '_Attribute'>
         Get: IsJITTrackingEnabled(self: DebuggableAttribute) -> bool
         """
         ...
-
-
     DebuggingModes = None
 
-
-class Debugger: # skipped bases: <type 'object'>
+class Debugger:  # skipped bases: <type 'object'>
     """
     Enables communication with a debugger. This class cannot be inherited.
 
     Debugger()
     """
+
     @staticmethod
     def Break():
         """
@@ -1258,7 +1170,6 @@ class Debugger: # skipped bases: <type 'object'>
             Signals a breakpoint to an attached debugger.
         """
         ...
-
     @staticmethod
     def IsLogging():
         """
@@ -1269,7 +1180,6 @@ class Debugger: # skipped bases: <type 'object'>
             Returns: ue if a debugger is attached and logging is enabled; otherwise, lse. The attached debugger is the registered managed debugger in the gManagedDebugger registry key. For more information on this key, see Enabling JIT-Attach Debugging.
         """
         ...
-
     @staticmethod
     def Launch():
         """
@@ -1280,7 +1190,6 @@ class Debugger: # skipped bases: <type 'object'>
             Returns: ue if the startup is successful or if the debugger is already attached; otherwise, lse.
         """
         ...
-
     @staticmethod
     def Log(level, category, message):
         """
@@ -1295,7 +1204,6 @@ class Debugger: # skipped bases: <type 'object'>
             message: The message to show.
         """
         ...
-
     @staticmethod
     def NotifyOfCrossThreadDependency():
         """
@@ -1304,22 +1212,20 @@ class Debugger: # skipped bases: <type 'object'>
             Notifies a debugger that execution is about to enter a path that involves a cross-thread dependency.
         """
         ...
-
     DefaultCategory = None
     IsAttached = False
 
-
-class DebuggerBrowsableAttribute(Attribute): # skipped bases: <type '_Attribute'>
+class DebuggerBrowsableAttribute(Attribute):  # skipped bases: <type '_Attribute'>
     """
     Determines if and how a member is displayed in the debugger variable windows. This class cannot be inherited.
 
     DebuggerBrowsableAttribute(state: DebuggerBrowsableState)
     """
-    @staticmethod # known case of __new__
-    def __new__(cls, state):
-        """ __new__(cls: type, state: DebuggerBrowsableState) """
-        ...
 
+    @staticmethod  # known case of __new__
+    def __new__(cls, state):
+        """__new__(cls: type, state: DebuggerBrowsableState)"""
+        ...
     @property
     def State(self):
         """
@@ -1329,31 +1235,29 @@ class DebuggerBrowsableAttribute(Attribute): # skipped bases: <type '_Attribute'
         """
         ...
 
-
-
-class DebuggerBrowsableState(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class DebuggerBrowsableState(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Provides display instructions for the debugger.
 
     enum DebuggerBrowsableState, values: Collapsed (2), Never (0), RootHidden (3)
     """
+
     Collapsed = None
     Never = None
     RootHidden = None
     value__ = None
 
-
-class DebuggerDisplayAttribute(Attribute): # skipped bases: <type '_Attribute'>
+class DebuggerDisplayAttribute(Attribute):  # skipped bases: <type '_Attribute'>
     """
     Determines how a class or field is displayed in the debugger variable windows.
 
     DebuggerDisplayAttribute(value: str)
     """
-    @staticmethod # known case of __new__
-    def __new__(cls, value):
-        """ __new__(cls: type, value: str) """
-        ...
 
+    @staticmethod  # known case of __new__
+    def __new__(cls, value):
+        """__new__(cls: type, value: str)"""
+        ...
     @property
     def Name(self):
         """
@@ -1364,7 +1268,6 @@ class DebuggerDisplayAttribute(Attribute): # skipped bases: <type '_Attribute'>
         Set: Name(self: DebuggerDisplayAttribute) = value
         """
         ...
-
     @property
     def Target(self):
         """
@@ -1375,7 +1278,6 @@ class DebuggerDisplayAttribute(Attribute): # skipped bases: <type '_Attribute'>
         Set: Target(self: DebuggerDisplayAttribute) = value
         """
         ...
-
     @property
     def TargetTypeName(self):
         """
@@ -1386,7 +1288,6 @@ class DebuggerDisplayAttribute(Attribute): # skipped bases: <type '_Attribute'>
         Set: TargetTypeName(self: DebuggerDisplayAttribute) = value
         """
         ...
-
     @property
     def Type(self):
         """
@@ -1397,7 +1298,6 @@ class DebuggerDisplayAttribute(Attribute): # skipped bases: <type '_Attribute'>
         Set: Type(self: DebuggerDisplayAttribute) = value
         """
         ...
-
     @property
     def Value(self):
         """
@@ -1407,41 +1307,43 @@ class DebuggerDisplayAttribute(Attribute): # skipped bases: <type '_Attribute'>
         """
         ...
 
-
-
-class DebuggerHiddenAttribute(Attribute): # skipped bases: <type '_Attribute'>
+class DebuggerHiddenAttribute(Attribute):  # skipped bases: <type '_Attribute'>
     """
     Specifies the System.Diagnostics.DebuggerHiddenAttribute. This class cannot be inherited.
 
     DebuggerHiddenAttribute()
     """
+
     pass
 
-class DebuggerNonUserCodeAttribute(Attribute): # skipped bases: <type '_Attribute'>
+class DebuggerNonUserCodeAttribute(Attribute):  # skipped bases: <type '_Attribute'>
     """
     Identifies a type or member that is not part of the user code for an application.
 
     DebuggerNonUserCodeAttribute()
     """
+
     pass
 
-class DebuggerStepperBoundaryAttribute(Attribute): # skipped bases: <type '_Attribute'>
+class DebuggerStepperBoundaryAttribute(Attribute):  # skipped bases: <type '_Attribute'>
     """
     Indicates the code following the attribute is to be executed in run, not step, mode.
 
     DebuggerStepperBoundaryAttribute()
     """
+
     pass
 
-class DebuggerStepThroughAttribute(Attribute): # skipped bases: <type '_Attribute'>
+class DebuggerStepThroughAttribute(Attribute):  # skipped bases: <type '_Attribute'>
     """
     Instructs the debugger to step through the code instead of stepping into the code. This class cannot be inherited.
 
     DebuggerStepThroughAttribute()
     """
+
     pass
 
-class DebuggerTypeProxyAttribute(Attribute): # skipped bases: <type '_Attribute'>
+class DebuggerTypeProxyAttribute(Attribute):  # skipped bases: <type '_Attribute'>
     """
     Specifies the display proxy for a type.
 
@@ -1449,7 +1351,8 @@ class DebuggerTypeProxyAttribute(Attribute): # skipped bases: <type '_Attribute'
 
     DebuggerTypeProxyAttribute(typeName: str)
     """
-    @staticmethod # known case of __new__
+
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, type: Type)
@@ -1457,7 +1360,6 @@ class DebuggerTypeProxyAttribute(Attribute): # skipped bases: <type '_Attribute'
         __new__(cls: type, typeName: str)
         """
         ...
-
     @property
     def ProxyTypeName(self):
         """
@@ -1466,7 +1368,6 @@ class DebuggerTypeProxyAttribute(Attribute): # skipped bases: <type '_Attribute'
         Get: ProxyTypeName(self: DebuggerTypeProxyAttribute) -> str
         """
         ...
-
     @property
     def Target(self):
         """
@@ -1477,7 +1378,6 @@ class DebuggerTypeProxyAttribute(Attribute): # skipped bases: <type '_Attribute'
         Set: Target(self: DebuggerTypeProxyAttribute) = value
         """
         ...
-
     @property
     def TargetTypeName(self):
         """
@@ -1489,9 +1389,7 @@ class DebuggerTypeProxyAttribute(Attribute): # skipped bases: <type '_Attribute'
         """
         ...
 
-
-
-class DebuggerVisualizerAttribute(Attribute): # skipped bases: <type '_Attribute'>
+class DebuggerVisualizerAttribute(Attribute):  # skipped bases: <type '_Attribute'>
     """
     Specifies that the type has a visualizer. This class cannot be inherited.
 
@@ -1507,7 +1405,8 @@ class DebuggerVisualizerAttribute(Attribute): # skipped bases: <type '_Attribute
 
     DebuggerVisualizerAttribute(visualizer: Type, visualizerObjectSourceTypeName: str)
     """
-    @staticmethod # known case of __new__
+
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, visualizerTypeName: str)
@@ -1523,7 +1422,6 @@ class DebuggerVisualizerAttribute(Attribute): # skipped bases: <type '_Attribute
         __new__(cls: type, visualizer: Type, visualizerObjectSourceTypeName: str)
         """
         ...
-
     @property
     def Description(self):
         """
@@ -1534,7 +1432,6 @@ class DebuggerVisualizerAttribute(Attribute): # skipped bases: <type '_Attribute
         Set: Description(self: DebuggerVisualizerAttribute) = value
         """
         ...
-
     @property
     def Target(self):
         """
@@ -1545,7 +1442,6 @@ class DebuggerVisualizerAttribute(Attribute): # skipped bases: <type '_Attribute
         Set: Target(self: DebuggerVisualizerAttribute) = value
         """
         ...
-
     @property
     def TargetTypeName(self):
         """
@@ -1556,7 +1452,6 @@ class DebuggerVisualizerAttribute(Attribute): # skipped bases: <type '_Attribute
         Set: TargetTypeName(self: DebuggerVisualizerAttribute) = value
         """
         ...
-
     @property
     def VisualizerObjectSourceTypeName(self):
         """
@@ -1565,7 +1460,6 @@ class DebuggerVisualizerAttribute(Attribute): # skipped bases: <type '_Attribute
         Get: VisualizerObjectSourceTypeName(self: DebuggerVisualizerAttribute) -> str
         """
         ...
-
     @property
     def VisualizerTypeName(self):
         """
@@ -1575,14 +1469,13 @@ class DebuggerVisualizerAttribute(Attribute): # skipped bases: <type '_Attribute
         """
         ...
 
-
-
-class DefaultTraceListener(TraceListener): # skipped bases: <type 'IDisposable'>
+class DefaultTraceListener(TraceListener):  # skipped bases: <type 'IDisposable'>
     """
     Provides the default output methods and behavior for tracing.
 
     DefaultTraceListener()
     """
+
     @property
     def AssertUiEnabled(self):
         """
@@ -1593,7 +1486,6 @@ class DefaultTraceListener(TraceListener): # skipped bases: <type 'IDisposable'>
         Set: AssertUiEnabled(self: DefaultTraceListener) = value
         """
         ...
-
     @property
     def LogFileName(self):
         """
@@ -1604,15 +1496,12 @@ class DefaultTraceListener(TraceListener): # skipped bases: <type 'IDisposable'>
         Set: LogFileName(self: DefaultTraceListener) = value
         """
         ...
-
     @property
     def NeedIndent(self):
-        """ Gets or sets a value indicating whether to indent the output. """
+        """Gets or sets a value indicating whether to indent the output."""
         ...
 
-
-
-class DelimitedListTraceListener(TextWriterTraceListener): # skipped bases: <type 'IDisposable'>
+class DelimitedListTraceListener(TextWriterTraceListener):  # skipped bases: <type 'IDisposable'>
     """
     Directs tracing or debugging output to a text writer, such as a stream writer, or to a stream, such as a file stream.
 
@@ -1628,6 +1517,7 @@ class DelimitedListTraceListener(TextWriterTraceListener): # skipped bases: <typ
 
     DelimitedListTraceListener(fileName: str, name: str)
     """
+
     def TraceData(self, eventCache, source, eventType, id, data):
         """
         TraceData(self: DelimitedListTraceListener, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int, data: object)
@@ -1659,7 +1549,6 @@ class DelimitedListTraceListener(TextWriterTraceListener): # skipped bases: <typ
             data: An array of data objects to write to the output file or stream.
         """
         ...
-
     def TraceEvent(self, eventCache, source, eventType, id, *__args):
         """
         TraceEvent(self: DelimitedListTraceListener, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int, format: str, *args: Array[object])
@@ -1693,7 +1582,6 @@ class DelimitedListTraceListener(TextWriterTraceListener): # skipped bases: <typ
             message: The trace message to write to the output file or stream.
         """
         ...
-
     @property
     def Delimiter(self):
         """
@@ -1704,13 +1592,10 @@ class DelimitedListTraceListener(TextWriterTraceListener): # skipped bases: <typ
         Set: Delimiter(self: DelimitedListTraceListener) = value
         """
         ...
-
     @property
     def NeedIndent(self):
-        """ Gets or sets a value indicating whether to indent the output. """
+        """Gets or sets a value indicating whether to indent the output."""
         ...
-
-
 
 class DiagnosticsConfigurationHandler(object, IConfigurationSectionHandler):
     """
@@ -1718,6 +1603,7 @@ class DiagnosticsConfigurationHandler(object, IConfigurationSectionHandler):
 
     DiagnosticsConfigurationHandler()
     """
+
     pass
 
 class EntryWrittenEventArgs(EventArgs):
@@ -1728,7 +1614,8 @@ class EntryWrittenEventArgs(EventArgs):
 
     EntryWrittenEventArgs(entry: EventLogEntry)
     """
-    @staticmethod # known case of __new__
+
+    @staticmethod  # known case of __new__
     def __new__(cls, entry=None):
         """
         __new__(cls: type)
@@ -1736,7 +1623,6 @@ class EntryWrittenEventArgs(EventArgs):
         __new__(cls: type, entry: EventLogEntry)
         """
         ...
-
     @property
     def Entry(self):
         """
@@ -1746,28 +1632,24 @@ class EntryWrittenEventArgs(EventArgs):
         """
         ...
 
-
-
-class EntryWrittenEventHandler(MulticastDelegate): # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
+class EntryWrittenEventHandler(MulticastDelegate):  # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
     """
     Represents the method that will handle the System.Diagnostics.EventLog.EntryWritten event of an System.Diagnostics.EventLog.
 
     EntryWrittenEventHandler(object: object, method: IntPtr)
     """
+
     def BeginInvoke(self, sender, e, callback, object):
-        """ BeginInvoke(self: EntryWrittenEventHandler, sender: object, e: EntryWrittenEventArgs, callback: AsyncCallback, object: object) -> IAsyncResult """
+        """BeginInvoke(self: EntryWrittenEventHandler, sender: object, e: EntryWrittenEventArgs, callback: AsyncCallback, object: object) -> IAsyncResult"""
         ...
-
     def EndInvoke(self, result):
-        """ EndInvoke(self: EntryWrittenEventHandler, result: IAsyncResult) """
+        """EndInvoke(self: EntryWrittenEventHandler, result: IAsyncResult)"""
         ...
-
     def Invoke(self, sender, e):
-        """ Invoke(self: EntryWrittenEventHandler, sender: object, e: EntryWrittenEventArgs) """
+        """Invoke(self: EntryWrittenEventHandler, sender: object, e: EntryWrittenEventArgs)"""
         ...
 
-
-class EventInstance: # skipped bases: <type 'object'>
+class EventInstance:  # skipped bases: <type 'object'>
     """
     Represents language-neutral information for an event log entry.
 
@@ -1775,6 +1657,7 @@ class EventInstance: # skipped bases: <type 'object'>
 
     EventInstance(instanceId: Int64, categoryId: int, entryType: EventLogEntryType)
     """
+
     @property
     def CategoryId(self):
         """
@@ -1785,7 +1668,6 @@ class EventInstance: # skipped bases: <type 'object'>
         Set: CategoryId(self: EventInstance) = value
         """
         ...
-
     @property
     def EntryType(self):
         """
@@ -1796,7 +1678,6 @@ class EventInstance: # skipped bases: <type 'object'>
         Set: EntryType(self: EventInstance) = value
         """
         ...
-
     @property
     def InstanceId(self):
         """
@@ -1808,9 +1689,7 @@ class EventInstance: # skipped bases: <type 'object'>
         """
         ...
 
-
-
-class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponent'>, <type 'IDisposable'>
+class EventLog(Component, ISupportInitialize):  # skipped bases: <type 'IComponent'>, <type 'IDisposable'>
     """
     Provides interaction with Windows event logs.
 
@@ -1822,6 +1701,7 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
 
     EventLog(logName: str, machineName: str, source: str)
     """
+
     def Clear(self):
         """
         Clear(self: EventLog)
@@ -1829,7 +1709,6 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
             Removes all entries from the event log.
         """
         ...
-
     def Close(self):
         """
         Close(self: EventLog)
@@ -1837,7 +1716,6 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
             Closes the event log and releases read and write handles.
         """
         ...
-
     @staticmethod
     def CreateEventSource(*__args):
         """
@@ -1866,7 +1744,6 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
             sourceData: The configuration properties for the event source and its target event log.
         """
         ...
-
     @staticmethod
     def Delete(logName, machineName=None):
         """
@@ -1885,7 +1762,6 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
             machineName: The name of the computer to delete the log from, or "." for the local computer.
         """
         ...
-
     @staticmethod
     def DeleteEventSource(source, machineName=None):
         """
@@ -1904,7 +1780,6 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
             machineName: The name of the computer to remove the registration from, or "." for the local computer.
         """
         ...
-
     @staticmethod
     def Exists(logName, machineName=None):
         """
@@ -1927,7 +1802,6 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
             Returns: ue if the log exists on the specified computer; otherwise, lse.
         """
         ...
-
     @staticmethod
     def GetEventLogs(machineName=None):
         """
@@ -1946,7 +1820,6 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
             Returns: An array of type System.Diagnostics.EventLog that represents the logs on the given computer.
         """
         ...
-
     @staticmethod
     def LogNameFromSourceName(source, machineName):
         """
@@ -1961,7 +1834,6 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
             Returns: The name of the log associated with the specified source in the registry.
         """
         ...
-
     def ModifyOverflowPolicy(self, action, retentionDays):
         """
         ModifyOverflowPolicy(self: EventLog, action: OverflowAction, retentionDays: int)
@@ -1973,7 +1845,6 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
             retentionDays: The minimum number of days each event log entry is retained. This parameter is used only if action is set to System.Diagnostics.OverflowAction.OverwriteOlder.
         """
         ...
-
     def RegisterDisplayName(self, resourceFile, resourceId):
         """
         RegisterDisplayName(self: EventLog, resourceFile: str, resourceId: Int64)
@@ -1985,7 +1856,6 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
             resourceId: The resource identifier that indexes a localized string within the resource file.
         """
         ...
-
     @staticmethod
     def SourceExists(source, machineName=None):
         """
@@ -2008,7 +1878,6 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
             Returns: ue if the event source is registered on the local computer; otherwise, lse.
         """
         ...
-
     @staticmethod
     def WriteEntry(*__args):
         """
@@ -2125,7 +1994,6 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
             rawData: An array of bytes that holds the binary data associated with the entry.
         """
         ...
-
     def WriteEvent(self, *__args):
         """
         WriteEvent(self: EventLog, instance: EventInstance, *values: Array[object])
@@ -2169,8 +2037,7 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
             values: An array of strings to merge into the message text of the event log entry.
         """
         ...
-
-    @staticmethod # known case of __new__
+    @staticmethod  # known case of __new__
     def __new__(cls, logName=None, machineName=None, source=None):
         """
         __new__(cls: type)
@@ -2182,17 +2049,14 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
         __new__(cls: type, logName: str, machineName: str, source: str)
         """
         ...
-
     @property
     def CanRaiseEvents(self):
-        """ Gets a value indicating whether the component can raise an event. """
+        """Gets a value indicating whether the component can raise an event."""
         ...
-
     @property
     def DesignMode(self):
-        """ Gets a value that indicates whether the System.ComponentModel.Component is currently in design mode. """
+        """Gets a value that indicates whether the System.ComponentModel.Component is currently in design mode."""
         ...
-
     @property
     def EnableRaisingEvents(self):
         """
@@ -2203,7 +2067,6 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
         Set: EnableRaisingEvents(self: EventLog) = value
         """
         ...
-
     @property
     def Entries(self):
         """
@@ -2212,12 +2075,10 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
         Get: Entries(self: EventLog) -> EventLogEntryCollection
         """
         ...
-
     @property
     def Events(self):
-        """ Gets the list of event handlers that are attached to this System.ComponentModel.Component. """
+        """Gets the list of event handlers that are attached to this System.ComponentModel.Component."""
         ...
-
     @property
     def Log(self):
         """
@@ -2228,7 +2089,6 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
         Set: Log(self: EventLog) = value
         """
         ...
-
     @property
     def LogDisplayName(self):
         """
@@ -2237,7 +2097,6 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
         Get: LogDisplayName(self: EventLog) -> str
         """
         ...
-
     @property
     def MachineName(self):
         """
@@ -2248,7 +2107,6 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
         Set: MachineName(self: EventLog) = value
         """
         ...
-
     @property
     def MaximumKilobytes(self):
         """
@@ -2259,7 +2117,6 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
         Set: MaximumKilobytes(self: EventLog) = value
         """
         ...
-
     @property
     def MinimumRetentionDays(self):
         """
@@ -2268,7 +2125,6 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
         Get: MinimumRetentionDays(self: EventLog) -> int
         """
         ...
-
     @property
     def OverflowAction(self):
         """
@@ -2277,7 +2133,6 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
         Get: OverflowAction(self: EventLog) -> OverflowAction
         """
         ...
-
     @property
     def Source(self):
         """
@@ -2288,7 +2143,6 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
         Set: Source(self: EventLog) = value
         """
         ...
-
     @property
     def SynchronizingObject(self):
         """
@@ -2299,13 +2153,11 @@ class EventLog(Component, ISupportInitialize): # skipped bases: <type 'IComponen
         Set: SynchronizingObject(self: EventLog) = value
         """
         ...
-
-
     EntryWritten = None
 
+class EventLogEntry(Component, ISerializable):  # skipped bases: <type 'IComponent'>, <type 'IDisposable'>
+    """Encapsulates a single record in the event log. This class cannot be inherited."""
 
-class EventLogEntry(Component, ISerializable): # skipped bases: <type 'IComponent'>, <type 'IDisposable'>
-    """ Encapsulates a single record in the event log. This class cannot be inherited. """
     def Equals(self, *__args):
         """
         Equals(self: EventLogEntry, otherEntry: EventLogEntry) -> bool
@@ -2317,19 +2169,14 @@ class EventLogEntry(Component, ISerializable): # skipped bases: <type 'IComponen
             Returns: ue if the System.Diagnostics.EventLogEntry objects are identical; otherwise, lse.
         """
         ...
-
-    def __eq__(self, *args): #cannot find CLR method
-        """ x.__eq__(y) <==> x==y """
+    def __eq__(self, *args):  # cannot find CLR method
+        """x.__eq__(y) <==> x==y"""
         ...
-
-    def __reduce_ex__(self, *args): #cannot find CLR method
-        ...
-
+    def __reduce_ex__(self, *args): ...
     @property
     def CanRaiseEvents(self):
-        """ Gets a value indicating whether the component can raise an event. """
+        """Gets a value indicating whether the component can raise an event."""
         ...
-
     @property
     def Category(self):
         """
@@ -2338,7 +2185,6 @@ class EventLogEntry(Component, ISerializable): # skipped bases: <type 'IComponen
         Get: Category(self: EventLogEntry) -> str
         """
         ...
-
     @property
     def CategoryNumber(self):
         """
@@ -2347,7 +2193,6 @@ class EventLogEntry(Component, ISerializable): # skipped bases: <type 'IComponen
         Get: CategoryNumber(self: EventLogEntry) -> Int16
         """
         ...
-
     @property
     def Data(self):
         """
@@ -2356,12 +2201,10 @@ class EventLogEntry(Component, ISerializable): # skipped bases: <type 'IComponen
         Get: Data(self: EventLogEntry) -> Array[Byte]
         """
         ...
-
     @property
     def DesignMode(self):
-        """ Gets a value that indicates whether the System.ComponentModel.Component is currently in design mode. """
+        """Gets a value that indicates whether the System.ComponentModel.Component is currently in design mode."""
         ...
-
     @property
     def EntryType(self):
         """
@@ -2370,7 +2213,6 @@ class EventLogEntry(Component, ISerializable): # skipped bases: <type 'IComponen
         Get: EntryType(self: EventLogEntry) -> EventLogEntryType
         """
         ...
-
     @property
     def EventID(self):
         """
@@ -2379,12 +2221,10 @@ class EventLogEntry(Component, ISerializable): # skipped bases: <type 'IComponen
         Get: EventID(self: EventLogEntry) -> int
         """
         ...
-
     @property
     def Events(self):
-        """ Gets the list of event handlers that are attached to this System.ComponentModel.Component. """
+        """Gets the list of event handlers that are attached to this System.ComponentModel.Component."""
         ...
-
     @property
     def Index(self):
         """
@@ -2393,7 +2233,6 @@ class EventLogEntry(Component, ISerializable): # skipped bases: <type 'IComponen
         Get: Index(self: EventLogEntry) -> int
         """
         ...
-
     @property
     def InstanceId(self):
         """
@@ -2402,7 +2241,6 @@ class EventLogEntry(Component, ISerializable): # skipped bases: <type 'IComponen
         Get: InstanceId(self: EventLogEntry) -> Int64
         """
         ...
-
     @property
     def MachineName(self):
         """
@@ -2411,7 +2249,6 @@ class EventLogEntry(Component, ISerializable): # skipped bases: <type 'IComponen
         Get: MachineName(self: EventLogEntry) -> str
         """
         ...
-
     @property
     def Message(self):
         """
@@ -2420,7 +2257,6 @@ class EventLogEntry(Component, ISerializable): # skipped bases: <type 'IComponen
         Get: Message(self: EventLogEntry) -> str
         """
         ...
-
     @property
     def ReplacementStrings(self):
         """
@@ -2429,7 +2265,6 @@ class EventLogEntry(Component, ISerializable): # skipped bases: <type 'IComponen
         Get: ReplacementStrings(self: EventLogEntry) -> Array[str]
         """
         ...
-
     @property
     def Source(self):
         """
@@ -2438,7 +2273,6 @@ class EventLogEntry(Component, ISerializable): # skipped bases: <type 'IComponen
         Get: Source(self: EventLogEntry) -> str
         """
         ...
-
     @property
     def TimeGenerated(self):
         """
@@ -2447,7 +2281,6 @@ class EventLogEntry(Component, ISerializable): # skipped bases: <type 'IComponen
         Get: TimeGenerated(self: EventLogEntry) -> DateTime
         """
         ...
-
     @property
     def TimeWritten(self):
         """
@@ -2456,7 +2289,6 @@ class EventLogEntry(Component, ISerializable): # skipped bases: <type 'IComponen
         Get: TimeWritten(self: EventLogEntry) -> DateTime
         """
         ...
-
     @property
     def UserName(self):
         """
@@ -2466,10 +2298,9 @@ class EventLogEntry(Component, ISerializable): # skipped bases: <type 'IComponen
         """
         ...
 
+class EventLogEntryCollection(object, ICollection):  # skipped bases: <type 'IEnumerable'>
+    """Defines size and enumerators for a collection of System.Diagnostics.EventLogEntry instances."""
 
-
-class EventLogEntryCollection(object, ICollection): # skipped bases: <type 'IEnumerable'>
-    """ Defines size and enumerators for a collection of System.Diagnostics.EventLogEntry instances. """
     def GetEnumerator(self):
         """
         GetEnumerator(self: EventLogEntryCollection) -> IEnumerator
@@ -2479,15 +2310,12 @@ class EventLogEntryCollection(object, ICollection): # skipped bases: <type 'IEnu
             Returns: An object that can be used to iterate over the collection.
         """
         ...
-
-    def __getitem__(self, *args): #cannot find CLR method
-        """ x.__getitem__(y) <==> x[y] """
+    def __getitem__(self, *args):  # cannot find CLR method
+        """x.__getitem__(y) <==> x[y]"""
         ...
-
-    def __len__(self, *args): #cannot find CLR method
-        """ x.__len__() <==> len(x) """
+    def __len__(self, *args):  # cannot find CLR method
+        """x.__len__() <==> len(x)"""
         ...
-
     @property
     def Count(self):
         """
@@ -2497,14 +2325,13 @@ class EventLogEntryCollection(object, ICollection): # skipped bases: <type 'IEnu
         """
         ...
 
-
-
-class EventLogEntryType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class EventLogEntryType(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the event type of an event log entry.
 
     enum EventLogEntryType, values: Error (1), FailureAudit (16), Information (4), SuccessAudit (8), Warning (2)
     """
+
     Error = None
     FailureAudit = None
     Information = None
@@ -2512,8 +2339,9 @@ class EventLogEntryType(Enum): # skipped bases: <type 'IComparable'>, <type 'ICo
     value__ = None
     Warning = None
 
-
-class EventLogPermission(ResourcePermissionBase): # skipped bases: <type 'IUnrestrictedPermission'>, <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
+class EventLogPermission(
+    ResourcePermissionBase
+):  # skipped bases: <type 'IUnrestrictedPermission'>, <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
     """
     Controls code access permissions for event logging.
 
@@ -2525,11 +2353,11 @@ class EventLogPermission(ResourcePermissionBase): # skipped bases: <type 'IUnres
 
     EventLogPermission(permissionAccessEntries: Array[EventLogPermissionEntry])
     """
+
     @property
     def PermissionAccessType(self):
-        """ Gets or sets an enumeration value that describes the types of access that you are giving the resource. """
+        """Gets or sets an enumeration value that describes the types of access that you are giving the resource."""
         ...
-
     @property
     def PermissionEntries(self):
         """
@@ -2538,35 +2366,34 @@ class EventLogPermission(ResourcePermissionBase): # skipped bases: <type 'IUnres
         Get: PermissionEntries(self: EventLogPermission) -> EventLogPermissionEntryCollection
         """
         ...
-
     @property
     def TagNames(self):
-        """ Gets or sets an array of strings that identify the resource you are protecting. """
+        """Gets or sets an array of strings that identify the resource you are protecting."""
         ...
 
-
-
-class EventLogPermissionAccess(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class EventLogPermissionAccess(
+    Enum
+):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Defines access levels used by System.Diagnostics.EventLog permission classes.
 
     enum (flags) EventLogPermissionAccess, values: Administer (48), Audit (10), Browse (2), Instrument (6), None (0), Write (16)
     """
+
     Administer = None
     Audit = None
     Browse = None
     Instrument = None
-    None = None
     value__ = None
     Write = None
 
-
-class EventLogPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class EventLogPermissionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Allows declaritive permission checks for event logging.
 
     EventLogPermissionAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: EventLogPermissionAttribute) -> IPermission
@@ -2578,7 +2405,6 @@ class EventLogPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
             Returns: An System.Security.IPermission that represents the created permission.
         """
         ...
-
     @property
     def MachineName(self):
         """
@@ -2589,7 +2415,6 @@ class EventLogPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         Set: MachineName(self: EventLogPermissionAttribute) = value
         """
         ...
-
     @property
     def PermissionAccess(self):
         """
@@ -2601,14 +2426,13 @@ class EventLogPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         """
         ...
 
-
-
-class EventLogPermissionEntry: # skipped bases: <type 'object'>
+class EventLogPermissionEntry:  # skipped bases: <type 'object'>
     """
     Defines the smallest unit of a code access security permission that is set for an System.Diagnostics.EventLog.
 
     EventLogPermissionEntry(permissionAccess: EventLogPermissionAccess, machineName: str)
     """
+
     @property
     def MachineName(self):
         """
@@ -2617,7 +2441,6 @@ class EventLogPermissionEntry: # skipped bases: <type 'object'>
         Get: MachineName(self: EventLogPermissionEntry) -> str
         """
         ...
-
     @property
     def PermissionAccess(self):
         """
@@ -2627,10 +2450,11 @@ class EventLogPermissionEntry: # skipped bases: <type 'object'>
         """
         ...
 
+class EventLogPermissionEntryCollection(
+    CollectionBase
+):  # skipped bases: <type 'IList'>, <type 'ICollection'>, <type 'IEnumerable'>
+    """Contains a strongly typed collection of System.Diagnostics.EventLogPermissionEntry objects."""
 
-
-class EventLogPermissionEntryCollection(CollectionBase): # skipped bases: <type 'IList'>, <type 'ICollection'>, <type 'IEnumerable'>
-    """ Contains a strongly typed collection of System.Diagnostics.EventLogPermissionEntry objects. """
     def Add(self, value):
         """
         Add(self: EventLogPermissionEntryCollection, value: EventLogPermissionEntry) -> int
@@ -2642,7 +2466,6 @@ class EventLogPermissionEntryCollection(CollectionBase): # skipped bases: <type 
             Returns: The zero-based index of the added System.Diagnostics.EventLogPermissionEntry.
         """
         ...
-
     def AddRange(self, value):
         """
         AddRange(self: EventLogPermissionEntryCollection, value: Array[EventLogPermissionEntry])
@@ -2658,7 +2481,6 @@ class EventLogPermissionEntryCollection(CollectionBase): # skipped bases: <type 
             value: A System.Diagnostics.EventLogPermissionEntryCollection that contains the permission entries to add.
         """
         ...
-
     def Contains(self, value):
         """
         Contains(self: EventLogPermissionEntryCollection, value: EventLogPermissionEntry) -> bool
@@ -2670,7 +2492,6 @@ class EventLogPermissionEntryCollection(CollectionBase): # skipped bases: <type 
             Returns: ue if the specified System.Diagnostics.EventLogPermissionEntry belongs to this collection; otherwise, lse.
         """
         ...
-
     def CopyTo(self, array, index):
         """
         CopyTo(self: EventLogPermissionEntryCollection, array: Array[EventLogPermissionEntry], index: int)
@@ -2682,7 +2503,6 @@ class EventLogPermissionEntryCollection(CollectionBase): # skipped bases: <type 
             index: The zero-based index at which to begin copying the permission entries.
         """
         ...
-
     def IndexOf(self, value):
         """
         IndexOf(self: EventLogPermissionEntryCollection, value: EventLogPermissionEntry) -> int
@@ -2694,7 +2514,6 @@ class EventLogPermissionEntryCollection(CollectionBase): # skipped bases: <type 
             Returns: The zero-based index of the specified permission entry, or -1 if the permission entry was not found in the collection.
         """
         ...
-
     def Insert(self, index, value):
         """
         Insert(self: EventLogPermissionEntryCollection, index: int, value: EventLogPermissionEntry)
@@ -2706,7 +2525,6 @@ class EventLogPermissionEntryCollection(CollectionBase): # skipped bases: <type 
             value: The permission entry to insert into this collection.
         """
         ...
-
     def Remove(self, value):
         """
         Remove(self: EventLogPermissionEntryCollection, value: EventLogPermissionEntry)
@@ -2716,32 +2534,25 @@ class EventLogPermissionEntryCollection(CollectionBase): # skipped bases: <type 
             value: The permission entry to remove.
         """
         ...
-
-    def __add__(self, *args): #cannot find CLR method
-        """ x.__add__(y) <==> x+y """
+    def __add__(self, *args):  # cannot find CLR method
+        """x.__add__(y) <==> x+y"""
         ...
-
-    def __getitem__(self, *args): #cannot find CLR method
-        """ x.__getitem__(y) <==> x[y] """
+    def __getitem__(self, *args):  # cannot find CLR method
+        """x.__getitem__(y) <==> x[y]"""
         ...
-
-    def __setitem__(self, *args): #cannot find CLR method
-        """ x.__setitem__(i, y) <==> x[i]= """
+    def __setitem__(self, *args):  # cannot find CLR method
+        """x.__setitem__(i, y) <==> x[i]="""
         ...
-
     @property
     def InnerList(self):
-        """ Gets an System.Collections.ArrayList containing the list of elements in the System.Collections.CollectionBase instance. """
+        """Gets an System.Collections.ArrayList containing the list of elements in the System.Collections.CollectionBase instance."""
         ...
-
     @property
     def List(self):
-        """ Gets an System.Collections.IList containing the list of elements in the System.Collections.CollectionBase instance. """
+        """Gets an System.Collections.IList containing the list of elements in the System.Collections.CollectionBase instance."""
         ...
 
-
-
-class EventLogTraceListener(TraceListener): # skipped bases: <type 'IDisposable'>
+class EventLogTraceListener(TraceListener):  # skipped bases: <type 'IDisposable'>
     """
     Provides a simple listener that directs tracing or debugging output to an System.Diagnostics.EventLog.
 
@@ -2751,6 +2562,7 @@ class EventLogTraceListener(TraceListener): # skipped bases: <type 'IDisposable'
 
     EventLogTraceListener(source: str)
     """
+
     @property
     def EventLog(self):
         """
@@ -2761,7 +2573,6 @@ class EventLogTraceListener(TraceListener): # skipped bases: <type 'IDisposable'
         Set: EventLog(self: EventLogTraceListener) = value
         """
         ...
-
     @property
     def Name(self):
         """
@@ -2772,20 +2583,18 @@ class EventLogTraceListener(TraceListener): # skipped bases: <type 'IDisposable'
         Set: Name(self: EventLogTraceListener) = value
         """
         ...
-
     @property
     def NeedIndent(self):
-        """ Gets or sets a value indicating whether to indent the output. """
+        """Gets or sets a value indicating whether to indent the output."""
         ...
 
-
-
-class EventSourceCreationData: # skipped bases: <type 'object'>
+class EventSourceCreationData:  # skipped bases: <type 'object'>
     """
     Represents the configuration settings used to create an event log source on the local computer or a remote computer.
 
     EventSourceCreationData(source: str, logName: str)
     """
+
     @property
     def CategoryCount(self):
         """
@@ -2796,7 +2605,6 @@ class EventSourceCreationData: # skipped bases: <type 'object'>
         Set: CategoryCount(self: EventSourceCreationData) = value
         """
         ...
-
     @property
     def CategoryResourceFile(self):
         """
@@ -2807,7 +2615,6 @@ class EventSourceCreationData: # skipped bases: <type 'object'>
         Set: CategoryResourceFile(self: EventSourceCreationData) = value
         """
         ...
-
     @property
     def LogName(self):
         """
@@ -2818,7 +2625,6 @@ class EventSourceCreationData: # skipped bases: <type 'object'>
         Set: LogName(self: EventSourceCreationData) = value
         """
         ...
-
     @property
     def MachineName(self):
         """
@@ -2829,7 +2635,6 @@ class EventSourceCreationData: # skipped bases: <type 'object'>
         Set: MachineName(self: EventSourceCreationData) = value
         """
         ...
-
     @property
     def MessageResourceFile(self):
         """
@@ -2840,7 +2645,6 @@ class EventSourceCreationData: # skipped bases: <type 'object'>
         Set: MessageResourceFile(self: EventSourceCreationData) = value
         """
         ...
-
     @property
     def ParameterResourceFile(self):
         """
@@ -2851,7 +2655,6 @@ class EventSourceCreationData: # skipped bases: <type 'object'>
         Set: ParameterResourceFile(self: EventSourceCreationData) = value
         """
         ...
-
     @property
     def Source(self):
         """
@@ -2863,10 +2666,9 @@ class EventSourceCreationData: # skipped bases: <type 'object'>
         """
         ...
 
+class TraceFilter:  # skipped bases: <type 'object'>
+    """Provides the base class for trace filter implementations."""
 
-
-class TraceFilter: # skipped bases: <type 'object'>
-    """ Provides the base class for trace filter implementations. """
     def ShouldTrace(self, cache, source, eventType, id, formatOrMessage, args, data1, data):
         """
         ShouldTrace(self: TraceFilter, cache: TraceEventCache, source: str, eventType: TraceEventType, id: int, formatOrMessage: str, args: Array[object], data1: object, data: Array[object]) -> bool
@@ -2893,18 +2695,17 @@ class TraceFilter: # skipped bases: <type 'object'>
         """
         ...
 
-
 class EventTypeFilter(TraceFilter):
     """
     Indicates whether a listener should trace based on the event type.
 
     EventTypeFilter(level: SourceLevels)
     """
-    @staticmethod # known case of __new__
-    def __new__(cls, level):
-        """ __new__(cls: type, level: SourceLevels) """
-        ...
 
+    @staticmethod  # known case of __new__
+    def __new__(cls, level):
+        """__new__(cls: type, level: SourceLevels)"""
+        ...
     @property
     def EventType(self):
         """
@@ -2916,10 +2717,9 @@ class EventTypeFilter(TraceFilter):
         """
         ...
 
+class FileVersionInfo:  # skipped bases: <type 'object'>
+    """Provides version information for a physical file on disk."""
 
-
-class FileVersionInfo: # skipped bases: <type 'object'>
-    """ Provides version information for a physical file on disk. """
     @staticmethod
     def GetVersionInfo(fileName):
         """
@@ -2932,7 +2732,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
             Returns: A System.Diagnostics.FileVersionInfo containing information about the file. If the file did not contain version information, the System.Diagnostics.FileVersionInfo contains only the name of the file requested.
         """
         ...
-
     def ToString(self):
         """
         ToString(self: FileVersionInfo) -> str
@@ -2954,7 +2753,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
              will be lse, and all other entries will be ll.
         """
         ...
-
     @property
     def Comments(self):
         """
@@ -2963,7 +2761,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: Comments(self: FileVersionInfo) -> str
         """
         ...
-
     @property
     def CompanyName(self):
         """
@@ -2972,7 +2769,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: CompanyName(self: FileVersionInfo) -> str
         """
         ...
-
     @property
     def FileBuildPart(self):
         """
@@ -2981,7 +2777,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: FileBuildPart(self: FileVersionInfo) -> int
         """
         ...
-
     @property
     def FileDescription(self):
         """
@@ -2990,7 +2785,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: FileDescription(self: FileVersionInfo) -> str
         """
         ...
-
     @property
     def FileMajorPart(self):
         """
@@ -2999,7 +2793,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: FileMajorPart(self: FileVersionInfo) -> int
         """
         ...
-
     @property
     def FileMinorPart(self):
         """
@@ -3008,7 +2801,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: FileMinorPart(self: FileVersionInfo) -> int
         """
         ...
-
     @property
     def FileName(self):
         """
@@ -3017,7 +2809,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: FileName(self: FileVersionInfo) -> str
         """
         ...
-
     @property
     def FilePrivatePart(self):
         """
@@ -3026,7 +2817,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: FilePrivatePart(self: FileVersionInfo) -> int
         """
         ...
-
     @property
     def FileVersion(self):
         """
@@ -3035,7 +2825,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: FileVersion(self: FileVersionInfo) -> str
         """
         ...
-
     @property
     def InternalName(self):
         """
@@ -3044,7 +2833,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: InternalName(self: FileVersionInfo) -> str
         """
         ...
-
     @property
     def IsDebug(self):
         """
@@ -3053,7 +2841,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: IsDebug(self: FileVersionInfo) -> bool
         """
         ...
-
     @property
     def IsPatched(self):
         """
@@ -3062,7 +2849,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: IsPatched(self: FileVersionInfo) -> bool
         """
         ...
-
     @property
     def IsPreRelease(self):
         """
@@ -3071,7 +2857,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: IsPreRelease(self: FileVersionInfo) -> bool
         """
         ...
-
     @property
     def IsPrivateBuild(self):
         """
@@ -3080,7 +2865,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: IsPrivateBuild(self: FileVersionInfo) -> bool
         """
         ...
-
     @property
     def IsSpecialBuild(self):
         """
@@ -3089,7 +2873,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: IsSpecialBuild(self: FileVersionInfo) -> bool
         """
         ...
-
     @property
     def Language(self):
         """
@@ -3098,7 +2881,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: Language(self: FileVersionInfo) -> str
         """
         ...
-
     @property
     def LegalCopyright(self):
         """
@@ -3107,7 +2889,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: LegalCopyright(self: FileVersionInfo) -> str
         """
         ...
-
     @property
     def LegalTrademarks(self):
         """
@@ -3116,7 +2897,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: LegalTrademarks(self: FileVersionInfo) -> str
         """
         ...
-
     @property
     def OriginalFilename(self):
         """
@@ -3125,7 +2905,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: OriginalFilename(self: FileVersionInfo) -> str
         """
         ...
-
     @property
     def PrivateBuild(self):
         """
@@ -3134,7 +2913,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: PrivateBuild(self: FileVersionInfo) -> str
         """
         ...
-
     @property
     def ProductBuildPart(self):
         """
@@ -3143,7 +2921,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: ProductBuildPart(self: FileVersionInfo) -> int
         """
         ...
-
     @property
     def ProductMajorPart(self):
         """
@@ -3152,7 +2929,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: ProductMajorPart(self: FileVersionInfo) -> int
         """
         ...
-
     @property
     def ProductMinorPart(self):
         """
@@ -3161,7 +2937,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: ProductMinorPart(self: FileVersionInfo) -> int
         """
         ...
-
     @property
     def ProductName(self):
         """
@@ -3170,7 +2945,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: ProductName(self: FileVersionInfo) -> str
         """
         ...
-
     @property
     def ProductPrivatePart(self):
         """
@@ -3179,7 +2953,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: ProductPrivatePart(self: FileVersionInfo) -> int
         """
         ...
-
     @property
     def ProductVersion(self):
         """
@@ -3188,7 +2961,6 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         Get: ProductVersion(self: FileVersionInfo) -> str
         """
         ...
-
     @property
     def SpecialBuild(self):
         """
@@ -3198,10 +2970,9 @@ class FileVersionInfo: # skipped bases: <type 'object'>
         """
         ...
 
-
-
 class ICollectData:
-    """ Prepares performance data for the performance DLL the system loads when working with performance counters. """
+    """Prepares performance data for the performance DLL the system loads when working with performance counters."""
+
     def CloseData(self):
         """
         CloseData(self: ICollectData)
@@ -3209,7 +2980,6 @@ class ICollectData:
             Called by the performance DLL's close performance data function.
         """
         ...
-
     def CollectData(self, id, valueName, data, totalBytes, res):
         """
         CollectData(self: ICollectData, id: int, valueName: IntPtr, data: IntPtr, totalBytes: int) -> IntPtr
@@ -3226,13 +2996,13 @@ class ICollectData:
         """
         ...
 
-
-class InstanceData: # skipped bases: <type 'object'>
+class InstanceData:  # skipped bases: <type 'object'>
     """
     Holds instance data associated with a performance counter sample.
 
     InstanceData(instanceName: str, sample: CounterSample)
     """
+
     @property
     def InstanceName(self):
         """
@@ -3241,7 +3011,6 @@ class InstanceData: # skipped bases: <type 'object'>
         Get: InstanceName(self: InstanceData) -> str
         """
         ...
-
     @property
     def RawValue(self):
         """
@@ -3250,7 +3019,6 @@ class InstanceData: # skipped bases: <type 'object'>
         Get: RawValue(self: InstanceData) -> Int64
         """
         ...
-
     @property
     def Sample(self):
         """
@@ -3260,14 +3028,15 @@ class InstanceData: # skipped bases: <type 'object'>
         """
         ...
 
-
-
-class InstanceDataCollection(DictionaryBase): # skipped bases: <type 'ICollection'>, <type 'IEnumerable'>, <type 'IDictionary'>
+class InstanceDataCollection(
+    DictionaryBase
+):  # skipped bases: <type 'ICollection'>, <type 'IEnumerable'>, <type 'IDictionary'>
     """
     Provides a strongly typed collection of System.Diagnostics.InstanceData objects.
 
     InstanceDataCollection(counterName: str)
     """
+
     def Contains(self, instanceName):
         """
         Contains(self: InstanceDataCollection, instanceName: str) -> bool
@@ -3279,16 +3048,13 @@ class InstanceDataCollection(DictionaryBase): # skipped bases: <type 'ICollectio
             Returns: ue if the instance exists in the collection; otherwise, lse.
         """
         ...
-
-    def __getitem__(self, *args): #cannot find CLR method
-        """ x.__getitem__(y) <==> x[y] """
+    def __getitem__(self, *args):  # cannot find CLR method
+        """x.__getitem__(y) <==> x[y]"""
         ...
-
-    @staticmethod # known case of __new__
+    @staticmethod  # known case of __new__
     def __new__(cls, counterName):
-        """ __new__(cls: type, counterName: str) """
+        """__new__(cls: type, counterName: str)"""
         ...
-
     @property
     def CounterName(self):
         """
@@ -3297,17 +3063,14 @@ class InstanceDataCollection(DictionaryBase): # skipped bases: <type 'ICollectio
         Get: CounterName(self: InstanceDataCollection) -> str
         """
         ...
-
     @property
     def Dictionary(self):
-        """ Gets the list of elements contained in the System.Collections.DictionaryBase instance. """
+        """Gets the list of elements contained in the System.Collections.DictionaryBase instance."""
         ...
-
     @property
     def InnerHashtable(self):
-        """ Gets the list of elements contained in the System.Collections.DictionaryBase instance. """
+        """Gets the list of elements contained in the System.Collections.DictionaryBase instance."""
         ...
-
     @property
     def Keys(self):
         """
@@ -3316,7 +3079,6 @@ class InstanceDataCollection(DictionaryBase): # skipped bases: <type 'ICollectio
         Get: Keys(self: InstanceDataCollection) -> ICollection
         """
         ...
-
     @property
     def Values(self):
         """
@@ -3326,14 +3088,15 @@ class InstanceDataCollection(DictionaryBase): # skipped bases: <type 'ICollectio
         """
         ...
 
-
-
-class InstanceDataCollectionCollection(DictionaryBase): # skipped bases: <type 'ICollection'>, <type 'IEnumerable'>, <type 'IDictionary'>
+class InstanceDataCollectionCollection(
+    DictionaryBase
+):  # skipped bases: <type 'ICollection'>, <type 'IEnumerable'>, <type 'IDictionary'>
     """
     Provides a strongly typed collection of System.Diagnostics.InstanceDataCollection objects.
 
     InstanceDataCollectionCollection()
     """
+
     def Contains(self, counterName):
         """
         Contains(self: InstanceDataCollectionCollection, counterName: str) -> bool
@@ -3345,21 +3108,17 @@ class InstanceDataCollectionCollection(DictionaryBase): # skipped bases: <type '
             Returns: ue if an instance data collection containing the specified counter exists in the collection; otherwise, lse.
         """
         ...
-
-    def __getitem__(self, *args): #cannot find CLR method
-        """ x.__getitem__(y) <==> x[y] """
+    def __getitem__(self, *args):  # cannot find CLR method
+        """x.__getitem__(y) <==> x[y]"""
         ...
-
     @property
     def Dictionary(self):
-        """ Gets the list of elements contained in the System.Collections.DictionaryBase instance. """
+        """Gets the list of elements contained in the System.Collections.DictionaryBase instance."""
         ...
-
     @property
     def InnerHashtable(self):
-        """ Gets the list of elements contained in the System.Collections.DictionaryBase instance. """
+        """Gets the list of elements contained in the System.Collections.DictionaryBase instance."""
         ...
-
     @property
     def Keys(self):
         """
@@ -3368,7 +3127,6 @@ class InstanceDataCollectionCollection(DictionaryBase): # skipped bases: <type '
         Get: Keys(self: InstanceDataCollectionCollection) -> ICollection
         """
         ...
-
     @property
     def Values(self):
         """
@@ -3378,14 +3136,13 @@ class InstanceDataCollectionCollection(DictionaryBase): # skipped bases: <type '
         """
         ...
 
-
-
-class MonitoringDescriptionAttribute(DescriptionAttribute): # skipped bases: <type '_Attribute'>
+class MonitoringDescriptionAttribute(DescriptionAttribute):  # skipped bases: <type '_Attribute'>
     """
     Specifies a description for a property or event.
 
     MonitoringDescriptionAttribute(description: str)
     """
+
     @property
     def Description(self):
         """
@@ -3394,27 +3151,24 @@ class MonitoringDescriptionAttribute(DescriptionAttribute): # skipped bases: <ty
         Get: Description(self: MonitoringDescriptionAttribute) -> str
         """
         ...
-
     @property
     def DescriptionValue(self):
-        """ Gets or sets the string stored as the description. """
+        """Gets or sets the string stored as the description."""
         ...
 
-
-
-class OverflowAction(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class OverflowAction(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies how to handle entries in an event log that has reached its maximum file size.
 
     enum OverflowAction, values: DoNotOverwrite (-1), OverwriteAsNeeded (0), OverwriteOlder (1)
     """
+
     DoNotOverwrite = None
     OverwriteAsNeeded = None
     OverwriteOlder = None
     value__ = None
 
-
-class PerformanceCounter(Component, ISupportInitialize): # skipped bases: <type 'IComponent'>, <type 'IDisposable'>
+class PerformanceCounter(Component, ISupportInitialize):  # skipped bases: <type 'IComponent'>, <type 'IDisposable'>
     """
     Represents a Windows NT performance counter component.
 
@@ -3430,6 +3184,7 @@ class PerformanceCounter(Component, ISupportInitialize): # skipped bases: <type 
 
     PerformanceCounter(categoryName: str, counterName: str, readOnly: bool)
     """
+
     def Close(self):
         """
         Close(self: PerformanceCounter)
@@ -3437,7 +3192,6 @@ class PerformanceCounter(Component, ISupportInitialize): # skipped bases: <type 
             Closes the performance counter and frees all the resources allocated by this performance counter instance.
         """
         ...
-
     @staticmethod
     def CloseSharedResources():
         """
@@ -3446,7 +3200,6 @@ class PerformanceCounter(Component, ISupportInitialize): # skipped bases: <type 
             Frees the performance counter library shared state allocated by the counters.
         """
         ...
-
     def Decrement(self):
         """
         Decrement(self: PerformanceCounter) -> Int64
@@ -3456,7 +3209,6 @@ class PerformanceCounter(Component, ISupportInitialize): # skipped bases: <type 
             Returns: The decremented counter value.
         """
         ...
-
     def Increment(self):
         """
         Increment(self: PerformanceCounter) -> Int64
@@ -3466,7 +3218,6 @@ class PerformanceCounter(Component, ISupportInitialize): # skipped bases: <type 
             Returns: The incremented counter value.
         """
         ...
-
     def IncrementBy(self, value):
         """
         IncrementBy(self: PerformanceCounter, value: Int64) -> Int64
@@ -3478,7 +3229,6 @@ class PerformanceCounter(Component, ISupportInitialize): # skipped bases: <type 
             Returns: The new counter value.
         """
         ...
-
     def NextSample(self):
         """
         NextSample(self: PerformanceCounter) -> CounterSample
@@ -3488,7 +3238,6 @@ class PerformanceCounter(Component, ISupportInitialize): # skipped bases: <type 
             Returns: A System.Diagnostics.CounterSample that represents the next raw value that the system obtains for this counter.
         """
         ...
-
     def NextValue(self):
         """
         NextValue(self: PerformanceCounter) -> Single
@@ -3498,7 +3247,6 @@ class PerformanceCounter(Component, ISupportInitialize): # skipped bases: <type 
             Returns: The next calculated value that the system obtains for this counter.
         """
         ...
-
     def RemoveInstance(self):
         """
         RemoveInstance(self: PerformanceCounter)
@@ -3506,8 +3254,7 @@ class PerformanceCounter(Component, ISupportInitialize): # skipped bases: <type 
             Deletes the category instance specified by the System.Diagnostics.PerformanceCounter object System.Diagnostics.PerformanceCounter.InstanceName property.
         """
         ...
-
-    @staticmethod # known case of __new__
+    @staticmethod  # known case of __new__
     def __new__(cls, categoryName=None, counterName=None, *__args):
         """
         __new__(cls: type)
@@ -3523,12 +3270,10 @@ class PerformanceCounter(Component, ISupportInitialize): # skipped bases: <type 
         __new__(cls: type, categoryName: str, counterName: str, readOnly: bool)
         """
         ...
-
     @property
     def CanRaiseEvents(self):
-        """ Gets a value indicating whether the component can raise an event. """
+        """Gets a value indicating whether the component can raise an event."""
         ...
-
     @property
     def CategoryName(self):
         """
@@ -3539,7 +3284,6 @@ class PerformanceCounter(Component, ISupportInitialize): # skipped bases: <type 
         Set: CategoryName(self: PerformanceCounter) = value
         """
         ...
-
     @property
     def CounterHelp(self):
         """
@@ -3548,7 +3292,6 @@ class PerformanceCounter(Component, ISupportInitialize): # skipped bases: <type 
         Get: CounterHelp(self: PerformanceCounter) -> str
         """
         ...
-
     @property
     def CounterName(self):
         """
@@ -3559,7 +3302,6 @@ class PerformanceCounter(Component, ISupportInitialize): # skipped bases: <type 
         Set: CounterName(self: PerformanceCounter) = value
         """
         ...
-
     @property
     def CounterType(self):
         """
@@ -3568,17 +3310,14 @@ class PerformanceCounter(Component, ISupportInitialize): # skipped bases: <type 
         Get: CounterType(self: PerformanceCounter) -> PerformanceCounterType
         """
         ...
-
     @property
     def DesignMode(self):
-        """ Gets a value that indicates whether the System.ComponentModel.Component is currently in design mode. """
+        """Gets a value that indicates whether the System.ComponentModel.Component is currently in design mode."""
         ...
-
     @property
     def Events(self):
-        """ Gets the list of event handlers that are attached to this System.ComponentModel.Component. """
+        """Gets the list of event handlers that are attached to this System.ComponentModel.Component."""
         ...
-
     @property
     def InstanceLifetime(self):
         """
@@ -3589,7 +3328,6 @@ class PerformanceCounter(Component, ISupportInitialize): # skipped bases: <type 
         Set: InstanceLifetime(self: PerformanceCounter) = value
         """
         ...
-
     @property
     def InstanceName(self):
         """
@@ -3600,7 +3338,6 @@ class PerformanceCounter(Component, ISupportInitialize): # skipped bases: <type 
         Set: InstanceName(self: PerformanceCounter) = value
         """
         ...
-
     @property
     def MachineName(self):
         """
@@ -3611,7 +3348,6 @@ class PerformanceCounter(Component, ISupportInitialize): # skipped bases: <type 
         Set: MachineName(self: PerformanceCounter) = value
         """
         ...
-
     @property
     def RawValue(self):
         """
@@ -3622,7 +3358,6 @@ class PerformanceCounter(Component, ISupportInitialize): # skipped bases: <type 
         Set: RawValue(self: PerformanceCounter) = value
         """
         ...
-
     @property
     def ReadOnly(self):
         """
@@ -3633,12 +3368,9 @@ class PerformanceCounter(Component, ISupportInitialize): # skipped bases: <type 
         Set: ReadOnly(self: PerformanceCounter) = value
         """
         ...
-
-
     DefaultFileMappingSize = 524288
 
-
-class PerformanceCounterCategory: # skipped bases: <type 'object'>
+class PerformanceCounterCategory:  # skipped bases: <type 'object'>
     """
     Represents a performance object, which defines a category of performance counters.
 
@@ -3648,6 +3380,7 @@ class PerformanceCounterCategory: # skipped bases: <type 'object'>
 
     PerformanceCounterCategory(categoryName: str, machineName: str)
     """
+
     def CounterExists(self, counterName, categoryName=None, machineName=None):
         """
         CounterExists(self: PerformanceCounterCategory, counterName: str) -> bool
@@ -3681,7 +3414,6 @@ class PerformanceCounterCategory: # skipped bases: <type 'object'>
             Returns: ue, if the counter is registered to the specified category on the specified computer; otherwise, lse.
         """
         ...
-
     @staticmethod
     def Create(categoryName, categoryHelp, *__args):
         """
@@ -3744,7 +3476,6 @@ class PerformanceCounterCategory: # skipped bases: <type 'object'>
             Returns: A System.Diagnostics.PerformanceCounterCategory that is associated with the new custom category, or performance object.
         """
         ...
-
     @staticmethod
     def Delete(categoryName):
         """
@@ -3755,7 +3486,6 @@ class PerformanceCounterCategory: # skipped bases: <type 'object'>
             categoryName: The name of the custom performance counter category to delete.
         """
         ...
-
     @staticmethod
     def Exists(categoryName, machineName=None):
         """
@@ -3778,7 +3508,6 @@ class PerformanceCounterCategory: # skipped bases: <type 'object'>
             Returns: ue if the category is registered; otherwise, lse.
         """
         ...
-
     @staticmethod
     def GetCategories(machineName=None):
         """
@@ -3797,7 +3526,6 @@ class PerformanceCounterCategory: # skipped bases: <type 'object'>
             Returns: An array of System.Diagnostics.PerformanceCounterCategory objects indicating the categories that are registered on the specified computer.
         """
         ...
-
     def GetCounters(self, instanceName=None):
         """
         GetCounters(self: PerformanceCounterCategory) -> Array[PerformanceCounter]
@@ -3815,7 +3543,6 @@ class PerformanceCounterCategory: # skipped bases: <type 'object'>
             Returns: An array of System.Diagnostics.PerformanceCounter objects indicating the counters that are associated with the specified object instance of this performance counter category.
         """
         ...
-
     def GetInstanceNames(self):
         """
         GetInstanceNames(self: PerformanceCounterCategory) -> Array[str]
@@ -3825,7 +3552,6 @@ class PerformanceCounterCategory: # skipped bases: <type 'object'>
             Returns: An array of strings representing the performance object instance names that are associated with this category or, if the category contains only one performance object instance, a single-entry array that contains an empty string ("").
         """
         ...
-
     def InstanceExists(self, instanceName, categoryName=None, machineName=None):
         """
         InstanceExists(self: PerformanceCounterCategory, instanceName: str) -> bool
@@ -3861,7 +3587,6 @@ class PerformanceCounterCategory: # skipped bases: <type 'object'>
             Returns: ue if the category contains the specified performance object instance; otherwise, lse.
         """
         ...
-
     def ReadCategory(self):
         """
         ReadCategory(self: PerformanceCounterCategory) -> InstanceDataCollectionCollection
@@ -3871,7 +3596,6 @@ class PerformanceCounterCategory: # skipped bases: <type 'object'>
             Returns: An System.Diagnostics.InstanceDataCollectionCollection that contains the counter and performance object instance data for the category.
         """
         ...
-
     @property
     def CategoryHelp(self):
         """
@@ -3880,7 +3604,6 @@ class PerformanceCounterCategory: # skipped bases: <type 'object'>
         Get: CategoryHelp(self: PerformanceCounterCategory) -> str
         """
         ...
-
     @property
     def CategoryName(self):
         """
@@ -3891,7 +3614,6 @@ class PerformanceCounterCategory: # skipped bases: <type 'object'>
         Set: CategoryName(self: PerformanceCounterCategory) = value
         """
         ...
-
     @property
     def CategoryType(self):
         """
@@ -3900,7 +3622,6 @@ class PerformanceCounterCategory: # skipped bases: <type 'object'>
         Get: CategoryType(self: PerformanceCounterCategory) -> PerformanceCounterCategoryType
         """
         ...
-
     @property
     def MachineName(self):
         """
@@ -3912,30 +3633,32 @@ class PerformanceCounterCategory: # skipped bases: <type 'object'>
         """
         ...
 
-
-
-class PerformanceCounterCategoryType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class PerformanceCounterCategoryType(
+    Enum
+):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Indicates whether the performance counter category can have multiple instances.
 
     enum PerformanceCounterCategoryType, values: MultiInstance (1), SingleInstance (0), Unknown (-1)
     """
+
     MultiInstance = None
     SingleInstance = None
     Unknown = None
     value__ = None
 
-
-class PerformanceCounterInstanceLifetime(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class PerformanceCounterInstanceLifetime(
+    Enum
+):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the lifetime of a performance counter instance.
 
     enum PerformanceCounterInstanceLifetime, values: Global (0), Process (1)
     """
+
     Global = None
     Process = None
     value__ = None
-
 
 class PerformanceCounterManager(object, ICollectData):
     """
@@ -3943,9 +3666,12 @@ class PerformanceCounterManager(object, ICollectData):
 
     PerformanceCounterManager()
     """
+
     pass
 
-class PerformanceCounterPermission(ResourcePermissionBase): # skipped bases: <type 'IUnrestrictedPermission'>, <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
+class PerformanceCounterPermission(
+    ResourcePermissionBase
+):  # skipped bases: <type 'IUnrestrictedPermission'>, <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
     """
     Allows control of code access permissions for System.Diagnostics.PerformanceCounter.
 
@@ -3957,11 +3683,11 @@ class PerformanceCounterPermission(ResourcePermissionBase): # skipped bases: <ty
 
     PerformanceCounterPermission(permissionAccessEntries: Array[PerformanceCounterPermissionEntry])
     """
+
     @property
     def PermissionAccessType(self):
-        """ Gets or sets an enumeration value that describes the types of access that you are giving the resource. """
+        """Gets or sets an enumeration value that describes the types of access that you are giving the resource."""
         ...
-
     @property
     def PermissionEntries(self):
         """
@@ -3970,35 +3696,34 @@ class PerformanceCounterPermission(ResourcePermissionBase): # skipped bases: <ty
         Get: PermissionEntries(self: PerformanceCounterPermission) -> PerformanceCounterPermissionEntryCollection
         """
         ...
-
     @property
     def TagNames(self):
-        """ Gets or sets an array of strings that identify the resource you are protecting. """
+        """Gets or sets an array of strings that identify the resource you are protecting."""
         ...
 
-
-
-class PerformanceCounterPermissionAccess(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class PerformanceCounterPermissionAccess(
+    Enum
+):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Defines access levels used by System.Diagnostics.PerformanceCounter permission classes.
 
     enum (flags) PerformanceCounterPermissionAccess, values: Administer (7), Browse (1), Instrument (3), None (0), Read (1), Write (2)
     """
+
     Administer = None
     Browse = None
     Instrument = None
-    None = None
     Read = None
     value__ = None
     Write = None
 
-
-class PerformanceCounterPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class PerformanceCounterPermissionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Allows declaritive performance counter permission checks.
 
     PerformanceCounterPermissionAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: PerformanceCounterPermissionAttribute) -> IPermission
@@ -4008,7 +3733,6 @@ class PerformanceCounterPermissionAttribute(CodeAccessSecurityAttribute): # skip
             Returns: An System.Security.IPermission that represents the created permission.
         """
         ...
-
     @property
     def CategoryName(self):
         """
@@ -4019,7 +3743,6 @@ class PerformanceCounterPermissionAttribute(CodeAccessSecurityAttribute): # skip
         Set: CategoryName(self: PerformanceCounterPermissionAttribute) = value
         """
         ...
-
     @property
     def MachineName(self):
         """
@@ -4030,7 +3753,6 @@ class PerformanceCounterPermissionAttribute(CodeAccessSecurityAttribute): # skip
         Set: MachineName(self: PerformanceCounterPermissionAttribute) = value
         """
         ...
-
     @property
     def PermissionAccess(self):
         """
@@ -4042,14 +3764,13 @@ class PerformanceCounterPermissionAttribute(CodeAccessSecurityAttribute): # skip
         """
         ...
 
-
-
-class PerformanceCounterPermissionEntry: # skipped bases: <type 'object'>
+class PerformanceCounterPermissionEntry:  # skipped bases: <type 'object'>
     """
     Defines the smallest unit of a code access security permission that is set for a System.Diagnostics.PerformanceCounter.
 
     PerformanceCounterPermissionEntry(permissionAccess: PerformanceCounterPermissionAccess, machineName: str, categoryName: str)
     """
+
     @property
     def CategoryName(self):
         """
@@ -4058,7 +3779,6 @@ class PerformanceCounterPermissionEntry: # skipped bases: <type 'object'>
         Get: CategoryName(self: PerformanceCounterPermissionEntry) -> str
         """
         ...
-
     @property
     def MachineName(self):
         """
@@ -4067,7 +3787,6 @@ class PerformanceCounterPermissionEntry: # skipped bases: <type 'object'>
         Get: MachineName(self: PerformanceCounterPermissionEntry) -> str
         """
         ...
-
     @property
     def PermissionAccess(self):
         """
@@ -4077,10 +3796,11 @@ class PerformanceCounterPermissionEntry: # skipped bases: <type 'object'>
         """
         ...
 
+class PerformanceCounterPermissionEntryCollection(
+    CollectionBase
+):  # skipped bases: <type 'IList'>, <type 'ICollection'>, <type 'IEnumerable'>
+    """Contains a strongly typed collection of System.Diagnostics.PerformanceCounterPermissionEntry objects."""
 
-
-class PerformanceCounterPermissionEntryCollection(CollectionBase): # skipped bases: <type 'IList'>, <type 'ICollection'>, <type 'IEnumerable'>
-    """ Contains a strongly typed collection of System.Diagnostics.PerformanceCounterPermissionEntry objects. """
     def Add(self, value):
         """
         Add(self: PerformanceCounterPermissionEntryCollection, value: PerformanceCounterPermissionEntry) -> int
@@ -4092,7 +3812,6 @@ class PerformanceCounterPermissionEntryCollection(CollectionBase): # skipped bas
             Returns: The zero-based index of the added System.Diagnostics.PerformanceCounterPermissionEntry object.
         """
         ...
-
     def AddRange(self, value):
         """
         AddRange(self: PerformanceCounterPermissionEntryCollection, value: Array[PerformanceCounterPermissionEntry])
@@ -4108,7 +3827,6 @@ class PerformanceCounterPermissionEntryCollection(CollectionBase): # skipped bas
             value: A System.Diagnostics.PerformanceCounterPermissionEntryCollection that contains the permission entries to add.
         """
         ...
-
     def Contains(self, value):
         """
         Contains(self: PerformanceCounterPermissionEntryCollection, value: PerformanceCounterPermissionEntry) -> bool
@@ -4120,7 +3838,6 @@ class PerformanceCounterPermissionEntryCollection(CollectionBase): # skipped bas
             Returns: ue if the specified System.Diagnostics.PerformanceCounterPermissionEntry object belongs to this collection; otherwise, lse.
         """
         ...
-
     def CopyTo(self, array, index):
         """
         CopyTo(self: PerformanceCounterPermissionEntryCollection, array: Array[PerformanceCounterPermissionEntry], index: int)
@@ -4132,7 +3849,6 @@ class PerformanceCounterPermissionEntryCollection(CollectionBase): # skipped bas
             index: The zero-based index at which to begin copying the permission entries.
         """
         ...
-
     def IndexOf(self, value):
         """
         IndexOf(self: PerformanceCounterPermissionEntryCollection, value: PerformanceCounterPermissionEntry) -> int
@@ -4144,7 +3860,6 @@ class PerformanceCounterPermissionEntryCollection(CollectionBase): # skipped bas
             Returns: The zero-based index of the specified permission entry, or -1 if the permission entry was not found in the collection.
         """
         ...
-
     def Insert(self, index, value):
         """
         Insert(self: PerformanceCounterPermissionEntryCollection, index: int, value: PerformanceCounterPermissionEntry)
@@ -4156,7 +3871,6 @@ class PerformanceCounterPermissionEntryCollection(CollectionBase): # skipped bas
             value: The permission entry to insert into this collection.
         """
         ...
-
     def Remove(self, value):
         """
         Remove(self: PerformanceCounterPermissionEntryCollection, value: PerformanceCounterPermissionEntry)
@@ -4166,37 +3880,31 @@ class PerformanceCounterPermissionEntryCollection(CollectionBase): # skipped bas
             value: The permission entry to remove.
         """
         ...
-
-    def __add__(self, *args): #cannot find CLR method
-        """ x.__add__(y) <==> x+y """
+    def __add__(self, *args):  # cannot find CLR method
+        """x.__add__(y) <==> x+y"""
         ...
-
-    def __getitem__(self, *args): #cannot find CLR method
-        """ x.__getitem__(y) <==> x[y] """
+    def __getitem__(self, *args):  # cannot find CLR method
+        """x.__getitem__(y) <==> x[y]"""
         ...
-
-    def __setitem__(self, *args): #cannot find CLR method
-        """ x.__setitem__(i, y) <==> x[i]= """
+    def __setitem__(self, *args):  # cannot find CLR method
+        """x.__setitem__(i, y) <==> x[i]="""
         ...
-
     @property
     def InnerList(self):
-        """ Gets an System.Collections.ArrayList containing the list of elements in the System.Collections.CollectionBase instance. """
+        """Gets an System.Collections.ArrayList containing the list of elements in the System.Collections.CollectionBase instance."""
         ...
-
     @property
     def List(self):
-        """ Gets an System.Collections.IList containing the list of elements in the System.Collections.CollectionBase instance. """
+        """Gets an System.Collections.IList containing the list of elements in the System.Collections.CollectionBase instance."""
         ...
 
-
-
-class PerformanceCounterType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class PerformanceCounterType(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the formula used to calculate the System.Diagnostics.PerformanceCounter.NextValue method for a System.Diagnostics.PerformanceCounter instance.
 
     enum PerformanceCounterType, values: AverageBase (1073939458), AverageCount64 (1073874176), AverageTimer32 (805438464), CounterDelta32 (4195328), CounterDelta64 (4195584), CounterMultiBase (1107494144), CounterMultiTimer (574686464), CounterMultiTimer100Ns (575735040), CounterMultiTimer100NsInverse (592512256), CounterMultiTimerInverse (591463680), CounterTimer (541132032), CounterTimerInverse (557909248), CountPerTimeInterval32 (4523008), CountPerTimeInterval64 (4523264), ElapsedTime (807666944), NumberOfItems32 (65536), NumberOfItems64 (65792), NumberOfItemsHEX32 (0), NumberOfItemsHEX64 (256), RateOfCountsPerSecond32 (272696320), RateOfCountsPerSecond64 (272696576), RawBase (1073939459), RawFraction (537003008), SampleBase (1073939457), SampleCounter (4260864), SampleFraction (549585920), Timer100Ns (542180608), Timer100NsInverse (558957824)
     """
+
     AverageBase = None
     AverageCount64 = None
     AverageTimer32 = None
@@ -4227,13 +3935,13 @@ class PerformanceCounterType(Enum): # skipped bases: <type 'IComparable'>, <type
     Timer100NsInverse = None
     value__ = None
 
-
-class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposable'>
+class Process(Component):  # skipped bases: <type 'IComponent'>, <type 'IDisposable'>
     """
     Provides access to local and remote processes and enables you to start and stop local system processes.To browse the .NET Framework source code for this type, see the Reference Source.
 
     Process()
     """
+
     def BeginErrorReadLine(self):
         """
         BeginErrorReadLine(self: Process)
@@ -4241,7 +3949,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
             Begins asynchronous read operations on the redirected System.Diagnostics.Process.StandardError stream of the application.
         """
         ...
-
     def BeginOutputReadLine(self):
         """
         BeginOutputReadLine(self: Process)
@@ -4249,7 +3956,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
             Begins asynchronous read operations on the redirected System.Diagnostics.Process.StandardOutput stream of the application.
         """
         ...
-
     def CancelErrorRead(self):
         """
         CancelErrorRead(self: Process)
@@ -4257,7 +3963,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
             Cancels the asynchronous read operation on the redirected System.Diagnostics.Process.StandardError stream of an application.
         """
         ...
-
     def CancelOutputRead(self):
         """
         CancelOutputRead(self: Process)
@@ -4265,7 +3970,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
             Cancels the asynchronous read operation on the redirected System.Diagnostics.Process.StandardOutput stream of an application.
         """
         ...
-
     def Close(self):
         """
         Close(self: Process)
@@ -4273,7 +3977,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
             Frees all the resources that are associated with this component.
         """
         ...
-
     def CloseMainWindow(self):
         """
         CloseMainWindow(self: Process) -> bool
@@ -4283,7 +3986,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
             Returns: ue if the close message was successfully sent; lse if the associated process does not have a main window or if the main window is disabled (for example if a modal dialog is being shown).
         """
         ...
-
     @staticmethod
     def EnterDebugMode():
         """
@@ -4292,7 +3994,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
             Puts a System.Diagnostics.Process component in state to interact with operating system processes that run in a special mode by enabling the native property DebugPrivilege on the current thread.
         """
         ...
-
     @staticmethod
     def GetCurrentProcess():
         """
@@ -4303,10 +4004,9 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
             Returns: A new System.Diagnostics.Process component associated with the process resource that is running the calling application.
         """
         ...
-
     @staticmethod
-    def GetProcessById(processId: int, machineName:Optional[str]=None) -> Process:
-        """ Returns a new System.Diagnostics.Process component, given a process identifier and the name of a computer on the network.
+    def GetProcessById(processId: int, machineName: Optional[str] = None) -> Process:
+        """Returns a new System.Diagnostics.Process component, given a process identifier and the name of a computer on the network.
 
 
         Args:
@@ -4317,7 +4017,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
             Process: A System.Diagnostics.Process component that is associated with a remote process resource identified by the processId parameter.
         """
         ...
-
     @staticmethod
     def GetProcesses(machineName=None):
         """
@@ -4336,7 +4035,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
             Returns: An array of type System.Diagnostics.Process that represents all the process resources running on the specified computer.
         """
         ...
-
     @staticmethod
     def GetProcessesByName(processName, machineName=None):
         """
@@ -4359,11 +4057,9 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
             Returns: An array of type System.Diagnostics.Process that represents the process resources running the specified application or file.
         """
         ...
-
     def Kill(self) -> None:
-        """ Kills the associated process immediately."""
+        """Kills the associated process immediately."""
         ...
-
     @staticmethod
     def LeaveDebugMode():
         """
@@ -4372,15 +4068,13 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
             Takes a System.Diagnostics.Process component out of the state that lets it interact with operating system processes that run in a special mode.
         """
         ...
-
-    def OnExited(self, *args): #cannot find CLR method
+    def OnExited(self, *args):  # cannot find CLR method
         """
         OnExited(self: Process)
 
             Raises the System.Diagnostics.Process.Exited event.
         """
         ...
-
     def Refresh(self):
         """
         Refresh(self: Process)
@@ -4388,7 +4082,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
             Discards any information about the associated process that has been cached inside the process component.
         """
         ...
-
     @staticmethod
     def Start(*__args):
         """
@@ -4465,7 +4158,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
             Returns: ue if a process resource is started; lse if no new process resource is started (for example, if an existing process is reused).
         """
         ...
-
     def WaitForExit(self, milliseconds=None):
         """
         WaitForExit(self: Process, milliseconds: int) -> bool
@@ -4481,7 +4173,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
             Instructs the System.Diagnostics.Process component to wait indefinitely for the associated process to exit.
         """
         ...
-
     def WaitForInputIdle(self, milliseconds=None):
         """
         WaitForInputIdle(self: Process, milliseconds: int) -> bool
@@ -4501,7 +4192,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
             Returns: ue if the associated process has reached an idle state.
         """
         ...
-
     @property
     def BasePriority(self):
         """
@@ -4510,17 +4200,14 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: BasePriority(self: Process) -> int
         """
         ...
-
     @property
     def CanRaiseEvents(self):
-        """ Gets a value indicating whether the component can raise an event. """
+        """Gets a value indicating whether the component can raise an event."""
         ...
-
     @property
     def DesignMode(self):
-        """ Gets a value that indicates whether the System.ComponentModel.Component is currently in design mode. """
+        """Gets a value that indicates whether the System.ComponentModel.Component is currently in design mode."""
         ...
-
     @property
     def EnableRaisingEvents(self):
         """
@@ -4531,12 +4218,10 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Set: EnableRaisingEvents(self: Process) = value
         """
         ...
-
     @property
     def Events(self):
-        """ Gets the list of event handlers that are attached to this System.ComponentModel.Component. """
+        """Gets the list of event handlers that are attached to this System.ComponentModel.Component."""
         ...
-
     @property
     def ExitCode(self):
         """
@@ -4545,7 +4230,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: ExitCode(self: Process) -> int
         """
         ...
-
     @property
     def ExitTime(self):
         """
@@ -4554,7 +4238,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: ExitTime(self: Process) -> DateTime
         """
         ...
-
     @property
     def Handle(self):
         """
@@ -4563,7 +4246,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: Handle(self: Process) -> IntPtr
         """
         ...
-
     @property
     def HandleCount(self):
         """
@@ -4572,7 +4254,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: HandleCount(self: Process) -> int
         """
         ...
-
     @property
     def HasExited(self):
         """
@@ -4581,7 +4262,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: HasExited(self: Process) -> bool
         """
         ...
-
     @property
     def Id(self):
         """
@@ -4590,7 +4270,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: Id(self: Process) -> int
         """
         ...
-
     @property
     def MachineName(self):
         """
@@ -4599,7 +4278,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: MachineName(self: Process) -> str
         """
         ...
-
     @property
     def MainModule(self):
         """
@@ -4608,7 +4286,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: MainModule(self: Process) -> ProcessModule
         """
         ...
-
     @property
     def MainWindowHandle(self):
         """
@@ -4617,7 +4294,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: MainWindowHandle(self: Process) -> IntPtr
         """
         ...
-
     @property
     def MainWindowTitle(self):
         """
@@ -4626,7 +4302,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: MainWindowTitle(self: Process) -> str
         """
         ...
-
     @property
     def MaxWorkingSet(self):
         """
@@ -4637,7 +4312,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Set: MaxWorkingSet(self: Process) = value
         """
         ...
-
     @property
     def MinWorkingSet(self):
         """
@@ -4648,7 +4322,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Set: MinWorkingSet(self: Process) = value
         """
         ...
-
     @property
     def Modules(self):
         """
@@ -4657,7 +4330,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: Modules(self: Process) -> ProcessModuleCollection
         """
         ...
-
     @property
     def NonpagedSystemMemorySize(self):
         """
@@ -4666,7 +4338,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: NonpagedSystemMemorySize(self: Process) -> int
         """
         ...
-
     @property
     def NonpagedSystemMemorySize64(self):
         """
@@ -4675,7 +4346,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: NonpagedSystemMemorySize64(self: Process) -> Int64
         """
         ...
-
     @property
     def PagedMemorySize(self):
         """
@@ -4684,7 +4354,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: PagedMemorySize(self: Process) -> int
         """
         ...
-
     @property
     def PagedMemorySize64(self):
         """
@@ -4693,7 +4362,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: PagedMemorySize64(self: Process) -> Int64
         """
         ...
-
     @property
     def PagedSystemMemorySize(self):
         """
@@ -4702,7 +4370,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: PagedSystemMemorySize(self: Process) -> int
         """
         ...
-
     @property
     def PagedSystemMemorySize64(self):
         """
@@ -4711,7 +4378,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: PagedSystemMemorySize64(self: Process) -> Int64
         """
         ...
-
     @property
     def PeakPagedMemorySize(self):
         """
@@ -4720,7 +4386,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: PeakPagedMemorySize(self: Process) -> int
         """
         ...
-
     @property
     def PeakPagedMemorySize64(self):
         """
@@ -4729,7 +4394,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: PeakPagedMemorySize64(self: Process) -> Int64
         """
         ...
-
     @property
     def PeakVirtualMemorySize(self):
         """
@@ -4738,7 +4402,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: PeakVirtualMemorySize(self: Process) -> int
         """
         ...
-
     @property
     def PeakVirtualMemorySize64(self):
         """
@@ -4747,7 +4410,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: PeakVirtualMemorySize64(self: Process) -> Int64
         """
         ...
-
     @property
     def PeakWorkingSet(self):
         """
@@ -4756,7 +4418,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: PeakWorkingSet(self: Process) -> int
         """
         ...
-
     @property
     def PeakWorkingSet64(self):
         """
@@ -4765,7 +4426,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: PeakWorkingSet64(self: Process) -> Int64
         """
         ...
-
     @property
     def PriorityBoostEnabled(self):
         """
@@ -4776,7 +4436,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Set: PriorityBoostEnabled(self: Process) = value
         """
         ...
-
     @property
     def PriorityClass(self):
         """
@@ -4787,7 +4446,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Set: PriorityClass(self: Process) = value
         """
         ...
-
     @property
     def PrivateMemorySize(self):
         """
@@ -4796,7 +4454,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: PrivateMemorySize(self: Process) -> int
         """
         ...
-
     @property
     def PrivateMemorySize64(self):
         """
@@ -4805,7 +4462,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: PrivateMemorySize64(self: Process) -> Int64
         """
         ...
-
     @property
     def PrivilegedProcessorTime(self):
         """
@@ -4814,7 +4470,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: PrivilegedProcessorTime(self: Process) -> TimeSpan
         """
         ...
-
     @property
     def ProcessName(self):
         """
@@ -4823,7 +4478,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: ProcessName(self: Process) -> str
         """
         ...
-
     @property
     def ProcessorAffinity(self):
         """
@@ -4834,7 +4488,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Set: ProcessorAffinity(self: Process) = value
         """
         ...
-
     @property
     def Responding(self):
         """
@@ -4843,7 +4496,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: Responding(self: Process) -> bool
         """
         ...
-
     @property
     def SafeHandle(self):
         """
@@ -4852,7 +4504,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: SafeHandle(self: Process) -> SafeProcessHandle
         """
         ...
-
     @property
     def SessionId(self):
         """
@@ -4861,7 +4512,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: SessionId(self: Process) -> int
         """
         ...
-
     @property
     def StandardError(self):
         """
@@ -4870,7 +4520,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: StandardError(self: Process) -> StreamReader
         """
         ...
-
     @property
     def StandardInput(self):
         """
@@ -4879,7 +4528,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: StandardInput(self: Process) -> StreamWriter
         """
         ...
-
     @property
     def StandardOutput(self):
         """
@@ -4888,7 +4536,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: StandardOutput(self: Process) -> StreamReader
         """
         ...
-
     @property
     def StartInfo(self):
         """
@@ -4899,7 +4546,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Set: StartInfo(self: Process) = value
         """
         ...
-
     @property
     def StartTime(self):
         """
@@ -4908,7 +4554,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: StartTime(self: Process) -> DateTime
         """
         ...
-
     @property
     def SynchronizingObject(self):
         """
@@ -4919,7 +4564,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Set: SynchronizingObject(self: Process) = value
         """
         ...
-
     @property
     def Threads(self):
         """
@@ -4928,7 +4572,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: Threads(self: Process) -> ProcessThreadCollection
         """
         ...
-
     @property
     def TotalProcessorTime(self):
         """
@@ -4937,7 +4580,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: TotalProcessorTime(self: Process) -> TimeSpan
         """
         ...
-
     @property
     def UserProcessorTime(self):
         """
@@ -4946,7 +4588,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: UserProcessorTime(self: Process) -> TimeSpan
         """
         ...
-
     @property
     def VirtualMemorySize(self):
         """
@@ -4955,7 +4596,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: VirtualMemorySize(self: Process) -> int
         """
         ...
-
     @property
     def VirtualMemorySize64(self):
         """
@@ -4964,7 +4604,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: VirtualMemorySize64(self: Process) -> Int64
         """
         ...
-
     @property
     def WorkingSet(self):
         """
@@ -4973,7 +4612,6 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: WorkingSet(self: Process) -> int
         """
         ...
-
     @property
     def WorkingSet64(self):
         """
@@ -4982,15 +4620,13 @@ class Process(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposab
         Get: WorkingSet64(self: Process) -> Int64
         """
         ...
-
-
     ErrorDataReceived = None
     Exited = None
     OutputDataReceived = None
 
+class ProcessModule(Component):  # skipped bases: <type 'IComponent'>, <type 'IDisposable'>
+    """Represents a.dll or .exe file that is loaded into a particular process."""
 
-class ProcessModule(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposable'>
-    """ Represents a.dll or .exe file that is loaded into a particular process. """
     @property
     def BaseAddress(self):
         """
@@ -4999,17 +4635,14 @@ class ProcessModule(Component): # skipped bases: <type 'IComponent'>, <type 'IDi
         Get: BaseAddress(self: ProcessModule) -> IntPtr
         """
         ...
-
     @property
     def CanRaiseEvents(self):
-        """ Gets a value indicating whether the component can raise an event. """
+        """Gets a value indicating whether the component can raise an event."""
         ...
-
     @property
     def DesignMode(self):
-        """ Gets a value that indicates whether the System.ComponentModel.Component is currently in design mode. """
+        """Gets a value that indicates whether the System.ComponentModel.Component is currently in design mode."""
         ...
-
     @property
     def EntryPointAddress(self):
         """
@@ -5018,12 +4651,10 @@ class ProcessModule(Component): # skipped bases: <type 'IComponent'>, <type 'IDi
         Get: EntryPointAddress(self: ProcessModule) -> IntPtr
         """
         ...
-
     @property
     def Events(self):
-        """ Gets the list of event handlers that are attached to this System.ComponentModel.Component. """
+        """Gets the list of event handlers that are attached to this System.ComponentModel.Component."""
         ...
-
     @property
     def FileName(self):
         """
@@ -5032,7 +4663,6 @@ class ProcessModule(Component): # skipped bases: <type 'IComponent'>, <type 'IDi
         Get: FileName(self: ProcessModule) -> str
         """
         ...
-
     @property
     def FileVersionInfo(self):
         """
@@ -5041,7 +4671,6 @@ class ProcessModule(Component): # skipped bases: <type 'IComponent'>, <type 'IDi
         Get: FileVersionInfo(self: ProcessModule) -> FileVersionInfo
         """
         ...
-
     @property
     def ModuleMemorySize(self):
         """
@@ -5050,7 +4679,6 @@ class ProcessModule(Component): # skipped bases: <type 'IComponent'>, <type 'IDi
         Get: ModuleMemorySize(self: ProcessModule) -> int
         """
         ...
-
     @property
     def ModuleName(self):
         """
@@ -5060,14 +4688,13 @@ class ProcessModule(Component): # skipped bases: <type 'IComponent'>, <type 'IDi
         """
         ...
 
-
-
-class ProcessModuleCollection(ReadOnlyCollectionBase): # skipped bases: <type 'ICollection'>, <type 'IEnumerable'>
+class ProcessModuleCollection(ReadOnlyCollectionBase):  # skipped bases: <type 'ICollection'>, <type 'IEnumerable'>
     """
     Provides a strongly typed collection of System.Diagnostics.ProcessModule objects.
 
     ProcessModuleCollection(processModules: Array[ProcessModule])
     """
+
     def Contains(self, module):
         """
         Contains(self: ProcessModuleCollection, module: ProcessModule) -> bool
@@ -5079,7 +4706,6 @@ class ProcessModuleCollection(ReadOnlyCollectionBase): # skipped bases: <type 'I
             Returns: ue if the module exists in the collection; otherwise, lse.
         """
         ...
-
     def CopyTo(self, array, index):
         """
         CopyTo(self: ProcessModuleCollection, array: Array[ProcessModule], index: int)
@@ -5091,7 +4717,6 @@ class ProcessModuleCollection(ReadOnlyCollectionBase): # skipped bases: <type 'I
             index: The location at which to add the new instances.
         """
         ...
-
     def IndexOf(self, module):
         """
         IndexOf(self: ProcessModuleCollection, module: ProcessModule) -> int
@@ -5103,12 +4728,10 @@ class ProcessModuleCollection(ReadOnlyCollectionBase): # skipped bases: <type 'I
             Returns: The zero-based index that defines the location of the module within the System.Diagnostics.ProcessModuleCollection.
         """
         ...
-
-    def __getitem__(self, *args): #cannot find CLR method
-        """ x.__getitem__(y) <==> x[y] """
+    def __getitem__(self, *args):  # cannot find CLR method
+        """x.__getitem__(y) <==> x[y]"""
         ...
-
-    @staticmethod # known case of __new__
+    @staticmethod  # known case of __new__
     def __new__(cls, processModules):
         """
         __new__(cls: type)
@@ -5116,20 +4739,18 @@ class ProcessModuleCollection(ReadOnlyCollectionBase): # skipped bases: <type 'I
         __new__(cls: type, processModules: Array[ProcessModule])
         """
         ...
-
     @property
     def InnerList(self):
-        """ Gets the list of elements contained in the System.Collections.ReadOnlyCollectionBase instance. """
+        """Gets the list of elements contained in the System.Collections.ReadOnlyCollectionBase instance."""
         ...
 
-
-
-class ProcessPriorityClass(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class ProcessPriorityClass(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Indicates the priority that the system associates with a process. This value, together with the priority value of each thread of the process, determines each thread's base priority level.
 
     enum ProcessPriorityClass, values: AboveNormal (32768), BelowNormal (16384), High (128), Idle (64), Normal (32), RealTime (256)
     """
+
     AboveNormal = None
     BelowNormal = None
     High = None
@@ -5138,8 +4759,7 @@ class ProcessPriorityClass(Enum): # skipped bases: <type 'IComparable'>, <type '
     RealTime = None
     value__ = None
 
-
-class ProcessStartInfo: # skipped bases: <type 'object'>
+class ProcessStartInfo:  # skipped bases: <type 'object'>
     """
     Specifies a set of values that are used when you start a process.
 
@@ -5149,6 +4769,7 @@ class ProcessStartInfo: # skipped bases: <type 'object'>
 
     ProcessStartInfo(fileName: str, arguments: str)
     """
+
     @property
     def Arguments(self):
         """
@@ -5159,7 +4780,6 @@ class ProcessStartInfo: # skipped bases: <type 'object'>
         Set: Arguments(self: ProcessStartInfo) = value
         """
         ...
-
     @property
     def CreateNoWindow(self):
         """
@@ -5170,7 +4790,6 @@ class ProcessStartInfo: # skipped bases: <type 'object'>
         Set: CreateNoWindow(self: ProcessStartInfo) = value
         """
         ...
-
     @property
     def Domain(self):
         """
@@ -5181,7 +4800,6 @@ class ProcessStartInfo: # skipped bases: <type 'object'>
         Set: Domain(self: ProcessStartInfo) = value
         """
         ...
-
     @property
     def Environment(self):
         """
@@ -5190,7 +4808,6 @@ class ProcessStartInfo: # skipped bases: <type 'object'>
         Get: Environment(self: ProcessStartInfo) -> IDictionary[str, str]
         """
         ...
-
     @property
     def EnvironmentVariables(self):
         """
@@ -5199,7 +4816,6 @@ class ProcessStartInfo: # skipped bases: <type 'object'>
         Get: EnvironmentVariables(self: ProcessStartInfo) -> StringDictionary
         """
         ...
-
     @property
     def ErrorDialog(self):
         """
@@ -5210,7 +4826,6 @@ class ProcessStartInfo: # skipped bases: <type 'object'>
         Set: ErrorDialog(self: ProcessStartInfo) = value
         """
         ...
-
     @property
     def ErrorDialogParentHandle(self):
         """
@@ -5221,7 +4836,6 @@ class ProcessStartInfo: # skipped bases: <type 'object'>
         Set: ErrorDialogParentHandle(self: ProcessStartInfo) = value
         """
         ...
-
     @property
     def FileName(self):
         """
@@ -5232,7 +4846,6 @@ class ProcessStartInfo: # skipped bases: <type 'object'>
         Set: FileName(self: ProcessStartInfo) = value
         """
         ...
-
     @property
     def LoadUserProfile(self):
         """
@@ -5243,7 +4856,6 @@ class ProcessStartInfo: # skipped bases: <type 'object'>
         Set: LoadUserProfile(self: ProcessStartInfo) = value
         """
         ...
-
     @property
     def Password(self):
         """
@@ -5254,7 +4866,6 @@ class ProcessStartInfo: # skipped bases: <type 'object'>
         Set: Password(self: ProcessStartInfo) = value
         """
         ...
-
     @property
     def PasswordInClearText(self):
         """
@@ -5265,7 +4876,6 @@ class ProcessStartInfo: # skipped bases: <type 'object'>
         Set: PasswordInClearText(self: ProcessStartInfo) = value
         """
         ...
-
     @property
     def RedirectStandardError(self):
         """
@@ -5276,7 +4886,6 @@ class ProcessStartInfo: # skipped bases: <type 'object'>
         Set: RedirectStandardError(self: ProcessStartInfo) = value
         """
         ...
-
     @property
     def RedirectStandardInput(self):
         """
@@ -5287,7 +4896,6 @@ class ProcessStartInfo: # skipped bases: <type 'object'>
         Set: RedirectStandardInput(self: ProcessStartInfo) = value
         """
         ...
-
     @property
     def RedirectStandardOutput(self):
         """
@@ -5298,7 +4906,6 @@ class ProcessStartInfo: # skipped bases: <type 'object'>
         Set: RedirectStandardOutput(self: ProcessStartInfo) = value
         """
         ...
-
     @property
     def StandardErrorEncoding(self):
         """
@@ -5309,7 +4916,6 @@ class ProcessStartInfo: # skipped bases: <type 'object'>
         Set: StandardErrorEncoding(self: ProcessStartInfo) = value
         """
         ...
-
     @property
     def StandardOutputEncoding(self):
         """
@@ -5320,7 +4926,6 @@ class ProcessStartInfo: # skipped bases: <type 'object'>
         Set: StandardOutputEncoding(self: ProcessStartInfo) = value
         """
         ...
-
     @property
     def UserName(self):
         """
@@ -5331,7 +4936,6 @@ class ProcessStartInfo: # skipped bases: <type 'object'>
         Set: UserName(self: ProcessStartInfo) = value
         """
         ...
-
     @property
     def UseShellExecute(self):
         """
@@ -5342,7 +4946,6 @@ class ProcessStartInfo: # skipped bases: <type 'object'>
         Set: UseShellExecute(self: ProcessStartInfo) = value
         """
         ...
-
     @property
     def Verb(self):
         """
@@ -5353,7 +4956,6 @@ class ProcessStartInfo: # skipped bases: <type 'object'>
         Set: Verb(self: ProcessStartInfo) = value
         """
         ...
-
     @property
     def Verbs(self):
         """
@@ -5362,7 +4964,6 @@ class ProcessStartInfo: # skipped bases: <type 'object'>
         Get: Verbs(self: ProcessStartInfo) -> Array[str]
         """
         ...
-
     @property
     def WindowStyle(self):
         """
@@ -5373,7 +4974,6 @@ class ProcessStartInfo: # skipped bases: <type 'object'>
         Set: WindowStyle(self: ProcessStartInfo) = value
         """
         ...
-
     @property
     def WorkingDirectory(self):
         """
@@ -5385,10 +4985,9 @@ class ProcessStartInfo: # skipped bases: <type 'object'>
         """
         ...
 
+class ProcessThread(Component):  # skipped bases: <type 'IComponent'>, <type 'IDisposable'>
+    """Represents an operating system process thread."""
 
-
-class ProcessThread(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposable'>
-    """ Represents an operating system process thread. """
     def ResetIdealProcessor(self):
         """
         ResetIdealProcessor(self: ProcessThread)
@@ -5396,7 +4995,6 @@ class ProcessThread(Component): # skipped bases: <type 'IComponent'>, <type 'IDi
             Resets the ideal processor for this thread to indicate that there is no single ideal processor. In other words, so that any processor is ideal.
         """
         ...
-
     @property
     def BasePriority(self):
         """
@@ -5405,12 +5003,10 @@ class ProcessThread(Component): # skipped bases: <type 'IComponent'>, <type 'IDi
         Get: BasePriority(self: ProcessThread) -> int
         """
         ...
-
     @property
     def CanRaiseEvents(self):
-        """ Gets a value indicating whether the component can raise an event. """
+        """Gets a value indicating whether the component can raise an event."""
         ...
-
     @property
     def CurrentPriority(self):
         """
@@ -5419,17 +5015,14 @@ class ProcessThread(Component): # skipped bases: <type 'IComponent'>, <type 'IDi
         Get: CurrentPriority(self: ProcessThread) -> int
         """
         ...
-
     @property
     def DesignMode(self):
-        """ Gets a value that indicates whether the System.ComponentModel.Component is currently in design mode. """
+        """Gets a value that indicates whether the System.ComponentModel.Component is currently in design mode."""
         ...
-
     @property
     def Events(self):
-        """ Gets the list of event handlers that are attached to this System.ComponentModel.Component. """
+        """Gets the list of event handlers that are attached to this System.ComponentModel.Component."""
         ...
-
     @property
     def Id(self):
         """
@@ -5438,7 +5031,6 @@ class ProcessThread(Component): # skipped bases: <type 'IComponent'>, <type 'IDi
         Get: Id(self: ProcessThread) -> int
         """
         ...
-
     @property
     def IdealProcessor(self):
         """
@@ -5447,7 +5039,6 @@ class ProcessThread(Component): # skipped bases: <type 'IComponent'>, <type 'IDi
         Set: IdealProcessor(self: ProcessThread) = value
         """
         ...
-
     @property
     def PriorityBoostEnabled(self):
         """
@@ -5458,7 +5049,6 @@ class ProcessThread(Component): # skipped bases: <type 'IComponent'>, <type 'IDi
         Set: PriorityBoostEnabled(self: ProcessThread) = value
         """
         ...
-
     @property
     def PriorityLevel(self):
         """
@@ -5469,7 +5059,6 @@ class ProcessThread(Component): # skipped bases: <type 'IComponent'>, <type 'IDi
         Set: PriorityLevel(self: ProcessThread) = value
         """
         ...
-
     @property
     def PrivilegedProcessorTime(self):
         """
@@ -5478,7 +5067,6 @@ class ProcessThread(Component): # skipped bases: <type 'IComponent'>, <type 'IDi
         Get: PrivilegedProcessorTime(self: ProcessThread) -> TimeSpan
         """
         ...
-
     @property
     def ProcessorAffinity(self):
         """
@@ -5487,7 +5075,6 @@ class ProcessThread(Component): # skipped bases: <type 'IComponent'>, <type 'IDi
         Set: ProcessorAffinity(self: ProcessThread) = value
         """
         ...
-
     @property
     def StartAddress(self):
         """
@@ -5496,7 +5083,6 @@ class ProcessThread(Component): # skipped bases: <type 'IComponent'>, <type 'IDi
         Get: StartAddress(self: ProcessThread) -> IntPtr
         """
         ...
-
     @property
     def StartTime(self):
         """
@@ -5505,7 +5091,6 @@ class ProcessThread(Component): # skipped bases: <type 'IComponent'>, <type 'IDi
         Get: StartTime(self: ProcessThread) -> DateTime
         """
         ...
-
     @property
     def ThreadState(self):
         """
@@ -5514,7 +5099,6 @@ class ProcessThread(Component): # skipped bases: <type 'IComponent'>, <type 'IDi
         Get: ThreadState(self: ProcessThread) -> ThreadState
         """
         ...
-
     @property
     def TotalProcessorTime(self):
         """
@@ -5523,7 +5107,6 @@ class ProcessThread(Component): # skipped bases: <type 'IComponent'>, <type 'IDi
         Get: TotalProcessorTime(self: ProcessThread) -> TimeSpan
         """
         ...
-
     @property
     def UserProcessorTime(self):
         """
@@ -5532,7 +5115,6 @@ class ProcessThread(Component): # skipped bases: <type 'IComponent'>, <type 'IDi
         Get: UserProcessorTime(self: ProcessThread) -> TimeSpan
         """
         ...
-
     @property
     def WaitReason(self):
         """
@@ -5542,14 +5124,13 @@ class ProcessThread(Component): # skipped bases: <type 'IComponent'>, <type 'IDi
         """
         ...
 
-
-
-class ProcessThreadCollection(ReadOnlyCollectionBase): # skipped bases: <type 'ICollection'>, <type 'IEnumerable'>
+class ProcessThreadCollection(ReadOnlyCollectionBase):  # skipped bases: <type 'ICollection'>, <type 'IEnumerable'>
     """
     Provides a strongly typed collection of System.Diagnostics.ProcessThread objects.
 
     ProcessThreadCollection(processThreads: Array[ProcessThread])
     """
+
     def Add(self, thread):
         """
         Add(self: ProcessThreadCollection, thread: ProcessThread) -> int
@@ -5561,7 +5142,6 @@ class ProcessThreadCollection(ReadOnlyCollectionBase): # skipped bases: <type 'I
             Returns: The zero-based index of the thread in the collection.
         """
         ...
-
     def Contains(self, thread):
         """
         Contains(self: ProcessThreadCollection, thread: ProcessThread) -> bool
@@ -5573,7 +5153,6 @@ class ProcessThreadCollection(ReadOnlyCollectionBase): # skipped bases: <type 'I
             Returns: ue if the thread exists in the collection; otherwise, lse.
         """
         ...
-
     def CopyTo(self, array, index):
         """
         CopyTo(self: ProcessThreadCollection, array: Array[ProcessThread], index: int)
@@ -5585,7 +5164,6 @@ class ProcessThreadCollection(ReadOnlyCollectionBase): # skipped bases: <type 'I
             index: The location at which to add the new instances.
         """
         ...
-
     def IndexOf(self, thread):
         """
         IndexOf(self: ProcessThreadCollection, thread: ProcessThread) -> int
@@ -5597,7 +5175,6 @@ class ProcessThreadCollection(ReadOnlyCollectionBase): # skipped bases: <type 'I
             Returns: The zero-based index that defines the location of the thread within the System.Diagnostics.ProcessThreadCollection.
         """
         ...
-
     def Insert(self, index, thread):
         """
         Insert(self: ProcessThreadCollection, index: int, thread: ProcessThread)
@@ -5609,7 +5186,6 @@ class ProcessThreadCollection(ReadOnlyCollectionBase): # skipped bases: <type 'I
             thread: The thread to insert into the collection.
         """
         ...
-
     def Remove(self, thread):
         """
         Remove(self: ProcessThreadCollection, thread: ProcessThread)
@@ -5619,16 +5195,13 @@ class ProcessThreadCollection(ReadOnlyCollectionBase): # skipped bases: <type 'I
             thread: The thread to remove from the collection.
         """
         ...
-
-    def __add__(self, *args): #cannot find CLR method
-        """ x.__add__(y) <==> x+y """
+    def __add__(self, *args):  # cannot find CLR method
+        """x.__add__(y) <==> x+y"""
         ...
-
-    def __getitem__(self, *args): #cannot find CLR method
-        """ x.__getitem__(y) <==> x[y] """
+    def __getitem__(self, *args):  # cannot find CLR method
+        """x.__getitem__(y) <==> x[y]"""
         ...
-
-    @staticmethod # known case of __new__
+    @staticmethod  # known case of __new__
     def __new__(cls, processThreads):
         """
         __new__(cls: type)
@@ -5636,26 +5209,23 @@ class ProcessThreadCollection(ReadOnlyCollectionBase): # skipped bases: <type 'I
         __new__(cls: type, processThreads: Array[ProcessThread])
         """
         ...
-
     @property
     def InnerList(self):
-        """ Gets the list of elements contained in the System.Collections.ReadOnlyCollectionBase instance. """
+        """Gets the list of elements contained in the System.Collections.ReadOnlyCollectionBase instance."""
         ...
 
-
-
-class ProcessWindowStyle(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class ProcessWindowStyle(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specified how a new window should appear when the system starts a process.
 
     enum ProcessWindowStyle, values: Hidden (1), Maximized (3), Minimized (2), Normal (0)
     """
+
     Hidden = None
     Maximized = None
     Minimized = None
     Normal = None
     value__ = None
-
 
 class SourceFilter(TraceFilter):
     """
@@ -5663,11 +5233,11 @@ class SourceFilter(TraceFilter):
 
     SourceFilter(source: str)
     """
-    @staticmethod # known case of __new__
-    def __new__(cls, source):
-        """ __new__(cls: type, source: str) """
-        ...
 
+    @staticmethod  # known case of __new__
+    def __new__(cls, source):
+        """__new__(cls: type, source: str)"""
+        ...
     @property
     def Source(self):
         """
@@ -5679,14 +5249,13 @@ class SourceFilter(TraceFilter):
         """
         ...
 
-
-
-class SourceLevels(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SourceLevels(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the levels of trace messages filtered by the source switch and event type filter.
 
     enum (flags) SourceLevels, values: ActivityTracing (65280), All (-1), Critical (1), Error (3), Information (15), Off (0), Verbose (31), Warning (7)
     """
+
     ActivityTracing = None
     All = None
     Critical = None
@@ -5697,7 +5266,6 @@ class SourceLevels(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvert
     Verbose = None
     Warning = None
 
-
 class SourceSwitch(Switch):
     """
     Provides a multilevel switch to control tracing and debug output without recompiling your code.
@@ -5706,6 +5274,7 @@ class SourceSwitch(Switch):
 
     SourceSwitch(displayName: str, defaultSwitchValue: str)
     """
+
     def ShouldTrace(self, eventType):
         """
         ShouldTrace(self: SourceSwitch, eventType: TraceEventType) -> bool
@@ -5717,7 +5286,6 @@ class SourceSwitch(Switch):
             Returns: ue if the trace listeners should be called; otherwise, lse.
         """
         ...
-
     @property
     def Level(self):
         """
@@ -5728,20 +5296,16 @@ class SourceSwitch(Switch):
         Set: Level(self: SourceSwitch) = value
         """
         ...
-
     @property
     def SwitchSetting(self):
-        """ Gets or sets the current setting for this switch. """
+        """Gets or sets the current setting for this switch."""
         ...
-
     @property
     def Value(self):
-        """ Gets or sets the value of the switch. """
+        """Gets or sets the value of the switch."""
         ...
 
-
-
-class StackFrame: # skipped bases: <type 'object'>
+class StackFrame:  # skipped bases: <type 'object'>
     """
     Provides information about a System.Diagnostics.StackFrame, which represents a function call on the call stack for the current thread.
 
@@ -5757,6 +5321,7 @@ class StackFrame: # skipped bases: <type 'object'>
 
     StackFrame(fileName: str, lineNumber: int, colNumber: int)
     """
+
     def GetFileColumnNumber(self):
         """
         GetFileColumnNumber(self: StackFrame) -> int
@@ -5766,7 +5331,6 @@ class StackFrame: # skipped bases: <type 'object'>
             Returns: The file column number, or 0 (zero) if the file column number cannot be determined.
         """
         ...
-
     def GetFileLineNumber(self):
         """
         GetFileLineNumber(self: StackFrame) -> int
@@ -5776,7 +5340,6 @@ class StackFrame: # skipped bases: <type 'object'>
             Returns: The file line number, or 0 (zero) if the file line number cannot be determined.
         """
         ...
-
     def GetFileName(self):
         """
         GetFileName(self: StackFrame) -> str
@@ -5786,7 +5349,6 @@ class StackFrame: # skipped bases: <type 'object'>
             Returns: The file name, or ll if the file name cannot be determined.
         """
         ...
-
     def GetILOffset(self):
         """
         GetILOffset(self: StackFrame) -> int
@@ -5798,7 +5360,6 @@ class StackFrame: # skipped bases: <type 'object'>
             Returns: The offset from the start of the MSIL code for the method that is executing.
         """
         ...
-
     def GetMethod(self):
         """
         GetMethod(self: StackFrame) -> MethodBase
@@ -5808,7 +5369,6 @@ class StackFrame: # skipped bases: <type 'object'>
             Returns: The method in which the frame is executing.
         """
         ...
-
     def GetNativeOffset(self):
         """
         GetNativeOffset(self: StackFrame) -> int
@@ -5818,7 +5378,6 @@ class StackFrame: # skipped bases: <type 'object'>
             Returns: The offset from the start of the JIT-compiled code for the method that is being executed.
         """
         ...
-
     def ToString(self):
         """
         ToString(self: StackFrame) -> str
@@ -5828,12 +5387,11 @@ class StackFrame: # skipped bases: <type 'object'>
             Returns: A readable representation of the stack trace.
         """
         ...
-
     OFFSET_UNKNOWN = -1
 
+class StackFrameExtensions:  # skipped bases: <type 'object'>
+    """Provides extension methods for the System.Diagnostics.StackFrame class, which represents a function call on the call stack for the current thread."""
 
-class StackFrameExtensions: # skipped bases: <type 'object'>
-    """ Provides extension methods for the System.Diagnostics.StackFrame class, which represents a function call on the call stack for the current thread. """
     @staticmethod
     def GetNativeImageBase(stackFrame):
         """
@@ -5846,7 +5404,6 @@ class StackFrameExtensions: # skipped bases: <type 'object'>
             Returns: This method always returns System.IntPtr.Zero.
         """
         ...
-
     @staticmethod
     def GetNativeIP(stackFrame):
         """
@@ -5859,7 +5416,6 @@ class StackFrameExtensions: # skipped bases: <type 'object'>
             Returns: This method always returns  System.IntPtr.Zero.
         """
         ...
-
     @staticmethod
     def HasILOffset(stackFrame):
         """
@@ -5872,7 +5428,6 @@ class StackFrameExtensions: # skipped bases: <type 'object'>
             Returns: ue if the offset is available; otherwise, lse.
         """
         ...
-
     @staticmethod
     def HasMethod(stackFrame):
         """
@@ -5885,7 +5440,6 @@ class StackFrameExtensions: # skipped bases: <type 'object'>
             Returns: ue if information about the method in which the current frame is executing is available; otherwise, lse.
         """
         ...
-
     @staticmethod
     def HasNativeImage(stackFrame):
         """
@@ -5898,7 +5452,6 @@ class StackFrameExtensions: # skipped bases: <type 'object'>
             Returns: ue if a native image is available for this stack frame; otherwise, lse.
         """
         ...
-
     @staticmethod
     def HasSource(stackFrame):
         """
@@ -5911,18 +5464,16 @@ class StackFrameExtensions: # skipped bases: <type 'object'>
             Returns: ue if the code that the specified stack frame is executing is available; otherwise, lse.
         """
         ...
-
     __all__ = [
-        'GetNativeImageBase',
-        'GetNativeIP',
-        'HasILOffset',
-        'HasMethod',
-        'HasNativeImage',
-        'HasSource',
+        "GetNativeImageBase",
+        "GetNativeIP",
+        "HasILOffset",
+        "HasMethod",
+        "HasNativeImage",
+        "HasSource",
     ]
 
-
-class StackTrace: # skipped bases: <type 'object'>
+class StackTrace:  # skipped bases: <type 'object'>
     """
     Represents a stack trace, which is an ordered collection of one or more stack frames.
 
@@ -5946,6 +5497,7 @@ class StackTrace: # skipped bases: <type 'object'>
 
     StackTrace(targetThread: Thread, needFileInfo: bool)
     """
+
     def GetFrame(self, index):
         """
         GetFrame(self: StackTrace, index: int) -> StackFrame
@@ -5957,7 +5509,6 @@ class StackTrace: # skipped bases: <type 'object'>
             Returns: The specified stack frame.
         """
         ...
-
     def GetFrames(self):
         """
         GetFrames(self: StackTrace) -> Array[StackFrame]
@@ -5967,7 +5518,6 @@ class StackTrace: # skipped bases: <type 'object'>
             Returns: An array of type System.Diagnostics.StackFrame representing the function calls in the stack trace.
         """
         ...
-
     def ToString(self):
         """
         ToString(self: StackTrace) -> str
@@ -5977,7 +5527,6 @@ class StackTrace: # skipped bases: <type 'object'>
             Returns: A readable representation of the stack trace.
         """
         ...
-
     @property
     def FrameCount(self):
         """
@@ -5986,17 +5535,15 @@ class StackTrace: # skipped bases: <type 'object'>
         Get: FrameCount(self: StackTrace) -> int
         """
         ...
-
-
     METHODS_TO_SKIP = 0
 
-
-class Stopwatch: # skipped bases: <type 'object'>
+class Stopwatch:  # skipped bases: <type 'object'>
     """
     Provides a set of methods and properties that you can use to accurately measure elapsed time.To browse the .NET Framework source code for this type, see the Reference Source.
 
     Stopwatch()
     """
+
     @staticmethod
     def GetTimestamp():
         """
@@ -6007,7 +5554,6 @@ class Stopwatch: # skipped bases: <type 'object'>
             Returns: A long integer representing the tick counter value of the underlying timer mechanism.
         """
         ...
-
     def Reset(self):
         """
         Reset(self: Stopwatch)
@@ -6015,7 +5561,6 @@ class Stopwatch: # skipped bases: <type 'object'>
             Stops time interval measurement and resets the elapsed time to zero.
         """
         ...
-
     def Restart(self):
         """
         Restart(self: Stopwatch)
@@ -6023,7 +5568,6 @@ class Stopwatch: # skipped bases: <type 'object'>
             Stops time interval measurement, resets the elapsed time to zero, and starts measuring elapsed time.
         """
         ...
-
     def Start(self):
         """
         Start(self: Stopwatch)
@@ -6031,7 +5575,6 @@ class Stopwatch: # skipped bases: <type 'object'>
             Starts, or resumes, measuring elapsed time for an interval.
         """
         ...
-
     @staticmethod
     def StartNew():
         """
@@ -6042,7 +5585,6 @@ class Stopwatch: # skipped bases: <type 'object'>
             Returns: A System.Diagnostics.Stopwatch that has just begun measuring elapsed time.
         """
         ...
-
     def Stop(self):
         """
         Stop(self: Stopwatch)
@@ -6050,7 +5592,6 @@ class Stopwatch: # skipped bases: <type 'object'>
             Stops measuring elapsed time for an interval.
         """
         ...
-
     @property
     def Elapsed(self):
         """
@@ -6059,7 +5600,6 @@ class Stopwatch: # skipped bases: <type 'object'>
         Get: Elapsed(self: Stopwatch) -> TimeSpan
         """
         ...
-
     @property
     def ElapsedMilliseconds(self):
         """
@@ -6068,7 +5608,6 @@ class Stopwatch: # skipped bases: <type 'object'>
         Get: ElapsedMilliseconds(self: Stopwatch) -> Int64
         """
         ...
-
     @property
     def ElapsedTicks(self):
         """
@@ -6077,7 +5616,6 @@ class Stopwatch: # skipped bases: <type 'object'>
         Get: ElapsedTicks(self: Stopwatch) -> Int64
         """
         ...
-
     @property
     def IsRunning(self):
         """
@@ -6086,18 +5624,16 @@ class Stopwatch: # skipped bases: <type 'object'>
         Get: IsRunning(self: Stopwatch) -> bool
         """
         ...
-
-
     Frequency = None
     IsHighResolution = True
 
-
-class SwitchAttribute(Attribute): # skipped bases: <type '_Attribute'>
+class SwitchAttribute(Attribute):  # skipped bases: <type '_Attribute'>
     """
     Identifies a switch used in an assembly, class, or member.
 
     SwitchAttribute(switchName: str, switchType: Type)
     """
+
     @staticmethod
     def GetAll(assembly):
         """
@@ -6110,12 +5646,10 @@ class SwitchAttribute(Attribute): # skipped bases: <type '_Attribute'>
             Returns: An array that contains all the switch attributes for the assembly.
         """
         ...
-
-    @staticmethod # known case of __new__
+    @staticmethod  # known case of __new__
     def __new__(cls, switchName, switchType):
-        """ __new__(cls: type, switchName: str, switchType: Type) """
+        """__new__(cls: type, switchName: str, switchType: Type)"""
         ...
-
     @property
     def SwitchDescription(self):
         """
@@ -6126,7 +5660,6 @@ class SwitchAttribute(Attribute): # skipped bases: <type '_Attribute'>
         Set: SwitchDescription(self: SwitchAttribute) = value
         """
         ...
-
     @property
     def SwitchName(self):
         """
@@ -6137,7 +5670,6 @@ class SwitchAttribute(Attribute): # skipped bases: <type '_Attribute'>
         Set: SwitchName(self: SwitchAttribute) = value
         """
         ...
-
     @property
     def SwitchType(self):
         """
@@ -6149,19 +5681,17 @@ class SwitchAttribute(Attribute): # skipped bases: <type '_Attribute'>
         """
         ...
 
-
-
-class SwitchLevelAttribute(Attribute): # skipped bases: <type '_Attribute'>
+class SwitchLevelAttribute(Attribute):  # skipped bases: <type '_Attribute'>
     """
     Identifies the level type for a switch.
 
     SwitchLevelAttribute(switchLevelType: Type)
     """
-    @staticmethod # known case of __new__
-    def __new__(cls, switchLevelType):
-        """ __new__(cls: type, switchLevelType: Type) """
-        ...
 
+    @staticmethod  # known case of __new__
+    def __new__(cls, switchLevelType):
+        """__new__(cls: type, switchLevelType: Type)"""
+        ...
     @property
     def SwitchLevelType(self):
         """
@@ -6173,14 +5703,13 @@ class SwitchLevelAttribute(Attribute): # skipped bases: <type '_Attribute'>
         """
         ...
 
-
-
-class ThreadPriorityLevel(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class ThreadPriorityLevel(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the priority level of a thread.
 
     enum ThreadPriorityLevel, values: AboveNormal (1), BelowNormal (-1), Highest (2), Idle (-15), Lowest (-2), Normal (0), TimeCritical (15)
     """
+
     AboveNormal = None
     BelowNormal = None
     Highest = None
@@ -6190,13 +5719,13 @@ class ThreadPriorityLevel(Enum): # skipped bases: <type 'IComparable'>, <type 'I
     TimeCritical = None
     value__ = None
 
-
-class ThreadState(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class ThreadState(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the current execution state of the thread.
 
     enum ThreadState, values: Initialized (0), Ready (1), Running (2), Standby (3), Terminated (4), Transition (6), Unknown (7), Wait (5)
     """
+
     Initialized = None
     Ready = None
     Running = None
@@ -6207,13 +5736,13 @@ class ThreadState(Enum): # skipped bases: <type 'IComparable'>, <type 'IConverti
     value__ = None
     Wait = None
 
-
-class ThreadWaitReason(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class ThreadWaitReason(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the reason a thread is waiting.
 
     enum ThreadWaitReason, values: EventPairHigh (7), EventPairLow (8), ExecutionDelay (4), Executive (0), FreePage (1), LpcReceive (9), LpcReply (10), PageIn (2), PageOut (12), Suspended (5), SystemAllocation (3), Unknown (13), UserRequest (6), VirtualMemory (11)
     """
+
     EventPairHigh = None
     EventPairLow = None
     ExecutionDelay = None
@@ -6230,9 +5759,9 @@ class ThreadWaitReason(Enum): # skipped bases: <type 'IComparable'>, <type 'ICon
     value__ = None
     VirtualMemory = None
 
+class Trace:  # skipped bases: <type 'object'>
+    """Provides a set of methods and properties that help you trace the execution of your code. This class cannot be inherited."""
 
-class Trace: # skipped bases: <type 'object'>
-    """ Provides a set of methods and properties that help you trace the execution of your code. This class cannot be inherited. """
     @staticmethod
     def Assert(condition, message=None, detailMessage=None):
         """
@@ -6261,7 +5790,6 @@ class Trace: # skipped bases: <type 'object'>
             detailMessage: The detailed message to send to the System.Diagnostics.Trace.Listeners collection.
         """
         ...
-
     @staticmethod
     def Close():
         """
@@ -6270,7 +5798,6 @@ class Trace: # skipped bases: <type 'object'>
             Flushes the output buffer, and then closes the System.Diagnostics.Trace.Listeners.
         """
         ...
-
     @staticmethod
     def Fail(message, detailMessage=None):
         """
@@ -6289,7 +5816,6 @@ class Trace: # skipped bases: <type 'object'>
             detailMessage: A detailed message to emit.
         """
         ...
-
     @staticmethod
     def Flush():
         """
@@ -6298,7 +5824,6 @@ class Trace: # skipped bases: <type 'object'>
             Flushes the output buffer, and causes buffered data to be written to the System.Diagnostics.Trace.Listeners.
         """
         ...
-
     @staticmethod
     def Indent():
         """
@@ -6307,7 +5832,6 @@ class Trace: # skipped bases: <type 'object'>
             Increases the current System.Diagnostics.Trace.IndentLevel by one.
         """
         ...
-
     @staticmethod
     def Refresh():
         """
@@ -6316,7 +5840,6 @@ class Trace: # skipped bases: <type 'object'>
             Refreshes the trace configuration data.
         """
         ...
-
     @staticmethod
     def TraceError(*__args):
         """
@@ -6335,7 +5858,6 @@ class Trace: # skipped bases: <type 'object'>
             args: An ject array containing zero or more objects to format.
         """
         ...
-
     @staticmethod
     def TraceInformation(*__args):
         """
@@ -6354,7 +5876,6 @@ class Trace: # skipped bases: <type 'object'>
             args: An ject array containing zero or more objects to format.
         """
         ...
-
     @staticmethod
     def TraceWarning(*__args):
         """
@@ -6373,7 +5894,6 @@ class Trace: # skipped bases: <type 'object'>
             args: An ject array containing zero or more objects to format.
         """
         ...
-
     @staticmethod
     def Unindent():
         """
@@ -6382,7 +5902,6 @@ class Trace: # skipped bases: <type 'object'>
             Decreases the current System.Diagnostics.Trace.IndentLevel by one.
         """
         ...
-
     @staticmethod
     def Write(*__args):
         """
@@ -6415,7 +5934,6 @@ class Trace: # skipped bases: <type 'object'>
             category: A category name used to organize the output.
         """
         ...
-
     @staticmethod
     def WriteIf(condition, *__args):
         """
@@ -6456,7 +5974,6 @@ class Trace: # skipped bases: <type 'object'>
             category: A category name used to organize the output.
         """
         ...
-
     @staticmethod
     def WriteLine(*__args):
         """
@@ -6489,7 +6006,6 @@ class Trace: # skipped bases: <type 'object'>
             category: A category name used to organize the output.
         """
         ...
-
     @staticmethod
     def WriteLineIf(condition, *__args):
         """
@@ -6530,7 +6046,6 @@ class Trace: # skipped bases: <type 'object'>
             category: A category name used to organize the output.
         """
         ...
-
     AutoFlush = False
     CorrelationManager = None
     IndentLevel = 0
@@ -6538,13 +6053,13 @@ class Trace: # skipped bases: <type 'object'>
     Listeners = None
     UseGlobalLock = True
 
-
-class TraceEventCache: # skipped bases: <type 'object'>
+class TraceEventCache:  # skipped bases: <type 'object'>
     """
     Provides trace event data specific to a thread and a process.
 
     TraceEventCache()
     """
+
     @property
     def Callstack(self):
         """
@@ -6553,7 +6068,6 @@ class TraceEventCache: # skipped bases: <type 'object'>
         Get: Callstack(self: TraceEventCache) -> str
         """
         ...
-
     @property
     def DateTime(self):
         """
@@ -6562,7 +6076,6 @@ class TraceEventCache: # skipped bases: <type 'object'>
         Get: DateTime(self: TraceEventCache) -> DateTime
         """
         ...
-
     @property
     def LogicalOperationStack(self):
         """
@@ -6571,7 +6084,6 @@ class TraceEventCache: # skipped bases: <type 'object'>
         Get: LogicalOperationStack(self: TraceEventCache) -> Stack
         """
         ...
-
     @property
     def ProcessId(self):
         """
@@ -6580,7 +6092,6 @@ class TraceEventCache: # skipped bases: <type 'object'>
         Get: ProcessId(self: TraceEventCache) -> int
         """
         ...
-
     @property
     def ThreadId(self):
         """
@@ -6589,7 +6100,6 @@ class TraceEventCache: # skipped bases: <type 'object'>
         Get: ThreadId(self: TraceEventCache) -> str
         """
         ...
-
     @property
     def Timestamp(self):
         """
@@ -6599,14 +6109,13 @@ class TraceEventCache: # skipped bases: <type 'object'>
         """
         ...
 
-
-
-class TraceEventType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class TraceEventType(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Identifies the type of event that has caused the trace.
 
     enum TraceEventType, values: Critical (1), Error (2), Information (8), Resume (2048), Start (256), Stop (512), Suspend (1024), Transfer (4096), Verbose (16), Warning (4)
     """
+
     Critical = None
     Error = None
     Information = None
@@ -6619,13 +6128,13 @@ class TraceEventType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConve
     Verbose = None
     Warning = None
 
-
-class TraceLevel(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class TraceLevel(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies what messages to output for the System.Diagnostics.Debug, System.Diagnostics.Trace and System.Diagnostics.TraceSwitch classes.
 
     enum TraceLevel, values: Error (1), Info (3), Off (0), Verbose (4), Warning (2)
     """
+
     Error = None
     Info = None
     Off = None
@@ -6633,9 +6142,9 @@ class TraceLevel(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertib
     Verbose = None
     Warning = None
 
+class TraceListenerCollection(object, IList):  # skipped bases: <type 'ICollection'>, <type 'IEnumerable'>
+    """Provides a thread-safe list of System.Diagnostics.TraceListener objects."""
 
-class TraceListenerCollection(object, IList): # skipped bases: <type 'ICollection'>, <type 'IEnumerable'>
-    """ Provides a thread-safe list of System.Diagnostics.TraceListener objects. """
     def AddRange(self, value):
         """
         AddRange(self: TraceListenerCollection, value: Array[TraceListener])
@@ -6651,7 +6160,6 @@ class TraceListenerCollection(object, IList): # skipped bases: <type 'ICollectio
             value: Another System.Diagnostics.TraceListenerCollection whose contents are added to the list.
         """
         ...
-
     def CopyTo(self, listeners, index):
         """
         CopyTo(self: TraceListenerCollection, listeners: Array[TraceListener], index: int)
@@ -6663,7 +6171,6 @@ class TraceListenerCollection(object, IList): # skipped bases: <type 'ICollectio
             index: The starting index number in the current list to copy from.
         """
         ...
-
     def GetEnumerator(self):
         """
         GetEnumerator(self: TraceListenerCollection) -> IEnumerator
@@ -6673,8 +6180,7 @@ class TraceListenerCollection(object, IList): # skipped bases: <type 'ICollectio
             Returns: An enumerator of type System.Collections.IEnumerator.
         """
         ...
-
-    def __contains__(self, *args): #cannot find CLR method
+    def __contains__(self, *args):  # cannot find CLR method
         """
         __contains__(self: IList, value: object) -> bool
 
@@ -6685,7 +6191,6 @@ class TraceListenerCollection(object, IList): # skipped bases: <type 'ICollectio
             Returns: ue if the System.Object is found in the System.Collections.IList; otherwise, lse.
         """
         ...
-
     @property
     def Count(self):
         """
@@ -6695,25 +6200,23 @@ class TraceListenerCollection(object, IList): # skipped bases: <type 'ICollectio
         """
         ...
 
-
-
-class TraceOptions(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class TraceOptions(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies trace data options to be written to the trace output.
 
     enum (flags) TraceOptions, values: Callstack (32), DateTime (2), LogicalOperationStack (1), None (0), ProcessId (8), ThreadId (16), Timestamp (4)
     """
+
     Callstack = None
     DateTime = None
     LogicalOperationStack = None
-    None = None
+
     ProcessId = None
     ThreadId = None
     Timestamp = None
     value__ = None
 
-
-class TraceSource: # skipped bases: <type 'object'>
+class TraceSource:  # skipped bases: <type 'object'>
     """
     Provides a set of methods and properties that enable applications to trace the execution of code and associate trace messages with their source.
 
@@ -6721,6 +6224,7 @@ class TraceSource: # skipped bases: <type 'object'>
 
     TraceSource(name: str, defaultLevel: SourceLevels)
     """
+
     def Close(self):
         """
         Close(self: TraceSource)
@@ -6728,7 +6232,6 @@ class TraceSource: # skipped bases: <type 'object'>
             Closes all the trace listeners in the trace listener collection.
         """
         ...
-
     def Flush(self):
         """
         Flush(self: TraceSource)
@@ -6736,8 +6239,7 @@ class TraceSource: # skipped bases: <type 'object'>
             Flushes all the trace listeners in the trace listener collection.
         """
         ...
-
-    def GetSupportedAttributes(self, *args): #cannot find CLR method
+    def GetSupportedAttributes(self, *args):  # cannot find CLR method
         """
         GetSupportedAttributes(self: TraceSource) -> Array[str]
 
@@ -6746,7 +6248,6 @@ class TraceSource: # skipped bases: <type 'object'>
             Returns: A string array naming the custom attributes supported by the trace source, or ll if there are no custom attributes.
         """
         ...
-
     def TraceData(self, eventType, id, data):
         """
         TraceData(self: TraceSource, eventType: TraceEventType, id: int, data: object)
@@ -6770,7 +6271,6 @@ class TraceSource: # skipped bases: <type 'object'>
             data: An object array containing the trace data.
         """
         ...
-
     def TraceEvent(self, eventType, id, *__args):
         """
         TraceEvent(self: TraceSource, eventType: TraceEventType, id: int)
@@ -6804,7 +6304,6 @@ class TraceSource: # skipped bases: <type 'object'>
             args: An ject array containing zero or more objects to format.
         """
         ...
-
     def TraceInformation(self, *__args):
         """
         TraceInformation(self: TraceSource, message: str)
@@ -6822,7 +6321,6 @@ class TraceSource: # skipped bases: <type 'object'>
             args: An array containing zero or more objects to format.
         """
         ...
-
     def TraceTransfer(self, id, message, relatedActivityId):
         """
         TraceTransfer(self: TraceSource, id: int, message: str, relatedActivityId: Guid)
@@ -6836,7 +6334,6 @@ class TraceSource: # skipped bases: <type 'object'>
             relatedActivityId: A structure that identifies the related activity.
         """
         ...
-
     @property
     def Attributes(self):
         """
@@ -6845,7 +6342,6 @@ class TraceSource: # skipped bases: <type 'object'>
         Get: Attributes(self: TraceSource) -> StringDictionary
         """
         ...
-
     @property
     def Listeners(self):
         """
@@ -6854,7 +6350,6 @@ class TraceSource: # skipped bases: <type 'object'>
         Get: Listeners(self: TraceSource) -> TraceListenerCollection
         """
         ...
-
     @property
     def Name(self):
         """
@@ -6863,7 +6358,6 @@ class TraceSource: # skipped bases: <type 'object'>
         Get: Name(self: TraceSource) -> str
         """
         ...
-
     @property
     def Switch(self):
         """
@@ -6875,8 +6369,6 @@ class TraceSource: # skipped bases: <type 'object'>
         """
         ...
 
-
-
 class TraceSwitch(Switch):
     """
     Provides a multilevel switch to control tracing and debug output without recompiling your code.
@@ -6885,6 +6377,7 @@ class TraceSwitch(Switch):
 
     TraceSwitch(displayName: str, description: str, defaultSwitchValue: str)
     """
+
     @property
     def Level(self):
         """
@@ -6895,12 +6388,10 @@ class TraceSwitch(Switch):
         Set: Level(self: TraceSwitch) = value
         """
         ...
-
     @property
     def SwitchSetting(self):
-        """ Gets or sets the current setting for this switch. """
+        """Gets or sets the current setting for this switch."""
         ...
-
     @property
     def TraceError(self):
         """
@@ -6909,7 +6400,6 @@ class TraceSwitch(Switch):
         Get: TraceError(self: TraceSwitch) -> bool
         """
         ...
-
     @property
     def TraceInfo(self):
         """
@@ -6918,7 +6408,6 @@ class TraceSwitch(Switch):
         Get: TraceInfo(self: TraceSwitch) -> bool
         """
         ...
-
     @property
     def TraceVerbose(self):
         """
@@ -6927,7 +6416,6 @@ class TraceSwitch(Switch):
         Get: TraceVerbose(self: TraceSwitch) -> bool
         """
         ...
-
     @property
     def TraceWarning(self):
         """
@@ -6936,15 +6424,12 @@ class TraceSwitch(Switch):
         Get: TraceWarning(self: TraceSwitch) -> bool
         """
         ...
-
     @property
     def Value(self):
-        """ Gets or sets the value of the switch. """
+        """Gets or sets the value of the switch."""
         ...
 
-
-
-class XmlWriterTraceListener(TextWriterTraceListener): # skipped bases: <type 'IDisposable'>
+class XmlWriterTraceListener(TextWriterTraceListener):  # skipped bases: <type 'IDisposable'>
     """
     Directs tracing or debugging output as XML-encoded data to a System.IO.TextWriter or to a System.IO.Stream, such as a System.IO.FileStream.
 
@@ -6960,6 +6445,7 @@ class XmlWriterTraceListener(TextWriterTraceListener): # skipped bases: <type 'I
 
     XmlWriterTraceListener(filename: str, name: str)
     """
+
     def Fail(self, message, detailMessage=None):
         """
         Fail(self: XmlWriterTraceListener, message: str, detailMessage: str)
@@ -6971,7 +6457,6 @@ class XmlWriterTraceListener(TextWriterTraceListener): # skipped bases: <type 'I
             detailMessage: The detailed error message to append to the error message.
         """
         ...
-
     def TraceData(self, eventCache, source, eventType, id, data):
         """
         TraceData(self: XmlWriterTraceListener, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int, data: object)
@@ -7003,7 +6488,6 @@ class XmlWriterTraceListener(TextWriterTraceListener): # skipped bases: <type 'I
             data: An array of data objects to emit.
         """
         ...
-
     def TraceEvent(self, eventCache, source, eventType, id, *__args):
         """
         TraceEvent(self: XmlWriterTraceListener, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int, format: str, *args: Array[object])
@@ -7037,7 +6521,6 @@ class XmlWriterTraceListener(TextWriterTraceListener): # skipped bases: <type 'I
             message: The message to write.
         """
         ...
-
     def TraceTransfer(self, eventCache, source, id, message, relatedActivityId):
         """
         TraceTransfer(self: XmlWriterTraceListener, eventCache: TraceEventCache, source: str, id: int, message: str, relatedActivityId: Guid)
@@ -7055,12 +6538,9 @@ class XmlWriterTraceListener(TextWriterTraceListener): # skipped bases: <type 'I
             relatedActivityId: A System.Guid structure that identifies a related activity.
         """
         ...
-
     @property
     def NeedIndent(self):
-        """ Gets or sets a value indicating whether to indent the output. """
+        """Gets or sets a value indicating whether to indent the output."""
         ...
-
-
 
 # variables with complex values

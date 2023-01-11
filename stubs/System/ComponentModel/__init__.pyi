@@ -6864,7 +6864,7 @@ class RefreshProperties(Enum): # skipped bases: <type 'IComparable'>, <type 'ICo
     enum RefreshProperties, values: All (1), None (0), Repaint (2)
     """
     All = None
-    None = None
+
     Repaint = None
     value__ = None
 
@@ -7112,7 +7112,7 @@ class ToolboxItemAttribute(Attribute): # skipped bases: <type '_Attribute'>
 
 
     Default = None
-    None = None
+
 
 
 class ToolboxItemFilterAttribute(Attribute): # skipped bases: <type '_Attribute'>

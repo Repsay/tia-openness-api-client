@@ -1,13 +1,13 @@
 import configparser
-import clr #type: ignore
-from version import TIAVersion
-from exceptions import LibraryDLLNotFound, LibraryImportError
+from tia_portal.version import TIAVersion
 import os
 
 DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "data"))
 CONFIG_PATH = os.path.join(DATA_PATH, "config.ini")
+VERSION = TIAVersion.V15_1
 
-def load():
+
+def load() -> None:
     config = configparser.ConfigParser()
 
     if not os.path.exists(DATA_PATH):
@@ -15,74 +15,23 @@ def load():
 
     if not os.path.exists(CONFIG_PATH):
         config["DEFAULT"] = {
-            "version": "V15_1",
+            "version": "V17",
         }
         config["USER"] = {}
         config.write(open(CONFIG_PATH, "w"))
 
     config.read(CONFIG_PATH)
     global VERSION
-    VERSION = TIAVersion[config["DEFAULT"]["version"]] if config["USER"].get("version") is None else TIAVersion[config["USER"]["version"]]
+    VERSION = (
+        TIAVersion[config["DEFAULT"]["version"]]
+        if config["USER"].get("version") is None
+        else TIAVersion[config["USER"]["version"]]
+    )
 
-    dll_path = f"C:\\Program Files\\Siemens\\Automation\\Portal {VERSION.name}\\PublicAPI\\V{VERSION.value.replace('_', '.')}\\Siemens.Engineering.dll"
-    if not os.path.exists(dll_path):
-        raise LibraryDLLNotFound(f"Could not find {dll_path}")
 
-    try:
-        clr.AddReference(dll_path)
-    except Exception as e:
-        raise LibraryImportError(f"Could not load {dll_path}") from e
+def set_version(version: TIAVersion) -> None:
+    config = configparser.ConfigParser()
+    config.read(CONFIG_PATH)
 
-    global tia
-    try:
-        import Siemens.Engineering as tia
-    except Exception as e:
-        raise LibraryImportError(f"Could not import Siemens.Engineering") from e
-
-    global comp
-    try:
-        import Siemens.Engineering.Compiler as comp #type: ignore
-    except Exception as e:
-        raise LibraryImportError(f"Could not import Siemens.Engineering.Compiler") from e
-
-    global hw
-    try:
-        import Siemens.Engineering.HW as hw
-    except Exception as e:
-        raise LibraryImportError(f"Could not import Siemens.Engineering.HW") from e
-
-    global hwf
-    try:
-        import Siemens.Engineering.HW.Features as hwf #type: ignore
-    except Exception as e:
-        raise LibraryImportError(f"Could not import Siemens.Engineering.HW.Features") from e
-
-    global sw
-    try:
-        import Siemens.Engineering.SW as sw
-    except Exception as e:
-        raise LibraryImportError(f"Could not import Siemens.Engineering.SW") from e
-
-    global swb
-    try:
-        import Siemens.Engineering.SW.Blocks as swb #type: ignore
-    except Exception as e:
-        raise LibraryImportError(f"Could not import Siemens.Engineering.SW.Blocks") from e
-
-    global lib
-    try:
-        import Siemens.Engineering.Library as lib
-    except Exception as e:
-        raise LibraryImportError(f"Could not import Siemens.Engineering.Library") from e
-
-    global lib_mc
-    try:
-        import Siemens.Engineering.Library.MasterCopies as lib_mc #type: ignore
-    except Exception as e:
-        raise LibraryImportError(f"Could not import Siemens.Engineering.Library.MasterCopies") from e
-
-    global lib_type
-    try:
-        import Siemens.Engineering.Library.Types as lib_type #type: ignore
-    except Exception as e:
-        raise LibraryImportError(f"Could not import Siemens.Engineering.Library.Types") from e
+    config["USER"]["version"] = version.name
+    config.write(open(CONFIG_PATH, "w"))

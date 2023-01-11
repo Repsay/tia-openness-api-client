@@ -168,7 +168,7 @@ class AssemblyRegistrationFlags(Enum): # skipped bases: <type 'IFormattable'>, <
 
     enum (flags) AssemblyRegistrationFlags, values: None (0), SetCodeBase (1)
     """
-    None = None
+
     SetCodeBase = None
     value__ = None
 
@@ -294,7 +294,7 @@ class CharSet(Enum): # skipped bases: <type 'IFormattable'>, <type 'IConvertible
     """
     Ansi = None
     Auto = None
-    None = None
+
     Unicode = None
     value__ = None
 
@@ -335,7 +335,7 @@ class ClassInterfaceType(Enum): # skipped bases: <type 'IFormattable'>, <type 'I
     """
     AutoDispatch = None
     AutoDual = None
-    None = None
+
     value__ = None
 
 
@@ -4994,7 +4994,7 @@ class TypeLibExporterFlags(Enum): # skipped bases: <type 'IFormattable'>, <type 
     CallerResolvedReferences = None
     ExportAs32Bit = None
     ExportAs64Bit = None
-    None = None
+
     OldNames = None
     OnlyReferenceRegistered = None
     value__ = None
@@ -5084,7 +5084,7 @@ class TypeLibImporterFlags(Enum): # skipped bases: <type 'IFormattable'>, <type 
     ImportAsX64 = None
     ImportAsX86 = None
     NoDefineVersionResource = None
-    None = None
+
     PreventClassMembers = None
     PrimaryInteropAssembly = None
     ReflectionOnlyLoading = None

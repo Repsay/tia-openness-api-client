@@ -8,7 +8,9 @@
 # no functions
 # classes
 
-class AspNetHostingPermission(CodeAccessPermission, IUnrestrictedPermission): # skipped bases: <type 'IPermission'>, <type 'ISecurityEncodable'>, <type 'IStackWalk'>
+class AspNetHostingPermission(
+    CodeAccessPermission, IUnrestrictedPermission
+):  # skipped bases: <type 'IPermission'>, <type 'ISecurityEncodable'>, <type 'IStackWalk'>
     """
     Controls access permissions in ASP.NET hosted environments. This class cannot be inherited.
 
@@ -16,6 +18,7 @@ class AspNetHostingPermission(CodeAccessPermission, IUnrestrictedPermission): # 
 
     AspNetHostingPermission(level: AspNetHostingPermissionLevel)
     """
+
     @property
     def Level(self):
         """
@@ -26,9 +29,7 @@ class AspNetHostingPermission(CodeAccessPermission, IUnrestrictedPermission): # 
         Set: Level(self: AspNetHostingPermission) = value
         """
         ...
-
-
-    @staticmethod # known case of __new__
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, state: PermissionState)
@@ -37,13 +38,13 @@ class AspNetHostingPermission(CodeAccessPermission, IUnrestrictedPermission): # 
         """
         ...
 
-
-class AspNetHostingPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class AspNetHostingPermissionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Allows security actions for System.Web.AspNetHostingPermission to be applied to code using declarative security. This class cannot be inherited.
 
     AspNetHostingPermissionAttribute(action: SecurityAction)
     """
+
     @property
     def Level(self):
         """
@@ -54,8 +55,6 @@ class AspNetHostingPermissionAttribute(CodeAccessSecurityAttribute): # skipped b
         Set: Level(self: AspNetHostingPermissionAttribute) = value
         """
         ...
-
-
     def CreatePermission(self):
         """
         CreatePermission(self: AspNetHostingPermissionAttribute) -> IPermission
@@ -68,17 +67,19 @@ class AspNetHostingPermissionAttribute(CodeAccessSecurityAttribute): # skipped b
         """
         ...
 
-
-class AspNetHostingPermissionLevel(Enum): # skipped bases: <type 'IFormattable'>, <type 'IConvertible'>, <type 'IComparable'>
+class AspNetHostingPermissionLevel(
+    Enum
+):  # skipped bases: <type 'IFormattable'>, <type 'IConvertible'>, <type 'IComparable'>
     """
     Specifies the trust level that is granted to an ASP.NET Web application.
 
     enum AspNetHostingPermissionLevel, values: High (500), Low (300), Medium (400), Minimal (200), None (100), Unrestricted (600)
     """
+
     High = None
     Low = None
     Medium = None
     Minimal = None
-    None = None
+
     Unrestricted = None
     value__ = None

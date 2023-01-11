@@ -120,7 +120,7 @@ def CompileModules(
     p_object=None,
     *args,
     **kwArgs,
-):  # real signature unknown; NOTE: unreliably restored from __doc__
+):  # real signature unknown
     """CompileModules(assemblyName: str,**kwArgs: IDictionary[str,object],*filenames: Array[str])"""
     pass
 

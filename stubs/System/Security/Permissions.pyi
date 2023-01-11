@@ -8,8 +8,9 @@
 # no functions
 # classes
 
-class SecurityAttribute(Attribute): # skipped bases: <type '_Attribute'>
-    """ Specifies the base attribute class for declarative security from which System.Security.Permissions.CodeAccessSecurityAttribute is derived. """
+class SecurityAttribute(Attribute):  # skipped bases: <type '_Attribute'>
+    """Specifies the base attribute class for declarative security from which System.Security.Permissions.CodeAccessSecurityAttribute is derived."""
+
     def CreatePermission(self):
         """
         CreatePermission(self: SecurityAttribute) -> IPermission
@@ -19,12 +20,10 @@ class SecurityAttribute(Attribute): # skipped bases: <type '_Attribute'>
             Returns: A serializable permission object.
         """
         ...
-
-    @staticmethod # known case of __new__
-    def __new__(cls, *args): #cannot find CLR constructor
-        """ __new__(cls: type, action: SecurityAction) """
+    @staticmethod  # known case of __new__
+    def __new__(cls, *args):  # cannot find CLR constructor
+        """__new__(cls: type, action: SecurityAction)"""
         ...
-
     @property
     def Action(self):
         """
@@ -35,7 +34,6 @@ class SecurityAttribute(Attribute): # skipped bases: <type '_Attribute'>
         Set: Action(self: SecurityAttribute) = value
         """
         ...
-
     @property
     def Unrestricted(self):
         """
@@ -47,14 +45,14 @@ class SecurityAttribute(Attribute): # skipped bases: <type '_Attribute'>
         """
         ...
 
+class CodeAccessSecurityAttribute(SecurityAttribute):  # skipped bases: <type '_Attribute'>
+    """Specifies the base attribute class for code access security."""
 
-
-class CodeAccessSecurityAttribute(SecurityAttribute): # skipped bases: <type '_Attribute'>
-    """ Specifies the base attribute class for code access security. """
     pass
 
 class IUnrestrictedPermission:
-    """ Allows a permission to expose an unrestricted state. """
+    """Allows a permission to expose an unrestricted state."""
+
     def IsUnrestricted(self):
         """
         IsUnrestricted(self: IUnrestrictedPermission) -> bool
@@ -65,8 +63,9 @@ class IUnrestrictedPermission:
         """
         ...
 
-
-class EnvironmentPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermission): # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
+class EnvironmentPermission(
+    CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermission
+):  # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
     """
     Controls access to system and user environment variables. This class cannot be inherited.
 
@@ -74,6 +73,7 @@ class EnvironmentPermission(CodeAccessPermission, IUnrestrictedPermission, IBuil
 
     EnvironmentPermission(flag: EnvironmentPermissionAccess, pathList: str)
     """
+
     def AddPathList(self, flag, pathList):
         """
         AddPathList(self: EnvironmentPermission, flag: EnvironmentPermissionAccess, pathList: str)
@@ -85,7 +85,6 @@ class EnvironmentPermission(CodeAccessPermission, IUnrestrictedPermission, IBuil
             pathList: A list of environment variables (semicolon-separated).
         """
         ...
-
     def GetPathList(self, flag):
         """
         GetPathList(self: EnvironmentPermission, flag: EnvironmentPermissionAccess) -> str
@@ -97,7 +96,6 @@ class EnvironmentPermission(CodeAccessPermission, IUnrestrictedPermission, IBuil
             Returns: A list of environment variables (semicolon-separated) for the selected flag.
         """
         ...
-
     def SetPathList(self, flag, pathList):
         """
         SetPathList(self: EnvironmentPermission, flag: EnvironmentPermissionAccess, pathList: str)
@@ -109,8 +107,7 @@ class EnvironmentPermission(CodeAccessPermission, IUnrestrictedPermission, IBuil
             pathList: A list of environment variables (semicolon-separated).
         """
         ...
-
-    @staticmethod # known case of __new__
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, state: PermissionState)
@@ -119,26 +116,28 @@ class EnvironmentPermission(CodeAccessPermission, IUnrestrictedPermission, IBuil
         """
         ...
 
-
-class EnvironmentPermissionAccess(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class EnvironmentPermissionAccess(
+    Enum
+):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies access to environment variables.
 
     enum (flags) EnvironmentPermissionAccess, values: AllAccess (3), NoAccess (0), Read (1), Write (2)
     """
+
     AllAccess = None
     NoAccess = None
     Read = None
     value__ = None
     Write = None
 
-
-class EnvironmentPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class EnvironmentPermissionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Allows security actions for System.Security.Permissions.EnvironmentPermission to be applied to code using declarative security. This class cannot be inherited.
 
     EnvironmentPermissionAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: EnvironmentPermissionAttribute) -> IPermission
@@ -148,7 +147,6 @@ class EnvironmentPermissionAttribute(CodeAccessSecurityAttribute): # skipped bas
             Returns: An System.Security.Permissions.EnvironmentPermission that corresponds to this attribute.
         """
         ...
-
     @property
     def All(self):
         """
@@ -159,7 +157,6 @@ class EnvironmentPermissionAttribute(CodeAccessSecurityAttribute): # skipped bas
         Set: All(self: EnvironmentPermissionAttribute) = value
         """
         ...
-
     @property
     def Read(self):
         """
@@ -170,7 +167,6 @@ class EnvironmentPermissionAttribute(CodeAccessSecurityAttribute): # skipped bas
         Set: Read(self: EnvironmentPermissionAttribute) = value
         """
         ...
-
     @property
     def Write(self):
         """
@@ -182,9 +178,9 @@ class EnvironmentPermissionAttribute(CodeAccessSecurityAttribute): # skipped bas
         """
         ...
 
-
-
-class FileDialogPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermission): # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
+class FileDialogPermission(
+    CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermission
+):  # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
     """
     Controls the ability to access files or folders through a File dialog box. This class cannot be inherited.
 
@@ -192,7 +188,8 @@ class FileDialogPermission(CodeAccessPermission, IUnrestrictedPermission, IBuilt
 
     FileDialogPermission(access: FileDialogPermissionAccess)
     """
-    @staticmethod # known case of __new__
+
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, state: PermissionState)
@@ -200,7 +197,6 @@ class FileDialogPermission(CodeAccessPermission, IUnrestrictedPermission, IBuilt
         __new__(cls: type, access: FileDialogPermissionAccess)
         """
         ...
-
     @property
     def Access(self):
         """
@@ -212,27 +208,27 @@ class FileDialogPermission(CodeAccessPermission, IUnrestrictedPermission, IBuilt
         """
         ...
 
-
-
-class FileDialogPermissionAccess(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class FileDialogPermissionAccess(
+    Enum
+):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the type of access to files allowed through the File dialog boxes.
 
     enum (flags) FileDialogPermissionAccess, values: None (0), Open (1), OpenSave (3), Save (2)
     """
-    None = None
+
     Open = None
     OpenSave = None
     Save = None
     value__ = None
 
-
-class FileDialogPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class FileDialogPermissionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Allows security actions for System.Security.Permissions.FileDialogPermission to be applied to code using declarative security. This class cannot be inherited.
 
     FileDialogPermissionAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: FileDialogPermissionAttribute) -> IPermission
@@ -242,7 +238,6 @@ class FileDialogPermissionAttribute(CodeAccessSecurityAttribute): # skipped base
             Returns: A System.Security.Permissions.FileDialogPermission that corresponds to this attribute.
         """
         ...
-
     @property
     def Open(self):
         """
@@ -253,7 +248,6 @@ class FileDialogPermissionAttribute(CodeAccessSecurityAttribute): # skipped base
         Set: Open(self: FileDialogPermissionAttribute) = value
         """
         ...
-
     @property
     def Save(self):
         """
@@ -265,9 +259,9 @@ class FileDialogPermissionAttribute(CodeAccessSecurityAttribute): # skipped base
         """
         ...
 
-
-
-class FileIOPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermission): # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
+class FileIOPermission(
+    CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermission
+):  # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
     """
     Controls the ability to access files and folders. This class cannot be inherited.
 
@@ -281,6 +275,7 @@ class FileIOPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltInPe
 
     FileIOPermission(access: FileIOPermissionAccess, control: AccessControlActions, pathList: Array[str])
     """
+
     def AddPathList(self, access, *__args):
         """
         AddPathList(self: FileIOPermission, access: FileIOPermissionAccess, path: str)
@@ -300,7 +295,6 @@ class FileIOPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltInPe
             pathList: An array containing the absolute paths of the files and directories.
         """
         ...
-
     def GetPathList(self, access):
         """
         GetPathList(self: FileIOPermission, access: FileIOPermissionAccess) -> Array[str]
@@ -312,7 +306,6 @@ class FileIOPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltInPe
             Returns: An array containing the paths of the files and directories to which access specified by the access parameter is granted.
         """
         ...
-
     def SetPathList(self, access, *__args):
         """
         SetPathList(self: FileIOPermission, access: FileIOPermissionAccess, path: str)
@@ -332,8 +325,7 @@ class FileIOPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltInPe
             pathList: An array containing the absolute paths of the files and directories.
         """
         ...
-
-    @staticmethod # known case of __new__
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, state: PermissionState)
@@ -347,7 +339,6 @@ class FileIOPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltInPe
         __new__(cls: type, access: FileIOPermissionAccess, control: AccessControlActions, pathList: Array[str])
         """
         ...
-
     @property
     def AllFiles(self):
         """
@@ -358,7 +349,6 @@ class FileIOPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltInPe
         Set: AllFiles(self: FileIOPermission) = value
         """
         ...
-
     @property
     def AllLocalFiles(self):
         """
@@ -370,14 +360,13 @@ class FileIOPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltInPe
         """
         ...
 
-
-
-class FileIOPermissionAccess(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class FileIOPermissionAccess(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the type of file access requested.
 
     enum (flags) FileIOPermissionAccess, values: AllAccess (15), Append (4), NoAccess (0), PathDiscovery (8), Read (1), Write (2)
     """
+
     AllAccess = None
     Append = None
     NoAccess = None
@@ -386,13 +375,13 @@ class FileIOPermissionAccess(Enum): # skipped bases: <type 'IComparable'>, <type
     value__ = None
     Write = None
 
-
-class FileIOPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class FileIOPermissionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Allows security actions for System.Security.Permissions.FileIOPermission to be applied to code using declarative security. This class cannot be inherited.
 
     FileIOPermissionAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: FileIOPermissionAttribute) -> IPermission
@@ -402,7 +391,6 @@ class FileIOPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <
             Returns: A System.Security.Permissions.FileIOPermission that corresponds to this attribute.
         """
         ...
-
     @property
     def All(self):
         """
@@ -413,7 +401,6 @@ class FileIOPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <
         Set: All(self: FileIOPermissionAttribute) = value
         """
         ...
-
     @property
     def AllFiles(self):
         """
@@ -424,7 +411,6 @@ class FileIOPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <
         Set: AllFiles(self: FileIOPermissionAttribute) = value
         """
         ...
-
     @property
     def AllLocalFiles(self):
         """
@@ -435,7 +421,6 @@ class FileIOPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <
         Set: AllLocalFiles(self: FileIOPermissionAttribute) = value
         """
         ...
-
     @property
     def Append(self):
         """
@@ -446,7 +431,6 @@ class FileIOPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <
         Set: Append(self: FileIOPermissionAttribute) = value
         """
         ...
-
     @property
     def ChangeAccessControl(self):
         """
@@ -457,7 +441,6 @@ class FileIOPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <
         Set: ChangeAccessControl(self: FileIOPermissionAttribute) = value
         """
         ...
-
     @property
     def PathDiscovery(self):
         """
@@ -468,7 +451,6 @@ class FileIOPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <
         Set: PathDiscovery(self: FileIOPermissionAttribute) = value
         """
         ...
-
     @property
     def Read(self):
         """
@@ -479,7 +461,6 @@ class FileIOPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <
         Set: Read(self: FileIOPermissionAttribute) = value
         """
         ...
-
     @property
     def ViewAccessControl(self):
         """
@@ -490,7 +471,6 @@ class FileIOPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <
         Set: ViewAccessControl(self: FileIOPermissionAttribute) = value
         """
         ...
-
     @property
     def ViewAndModify(self):
         """
@@ -501,7 +481,6 @@ class FileIOPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <
         Set: ViewAndModify(self: FileIOPermissionAttribute) = value
         """
         ...
-
     @property
     def Write(self):
         """
@@ -513,9 +492,9 @@ class FileIOPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <
         """
         ...
 
-
-
-class GacIdentityPermission(CodeAccessPermission, IBuiltInPermission): # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
+class GacIdentityPermission(
+    CodeAccessPermission, IBuiltInPermission
+):  # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
     """
     Defines the identity permission for files originating in the global assembly cache. This class cannot be inherited.
 
@@ -523,7 +502,8 @@ class GacIdentityPermission(CodeAccessPermission, IBuiltInPermission): # skipped
 
     GacIdentityPermission()
     """
-    @staticmethod # known case of __new__
+
+    @staticmethod  # known case of __new__
     def __new__(cls, state=None):
         """
         __new__(cls: type, state: PermissionState)
@@ -532,13 +512,13 @@ class GacIdentityPermission(CodeAccessPermission, IBuiltInPermission): # skipped
         """
         ...
 
-
-class GacIdentityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class GacIdentityPermissionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Allows security actions for System.Security.Permissions.GacIdentityPermission to be applied to code using declarative security. This class cannot be inherited.
 
     GacIdentityPermissionAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: GacIdentityPermissionAttribute) -> IPermission
@@ -549,8 +529,7 @@ class GacIdentityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bas
         """
         ...
 
-
-class HostProtectionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class HostProtectionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Allows the use of declarative security actions to determine host protection requirements. This class cannot be inherited.
 
@@ -558,6 +537,7 @@ class HostProtectionAttribute(CodeAccessSecurityAttribute): # skipped bases: <ty
 
     HostProtectionAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: HostProtectionAttribute) -> IPermission
@@ -567,7 +547,6 @@ class HostProtectionAttribute(CodeAccessSecurityAttribute): # skipped bases: <ty
             Returns: An System.Security.IPermission that corresponds to the current attribute.
         """
         ...
-
     @property
     def ExternalProcessMgmt(self):
         """
@@ -578,7 +557,6 @@ class HostProtectionAttribute(CodeAccessSecurityAttribute): # skipped bases: <ty
         Set: ExternalProcessMgmt(self: HostProtectionAttribute) = value
         """
         ...
-
     @property
     def ExternalThreading(self):
         """
@@ -589,7 +567,6 @@ class HostProtectionAttribute(CodeAccessSecurityAttribute): # skipped bases: <ty
         Set: ExternalThreading(self: HostProtectionAttribute) = value
         """
         ...
-
     @property
     def MayLeakOnAbort(self):
         """
@@ -600,7 +577,6 @@ class HostProtectionAttribute(CodeAccessSecurityAttribute): # skipped bases: <ty
         Set: MayLeakOnAbort(self: HostProtectionAttribute) = value
         """
         ...
-
     @property
     def Resources(self):
         """
@@ -611,7 +587,6 @@ class HostProtectionAttribute(CodeAccessSecurityAttribute): # skipped bases: <ty
         Set: Resources(self: HostProtectionAttribute) = value
         """
         ...
-
     @property
     def SecurityInfrastructure(self):
         """
@@ -622,7 +597,6 @@ class HostProtectionAttribute(CodeAccessSecurityAttribute): # skipped bases: <ty
         Set: SecurityInfrastructure(self: HostProtectionAttribute) = value
         """
         ...
-
     @property
     def SelfAffectingProcessMgmt(self):
         """
@@ -633,7 +607,6 @@ class HostProtectionAttribute(CodeAccessSecurityAttribute): # skipped bases: <ty
         Set: SelfAffectingProcessMgmt(self: HostProtectionAttribute) = value
         """
         ...
-
     @property
     def SelfAffectingThreading(self):
         """
@@ -644,7 +617,6 @@ class HostProtectionAttribute(CodeAccessSecurityAttribute): # skipped bases: <ty
         Set: SelfAffectingThreading(self: HostProtectionAttribute) = value
         """
         ...
-
     @property
     def SharedState(self):
         """
@@ -655,7 +627,6 @@ class HostProtectionAttribute(CodeAccessSecurityAttribute): # skipped bases: <ty
         Set: SharedState(self: HostProtectionAttribute) = value
         """
         ...
-
     @property
     def Synchronization(self):
         """
@@ -666,7 +637,6 @@ class HostProtectionAttribute(CodeAccessSecurityAttribute): # skipped bases: <ty
         Set: Synchronization(self: HostProtectionAttribute) = value
         """
         ...
-
     @property
     def UI(self):
         """
@@ -678,19 +648,18 @@ class HostProtectionAttribute(CodeAccessSecurityAttribute): # skipped bases: <ty
         """
         ...
 
-
-
-class HostProtectionResource(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class HostProtectionResource(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies categories of functionality potentially harmful to the host if invoked by a method or class.
 
     enum (flags) HostProtectionResource, values: All (511), ExternalProcessMgmt (4), ExternalThreading (16), MayLeakOnAbort (256), None (0), SecurityInfrastructure (64), SelfAffectingProcessMgmt (8), SelfAffectingThreading (32), SharedState (2), Synchronization (1), UI (128)
     """
+
     All = None
     ExternalProcessMgmt = None
     ExternalThreading = None
     MayLeakOnAbort = None
-    None = None
+
     SecurityInfrastructure = None
     SelfAffectingProcessMgmt = None
     SelfAffectingThreading = None
@@ -699,13 +668,15 @@ class HostProtectionResource(Enum): # skipped bases: <type 'IComparable'>, <type
     UI = None
     value__ = None
 
-
-class IsolatedStorageContainment(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class IsolatedStorageContainment(
+    Enum
+):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the permitted use of isolated storage.
 
     enum IsolatedStorageContainment, values: AdministerIsolatedStorageByUser (112), ApplicationIsolationByMachine (69), ApplicationIsolationByRoamingUser (101), ApplicationIsolationByUser (21), AssemblyIsolationByMachine (64), AssemblyIsolationByRoamingUser (96), AssemblyIsolationByUser (32), DomainIsolationByMachine (48), DomainIsolationByRoamingUser (80), DomainIsolationByUser (16), None (0), UnrestrictedIsolatedStorage (240)
     """
+
     AdministerIsolatedStorageByUser = None
     ApplicationIsolationByMachine = None
     ApplicationIsolationByRoamingUser = None
@@ -716,18 +687,19 @@ class IsolatedStorageContainment(Enum): # skipped bases: <type 'IComparable'>, <
     DomainIsolationByMachine = None
     DomainIsolationByRoamingUser = None
     DomainIsolationByUser = None
-    None = None
+
     UnrestrictedIsolatedStorage = None
     value__ = None
 
+class IsolatedStoragePermission(
+    CodeAccessPermission, IUnrestrictedPermission
+):  # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
+    """Represents access to generic isolated storage capabilities."""
 
-class IsolatedStoragePermission(CodeAccessPermission, IUnrestrictedPermission): # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
-    """ Represents access to generic isolated storage capabilities. """
-    @staticmethod # known case of __new__
-    def __new__(cls, *args): #cannot find CLR constructor
-        """ __new__(cls: type, state: PermissionState) """
+    @staticmethod  # known case of __new__
+    def __new__(cls, *args):  # cannot find CLR constructor
+        """__new__(cls: type, state: PermissionState)"""
         ...
-
     @property
     def UsageAllowed(self):
         """
@@ -738,7 +710,6 @@ class IsolatedStoragePermission(CodeAccessPermission, IUnrestrictedPermission): 
         Set: UsageAllowed(self: IsolatedStoragePermission) = value
         """
         ...
-
     @property
     def UserQuota(self):
         """
@@ -750,18 +721,20 @@ class IsolatedStoragePermission(CodeAccessPermission, IUnrestrictedPermission): 
         """
         ...
 
-
-
-class IsolatedStorageFilePermission(IsolatedStoragePermission, IBuiltInPermission): # skipped bases: <type 'IUnrestrictedPermission'>, <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
+class IsolatedStorageFilePermission(
+    IsolatedStoragePermission, IBuiltInPermission
+):  # skipped bases: <type 'IUnrestrictedPermission'>, <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
     """
     Specifies the allowed usage of a private virtual file system. This class cannot be inherited.
 
     IsolatedStorageFilePermission(state: PermissionState)
     """
+
     pass
 
-class IsolatedStoragePermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
-    """ Allows security actions for System.Security.Permissions.IsolatedStoragePermission to be applied to code using declarative security. """
+class IsolatedStoragePermissionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
+    """Allows security actions for System.Security.Permissions.IsolatedStoragePermission to be applied to code using declarative security."""
+
     @property
     def UsageAllowed(self):
         """
@@ -772,7 +745,6 @@ class IsolatedStoragePermissionAttribute(CodeAccessSecurityAttribute): # skipped
         Set: UsageAllowed(self: IsolatedStoragePermissionAttribute) = value
         """
         ...
-
     @property
     def UserQuota(self):
         """
@@ -784,14 +756,13 @@ class IsolatedStoragePermissionAttribute(CodeAccessSecurityAttribute): # skipped
         """
         ...
 
-
-
-class IsolatedStorageFilePermissionAttribute(IsolatedStoragePermissionAttribute): # skipped bases: <type '_Attribute'>
+class IsolatedStorageFilePermissionAttribute(IsolatedStoragePermissionAttribute):  # skipped bases: <type '_Attribute'>
     """
     Allows security actions for System.Security.Permissions.IsolatedStorageFilePermission to be applied to code using declarative security. This class cannot be inherited.
 
     IsolatedStorageFilePermissionAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: IsolatedStorageFilePermissionAttribute) -> IPermission
@@ -802,8 +773,9 @@ class IsolatedStorageFilePermissionAttribute(IsolatedStoragePermissionAttribute)
         """
         ...
 
-
-class KeyContainerPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermission): # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
+class KeyContainerPermission(
+    CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermission
+):  # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
     """
     Controls the ability to access key containers. This class cannot be inherited.
 
@@ -813,7 +785,8 @@ class KeyContainerPermission(CodeAccessPermission, IUnrestrictedPermission, IBui
 
     KeyContainerPermission(flags: KeyContainerPermissionFlags, accessList: Array[KeyContainerPermissionAccessEntry])
     """
-    @staticmethod # known case of __new__
+
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, state: PermissionState)
@@ -823,7 +796,6 @@ class KeyContainerPermission(CodeAccessPermission, IUnrestrictedPermission, IBui
         __new__(cls: type, flags: KeyContainerPermissionFlags, accessList: Array[KeyContainerPermissionAccessEntry])
         """
         ...
-
     @property
     def AccessEntries(self):
         """
@@ -832,7 +804,6 @@ class KeyContainerPermission(CodeAccessPermission, IUnrestrictedPermission, IBui
         Get: AccessEntries(self: KeyContainerPermission) -> KeyContainerPermissionAccessEntryCollection
         """
         ...
-
     @property
     def Flags(self):
         """
@@ -842,9 +813,7 @@ class KeyContainerPermission(CodeAccessPermission, IUnrestrictedPermission, IBui
         """
         ...
 
-
-
-class KeyContainerPermissionAccessEntry: # skipped bases: <type 'object'>
+class KeyContainerPermissionAccessEntry:  # skipped bases: <type 'object'>
     """
     Specifies access rights for specific key containers. This class cannot be inherited.
 
@@ -854,6 +823,7 @@ class KeyContainerPermissionAccessEntry: # skipped bases: <type 'object'>
 
     KeyContainerPermissionAccessEntry(keyStore: str, providerName: str, providerType: int, keyContainerName: str, keySpec: int, flags: KeyContainerPermissionFlags)
     """
+
     def Equals(self, o):
         """
         Equals(self: KeyContainerPermissionAccessEntry, o: object) -> bool
@@ -865,7 +835,6 @@ class KeyContainerPermissionAccessEntry: # skipped bases: <type 'object'>
             Returns: ue if the specified System.Security.Permissions.KeyContainerPermissionAccessEntry is equal to the current System.Security.Permissions.KeyContainerPermissionAccessEntry object; otherwise, lse.
         """
         ...
-
     def GetHashCode(self):
         """
         GetHashCode(self: KeyContainerPermissionAccessEntry) -> int
@@ -875,14 +844,10 @@ class KeyContainerPermissionAccessEntry: # skipped bases: <type 'object'>
             Returns: A hash code for the current System.Security.Permissions.KeyContainerPermissionAccessEntry object.
         """
         ...
-
-    def __eq__(self, *args): #cannot find CLR method
-        """ x.__eq__(y) <==> x==y """
+    def __eq__(self, *args):  # cannot find CLR method
+        """x.__eq__(y) <==> x==y"""
         ...
-
-    def __ne__(self, *args): #cannot find CLR method
-        ...
-
+    def __ne__(self, *args): ...
     @property
     def Flags(self):
         """
@@ -893,7 +858,6 @@ class KeyContainerPermissionAccessEntry: # skipped bases: <type 'object'>
         Set: Flags(self: KeyContainerPermissionAccessEntry) = value
         """
         ...
-
     @property
     def KeyContainerName(self):
         """
@@ -904,7 +868,6 @@ class KeyContainerPermissionAccessEntry: # skipped bases: <type 'object'>
         Set: KeyContainerName(self: KeyContainerPermissionAccessEntry) = value
         """
         ...
-
     @property
     def KeySpec(self):
         """
@@ -915,7 +878,6 @@ class KeyContainerPermissionAccessEntry: # skipped bases: <type 'object'>
         Set: KeySpec(self: KeyContainerPermissionAccessEntry) = value
         """
         ...
-
     @property
     def KeyStore(self):
         """
@@ -926,7 +888,6 @@ class KeyContainerPermissionAccessEntry: # skipped bases: <type 'object'>
         Set: KeyStore(self: KeyContainerPermissionAccessEntry) = value
         """
         ...
-
     @property
     def ProviderName(self):
         """
@@ -937,7 +898,6 @@ class KeyContainerPermissionAccessEntry: # skipped bases: <type 'object'>
         Set: ProviderName(self: KeyContainerPermissionAccessEntry) = value
         """
         ...
-
     @property
     def ProviderType(self):
         """
@@ -949,10 +909,9 @@ class KeyContainerPermissionAccessEntry: # skipped bases: <type 'object'>
         """
         ...
 
+class KeyContainerPermissionAccessEntryCollection(object, ICollection):  # skipped bases: <type 'IEnumerable'>
+    """Represents a collection of System.Security.Permissions.KeyContainerPermissionAccessEntry objects. This class cannot be inherited."""
 
-
-class KeyContainerPermissionAccessEntryCollection(object, ICollection): # skipped bases: <type 'IEnumerable'>
-    """ Represents a collection of System.Security.Permissions.KeyContainerPermissionAccessEntry objects. This class cannot be inherited. """
     def Add(self, accessEntry):
         """
         Add(self: KeyContainerPermissionAccessEntryCollection, accessEntry: KeyContainerPermissionAccessEntry) -> int
@@ -964,7 +923,6 @@ class KeyContainerPermissionAccessEntryCollection(object, ICollection): # skippe
             Returns: The index at which the new element was inserted.
         """
         ...
-
     def Clear(self):
         """
         Clear(self: KeyContainerPermissionAccessEntryCollection)
@@ -972,7 +930,6 @@ class KeyContainerPermissionAccessEntryCollection(object, ICollection): # skippe
             Removes all the System.Security.Permissions.KeyContainerPermissionAccessEntry objects from the collection.
         """
         ...
-
     def GetEnumerator(self):
         """
         GetEnumerator(self: KeyContainerPermissionAccessEntryCollection) -> KeyContainerPermissionAccessEntryEnumerator
@@ -982,7 +939,6 @@ class KeyContainerPermissionAccessEntryCollection(object, ICollection): # skippe
             Returns: A System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator object that can be used to iterate through the collection.
         """
         ...
-
     def IndexOf(self, accessEntry):
         """
         IndexOf(self: KeyContainerPermissionAccessEntryCollection, accessEntry: KeyContainerPermissionAccessEntry) -> int
@@ -991,9 +947,8 @@ class KeyContainerPermissionAccessEntryCollection(object, ICollection): # skippe
 
             accessEntry: The System.Security.Permissions.KeyContainerPermissionAccessEntry object to locate.
 
-                """
+        """
         ...
-
     def Remove(self, accessEntry):
         """
         Remove(self: KeyContainerPermissionAccessEntryCollection, accessEntry: KeyContainerPermissionAccessEntry)
@@ -1003,19 +958,15 @@ class KeyContainerPermissionAccessEntryCollection(object, ICollection): # skippe
             accessEntry: The System.Security.Permissions.KeyContainerPermissionAccessEntry object to remove.
         """
         ...
-
-    def __add__(self, *args): #cannot find CLR method
-        """ x.__add__(y) <==> x+y """
+    def __add__(self, *args):  # cannot find CLR method
+        """x.__add__(y) <==> x+y"""
         ...
-
-    def __getitem__(self, *args): #cannot find CLR method
-        """ x.__getitem__(y) <==> x[y] """
+    def __getitem__(self, *args):  # cannot find CLR method
+        """x.__getitem__(y) <==> x[y]"""
         ...
-
-    def __len__(self, *args): #cannot find CLR method
-        """ x.__len__() <==> len(x) """
+    def __len__(self, *args):  # cannot find CLR method
+        """x.__len__() <==> len(x)"""
         ...
-
     @property
     def Count(self):
         """
@@ -1024,7 +975,6 @@ class KeyContainerPermissionAccessEntryCollection(object, ICollection): # skippe
         Get: Count(self: KeyContainerPermissionAccessEntryCollection) -> int
         """
         ...
-
     @property
     def IsSynchronized(self):
         """
@@ -1033,7 +983,6 @@ class KeyContainerPermissionAccessEntryCollection(object, ICollection): # skippe
         Get: IsSynchronized(self: KeyContainerPermissionAccessEntryCollection) -> bool
         """
         ...
-
     @property
     def SyncRoot(self):
         """
@@ -1043,10 +992,9 @@ class KeyContainerPermissionAccessEntryCollection(object, ICollection): # skippe
         """
         ...
 
-
-
 class KeyContainerPermissionAccessEntryEnumerator(object, IEnumerator):
-    """ Represents the enumerator for System.Security.Permissions.KeyContainerPermissionAccessEntry objects in a System.Security.Permissions.KeyContainerPermissionAccessEntryCollection. """
+    """Represents the enumerator for System.Security.Permissions.KeyContainerPermissionAccessEntry objects in a System.Security.Permissions.KeyContainerPermissionAccessEntryCollection."""
+
     @property
     def Current(self):
         """
@@ -1056,14 +1004,13 @@ class KeyContainerPermissionAccessEntryEnumerator(object, IEnumerator):
         """
         ...
 
-
-
-class KeyContainerPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class KeyContainerPermissionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Allows security actions for System.Security.Permissions.KeyContainerPermission to be applied to code using declarative security. This class cannot be inherited.
 
     KeyContainerPermissionAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: KeyContainerPermissionAttribute) -> IPermission
@@ -1073,7 +1020,6 @@ class KeyContainerPermissionAttribute(CodeAccessSecurityAttribute): # skipped ba
             Returns: A System.Security.Permissions.KeyContainerPermission that corresponds to the attribute.
         """
         ...
-
     @property
     def Flags(self):
         """
@@ -1084,7 +1030,6 @@ class KeyContainerPermissionAttribute(CodeAccessSecurityAttribute): # skipped ba
         Set: Flags(self: KeyContainerPermissionAttribute) = value
         """
         ...
-
     @property
     def KeyContainerName(self):
         """
@@ -1095,7 +1040,6 @@ class KeyContainerPermissionAttribute(CodeAccessSecurityAttribute): # skipped ba
         Set: KeyContainerName(self: KeyContainerPermissionAttribute) = value
         """
         ...
-
     @property
     def KeySpec(self):
         """
@@ -1106,7 +1050,6 @@ class KeyContainerPermissionAttribute(CodeAccessSecurityAttribute): # skipped ba
         Set: KeySpec(self: KeyContainerPermissionAttribute) = value
         """
         ...
-
     @property
     def KeyStore(self):
         """
@@ -1117,7 +1060,6 @@ class KeyContainerPermissionAttribute(CodeAccessSecurityAttribute): # skipped ba
         Set: KeyStore(self: KeyContainerPermissionAttribute) = value
         """
         ...
-
     @property
     def ProviderName(self):
         """
@@ -1128,7 +1070,6 @@ class KeyContainerPermissionAttribute(CodeAccessSecurityAttribute): # skipped ba
         Set: ProviderName(self: KeyContainerPermissionAttribute) = value
         """
         ...
-
     @property
     def ProviderType(self):
         """
@@ -1140,14 +1081,15 @@ class KeyContainerPermissionAttribute(CodeAccessSecurityAttribute): # skipped ba
         """
         ...
 
-
-
-class KeyContainerPermissionFlags(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class KeyContainerPermissionFlags(
+    Enum
+):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the type of key container access allowed.
 
     enum (flags) KeyContainerPermissionFlags, values: AllFlags (13111), ChangeAcl (8192), Create (1), Decrypt (512), Delete (4), Export (32), Import (16), NoFlags (0), Open (2), Sign (256), ViewAcl (4096)
     """
+
     AllFlags = None
     ChangeAcl = None
     Create = None
@@ -1161,13 +1103,13 @@ class KeyContainerPermissionFlags(Enum): # skipped bases: <type 'IComparable'>, 
     value__ = None
     ViewAcl = None
 
-
-class PermissionSetAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class PermissionSetAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Allows security actions for a System.Security.PermissionSet to be applied to code using declarative security. This class cannot be inherited.
 
     PermissionSetAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: PermissionSetAttribute) -> IPermission
@@ -1177,7 +1119,6 @@ class PermissionSetAttribute(CodeAccessSecurityAttribute): # skipped bases: <typ
             Returns: A null reference (thing in Visual Basic) in all cases.
         """
         ...
-
     def CreatePermissionSet(self):
         """
         CreatePermissionSet(self: PermissionSetAttribute) -> PermissionSet
@@ -1187,7 +1128,6 @@ class PermissionSetAttribute(CodeAccessSecurityAttribute): # skipped bases: <typ
             Returns: A new permission set.
         """
         ...
-
     @property
     def File(self):
         """
@@ -1198,7 +1138,6 @@ class PermissionSetAttribute(CodeAccessSecurityAttribute): # skipped bases: <typ
         Set: File(self: PermissionSetAttribute) = value
         """
         ...
-
     @property
     def Hex(self):
         """
@@ -1209,7 +1148,6 @@ class PermissionSetAttribute(CodeAccessSecurityAttribute): # skipped bases: <typ
         Set: Hex(self: PermissionSetAttribute) = value
         """
         ...
-
     @property
     def Name(self):
         """
@@ -1220,7 +1158,6 @@ class PermissionSetAttribute(CodeAccessSecurityAttribute): # skipped bases: <typ
         Set: Name(self: PermissionSetAttribute) = value
         """
         ...
-
     @property
     def UnicodeEncoded(self):
         """
@@ -1231,7 +1168,6 @@ class PermissionSetAttribute(CodeAccessSecurityAttribute): # skipped bases: <typ
         Set: UnicodeEncoded(self: PermissionSetAttribute) = value
         """
         ...
-
     @property
     def XML(self):
         """
@@ -1243,20 +1179,19 @@ class PermissionSetAttribute(CodeAccessSecurityAttribute): # skipped bases: <typ
         """
         ...
 
-
-
-class PermissionState(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class PermissionState(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies whether a permission should have all or no access to resources at creation.
 
     enum PermissionState, values: None (0), Unrestricted (1)
     """
-    None = None
+
     Unrestricted = None
     value__ = None
 
-
-class PrincipalPermission(object, IPermission, IUnrestrictedPermission, IBuiltInPermission): # skipped bases: <type 'ISecurityEncodable'>
+class PrincipalPermission(
+    object, IPermission, IUnrestrictedPermission, IBuiltInPermission
+):  # skipped bases: <type 'ISecurityEncodable'>
     """
     Allows checks against the active principal (see System.Security.Principal.IPrincipal) using the language constructs defined for both declarative and imperative security actions. This class cannot be inherited.
 
@@ -1266,6 +1201,7 @@ class PrincipalPermission(object, IPermission, IUnrestrictedPermission, IBuiltIn
 
     PrincipalPermission(name: str, role: str, isAuthenticated: bool)
     """
+
     def Equals(self, obj):
         """
         Equals(self: PrincipalPermission, obj: object) -> bool
@@ -1277,7 +1213,6 @@ class PrincipalPermission(object, IPermission, IUnrestrictedPermission, IBuiltIn
             Returns: ue if the specified System.Security.Permissions.PrincipalPermission is equal to the current System.Security.Permissions.PrincipalPermission object; otherwise, lse.
         """
         ...
-
     def FromXml(self, elem):
         """
         FromXml(self: PrincipalPermission, elem: SecurityElement)
@@ -1287,7 +1222,6 @@ class PrincipalPermission(object, IPermission, IUnrestrictedPermission, IBuiltIn
             elem: The XML encoding to use to reconstruct the permission.
         """
         ...
-
     def GetHashCode(self):
         """
         GetHashCode(self: PrincipalPermission) -> int
@@ -1297,7 +1231,6 @@ class PrincipalPermission(object, IPermission, IUnrestrictedPermission, IBuiltIn
             Returns: A hash code for the current System.Security.Permissions.PrincipalPermission object.
         """
         ...
-
     def ToString(self):
         """
         ToString(self: PrincipalPermission) -> str
@@ -1307,7 +1240,6 @@ class PrincipalPermission(object, IPermission, IUnrestrictedPermission, IBuiltIn
             Returns: A representation of the current permission.
         """
         ...
-
     def ToXml(self):
         """
         ToXml(self: PrincipalPermission) -> SecurityElement
@@ -1317,21 +1249,18 @@ class PrincipalPermission(object, IPermission, IUnrestrictedPermission, IBuiltIn
             Returns: An XML encoding of the permission, including any state information.
         """
         ...
-
-    def __eq__(self, *args): #cannot find CLR method
-        """ x.__eq__(y) <==> x==y """
+    def __eq__(self, *args):  # cannot find CLR method
+        """x.__eq__(y) <==> x==y"""
         ...
+    def __ne__(self, *args): ...
 
-    def __ne__(self, *args): #cannot find CLR method
-        ...
-
-
-class PrincipalPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class PrincipalPermissionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Allows security actions for System.Security.Permissions.PrincipalPermission to be applied to code using declarative security. This class cannot be inherited.
 
     PrincipalPermissionAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: PrincipalPermissionAttribute) -> IPermission
@@ -1341,7 +1270,6 @@ class PrincipalPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases
             Returns: A System.Security.Permissions.PrincipalPermission that corresponds to this attribute.
         """
         ...
-
     @property
     def Authenticated(self):
         """
@@ -1352,7 +1280,6 @@ class PrincipalPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases
         Set: Authenticated(self: PrincipalPermissionAttribute) = value
         """
         ...
-
     @property
     def Name(self):
         """
@@ -1363,7 +1290,6 @@ class PrincipalPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases
         Set: Name(self: PrincipalPermissionAttribute) = value
         """
         ...
-
     @property
     def Role(self):
         """
@@ -1375,9 +1301,9 @@ class PrincipalPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases
         """
         ...
 
-
-
-class PublisherIdentityPermission(CodeAccessPermission, IBuiltInPermission): # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
+class PublisherIdentityPermission(
+    CodeAccessPermission, IBuiltInPermission
+):  # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
     """
     Represents the identity of a software publisher. This class cannot be inherited.
 
@@ -1385,7 +1311,8 @@ class PublisherIdentityPermission(CodeAccessPermission, IBuiltInPermission): # s
 
     PublisherIdentityPermission(certificate: X509Certificate)
     """
-    @staticmethod # known case of __new__
+
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, state: PermissionState)
@@ -1393,7 +1320,6 @@ class PublisherIdentityPermission(CodeAccessPermission, IBuiltInPermission): # s
         __new__(cls: type, certificate: X509Certificate)
         """
         ...
-
     @property
     def Certificate(self):
         """
@@ -1405,14 +1331,13 @@ class PublisherIdentityPermission(CodeAccessPermission, IBuiltInPermission): # s
         """
         ...
 
-
-
-class PublisherIdentityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class PublisherIdentityPermissionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Allows security actions for System.Security.Permissions.PublisherIdentityPermission to be applied to code using declarative security. This class cannot be inherited.
 
     PublisherIdentityPermissionAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: PublisherIdentityPermissionAttribute) -> IPermission
@@ -1422,7 +1347,6 @@ class PublisherIdentityPermissionAttribute(CodeAccessSecurityAttribute): # skipp
             Returns: A System.Security.Permissions.PublisherIdentityPermission that corresponds to this attribute.
         """
         ...
-
     @property
     def CertFile(self):
         """
@@ -1433,7 +1357,6 @@ class PublisherIdentityPermissionAttribute(CodeAccessSecurityAttribute): # skipp
         Set: CertFile(self: PublisherIdentityPermissionAttribute) = value
         """
         ...
-
     @property
     def SignedFile(self):
         """
@@ -1444,7 +1367,6 @@ class PublisherIdentityPermissionAttribute(CodeAccessSecurityAttribute): # skipp
         Set: SignedFile(self: PublisherIdentityPermissionAttribute) = value
         """
         ...
-
     @property
     def X509Certificate(self):
         """
@@ -1456,9 +1378,9 @@ class PublisherIdentityPermissionAttribute(CodeAccessSecurityAttribute): # skipp
         """
         ...
 
-
-
-class ReflectionPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermission): # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
+class ReflectionPermission(
+    CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermission
+):  # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
     """
     Controls access to non-public types and members through the System.Reflection APIs. Controls some features of the System.Reflection.Emit APIs.
 
@@ -1466,7 +1388,8 @@ class ReflectionPermission(CodeAccessPermission, IUnrestrictedPermission, IBuilt
 
     ReflectionPermission(flag: ReflectionPermissionFlag)
     """
-    @staticmethod # known case of __new__
+
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, state: PermissionState)
@@ -1474,7 +1397,6 @@ class ReflectionPermission(CodeAccessPermission, IUnrestrictedPermission, IBuilt
         __new__(cls: type, flag: ReflectionPermissionFlag)
         """
         ...
-
     @property
     def Flags(self):
         """
@@ -1486,14 +1408,13 @@ class ReflectionPermission(CodeAccessPermission, IUnrestrictedPermission, IBuilt
         """
         ...
 
-
-
-class ReflectionPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class ReflectionPermissionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Allows security actions for System.Security.Permissions.ReflectionPermission to be applied to code using declarative security.
 
     ReflectionPermissionAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: ReflectionPermissionAttribute) -> IPermission
@@ -1503,7 +1424,6 @@ class ReflectionPermissionAttribute(CodeAccessSecurityAttribute): # skipped base
             Returns: A System.Security.Permissions.ReflectionPermission that corresponds to this attribute.
         """
         ...
-
     @property
     def Flags(self):
         """
@@ -1514,7 +1434,6 @@ class ReflectionPermissionAttribute(CodeAccessSecurityAttribute): # skipped base
         Set: Flags(self: ReflectionPermissionAttribute) = value
         """
         ...
-
     @property
     def MemberAccess(self):
         """
@@ -1525,7 +1444,6 @@ class ReflectionPermissionAttribute(CodeAccessSecurityAttribute): # skipped base
         Set: MemberAccess(self: ReflectionPermissionAttribute) = value
         """
         ...
-
     @property
     def ReflectionEmit(self):
         """
@@ -1536,7 +1454,6 @@ class ReflectionPermissionAttribute(CodeAccessSecurityAttribute): # skipped base
         Set: ReflectionEmit(self: ReflectionPermissionAttribute) = value
         """
         ...
-
     @property
     def RestrictedMemberAccess(self):
         """
@@ -1547,7 +1464,6 @@ class ReflectionPermissionAttribute(CodeAccessSecurityAttribute): # skipped base
         Set: RestrictedMemberAccess(self: ReflectionPermissionAttribute) = value
         """
         ...
-
     @property
     def TypeInformation(self):
         """
@@ -1559,14 +1475,15 @@ class ReflectionPermissionAttribute(CodeAccessSecurityAttribute): # skipped base
         """
         ...
 
-
-
-class ReflectionPermissionFlag(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class ReflectionPermissionFlag(
+    Enum
+):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the permitted use of the System.Reflection and System.Reflection.Emit namespaces.
 
     enum (flags) ReflectionPermissionFlag, values: AllFlags (7), MemberAccess (2), NoFlags (0), ReflectionEmit (4), RestrictedMemberAccess (8), TypeInformation (1)
     """
+
     AllFlags = None
     MemberAccess = None
     NoFlags = None
@@ -1575,8 +1492,9 @@ class ReflectionPermissionFlag(Enum): # skipped bases: <type 'IComparable'>, <ty
     TypeInformation = None
     value__ = None
 
-
-class RegistryPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermission): # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
+class RegistryPermission(
+    CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermission
+):  # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
     """
     Controls the ability to access registry variables. This class cannot be inherited.
 
@@ -1586,6 +1504,7 @@ class RegistryPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltIn
 
     RegistryPermission(access: RegistryPermissionAccess, control: AccessControlActions, pathList: str)
     """
+
     def AddPathList(self, access, *__args):
         """
         AddPathList(self: RegistryPermission, access: RegistryPermissionAccess, pathList: str)
@@ -1607,7 +1526,6 @@ class RegistryPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltIn
             pathList: A list of registry variables (separated by semicolons).
         """
         ...
-
     def GetPathList(self, access):
         """
         GetPathList(self: RegistryPermission, access: RegistryPermissionAccess) -> str
@@ -1619,7 +1537,6 @@ class RegistryPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltIn
             Returns: A list of the registry variables (semicolon-separated) with the specified System.Security.Permissions.RegistryPermissionAccess.
         """
         ...
-
     def SetPathList(self, access, pathList):
         """
         SetPathList(self: RegistryPermission, access: RegistryPermissionAccess, pathList: str)
@@ -1631,8 +1548,7 @@ class RegistryPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltIn
             pathList: A list of registry variables (semicolon-separated).
         """
         ...
-
-    @staticmethod # known case of __new__
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, state: PermissionState)
@@ -1643,13 +1559,15 @@ class RegistryPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltIn
         """
         ...
 
-
-class RegistryPermissionAccess(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class RegistryPermissionAccess(
+    Enum
+):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the permitted access to registry keys and values.
 
     enum (flags) RegistryPermissionAccess, values: AllAccess (7), Create (4), NoAccess (0), Read (1), Write (2)
     """
+
     AllAccess = None
     Create = None
     NoAccess = None
@@ -1657,13 +1575,13 @@ class RegistryPermissionAccess(Enum): # skipped bases: <type 'IComparable'>, <ty
     value__ = None
     Write = None
 
-
-class RegistryPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class RegistryPermissionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Allows security actions for System.Security.Permissions.RegistryPermission to be applied to code using declarative security. This class cannot be inherited.
 
     RegistryPermissionAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: RegistryPermissionAttribute) -> IPermission
@@ -1673,7 +1591,6 @@ class RegistryPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
             Returns: A System.Security.Permissions.RegistryPermission that corresponds to this attribute.
         """
         ...
-
     @property
     def All(self):
         """
@@ -1684,7 +1601,6 @@ class RegistryPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         Set: All(self: RegistryPermissionAttribute) = value
         """
         ...
-
     @property
     def ChangeAccessControl(self):
         """
@@ -1695,7 +1611,6 @@ class RegistryPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         Set: ChangeAccessControl(self: RegistryPermissionAttribute) = value
         """
         ...
-
     @property
     def Create(self):
         """
@@ -1706,7 +1621,6 @@ class RegistryPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         Set: Create(self: RegistryPermissionAttribute) = value
         """
         ...
-
     @property
     def Read(self):
         """
@@ -1717,7 +1631,6 @@ class RegistryPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         Set: Read(self: RegistryPermissionAttribute) = value
         """
         ...
-
     @property
     def ViewAccessControl(self):
         """
@@ -1728,7 +1641,6 @@ class RegistryPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         Set: ViewAccessControl(self: RegistryPermissionAttribute) = value
         """
         ...
-
     @property
     def ViewAndModify(self):
         """
@@ -1739,7 +1651,6 @@ class RegistryPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         Set: ViewAndModify(self: RegistryPermissionAttribute) = value
         """
         ...
-
     @property
     def Write(self):
         """
@@ -1751,11 +1662,12 @@ class RegistryPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         """
         ...
 
+class ResourcePermissionBase(
+    CodeAccessPermission, IUnrestrictedPermission
+):  # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
+    """Allows control of code access security permissions."""
 
-
-class ResourcePermissionBase(CodeAccessPermission, IUnrestrictedPermission): # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
-    """ Allows control of code access security permissions. """
-    def AddPermissionAccess(self, *args): #cannot find CLR method
+    def AddPermissionAccess(self, *args):  # cannot find CLR method
         """
         AddPermissionAccess(self: ResourcePermissionBase, entry: ResourcePermissionBaseEntry)
 
@@ -1764,16 +1676,14 @@ class ResourcePermissionBase(CodeAccessPermission, IUnrestrictedPermission): # s
             entry: The System.Security.Permissions.ResourcePermissionBaseEntry to add.
         """
         ...
-
-    def Clear(self, *args): #cannot find CLR method
+    def Clear(self, *args):  # cannot find CLR method
         """
         Clear(self: ResourcePermissionBase)
 
             Clears the permission of the added permission entries.
         """
         ...
-
-    def GetPermissionEntries(self, *args): #cannot find CLR method
+    def GetPermissionEntries(self, *args):  # cannot find CLR method
         """
         GetPermissionEntries(self: ResourcePermissionBase) -> Array[ResourcePermissionBaseEntry]
 
@@ -1782,8 +1692,7 @@ class ResourcePermissionBase(CodeAccessPermission, IUnrestrictedPermission): # s
             Returns: An array of System.Security.Permissions.ResourcePermissionBaseEntry objects that were added to this permission.
         """
         ...
-
-    def RemovePermissionAccess(self, *args): #cannot find CLR method
+    def RemovePermissionAccess(self, *args):  # cannot find CLR method
         """
         RemovePermissionAccess(self: ResourcePermissionBase, entry: ResourcePermissionBaseEntry)
 
@@ -1792,32 +1701,26 @@ class ResourcePermissionBase(CodeAccessPermission, IUnrestrictedPermission): # s
             entry: The System.Security.Permissions.ResourcePermissionBaseEntry to remove.
         """
         ...
-
-    @staticmethod # known case of __new__
-    def __new__(cls, *args): #cannot find CLR constructor
+    @staticmethod  # known case of __new__
+    def __new__(cls, *args):  # cannot find CLR constructor
         """
         __new__(cls: type)
 
         __new__(cls: type, state: PermissionState)
         """
         ...
-
     @property
     def PermissionAccessType(self):
-        """ Gets or sets an enumeration value that describes the types of access that you are giving the resource. """
+        """Gets or sets an enumeration value that describes the types of access that you are giving the resource."""
         ...
-
     @property
     def TagNames(self):
-        """ Gets or sets an array of strings that identify the resource you are protecting. """
+        """Gets or sets an array of strings that identify the resource you are protecting."""
         ...
+    Any = "*"
+    Local = "."
 
-
-    Any = '*'
-    Local = '.'
-
-
-class ResourcePermissionBaseEntry: # skipped bases: <type 'object'>
+class ResourcePermissionBaseEntry:  # skipped bases: <type 'object'>
     """
     Defines the smallest unit of a code access security permission set.
 
@@ -1825,6 +1728,7 @@ class ResourcePermissionBaseEntry: # skipped bases: <type 'object'>
 
     ResourcePermissionBaseEntry(permissionAccess: int, permissionAccessPath: Array[str])
     """
+
     @property
     def PermissionAccess(self):
         """
@@ -1833,7 +1737,6 @@ class ResourcePermissionBaseEntry: # skipped bases: <type 'object'>
         Get: PermissionAccess(self: ResourcePermissionBaseEntry) -> int
         """
         ...
-
     @property
     def PermissionAccessPath(self):
         """
@@ -1843,14 +1746,13 @@ class ResourcePermissionBaseEntry: # skipped bases: <type 'object'>
         """
         ...
 
-
-
-class SecurityAction(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SecurityAction(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the security actions that can be performed using declarative security.
 
     enum SecurityAction, values: Assert (3), Demand (2), Deny (4), InheritanceDemand (7), LinkDemand (6), PermitOnly (5), RequestMinimum (8), RequestOptional (9), RequestRefuse (10)
     """
+
     Assert = None
     Demand = None
     Deny = None
@@ -1862,8 +1764,9 @@ class SecurityAction(Enum): # skipped bases: <type 'IComparable'>, <type 'IConve
     RequestRefuse = None
     value__ = None
 
-
-class SecurityPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermission): # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
+class SecurityPermission(
+    CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermission
+):  # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
     """
     Describes a set of security permissions applied to code. This class cannot be inherited.
 
@@ -1871,7 +1774,8 @@ class SecurityPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltIn
 
     SecurityPermission(flag: SecurityPermissionFlag)
     """
-    @staticmethod # known case of __new__
+
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, state: PermissionState)
@@ -1879,7 +1783,6 @@ class SecurityPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltIn
         __new__(cls: type, flag: SecurityPermissionFlag)
         """
         ...
-
     @property
     def Flags(self):
         """
@@ -1891,14 +1794,13 @@ class SecurityPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltIn
         """
         ...
 
-
-
-class SecurityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class SecurityPermissionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Allows security actions for System.Security.Permissions.SecurityPermission to be applied to code using declarative security. This class cannot be inherited.
 
     SecurityPermissionAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: SecurityPermissionAttribute) -> IPermission
@@ -1908,7 +1810,6 @@ class SecurityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
             Returns: A System.Security.Permissions.SecurityPermission that corresponds to this attribute.
         """
         ...
-
     @property
     def Assertion(self):
         """
@@ -1919,7 +1820,6 @@ class SecurityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         Set: Assertion(self: SecurityPermissionAttribute) = value
         """
         ...
-
     @property
     def BindingRedirects(self):
         """
@@ -1930,7 +1830,6 @@ class SecurityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         Set: BindingRedirects(self: SecurityPermissionAttribute) = value
         """
         ...
-
     @property
     def ControlAppDomain(self):
         """
@@ -1941,7 +1840,6 @@ class SecurityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         Set: ControlAppDomain(self: SecurityPermissionAttribute) = value
         """
         ...
-
     @property
     def ControlDomainPolicy(self):
         """
@@ -1952,7 +1850,6 @@ class SecurityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         Set: ControlDomainPolicy(self: SecurityPermissionAttribute) = value
         """
         ...
-
     @property
     def ControlEvidence(self):
         """
@@ -1963,7 +1860,6 @@ class SecurityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         Set: ControlEvidence(self: SecurityPermissionAttribute) = value
         """
         ...
-
     @property
     def ControlPolicy(self):
         """
@@ -1974,7 +1870,6 @@ class SecurityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         Set: ControlPolicy(self: SecurityPermissionAttribute) = value
         """
         ...
-
     @property
     def ControlPrincipal(self):
         """
@@ -1985,7 +1880,6 @@ class SecurityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         Set: ControlPrincipal(self: SecurityPermissionAttribute) = value
         """
         ...
-
     @property
     def ControlThread(self):
         """
@@ -1996,7 +1890,6 @@ class SecurityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         Set: ControlThread(self: SecurityPermissionAttribute) = value
         """
         ...
-
     @property
     def Execution(self):
         """
@@ -2007,7 +1900,6 @@ class SecurityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         Set: Execution(self: SecurityPermissionAttribute) = value
         """
         ...
-
     @property
     def Flags(self):
         """
@@ -2018,7 +1910,6 @@ class SecurityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         Set: Flags(self: SecurityPermissionAttribute) = value
         """
         ...
-
     @property
     def Infrastructure(self):
         """
@@ -2029,7 +1920,6 @@ class SecurityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         Set: Infrastructure(self: SecurityPermissionAttribute) = value
         """
         ...
-
     @property
     def RemotingConfiguration(self):
         """
@@ -2040,7 +1930,6 @@ class SecurityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         Set: RemotingConfiguration(self: SecurityPermissionAttribute) = value
         """
         ...
-
     @property
     def SerializationFormatter(self):
         """
@@ -2051,7 +1940,6 @@ class SecurityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         Set: SerializationFormatter(self: SecurityPermissionAttribute) = value
         """
         ...
-
     @property
     def SkipVerification(self):
         """
@@ -2062,7 +1950,6 @@ class SecurityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         Set: SkipVerification(self: SecurityPermissionAttribute) = value
         """
         ...
-
     @property
     def UnmanagedCode(self):
         """
@@ -2074,14 +1961,13 @@ class SecurityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases:
         """
         ...
 
-
-
-class SecurityPermissionFlag(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SecurityPermissionFlag(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies access flags for the security permission object.
 
     enum (flags) SecurityPermissionFlag, values: AllFlags (16383), Assertion (1), BindingRedirects (8192), ControlAppDomain (1024), ControlDomainPolicy (256), ControlEvidence (32), ControlPolicy (64), ControlPrincipal (512), ControlThread (16), Execution (8), Infrastructure (4096), NoFlags (0), RemotingConfiguration (2048), SerializationFormatter (128), SkipVerification (4), UnmanagedCode (2)
     """
+
     AllFlags = None
     Assertion = None
     BindingRedirects = None
@@ -2100,8 +1986,9 @@ class SecurityPermissionFlag(Enum): # skipped bases: <type 'IComparable'>, <type
     UnmanagedCode = None
     value__ = None
 
-
-class SiteIdentityPermission(CodeAccessPermission, IBuiltInPermission): # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
+class SiteIdentityPermission(
+    CodeAccessPermission, IBuiltInPermission
+):  # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
     """
     Defines the identity permission for the Web site from which the code originates. This class cannot be inherited.
 
@@ -2109,7 +1996,8 @@ class SiteIdentityPermission(CodeAccessPermission, IBuiltInPermission): # skippe
 
     SiteIdentityPermission(site: str)
     """
-    @staticmethod # known case of __new__
+
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, state: PermissionState)
@@ -2117,7 +2005,6 @@ class SiteIdentityPermission(CodeAccessPermission, IBuiltInPermission): # skippe
         __new__(cls: type, site: str)
         """
         ...
-
     @property
     def Site(self):
         """
@@ -2129,14 +2016,13 @@ class SiteIdentityPermission(CodeAccessPermission, IBuiltInPermission): # skippe
         """
         ...
 
-
-
-class SiteIdentityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class SiteIdentityPermissionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Allows security actions for System.Security.Permissions.SiteIdentityPermission to be applied to code using declarative security. This class cannot be inherited.
 
     SiteIdentityPermissionAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: SiteIdentityPermissionAttribute) -> IPermission
@@ -2146,7 +2032,6 @@ class SiteIdentityPermissionAttribute(CodeAccessSecurityAttribute): # skipped ba
             Returns: A System.Security.Permissions.SiteIdentityPermission that corresponds to this attribute.
         """
         ...
-
     @property
     def Site(self):
         """
@@ -2158,9 +2043,9 @@ class SiteIdentityPermissionAttribute(CodeAccessSecurityAttribute): # skipped ba
         """
         ...
 
-
-
-class StorePermission(CodeAccessPermission, IUnrestrictedPermission): # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
+class StorePermission(
+    CodeAccessPermission, IUnrestrictedPermission
+):  # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
     """
     Controls access to stores containing X.509 certificates. This class cannot be inherited.
 
@@ -2168,7 +2053,8 @@ class StorePermission(CodeAccessPermission, IUnrestrictedPermission): # skipped 
 
     StorePermission(flag: StorePermissionFlags)
     """
-    @staticmethod # known case of __new__
+
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, state: PermissionState)
@@ -2176,7 +2062,6 @@ class StorePermission(CodeAccessPermission, IUnrestrictedPermission): # skipped 
         __new__(cls: type, flag: StorePermissionFlags)
         """
         ...
-
     @property
     def Flags(self):
         """
@@ -2188,14 +2073,13 @@ class StorePermission(CodeAccessPermission, IUnrestrictedPermission): # skipped 
         """
         ...
 
-
-
-class StorePermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class StorePermissionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Allows security actions for System.Security.Permissions.StorePermission to be applied to code using declarative security. This class cannot be inherited.
 
     StorePermissionAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: StorePermissionAttribute) -> IPermission
@@ -2205,7 +2089,6 @@ class StorePermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <t
             Returns: A System.Security.Permissions.StorePermission that corresponds to the attribute.
         """
         ...
-
     @property
     def AddToStore(self):
         """
@@ -2216,7 +2099,6 @@ class StorePermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <t
         Set: AddToStore(self: StorePermissionAttribute) = value
         """
         ...
-
     @property
     def CreateStore(self):
         """
@@ -2227,7 +2109,6 @@ class StorePermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <t
         Set: CreateStore(self: StorePermissionAttribute) = value
         """
         ...
-
     @property
     def DeleteStore(self):
         """
@@ -2238,7 +2119,6 @@ class StorePermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <t
         Set: DeleteStore(self: StorePermissionAttribute) = value
         """
         ...
-
     @property
     def EnumerateCertificates(self):
         """
@@ -2249,7 +2129,6 @@ class StorePermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <t
         Set: EnumerateCertificates(self: StorePermissionAttribute) = value
         """
         ...
-
     @property
     def EnumerateStores(self):
         """
@@ -2260,7 +2139,6 @@ class StorePermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <t
         Set: EnumerateStores(self: StorePermissionAttribute) = value
         """
         ...
-
     @property
     def Flags(self):
         """
@@ -2271,7 +2149,6 @@ class StorePermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <t
         Set: Flags(self: StorePermissionAttribute) = value
         """
         ...
-
     @property
     def OpenStore(self):
         """
@@ -2282,7 +2159,6 @@ class StorePermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <t
         Set: OpenStore(self: StorePermissionAttribute) = value
         """
         ...
-
     @property
     def RemoveFromStore(self):
         """
@@ -2294,14 +2170,13 @@ class StorePermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <t
         """
         ...
 
-
-
-class StorePermissionFlags(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class StorePermissionFlags(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the permitted access to X.509 certificate stores.
 
     enum (flags) StorePermissionFlags, values: AddToStore (32), AllFlags (247), CreateStore (1), DeleteStore (2), EnumerateCertificates (128), EnumerateStores (4), NoFlags (0), OpenStore (16), RemoveFromStore (64)
     """
+
     AddToStore = None
     AllFlags = None
     CreateStore = None
@@ -2313,8 +2188,9 @@ class StorePermissionFlags(Enum): # skipped bases: <type 'IComparable'>, <type '
     RemoveFromStore = None
     value__ = None
 
-
-class StrongNameIdentityPermission(CodeAccessPermission, IBuiltInPermission): # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
+class StrongNameIdentityPermission(
+    CodeAccessPermission, IBuiltInPermission
+):  # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
     """
     Defines the identity permission for strong names. This class cannot be inherited.
 
@@ -2322,7 +2198,8 @@ class StrongNameIdentityPermission(CodeAccessPermission, IBuiltInPermission): # 
 
     StrongNameIdentityPermission(blob: StrongNamePublicKeyBlob, name: str, version: Version)
     """
-    @staticmethod # known case of __new__
+
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, state: PermissionState)
@@ -2330,7 +2207,6 @@ class StrongNameIdentityPermission(CodeAccessPermission, IBuiltInPermission): # 
         __new__(cls: type, blob: StrongNamePublicKeyBlob, name: str, version: Version)
         """
         ...
-
     @property
     def Name(self):
         """
@@ -2341,7 +2217,6 @@ class StrongNameIdentityPermission(CodeAccessPermission, IBuiltInPermission): # 
         Set: Name(self: StrongNameIdentityPermission) = value
         """
         ...
-
     @property
     def PublicKey(self):
         """
@@ -2352,7 +2227,6 @@ class StrongNameIdentityPermission(CodeAccessPermission, IBuiltInPermission): # 
         Set: PublicKey(self: StrongNameIdentityPermission) = value
         """
         ...
-
     @property
     def Version(self):
         """
@@ -2364,14 +2238,13 @@ class StrongNameIdentityPermission(CodeAccessPermission, IBuiltInPermission): # 
         """
         ...
 
-
-
-class StrongNameIdentityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class StrongNameIdentityPermissionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Allows security actions for System.Security.Permissions.StrongNameIdentityPermission to be applied to code using declarative security. This class cannot be inherited.
 
     StrongNameIdentityPermissionAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: StrongNameIdentityPermissionAttribute) -> IPermission
@@ -2381,7 +2254,6 @@ class StrongNameIdentityPermissionAttribute(CodeAccessSecurityAttribute): # skip
             Returns: A System.Security.Permissions.StrongNameIdentityPermission that corresponds to this attribute.
         """
         ...
-
     @property
     def Name(self):
         """
@@ -2392,7 +2264,6 @@ class StrongNameIdentityPermissionAttribute(CodeAccessSecurityAttribute): # skip
         Set: Name(self: StrongNameIdentityPermissionAttribute) = value
         """
         ...
-
     @property
     def PublicKey(self):
         """
@@ -2403,7 +2274,6 @@ class StrongNameIdentityPermissionAttribute(CodeAccessSecurityAttribute): # skip
         Set: PublicKey(self: StrongNameIdentityPermissionAttribute) = value
         """
         ...
-
     @property
     def Version(self):
         """
@@ -2415,14 +2285,13 @@ class StrongNameIdentityPermissionAttribute(CodeAccessSecurityAttribute): # skip
         """
         ...
 
-
-
-class StrongNamePublicKeyBlob: # skipped bases: <type 'object'>
+class StrongNamePublicKeyBlob:  # skipped bases: <type 'object'>
     """
     Represents the public key information (called a blob) for a strong name. This class cannot be inherited.
 
     StrongNamePublicKeyBlob(publicKey: Array[Byte])
     """
+
     def Equals(self, obj):
         """
         Equals(self: StrongNamePublicKeyBlob, obj: object) -> bool
@@ -2434,7 +2303,6 @@ class StrongNamePublicKeyBlob: # skipped bases: <type 'object'>
             Returns: ue if the public key blob of the current object is equal to the public key blob of the obj parameter; otherwise, lse.
         """
         ...
-
     def GetHashCode(self):
         """
         GetHashCode(self: StrongNamePublicKeyBlob) -> int
@@ -2444,7 +2312,6 @@ class StrongNamePublicKeyBlob: # skipped bases: <type 'object'>
             Returns: The hash code based on the public key.
         """
         ...
-
     def ToString(self):
         """
         ToString(self: StrongNamePublicKeyBlob) -> str
@@ -2454,16 +2321,14 @@ class StrongNamePublicKeyBlob: # skipped bases: <type 'object'>
             Returns: A hexadecimal version of the public key blob.
         """
         ...
-
-    def __eq__(self, *args): #cannot find CLR method
-        """ x.__eq__(y) <==> x==y """
+    def __eq__(self, *args):  # cannot find CLR method
+        """x.__eq__(y) <==> x==y"""
         ...
+    def __ne__(self, *args): ...
 
-    def __ne__(self, *args): #cannot find CLR method
-        ...
-
-
-class TypeDescriptorPermission(CodeAccessPermission, IUnrestrictedPermission): # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
+class TypeDescriptorPermission(
+    CodeAccessPermission, IUnrestrictedPermission
+):  # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
     """
     Defines partial-trust access to the System.ComponentModel.TypeDescriptor class.
 
@@ -2471,7 +2336,8 @@ class TypeDescriptorPermission(CodeAccessPermission, IUnrestrictedPermission): #
 
     TypeDescriptorPermission(flag: TypeDescriptorPermissionFlags)
     """
-    @staticmethod # known case of __new__
+
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, state: PermissionState)
@@ -2479,7 +2345,6 @@ class TypeDescriptorPermission(CodeAccessPermission, IUnrestrictedPermission): #
         __new__(cls: type, flag: TypeDescriptorPermissionFlags)
         """
         ...
-
     @property
     def Flags(self):
         """
@@ -2491,14 +2356,13 @@ class TypeDescriptorPermission(CodeAccessPermission, IUnrestrictedPermission): #
         """
         ...
 
-
-
-class TypeDescriptorPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class TypeDescriptorPermissionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Determines the permission flags that apply to a System.ComponentModel.TypeDescriptor.
 
     TypeDescriptorPermissionAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: TypeDescriptorPermissionAttribute) -> IPermission
@@ -2508,7 +2372,6 @@ class TypeDescriptorPermissionAttribute(CodeAccessSecurityAttribute): # skipped 
             Returns: A serializable permission object.
         """
         ...
-
     @property
     def Flags(self):
         """
@@ -2519,7 +2382,6 @@ class TypeDescriptorPermissionAttribute(CodeAccessSecurityAttribute): # skipped 
         Set: Flags(self: TypeDescriptorPermissionAttribute) = value
         """
         ...
-
     @property
     def RestrictedRegistrationAccess(self):
         """
@@ -2531,20 +2393,22 @@ class TypeDescriptorPermissionAttribute(CodeAccessSecurityAttribute): # skipped 
         """
         ...
 
-
-
-class TypeDescriptorPermissionFlags(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class TypeDescriptorPermissionFlags(
+    Enum
+):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Defines permission settings for type descriptors.
 
     enum (flags) TypeDescriptorPermissionFlags, values: NoFlags (0), RestrictedRegistrationAccess (1)
     """
+
     NoFlags = None
     RestrictedRegistrationAccess = None
     value__ = None
 
-
-class UIPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermission): # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
+class UIPermission(
+    CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermission
+):  # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
     """
     Controls the permissions related to user interfaces and the Clipboard. This class cannot be inherited.
 
@@ -2556,7 +2420,8 @@ class UIPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermis
 
     UIPermission(clipboardFlag: UIPermissionClipboard)
     """
-    @staticmethod # known case of __new__
+
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, state: PermissionState)
@@ -2568,7 +2433,6 @@ class UIPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermis
         __new__(cls: type, clipboardFlag: UIPermissionClipboard)
         """
         ...
-
     @property
     def Clipboard(self):
         """
@@ -2579,7 +2443,6 @@ class UIPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermis
         Set: Clipboard(self: UIPermission) = value
         """
         ...
-
     @property
     def Window(self):
         """
@@ -2591,14 +2454,13 @@ class UIPermission(CodeAccessPermission, IUnrestrictedPermission, IBuiltInPermis
         """
         ...
 
-
-
-class UIPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class UIPermissionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Allows security actions for System.Security.Permissions.UIPermission to be applied to code using declarative security. This class cannot be inherited.
 
     UIPermissionAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: UIPermissionAttribute) -> IPermission
@@ -2608,7 +2470,6 @@ class UIPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type
             Returns: A System.Security.Permissions.UIPermission that corresponds to this attribute.
         """
         ...
-
     @property
     def Clipboard(self):
         """
@@ -2619,7 +2480,6 @@ class UIPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type
         Set: Clipboard(self: UIPermissionAttribute) = value
         """
         ...
-
     @property
     def Window(self):
         """
@@ -2631,34 +2491,34 @@ class UIPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type
         """
         ...
 
-
-
-class UIPermissionClipboard(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class UIPermissionClipboard(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the type of clipboard access that is allowed to the calling code.
 
     enum UIPermissionClipboard, values: AllClipboard (2), NoClipboard (0), OwnClipboard (1)
     """
+
     AllClipboard = None
     NoClipboard = None
     OwnClipboard = None
     value__ = None
 
-
-class UIPermissionWindow(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class UIPermissionWindow(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the type of windows that code is allowed to use.
 
     enum UIPermissionWindow, values: AllWindows (3), NoWindows (0), SafeSubWindows (1), SafeTopLevelWindows (2)
     """
+
     AllWindows = None
     NoWindows = None
     SafeSubWindows = None
     SafeTopLevelWindows = None
     value__ = None
 
-
-class UrlIdentityPermission(CodeAccessPermission, IBuiltInPermission): # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
+class UrlIdentityPermission(
+    CodeAccessPermission, IBuiltInPermission
+):  # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
     """
     Defines the identity permission for the URL from which the code originates. This class cannot be inherited.
 
@@ -2666,7 +2526,8 @@ class UrlIdentityPermission(CodeAccessPermission, IBuiltInPermission): # skipped
 
     UrlIdentityPermission(site: str)
     """
-    @staticmethod # known case of __new__
+
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, state: PermissionState)
@@ -2674,7 +2535,6 @@ class UrlIdentityPermission(CodeAccessPermission, IBuiltInPermission): # skipped
         __new__(cls: type, site: str)
         """
         ...
-
     @property
     def Url(self):
         """
@@ -2686,14 +2546,13 @@ class UrlIdentityPermission(CodeAccessPermission, IBuiltInPermission): # skipped
         """
         ...
 
-
-
-class UrlIdentityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class UrlIdentityPermissionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Allows security actions for System.Security.Permissions.UrlIdentityPermission to be applied to code using declarative security. This class cannot be inherited.
 
     UrlIdentityPermissionAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: UrlIdentityPermissionAttribute) -> IPermission
@@ -2703,7 +2562,6 @@ class UrlIdentityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bas
             Returns: A System.Security.Permissions.UrlIdentityPermission that corresponds to this attribute.
         """
         ...
-
     @property
     def Url(self):
         """
@@ -2715,9 +2573,9 @@ class UrlIdentityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bas
         """
         ...
 
-
-
-class ZoneIdentityPermission(CodeAccessPermission, IBuiltInPermission): # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
+class ZoneIdentityPermission(
+    CodeAccessPermission, IBuiltInPermission
+):  # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
     """
     Defines the identity permission for the zone from which the code originates. This class cannot be inherited.
 
@@ -2725,7 +2583,8 @@ class ZoneIdentityPermission(CodeAccessPermission, IBuiltInPermission): # skippe
 
     ZoneIdentityPermission(zone: SecurityZone)
     """
-    @staticmethod # known case of __new__
+
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, state: PermissionState)
@@ -2733,7 +2592,6 @@ class ZoneIdentityPermission(CodeAccessPermission, IBuiltInPermission): # skippe
         __new__(cls: type, zone: SecurityZone)
         """
         ...
-
     @property
     def SecurityZone(self):
         """
@@ -2745,14 +2603,13 @@ class ZoneIdentityPermission(CodeAccessPermission, IBuiltInPermission): # skippe
         """
         ...
 
-
-
-class ZoneIdentityPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class ZoneIdentityPermissionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Allows security actions for System.Security.Permissions.ZoneIdentityPermission to be applied to code using declarative security. This class cannot be inherited.
 
     ZoneIdentityPermissionAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: ZoneIdentityPermissionAttribute) -> IPermission
@@ -2762,7 +2619,6 @@ class ZoneIdentityPermissionAttribute(CodeAccessSecurityAttribute): # skipped ba
             Returns: A System.Security.Permissions.ZoneIdentityPermission that corresponds to this attribute.
         """
         ...
-
     @property
     def Zone(self):
         """

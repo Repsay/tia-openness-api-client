@@ -9,7 +9,8 @@
 # classes
 
 class AttachmentBase(object, IDisposable):
-    """ Base class that represents an email attachment. Classes System.Net.Mail.Attachment, System.Net.Mail.AlternateView, and System.Net.Mail.LinkedResource derive from this class. """
+    """Base class that represents an email attachment. Classes System.Net.Mail.Attachment, System.Net.Mail.AlternateView, and System.Net.Mail.LinkedResource derive from this class."""
+
     @property
     def ContentId(self):
         """
@@ -20,7 +21,6 @@ class AttachmentBase(object, IDisposable):
         Set: ContentId(self: AttachmentBase) = value
         """
         ...
-
     @property
     def ContentStream(self):
         """
@@ -29,7 +29,6 @@ class AttachmentBase(object, IDisposable):
         Get: ContentStream(self: AttachmentBase) -> Stream
         """
         ...
-
     @property
     def ContentType(self):
         """
@@ -40,7 +39,6 @@ class AttachmentBase(object, IDisposable):
         Set: ContentType(self: AttachmentBase) = value
         """
         ...
-
     @property
     def TransferEncoding(self):
         """
@@ -52,9 +50,7 @@ class AttachmentBase(object, IDisposable):
         """
         ...
 
-
-
-class AlternateView(AttachmentBase): # skipped bases: <type 'IDisposable'>
+class AlternateView(AttachmentBase):  # skipped bases: <type 'IDisposable'>
     """
     Represents the format to view an email message.
 
@@ -70,6 +66,7 @@ class AlternateView(AttachmentBase): # skipped bases: <type 'IDisposable'>
 
     AlternateView(contentStream: Stream, contentType: ContentType)
     """
+
     @staticmethod
     def CreateAlternateViewFromString(content, *__args):
         """
@@ -106,7 +103,6 @@ class AlternateView(AttachmentBase): # skipped bases: <type 'IDisposable'>
             Returns: An System.Net.Mail.AlternateView object that represents an alternate view of an email message.
         """
         ...
-
     @property
     def BaseUri(self):
         """
@@ -117,7 +113,6 @@ class AlternateView(AttachmentBase): # skipped bases: <type 'IDisposable'>
         Set: BaseUri(self: AlternateView) = value
         """
         ...
-
     @property
     def LinkedResources(self):
         """
@@ -127,18 +122,17 @@ class AlternateView(AttachmentBase): # skipped bases: <type 'IDisposable'>
         """
         ...
 
+class AlternateViewCollection(
+    Collection[AlternateView], IDisposable
+):  # skipped bases: <type 'IReadOnlyCollection[AlternateView]'>, <type 'IList[AlternateView]'>, <type 'IReadOnlyList[AlternateView]'>, <type 'IList'>, <type 'ICollection'>, <type 'IEnumerable'>, <type 'IEnumerable[AlternateView]'>, <type 'ICollection[AlternateView]'>
+    """Represents a collection of System.Net.Mail.AlternateView objects."""
 
-
-class AlternateViewCollection(Collection[AlternateView], IDisposable): # skipped bases: <type 'IReadOnlyCollection[AlternateView]'>, <type 'IList[AlternateView]'>, <type 'IReadOnlyList[AlternateView]'>, <type 'IList'>, <type 'ICollection'>, <type 'IEnumerable'>, <type 'IEnumerable[AlternateView]'>, <type 'ICollection[AlternateView]'>
-    """ Represents a collection of System.Net.Mail.AlternateView objects. """
     @property
     def Items(self):
-        """ Gets a System.Collections.Generic.IList wrapper around the System.Collections.ObjectModel.Collection. """
+        """Gets a System.Collections.Generic.IList wrapper around the System.Collections.ObjectModel.Collection."""
         ...
 
-
-
-class Attachment(AttachmentBase): # skipped bases: <type 'IDisposable'>
+class Attachment(AttachmentBase):  # skipped bases: <type 'IDisposable'>
     """
     Represents an attachment to an e-mail.
 
@@ -154,6 +148,7 @@ class Attachment(AttachmentBase): # skipped bases: <type 'IDisposable'>
 
     Attachment(contentStream: Stream, contentType: ContentType)
     """
+
     @staticmethod
     def CreateAttachmentFromString(content, *__args):
         """
@@ -194,7 +189,6 @@ class Attachment(AttachmentBase): # skipped bases: <type 'IDisposable'>
             Returns: An object of type System.Net.Mail.Attachment.
         """
         ...
-
     @property
     def ContentDisposition(self):
         """
@@ -203,7 +197,6 @@ class Attachment(AttachmentBase): # skipped bases: <type 'IDisposable'>
         Get: ContentDisposition(self: Attachment) -> ContentDisposition
         """
         ...
-
     @property
     def Name(self):
         """
@@ -214,7 +207,6 @@ class Attachment(AttachmentBase): # skipped bases: <type 'IDisposable'>
         Set: Name(self: Attachment) = value
         """
         ...
-
     @property
     def NameEncoding(self):
         """
@@ -226,32 +218,33 @@ class Attachment(AttachmentBase): # skipped bases: <type 'IDisposable'>
         """
         ...
 
+class AttachmentCollection(
+    Collection[Attachment], IDisposable
+):  # skipped bases: <type 'IReadOnlyCollection[Attachment]'>, <type 'ICollection[Attachment]'>, <type 'IReadOnlyList[Attachment]'>, <type 'IList[Attachment]'>, <type 'IEnumerable[Attachment]'>, <type 'IList'>, <type 'ICollection'>, <type 'IEnumerable'>
+    """Stores attachments to be sent as part of an e-mail message."""
 
-
-class AttachmentCollection(Collection[Attachment], IDisposable): # skipped bases: <type 'IReadOnlyCollection[Attachment]'>, <type 'ICollection[Attachment]'>, <type 'IReadOnlyList[Attachment]'>, <type 'IList[Attachment]'>, <type 'IEnumerable[Attachment]'>, <type 'IList'>, <type 'ICollection'>, <type 'IEnumerable'>
-    """ Stores attachments to be sent as part of an e-mail message. """
     @property
     def Items(self):
-        """ Gets a System.Collections.Generic.IList wrapper around the System.Collections.ObjectModel.Collection. """
+        """Gets a System.Collections.Generic.IList wrapper around the System.Collections.ObjectModel.Collection."""
         ...
 
-
-
-class DeliveryNotificationOptions(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class DeliveryNotificationOptions(
+    Enum
+):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Describes the delivery notification options for e-mail.
 
     enum (flags) DeliveryNotificationOptions, values: Delay (4), Never (134217728), None (0), OnFailure (2), OnSuccess (1)
     """
+
     Delay = None
     Never = None
-    None = None
+
     OnFailure = None
     OnSuccess = None
     value__ = None
 
-
-class LinkedResource(AttachmentBase): # skipped bases: <type 'IDisposable'>
+class LinkedResource(AttachmentBase):  # skipped bases: <type 'IDisposable'>
     """
     Represents an embedded external resource in an email attachment, such as an image in an HTML attachment.
 
@@ -267,6 +260,7 @@ class LinkedResource(AttachmentBase): # skipped bases: <type 'IDisposable'>
 
     LinkedResource(contentStream: Stream, contentType: ContentType)
     """
+
     @staticmethod
     def CreateLinkedResourceFromString(content, *__args):
         """
@@ -307,7 +301,6 @@ class LinkedResource(AttachmentBase): # skipped bases: <type 'IDisposable'>
             Returns: A System.Net.Mail.LinkedResource object that contains the embedded resource to be included in the email attachment.
         """
         ...
-
     @property
     def ContentLink(self):
         """
@@ -319,18 +312,17 @@ class LinkedResource(AttachmentBase): # skipped bases: <type 'IDisposable'>
         """
         ...
 
+class LinkedResourceCollection(
+    Collection[LinkedResource], IDisposable
+):  # skipped bases: <type 'IEnumerable[LinkedResource]'>, <type 'IReadOnlyList[LinkedResource]'>, <type 'ICollection[LinkedResource]'>, <type 'IReadOnlyCollection[LinkedResource]'>, <type 'IList[LinkedResource]'>, <type 'ICollection'>, <type 'IEnumerable'>, <type 'IList'>
+    """Stores linked resources to be sent as part of an e-mail message."""
 
-
-class LinkedResourceCollection(Collection[LinkedResource], IDisposable): # skipped bases: <type 'IEnumerable[LinkedResource]'>, <type 'IReadOnlyList[LinkedResource]'>, <type 'ICollection[LinkedResource]'>, <type 'IReadOnlyCollection[LinkedResource]'>, <type 'IList[LinkedResource]'>, <type 'ICollection'>, <type 'IEnumerable'>, <type 'IList'>
-    """ Stores linked resources to be sent as part of an e-mail message. """
     @property
     def Items(self):
-        """ Gets a System.Collections.Generic.IList wrapper around the System.Collections.ObjectModel.Collection. """
+        """Gets a System.Collections.Generic.IList wrapper around the System.Collections.ObjectModel.Collection."""
         ...
 
-
-
-class MailAddress: # skipped bases: <type 'object'>
+class MailAddress:  # skipped bases: <type 'object'>
     """
     Represents the address of an electronic mail sender or recipient.
 
@@ -340,6 +332,7 @@ class MailAddress: # skipped bases: <type 'object'>
 
     MailAddress(address: str, displayName: str, displayNameEncoding: Encoding)
     """
+
     def Equals(self, value):
         """
         Equals(self: MailAddress, value: object) -> bool
@@ -351,7 +344,6 @@ class MailAddress: # skipped bases: <type 'object'>
             Returns: ue if the two mail addresses are equal; otherwise, lse.
         """
         ...
-
     def GetHashCode(self):
         """
         GetHashCode(self: MailAddress) -> int
@@ -361,7 +353,6 @@ class MailAddress: # skipped bases: <type 'object'>
             Returns: An integer hash value.
         """
         ...
-
     def ToString(self):
         """
         ToString(self: MailAddress) -> str
@@ -371,14 +362,10 @@ class MailAddress: # skipped bases: <type 'object'>
             Returns: A System.String that contains the contents of this System.Net.Mail.MailAddress.
         """
         ...
-
-    def __eq__(self, *args): #cannot find CLR method
-        """ x.__eq__(y) <==> x==y """
+    def __eq__(self, *args):  # cannot find CLR method
+        """x.__eq__(y) <==> x==y"""
         ...
-
-    def __ne__(self, *args): #cannot find CLR method
-        ...
-
+    def __ne__(self, *args): ...
     @property
     def Address(self):
         """
@@ -387,7 +374,6 @@ class MailAddress: # skipped bases: <type 'object'>
         Get: Address(self: MailAddress) -> str
         """
         ...
-
     @property
     def DisplayName(self):
         """
@@ -396,7 +382,6 @@ class MailAddress: # skipped bases: <type 'object'>
         Get: DisplayName(self: MailAddress) -> str
         """
         ...
-
     @property
     def Host(self):
         """
@@ -405,7 +390,6 @@ class MailAddress: # skipped bases: <type 'object'>
         Get: Host(self: MailAddress) -> str
         """
         ...
-
     @property
     def User(self):
         """
@@ -415,14 +399,15 @@ class MailAddress: # skipped bases: <type 'object'>
         """
         ...
 
-
-
-class MailAddressCollection(Collection[MailAddress]): # skipped bases: <type 'IEnumerable[MailAddress]'>, <type 'ICollection[MailAddress]'>, <type 'IReadOnlyList[MailAddress]'>, <type 'IList'>, <type 'ICollection'>, <type 'IEnumerable'>, <type 'IList[MailAddress]'>, <type 'IReadOnlyCollection[MailAddress]'>
+class MailAddressCollection(
+    Collection[MailAddress]
+):  # skipped bases: <type 'IEnumerable[MailAddress]'>, <type 'ICollection[MailAddress]'>, <type 'IReadOnlyList[MailAddress]'>, <type 'IList'>, <type 'ICollection'>, <type 'IEnumerable'>, <type 'IList[MailAddress]'>, <type 'IReadOnlyCollection[MailAddress]'>
     """
     Store e-mail addresses that are associated with an e-mail message.
 
     MailAddressCollection()
     """
+
     def ToString(self):
         """
         ToString(self: MailAddressCollection) -> str
@@ -432,16 +417,11 @@ class MailAddressCollection(Collection[MailAddress]): # skipped bases: <type 'IE
             Returns: A System.String containing the e-mail addresses in this collection.
         """
         ...
-
-    def __str__(self, *args): #cannot find CLR method
-        ...
-
+    def __str__(self, *args): ...
     @property
     def Items(self):
-        """ Gets a System.Collections.Generic.IList wrapper around the System.Collections.ObjectModel.Collection. """
+        """Gets a System.Collections.Generic.IList wrapper around the System.Collections.ObjectModel.Collection."""
         ...
-
-
 
 class MailMessage(object, IDisposable):
     """
@@ -455,6 +435,7 @@ class MailMessage(object, IDisposable):
 
     MailMessage(from: MailAddress, to: MailAddress)
     """
+
     @property
     def AlternateViews(self):
         """
@@ -463,7 +444,6 @@ class MailMessage(object, IDisposable):
         Get: AlternateViews(self: MailMessage) -> AlternateViewCollection
         """
         ...
-
     @property
     def Attachments(self):
         """
@@ -472,7 +452,6 @@ class MailMessage(object, IDisposable):
         Get: Attachments(self: MailMessage) -> AttachmentCollection
         """
         ...
-
     @property
     def Bcc(self):
         """
@@ -481,7 +460,6 @@ class MailMessage(object, IDisposable):
         Get: Bcc(self: MailMessage) -> MailAddressCollection
         """
         ...
-
     @property
     def Body(self):
         """
@@ -492,7 +470,6 @@ class MailMessage(object, IDisposable):
         Set: Body(self: MailMessage) = value
         """
         ...
-
     @property
     def BodyEncoding(self):
         """
@@ -503,7 +480,6 @@ class MailMessage(object, IDisposable):
         Set: BodyEncoding(self: MailMessage) = value
         """
         ...
-
     @property
     def BodyTransferEncoding(self):
         """
@@ -514,7 +490,6 @@ class MailMessage(object, IDisposable):
         Set: BodyTransferEncoding(self: MailMessage) = value
         """
         ...
-
     @property
     def CC(self):
         """
@@ -523,7 +498,6 @@ class MailMessage(object, IDisposable):
         Get: CC(self: MailMessage) -> MailAddressCollection
         """
         ...
-
     @property
     def DeliveryNotificationOptions(self):
         """
@@ -534,7 +508,6 @@ class MailMessage(object, IDisposable):
         Set: DeliveryNotificationOptions(self: MailMessage) = value
         """
         ...
-
     @property
     def From(self):
         """
@@ -545,7 +518,6 @@ class MailMessage(object, IDisposable):
         Set: From(self: MailMessage) = value
         """
         ...
-
     @property
     def Headers(self):
         """
@@ -554,7 +526,6 @@ class MailMessage(object, IDisposable):
         Get: Headers(self: MailMessage) -> NameValueCollection
         """
         ...
-
     @property
     def HeadersEncoding(self):
         """
@@ -565,7 +536,6 @@ class MailMessage(object, IDisposable):
         Set: HeadersEncoding(self: MailMessage) = value
         """
         ...
-
     @property
     def IsBodyHtml(self):
         """
@@ -576,7 +546,6 @@ class MailMessage(object, IDisposable):
         Set: IsBodyHtml(self: MailMessage) = value
         """
         ...
-
     @property
     def Priority(self):
         """
@@ -587,7 +556,6 @@ class MailMessage(object, IDisposable):
         Set: Priority(self: MailMessage) = value
         """
         ...
-
     @property
     def ReplyTo(self):
         """
@@ -598,7 +566,6 @@ class MailMessage(object, IDisposable):
         Set: ReplyTo(self: MailMessage) = value
         """
         ...
-
     @property
     def ReplyToList(self):
         """
@@ -607,7 +574,6 @@ class MailMessage(object, IDisposable):
         Get: ReplyToList(self: MailMessage) -> MailAddressCollection
         """
         ...
-
     @property
     def Sender(self):
         """
@@ -618,7 +584,6 @@ class MailMessage(object, IDisposable):
         Set: Sender(self: MailMessage) = value
         """
         ...
-
     @property
     def Subject(self):
         """
@@ -629,7 +594,6 @@ class MailMessage(object, IDisposable):
         Set: Subject(self: MailMessage) = value
         """
         ...
-
     @property
     def SubjectEncoding(self):
         """
@@ -640,7 +604,6 @@ class MailMessage(object, IDisposable):
         Set: SubjectEncoding(self: MailMessage) = value
         """
         ...
-
     @property
     def To(self):
         """
@@ -650,50 +613,46 @@ class MailMessage(object, IDisposable):
         """
         ...
 
-
-
-class MailPriority(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class MailPriority(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the priority of a System.Net.Mail.MailMessage.
 
     enum MailPriority, values: High (2), Low (1), Normal (0)
     """
+
     High = None
     Low = None
     Normal = None
     value__ = None
 
-
-class SendCompletedEventHandler(MulticastDelegate): # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
+class SendCompletedEventHandler(MulticastDelegate):  # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
     """
     Represents the method that will handle the System.Net.Mail.SmtpClient.SendCompleted event.
 
     SendCompletedEventHandler(object: object, method: IntPtr)
     """
+
     def BeginInvoke(self, sender, e, callback, object):
-        """ BeginInvoke(self: SendCompletedEventHandler, sender: object, e: AsyncCompletedEventArgs, callback: AsyncCallback, object: object) -> IAsyncResult """
+        """BeginInvoke(self: SendCompletedEventHandler, sender: object, e: AsyncCompletedEventArgs, callback: AsyncCallback, object: object) -> IAsyncResult"""
         ...
-
     def EndInvoke(self, result):
-        """ EndInvoke(self: SendCompletedEventHandler, result: IAsyncResult) """
+        """EndInvoke(self: SendCompletedEventHandler, result: IAsyncResult)"""
         ...
-
     def Invoke(self, sender, e):
-        """ Invoke(self: SendCompletedEventHandler, sender: object, e: AsyncCompletedEventArgs) """
+        """Invoke(self: SendCompletedEventHandler, sender: object, e: AsyncCompletedEventArgs)"""
         ...
 
-
-class SmtpAccess(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SmtpAccess(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the level of access allowed to a Simple Mail Transport Protocol (SMTP) server.
 
     enum SmtpAccess, values: Connect (1), ConnectToUnrestrictedPort (2), None (0)
     """
+
     Connect = None
     ConnectToUnrestrictedPort = None
-    None = None
-    value__ = None
 
+    value__ = None
 
 class SmtpClient(object, IDisposable):
     """
@@ -705,7 +664,8 @@ class SmtpClient(object, IDisposable):
 
     SmtpClient(host: str, port: int)
     """
-    def OnSendCompleted(self, *args): #cannot find CLR method
+
+    def OnSendCompleted(self, *args):  # cannot find CLR method
         """
         OnSendCompleted(self: SmtpClient, e: AsyncCompletedEventArgs)
 
@@ -714,7 +674,6 @@ class SmtpClient(object, IDisposable):
             e: An System.ComponentModel.AsyncCompletedEventArgs that contains event data.
         """
         ...
-
     def Send(self, *__args):
         """
         Send(self: SmtpClient, from: str, recipients: str, subject: str, body: str)
@@ -736,7 +695,6 @@ class SmtpClient(object, IDisposable):
             message: A System.Net.Mail.MailMessage that contains the message to send.
         """
         ...
-
     def SendAsync(self, *__args):
         """
         SendAsync(self: SmtpClient, from: str, recipients: str, subject: str, body: str, userToken: object)
@@ -766,7 +724,6 @@ class SmtpClient(object, IDisposable):
             userToken: A user-defined object that is passed to the method invoked when the asynchronous operation completes.
         """
         ...
-
     def SendAsyncCancel(self):
         """
         SendAsyncCancel(self: SmtpClient)
@@ -774,7 +731,6 @@ class SmtpClient(object, IDisposable):
             Cancels an asynchronous operation to send an e-mail message.
         """
         ...
-
     def SendMailAsync(self, *__args):
         """
         SendMailAsync(self: SmtpClient, from: str, recipients: str, subject: str, body: str) -> Task
@@ -802,7 +758,6 @@ class SmtpClient(object, IDisposable):
             Returns: Returns System.Threading.Tasks.Task.The task object representing the asynchronous operation.
         """
         ...
-
     @property
     def ClientCertificates(self):
         """
@@ -811,7 +766,6 @@ class SmtpClient(object, IDisposable):
         Get: ClientCertificates(self: SmtpClient) -> X509CertificateCollection
         """
         ...
-
     @property
     def Credentials(self):
         """
@@ -822,7 +776,6 @@ class SmtpClient(object, IDisposable):
         Set: Credentials(self: SmtpClient) = value
         """
         ...
-
     @property
     def DeliveryFormat(self):
         """
@@ -833,7 +786,6 @@ class SmtpClient(object, IDisposable):
         Set: DeliveryFormat(self: SmtpClient) = value
         """
         ...
-
     @property
     def DeliveryMethod(self):
         """
@@ -844,7 +796,6 @@ class SmtpClient(object, IDisposable):
         Set: DeliveryMethod(self: SmtpClient) = value
         """
         ...
-
     @property
     def EnableSsl(self):
         """
@@ -855,7 +806,6 @@ class SmtpClient(object, IDisposable):
         Set: EnableSsl(self: SmtpClient) = value
         """
         ...
-
     @property
     def Host(self):
         """
@@ -866,7 +816,6 @@ class SmtpClient(object, IDisposable):
         Set: Host(self: SmtpClient) = value
         """
         ...
-
     @property
     def PickupDirectoryLocation(self):
         """
@@ -877,7 +826,6 @@ class SmtpClient(object, IDisposable):
         Set: PickupDirectoryLocation(self: SmtpClient) = value
         """
         ...
-
     @property
     def Port(self):
         """
@@ -888,7 +836,6 @@ class SmtpClient(object, IDisposable):
         Set: Port(self: SmtpClient) = value
         """
         ...
-
     @property
     def ServicePoint(self):
         """
@@ -897,7 +844,6 @@ class SmtpClient(object, IDisposable):
         Get: ServicePoint(self: SmtpClient) -> ServicePoint
         """
         ...
-
     @property
     def TargetName(self):
         """
@@ -908,7 +854,6 @@ class SmtpClient(object, IDisposable):
         Set: TargetName(self: SmtpClient) = value
         """
         ...
-
     @property
     def Timeout(self):
         """
@@ -919,7 +864,6 @@ class SmtpClient(object, IDisposable):
         Set: Timeout(self: SmtpClient) = value
         """
         ...
-
     @property
     def UseDefaultCredentials(self):
         """
@@ -930,35 +874,32 @@ class SmtpClient(object, IDisposable):
         Set: UseDefaultCredentials(self: SmtpClient) = value
         """
         ...
-
-
     SendCompleted = None
 
-
-class SmtpDeliveryFormat(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SmtpDeliveryFormat(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     The delivery format to use for sending outgoing e-mail using the Simple Mail Transport Protocol (SMTP).
 
     enum SmtpDeliveryFormat, values: International (1), SevenBit (0)
     """
+
     International = None
     SevenBit = None
     value__ = None
 
-
-class SmtpDeliveryMethod(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SmtpDeliveryMethod(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies how email messages are delivered.
 
     enum SmtpDeliveryMethod, values: Network (0), PickupDirectoryFromIis (2), SpecifiedPickupDirectory (1)
     """
+
     Network = None
     PickupDirectoryFromIis = None
     SpecifiedPickupDirectory = None
     value__ = None
 
-
-class SmtpException(Exception): # skipped bases: <type '_Exception'>, <type 'ISerializable'>
+class SmtpException(Exception):  # skipped bases: <type '_Exception'>, <type 'ISerializable'>
     """
     Represents the exception that is thrown when the System.Net.Mail.SmtpClient is not able to complete a erload:System.Net.Mail.SmtpClient.Send or erload:System.Net.Mail.SmtpClient.SendAsync operation.
 
@@ -972,6 +913,7 @@ class SmtpException(Exception): # skipped bases: <type '_Exception'>, <type 'ISe
 
     SmtpException(message: str, innerException: Exception)
     """
+
     @property
     def StatusCode(self):
         """
@@ -982,12 +924,9 @@ class SmtpException(Exception): # skipped bases: <type '_Exception'>, <type 'ISe
         Set: StatusCode(self: SmtpException) = value
         """
         ...
-
-
     SerializeObjectState = None
 
-
-class SmtpFailedRecipientException(SmtpException): # skipped bases: <type '_Exception'>, <type 'ISerializable'>
+class SmtpFailedRecipientException(SmtpException):  # skipped bases: <type '_Exception'>, <type 'ISerializable'>
     """
     Represents the exception that is thrown when the System.Net.Mail.SmtpClient is not able to complete a erload:System.Net.Mail.SmtpClient.Send or erload:System.Net.Mail.SmtpClient.SendAsync operation to a particular recipient.
 
@@ -1003,6 +942,7 @@ class SmtpFailedRecipientException(SmtpException): # skipped bases: <type '_Exce
 
     SmtpFailedRecipientException(message: str, failedRecipient: str, innerException: Exception)
     """
+
     @property
     def FailedRecipient(self):
         """
@@ -1011,12 +951,11 @@ class SmtpFailedRecipientException(SmtpException): # skipped bases: <type '_Exce
         Get: FailedRecipient(self: SmtpFailedRecipientException) -> str
         """
         ...
-
-
     SerializeObjectState = None
 
-
-class SmtpFailedRecipientsException(SmtpFailedRecipientException): # skipped bases: <type '_Exception'>, <type 'ISerializable'>
+class SmtpFailedRecipientsException(
+    SmtpFailedRecipientException
+):  # skipped bases: <type '_Exception'>, <type 'ISerializable'>
     """
     The exception that is thrown when e-mail is sent using an System.Net.Mail.SmtpClient and cannot be delivered to all recipients.
 
@@ -1028,6 +967,7 @@ class SmtpFailedRecipientsException(SmtpFailedRecipientException): # skipped bas
 
     SmtpFailedRecipientsException(message: str, innerExceptions: Array[SmtpFailedRecipientException])
     """
+
     @property
     def InnerExceptions(self):
         """
@@ -1036,12 +976,11 @@ class SmtpFailedRecipientsException(SmtpFailedRecipientException): # skipped bas
         Get: InnerExceptions(self: SmtpFailedRecipientsException) -> Array[SmtpFailedRecipientException]
         """
         ...
-
-
     SerializeObjectState = None
 
-
-class SmtpPermission(CodeAccessPermission, IUnrestrictedPermission): # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
+class SmtpPermission(
+    CodeAccessPermission, IUnrestrictedPermission
+):  # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
     """
     Controls access to Simple Mail Transport Protocol (SMTP) servers.
 
@@ -1051,6 +990,7 @@ class SmtpPermission(CodeAccessPermission, IUnrestrictedPermission): # skipped b
 
     SmtpPermission(access: SmtpAccess)
     """
+
     def AddPermission(self, access):
         """
         AddPermission(self: SmtpPermission, access: SmtpAccess)
@@ -1060,8 +1000,7 @@ class SmtpPermission(CodeAccessPermission, IUnrestrictedPermission): # skipped b
             access: One of the System.Net.Mail.SmtpAccess values.
         """
         ...
-
-    @staticmethod # known case of __new__
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, state: PermissionState)
@@ -1071,7 +1010,6 @@ class SmtpPermission(CodeAccessPermission, IUnrestrictedPermission): # skipped b
         __new__(cls: type, access: SmtpAccess)
         """
         ...
-
     @property
     def Access(self):
         """
@@ -1081,14 +1019,13 @@ class SmtpPermission(CodeAccessPermission, IUnrestrictedPermission): # skipped b
         """
         ...
 
-
-
-class SmtpPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class SmtpPermissionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Controls access to Simple Mail Transport Protocol (SMTP) servers.
 
     SmtpPermissionAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: SmtpPermissionAttribute) -> IPermission
@@ -1098,7 +1035,6 @@ class SmtpPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <ty
             Returns: An System.Net.Mail.SmtpPermission instance.
         """
         ...
-
     @property
     def Access(self):
         """
@@ -1110,14 +1046,13 @@ class SmtpPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <ty
         """
         ...
 
-
-
-class SmtpStatusCode(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SmtpStatusCode(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the outcome of sending e-mail by using the System.Net.Mail.SmtpClient class.
 
     enum SmtpStatusCode, values: BadCommandSequence (503), CannotVerifyUserWillAttemptDelivery (252), ClientNotPermitted (454), CommandNotImplemented (502), CommandParameterNotImplemented (504), CommandUnrecognized (500), ExceededStorageAllocation (552), GeneralFailure (-1), HelpMessage (214), InsufficientStorage (452), LocalErrorInProcessing (451), MailboxBusy (450), MailboxNameNotAllowed (553), MailboxUnavailable (550), MustIssueStartTlsFirst (530), Ok (250), ServiceClosingTransmissionChannel (221), ServiceNotAvailable (421), ServiceReady (220), StartMailInput (354), SyntaxError (501), SystemStatus (211), TransactionFailed (554), UserNotLocalTryAlternatePath (551), UserNotLocalWillForward (251)
     """
+
     BadCommandSequence = None
     CannotVerifyUserWillAttemptDelivery = None
     ClientNotPermitted = None

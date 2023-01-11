@@ -8,12 +8,15 @@
 # no functions
 # classes
 
-class DuplicateAddressDetectionState(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class DuplicateAddressDetectionState(
+    Enum
+):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the current state of an IP address.
 
     enum DuplicateAddressDetectionState, values: Deprecated (3), Duplicate (2), Invalid (0), Preferred (4), Tentative (1)
     """
+
     Deprecated = None
     Duplicate = None
     Invalid = None
@@ -21,9 +24,9 @@ class DuplicateAddressDetectionState(Enum): # skipped bases: <type 'IComparable'
     Tentative = None
     value__ = None
 
+class GatewayIPAddressInformation:  # skipped bases: <type 'object'>
+    """Represents the IP address of the network gateway. This class cannot be instantiated."""
 
-class GatewayIPAddressInformation: # skipped bases: <type 'object'>
-    """ Represents the IP address of the network gateway. This class cannot be instantiated. """
     @property
     def Address(self):
         """
@@ -33,10 +36,11 @@ class GatewayIPAddressInformation: # skipped bases: <type 'object'>
         """
         ...
 
+class GatewayIPAddressInformationCollection(
+    object, ICollection[GatewayIPAddressInformation]
+):  # skipped bases: <type 'IEnumerable'>, <type 'IEnumerable[GatewayIPAddressInformation]'>
+    """Stores a set of System.Net.NetworkInformation.GatewayIPAddressInformation types."""
 
-
-class GatewayIPAddressInformationCollection(object, ICollection[GatewayIPAddressInformation]): # skipped bases: <type 'IEnumerable'>, <type 'IEnumerable[GatewayIPAddressInformation]'>
-    """ Stores a set of System.Net.NetworkInformation.GatewayIPAddressInformation types. """
     def GetEnumerator(self):
         """
         GetEnumerator(self: GatewayIPAddressInformationCollection) -> IEnumerator[GatewayIPAddressInformation]
@@ -48,15 +52,12 @@ class GatewayIPAddressInformationCollection(object, ICollection[GatewayIPAddress
              this collection.
         """
         ...
-
-    def __getitem__(self, *args): #cannot find CLR method
-        """ x.__getitem__(y) <==> x[y] """
+    def __getitem__(self, *args):  # cannot find CLR method
+        """x.__getitem__(y) <==> x[y]"""
         ...
-
-    def __len__(self, *args): #cannot find CLR method
-        """ x.__len__() <==> len(x) """
+    def __len__(self, *args):  # cannot find CLR method
+        """x.__len__() <==> len(x)"""
         ...
-
     @property
     def Count(self):
         """
@@ -65,7 +66,6 @@ class GatewayIPAddressInformationCollection(object, ICollection[GatewayIPAddress
         Get: Count(self: GatewayIPAddressInformationCollection) -> int
         """
         ...
-
     @property
     def IsReadOnly(self):
         """
@@ -75,10 +75,9 @@ class GatewayIPAddressInformationCollection(object, ICollection[GatewayIPAddress
         """
         ...
 
+class IcmpV4Statistics:  # skipped bases: <type 'object'>
+    """Provides Internet Control Message Protocol for IPv4 (ICMPv4) statistical data for the local computer."""
 
-
-class IcmpV4Statistics: # skipped bases: <type 'object'>
-    """ Provides Internet Control Message Protocol for IPv4 (ICMPv4) statistical data for the local computer. """
     @property
     def AddressMaskRepliesReceived(self):
         """
@@ -87,7 +86,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: AddressMaskRepliesReceived(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def AddressMaskRepliesSent(self):
         """
@@ -96,7 +94,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: AddressMaskRepliesSent(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def AddressMaskRequestsReceived(self):
         """
@@ -105,7 +102,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: AddressMaskRequestsReceived(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def AddressMaskRequestsSent(self):
         """
@@ -114,7 +110,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: AddressMaskRequestsSent(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def DestinationUnreachableMessagesReceived(self):
         """
@@ -123,7 +118,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: DestinationUnreachableMessagesReceived(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def DestinationUnreachableMessagesSent(self):
         """
@@ -132,7 +126,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: DestinationUnreachableMessagesSent(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def EchoRepliesReceived(self):
         """
@@ -141,7 +134,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: EchoRepliesReceived(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def EchoRepliesSent(self):
         """
@@ -150,7 +142,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: EchoRepliesSent(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def EchoRequestsReceived(self):
         """
@@ -159,7 +150,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: EchoRequestsReceived(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def EchoRequestsSent(self):
         """
@@ -168,7 +158,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: EchoRequestsSent(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def ErrorsReceived(self):
         """
@@ -177,7 +166,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: ErrorsReceived(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def ErrorsSent(self):
         """
@@ -186,7 +174,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: ErrorsSent(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def MessagesReceived(self):
         """
@@ -195,7 +182,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: MessagesReceived(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def MessagesSent(self):
         """
@@ -204,7 +190,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: MessagesSent(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def ParameterProblemsReceived(self):
         """
@@ -213,7 +198,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: ParameterProblemsReceived(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def ParameterProblemsSent(self):
         """
@@ -222,7 +206,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: ParameterProblemsSent(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def RedirectsReceived(self):
         """
@@ -231,7 +214,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: RedirectsReceived(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def RedirectsSent(self):
         """
@@ -240,7 +222,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: RedirectsSent(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def SourceQuenchesReceived(self):
         """
@@ -249,7 +230,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: SourceQuenchesReceived(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def SourceQuenchesSent(self):
         """
@@ -258,7 +238,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: SourceQuenchesSent(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def TimeExceededMessagesReceived(self):
         """
@@ -267,7 +246,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: TimeExceededMessagesReceived(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def TimeExceededMessagesSent(self):
         """
@@ -276,7 +254,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: TimeExceededMessagesSent(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def TimestampRepliesReceived(self):
         """
@@ -285,7 +262,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: TimestampRepliesReceived(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def TimestampRepliesSent(self):
         """
@@ -294,7 +270,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: TimestampRepliesSent(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def TimestampRequestsReceived(self):
         """
@@ -303,7 +278,6 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         Get: TimestampRequestsReceived(self: IcmpV4Statistics) -> Int64
         """
         ...
-
     @property
     def TimestampRequestsSent(self):
         """
@@ -313,10 +287,9 @@ class IcmpV4Statistics: # skipped bases: <type 'object'>
         """
         ...
 
+class IcmpV6Statistics:  # skipped bases: <type 'object'>
+    """Provides Internet Control Message Protocol for Internet Protocol version 6 (ICMPv6) statistical data for the local computer."""
 
-
-class IcmpV6Statistics: # skipped bases: <type 'object'>
-    """ Provides Internet Control Message Protocol for Internet Protocol version 6 (ICMPv6) statistical data for the local computer. """
     @property
     def DestinationUnreachableMessagesReceived(self):
         """
@@ -325,7 +298,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: DestinationUnreachableMessagesReceived(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def DestinationUnreachableMessagesSent(self):
         """
@@ -334,7 +306,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: DestinationUnreachableMessagesSent(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def EchoRepliesReceived(self):
         """
@@ -343,7 +314,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: EchoRepliesReceived(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def EchoRepliesSent(self):
         """
@@ -352,7 +322,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: EchoRepliesSent(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def EchoRequestsReceived(self):
         """
@@ -361,7 +330,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: EchoRequestsReceived(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def EchoRequestsSent(self):
         """
@@ -370,7 +338,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: EchoRequestsSent(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def ErrorsReceived(self):
         """
@@ -379,7 +346,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: ErrorsReceived(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def ErrorsSent(self):
         """
@@ -388,7 +354,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: ErrorsSent(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def MembershipQueriesReceived(self):
         """
@@ -397,7 +362,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: MembershipQueriesReceived(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def MembershipQueriesSent(self):
         """
@@ -406,7 +370,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: MembershipQueriesSent(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def MembershipReductionsReceived(self):
         """
@@ -415,7 +378,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: MembershipReductionsReceived(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def MembershipReductionsSent(self):
         """
@@ -424,7 +386,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: MembershipReductionsSent(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def MembershipReportsReceived(self):
         """
@@ -433,7 +394,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: MembershipReportsReceived(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def MembershipReportsSent(self):
         """
@@ -442,7 +402,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: MembershipReportsSent(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def MessagesReceived(self):
         """
@@ -451,7 +410,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: MessagesReceived(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def MessagesSent(self):
         """
@@ -460,7 +418,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: MessagesSent(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def NeighborAdvertisementsReceived(self):
         """
@@ -469,7 +426,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: NeighborAdvertisementsReceived(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def NeighborAdvertisementsSent(self):
         """
@@ -478,7 +434,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: NeighborAdvertisementsSent(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def NeighborSolicitsReceived(self):
         """
@@ -487,7 +442,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: NeighborSolicitsReceived(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def NeighborSolicitsSent(self):
         """
@@ -496,7 +450,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: NeighborSolicitsSent(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def PacketTooBigMessagesReceived(self):
         """
@@ -505,7 +458,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: PacketTooBigMessagesReceived(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def PacketTooBigMessagesSent(self):
         """
@@ -514,7 +466,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: PacketTooBigMessagesSent(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def ParameterProblemsReceived(self):
         """
@@ -523,7 +474,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: ParameterProblemsReceived(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def ParameterProblemsSent(self):
         """
@@ -532,7 +482,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: ParameterProblemsSent(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def RedirectsReceived(self):
         """
@@ -541,7 +490,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: RedirectsReceived(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def RedirectsSent(self):
         """
@@ -550,7 +498,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: RedirectsSent(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def RouterAdvertisementsReceived(self):
         """
@@ -559,7 +506,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: RouterAdvertisementsReceived(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def RouterAdvertisementsSent(self):
         """
@@ -568,7 +514,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: RouterAdvertisementsSent(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def RouterSolicitsReceived(self):
         """
@@ -577,7 +522,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: RouterSolicitsReceived(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def RouterSolicitsSent(self):
         """
@@ -586,7 +530,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: RouterSolicitsSent(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def TimeExceededMessagesReceived(self):
         """
@@ -595,7 +538,6 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         Get: TimeExceededMessagesReceived(self: IcmpV6Statistics) -> Int64
         """
         ...
-
     @property
     def TimeExceededMessagesSent(self):
         """
@@ -605,10 +547,11 @@ class IcmpV6Statistics: # skipped bases: <type 'object'>
         """
         ...
 
+class IPAddressCollection(
+    object, ICollection[IPAddress]
+):  # skipped bases: <type 'IEnumerable'>, <type 'IEnumerable[IPAddress]'>
+    """Stores a set of System.Net.IPAddress types."""
 
-
-class IPAddressCollection(object, ICollection[IPAddress]): # skipped bases: <type 'IEnumerable'>, <type 'IEnumerable[IPAddress]'>
-    """ Stores a set of System.Net.IPAddress types. """
     def GetEnumerator(self):
         """
         GetEnumerator(self: IPAddressCollection) -> IEnumerator[IPAddress]
@@ -620,15 +563,12 @@ class IPAddressCollection(object, ICollection[IPAddress]): # skipped bases: <typ
              collection.
         """
         ...
-
-    def __getitem__(self, *args): #cannot find CLR method
-        """ x.__getitem__(y) <==> x[y] """
+    def __getitem__(self, *args):  # cannot find CLR method
+        """x.__getitem__(y) <==> x[y]"""
         ...
-
-    def __len__(self, *args): #cannot find CLR method
-        """ x.__len__() <==> len(x) """
+    def __len__(self, *args):  # cannot find CLR method
+        """x.__len__() <==> len(x)"""
         ...
-
     @property
     def Count(self):
         """
@@ -637,7 +577,6 @@ class IPAddressCollection(object, ICollection[IPAddress]): # skipped bases: <typ
         Get: Count(self: IPAddressCollection) -> int
         """
         ...
-
     @property
     def IsReadOnly(self):
         """
@@ -647,10 +586,9 @@ class IPAddressCollection(object, ICollection[IPAddress]): # skipped bases: <typ
         """
         ...
 
+class IPAddressInformation:  # skipped bases: <type 'object'>
+    """Provides information about a network interface address."""
 
-
-class IPAddressInformation: # skipped bases: <type 'object'>
-    """ Provides information about a network interface address. """
     @property
     def Address(self):
         """
@@ -659,7 +597,6 @@ class IPAddressInformation: # skipped bases: <type 'object'>
         Get: Address(self: IPAddressInformation) -> IPAddress
         """
         ...
-
     @property
     def IsDnsEligible(self):
         """
@@ -668,7 +605,6 @@ class IPAddressInformation: # skipped bases: <type 'object'>
         Get: IsDnsEligible(self: IPAddressInformation) -> bool
         """
         ...
-
     @property
     def IsTransient(self):
         """
@@ -678,10 +614,11 @@ class IPAddressInformation: # skipped bases: <type 'object'>
         """
         ...
 
+class IPAddressInformationCollection(
+    object, ICollection[IPAddressInformation]
+):  # skipped bases: <type 'IEnumerable[IPAddressInformation]'>, <type 'IEnumerable'>
+    """Stores a set of System.Net.NetworkInformation.IPAddressInformation types."""
 
-
-class IPAddressInformationCollection(object, ICollection[IPAddressInformation]): # skipped bases: <type 'IEnumerable[IPAddressInformation]'>, <type 'IEnumerable'>
-    """ Stores a set of System.Net.NetworkInformation.IPAddressInformation types. """
     def GetEnumerator(self):
         """
         GetEnumerator(self: IPAddressInformationCollection) -> IEnumerator[IPAddressInformation]
@@ -693,15 +630,12 @@ class IPAddressInformationCollection(object, ICollection[IPAddressInformation]):
              collection.
         """
         ...
-
-    def __getitem__(self, *args): #cannot find CLR method
-        """ x.__getitem__(y) <==> x[y] """
+    def __getitem__(self, *args):  # cannot find CLR method
+        """x.__getitem__(y) <==> x[y]"""
         ...
-
-    def __len__(self, *args): #cannot find CLR method
-        """ x.__len__() <==> len(x) """
+    def __len__(self, *args):  # cannot find CLR method
+        """x.__len__() <==> len(x)"""
         ...
-
     @property
     def Count(self):
         """
@@ -710,7 +644,6 @@ class IPAddressInformationCollection(object, ICollection[IPAddressInformation]):
         Get: Count(self: IPAddressInformationCollection) -> int
         """
         ...
-
     @property
     def IsReadOnly(self):
         """
@@ -720,10 +653,9 @@ class IPAddressInformationCollection(object, ICollection[IPAddressInformation]):
         """
         ...
 
+class IPGlobalProperties:  # skipped bases: <type 'object'>
+    """Provides information about the network connectivity of the local computer."""
 
-
-class IPGlobalProperties: # skipped bases: <type 'object'>
-    """ Provides information about the network connectivity of the local computer. """
     def BeginGetUnicastAddresses(self, callback, state):
         """
         BeginGetUnicastAddresses(self: IPGlobalProperties, callback: AsyncCallback, state: object) -> IAsyncResult
@@ -737,7 +669,6 @@ class IPGlobalProperties: # skipped bases: <type 'object'>
             Returns: An System.IAsyncResult that references the asynchronous request.
         """
         ...
-
     def EndGetUnicastAddresses(self, asyncResult):
         """
         EndGetUnicastAddresses(self: IPGlobalProperties, asyncResult: IAsyncResult) -> UnicastIPAddressInformationCollection
@@ -749,7 +680,6 @@ class IPGlobalProperties: # skipped bases: <type 'object'>
             Returns: An System.IAsyncResult that stores state information and any user defined data for this asynchronous operation.
         """
         ...
-
     def GetActiveTcpConnections(self):
         """
         GetActiveTcpConnections(self: IPGlobalProperties) -> Array[TcpConnectionInformation]
@@ -761,7 +691,6 @@ class IPGlobalProperties: # skipped bases: <type 'object'>
              connections are detected.
         """
         ...
-
     def GetActiveTcpListeners(self):
         """
         GetActiveTcpListeners(self: IPGlobalProperties) -> Array[IPEndPoint]
@@ -771,7 +700,6 @@ class IPGlobalProperties: # skipped bases: <type 'object'>
             Returns: A System.Net.IPEndPoint array that contains objects that describe the active TCP listeners, or an empty array, if no active TCP listeners are detected.
         """
         ...
-
     def GetActiveUdpListeners(self):
         """
         GetActiveUdpListeners(self: IPGlobalProperties) -> Array[IPEndPoint]
@@ -781,7 +709,6 @@ class IPGlobalProperties: # skipped bases: <type 'object'>
             Returns: An System.Net.IPEndPoint array that contains objects that describe the UDP listeners, or an empty array if no UDP listeners are detected.
         """
         ...
-
     def GetIcmpV4Statistics(self):
         """
         GetIcmpV4Statistics(self: IPGlobalProperties) -> IcmpV4Statistics
@@ -791,7 +718,6 @@ class IPGlobalProperties: # skipped bases: <type 'object'>
             Returns: An System.Net.NetworkInformation.IcmpV4Statistics object that provides ICMP version 4 traffic statistics for the local computer.
         """
         ...
-
     def GetIcmpV6Statistics(self):
         """
         GetIcmpV6Statistics(self: IPGlobalProperties) -> IcmpV6Statistics
@@ -801,7 +727,6 @@ class IPGlobalProperties: # skipped bases: <type 'object'>
             Returns: An System.Net.NetworkInformation.IcmpV6Statistics object that provides ICMP version 6 traffic statistics for the local computer.
         """
         ...
-
     @staticmethod
     def GetIPGlobalProperties():
         """
@@ -812,7 +737,6 @@ class IPGlobalProperties: # skipped bases: <type 'object'>
             Returns: A System.Net.NetworkInformation.IPGlobalProperties object that contains information about the local computer.
         """
         ...
-
     def GetIPv4GlobalStatistics(self):
         """
         GetIPv4GlobalStatistics(self: IPGlobalProperties) -> IPGlobalStatistics
@@ -822,7 +746,6 @@ class IPGlobalProperties: # skipped bases: <type 'object'>
             Returns: An System.Net.NetworkInformation.IPGlobalStatistics object that provides IPv4 traffic statistics for the local computer.
         """
         ...
-
     def GetIPv6GlobalStatistics(self):
         """
         GetIPv6GlobalStatistics(self: IPGlobalProperties) -> IPGlobalStatistics
@@ -832,7 +755,6 @@ class IPGlobalProperties: # skipped bases: <type 'object'>
             Returns: An System.Net.NetworkInformation.IPGlobalStatistics object that provides IPv6 traffic statistics for the local computer.
         """
         ...
-
     def GetTcpIPv4Statistics(self):
         """
         GetTcpIPv4Statistics(self: IPGlobalProperties) -> TcpStatistics
@@ -842,7 +764,6 @@ class IPGlobalProperties: # skipped bases: <type 'object'>
             Returns: A System.Net.NetworkInformation.TcpStatistics object that provides TCP/IPv4 traffic statistics for the local computer.
         """
         ...
-
     def GetTcpIPv6Statistics(self):
         """
         GetTcpIPv6Statistics(self: IPGlobalProperties) -> TcpStatistics
@@ -852,7 +773,6 @@ class IPGlobalProperties: # skipped bases: <type 'object'>
             Returns: A System.Net.NetworkInformation.TcpStatistics object that provides TCP/IPv6 traffic statistics for the local computer.
         """
         ...
-
     def GetUdpIPv4Statistics(self):
         """
         GetUdpIPv4Statistics(self: IPGlobalProperties) -> UdpStatistics
@@ -862,7 +782,6 @@ class IPGlobalProperties: # skipped bases: <type 'object'>
             Returns: A System.Net.NetworkInformation.UdpStatistics object that provides UDP/IPv4 traffic statistics for the local computer.
         """
         ...
-
     def GetUdpIPv6Statistics(self):
         """
         GetUdpIPv6Statistics(self: IPGlobalProperties) -> UdpStatistics
@@ -872,7 +791,6 @@ class IPGlobalProperties: # skipped bases: <type 'object'>
             Returns: A System.Net.NetworkInformation.UdpStatistics object that provides UDP/IPv6 traffic statistics for the local computer.
         """
         ...
-
     def GetUnicastAddresses(self):
         """
         GetUnicastAddresses(self: IPGlobalProperties) -> UnicastIPAddressInformationCollection
@@ -882,7 +800,6 @@ class IPGlobalProperties: # skipped bases: <type 'object'>
             Returns: A System.Net.NetworkInformation.UnicastIPAddressInformationCollection that contains a list of stable unicast IP addresses on the local computer.
         """
         ...
-
     def GetUnicastAddressesAsync(self):
         """
         GetUnicastAddressesAsync(self: IPGlobalProperties) -> Task[UnicastIPAddressInformationCollection]
@@ -892,7 +809,6 @@ class IPGlobalProperties: # skipped bases: <type 'object'>
             Returns: Returns System.Threading.Tasks.Task.The task object representing the asynchronous operation.
         """
         ...
-
     @property
     def DhcpScopeName(self):
         """
@@ -901,7 +817,6 @@ class IPGlobalProperties: # skipped bases: <type 'object'>
         Get: DhcpScopeName(self: IPGlobalProperties) -> str
         """
         ...
-
     @property
     def DomainName(self):
         """
@@ -910,7 +825,6 @@ class IPGlobalProperties: # skipped bases: <type 'object'>
         Get: DomainName(self: IPGlobalProperties) -> str
         """
         ...
-
     @property
     def HostName(self):
         """
@@ -919,7 +833,6 @@ class IPGlobalProperties: # skipped bases: <type 'object'>
         Get: HostName(self: IPGlobalProperties) -> str
         """
         ...
-
     @property
     def IsWinsProxy(self):
         """
@@ -928,7 +841,6 @@ class IPGlobalProperties: # skipped bases: <type 'object'>
         Get: IsWinsProxy(self: IPGlobalProperties) -> bool
         """
         ...
-
     @property
     def NodeType(self):
         """
@@ -938,10 +850,9 @@ class IPGlobalProperties: # skipped bases: <type 'object'>
         """
         ...
 
+class IPGlobalStatistics:  # skipped bases: <type 'object'>
+    """Provides Internet Protocol (IP) statistical data."""
 
-
-class IPGlobalStatistics: # skipped bases: <type 'object'>
-    """ Provides Internet Protocol (IP) statistical data. """
     @property
     def DefaultTtl(self):
         """
@@ -950,7 +861,6 @@ class IPGlobalStatistics: # skipped bases: <type 'object'>
         Get: DefaultTtl(self: IPGlobalStatistics) -> int
         """
         ...
-
     @property
     def ForwardingEnabled(self):
         """
@@ -959,7 +869,6 @@ class IPGlobalStatistics: # skipped bases: <type 'object'>
         Get: ForwardingEnabled(self: IPGlobalStatistics) -> bool
         """
         ...
-
     @property
     def NumberOfInterfaces(self):
         """
@@ -968,7 +877,6 @@ class IPGlobalStatistics: # skipped bases: <type 'object'>
         Get: NumberOfInterfaces(self: IPGlobalStatistics) -> int
         """
         ...
-
     @property
     def NumberOfIPAddresses(self):
         """
@@ -977,7 +885,6 @@ class IPGlobalStatistics: # skipped bases: <type 'object'>
         Get: NumberOfIPAddresses(self: IPGlobalStatistics) -> int
         """
         ...
-
     @property
     def NumberOfRoutes(self):
         """
@@ -986,7 +893,6 @@ class IPGlobalStatistics: # skipped bases: <type 'object'>
         Get: NumberOfRoutes(self: IPGlobalStatistics) -> int
         """
         ...
-
     @property
     def OutputPacketRequests(self):
         """
@@ -995,7 +901,6 @@ class IPGlobalStatistics: # skipped bases: <type 'object'>
         Get: OutputPacketRequests(self: IPGlobalStatistics) -> Int64
         """
         ...
-
     @property
     def OutputPacketRoutingDiscards(self):
         """
@@ -1004,7 +909,6 @@ class IPGlobalStatistics: # skipped bases: <type 'object'>
         Get: OutputPacketRoutingDiscards(self: IPGlobalStatistics) -> Int64
         """
         ...
-
     @property
     def OutputPacketsDiscarded(self):
         """
@@ -1013,7 +917,6 @@ class IPGlobalStatistics: # skipped bases: <type 'object'>
         Get: OutputPacketsDiscarded(self: IPGlobalStatistics) -> Int64
         """
         ...
-
     @property
     def OutputPacketsWithNoRoute(self):
         """
@@ -1022,7 +925,6 @@ class IPGlobalStatistics: # skipped bases: <type 'object'>
         Get: OutputPacketsWithNoRoute(self: IPGlobalStatistics) -> Int64
         """
         ...
-
     @property
     def PacketFragmentFailures(self):
         """
@@ -1031,7 +933,6 @@ class IPGlobalStatistics: # skipped bases: <type 'object'>
         Get: PacketFragmentFailures(self: IPGlobalStatistics) -> Int64
         """
         ...
-
     @property
     def PacketReassembliesRequired(self):
         """
@@ -1040,7 +941,6 @@ class IPGlobalStatistics: # skipped bases: <type 'object'>
         Get: PacketReassembliesRequired(self: IPGlobalStatistics) -> Int64
         """
         ...
-
     @property
     def PacketReassemblyFailures(self):
         """
@@ -1049,7 +949,6 @@ class IPGlobalStatistics: # skipped bases: <type 'object'>
         Get: PacketReassemblyFailures(self: IPGlobalStatistics) -> Int64
         """
         ...
-
     @property
     def PacketReassemblyTimeout(self):
         """
@@ -1058,7 +957,6 @@ class IPGlobalStatistics: # skipped bases: <type 'object'>
         Get: PacketReassemblyTimeout(self: IPGlobalStatistics) -> Int64
         """
         ...
-
     @property
     def PacketsFragmented(self):
         """
@@ -1067,7 +965,6 @@ class IPGlobalStatistics: # skipped bases: <type 'object'>
         Get: PacketsFragmented(self: IPGlobalStatistics) -> Int64
         """
         ...
-
     @property
     def PacketsReassembled(self):
         """
@@ -1076,7 +973,6 @@ class IPGlobalStatistics: # skipped bases: <type 'object'>
         Get: PacketsReassembled(self: IPGlobalStatistics) -> Int64
         """
         ...
-
     @property
     def ReceivedPackets(self):
         """
@@ -1085,7 +981,6 @@ class IPGlobalStatistics: # skipped bases: <type 'object'>
         Get: ReceivedPackets(self: IPGlobalStatistics) -> Int64
         """
         ...
-
     @property
     def ReceivedPacketsDelivered(self):
         """
@@ -1094,7 +989,6 @@ class IPGlobalStatistics: # skipped bases: <type 'object'>
         Get: ReceivedPacketsDelivered(self: IPGlobalStatistics) -> Int64
         """
         ...
-
     @property
     def ReceivedPacketsDiscarded(self):
         """
@@ -1103,7 +997,6 @@ class IPGlobalStatistics: # skipped bases: <type 'object'>
         Get: ReceivedPacketsDiscarded(self: IPGlobalStatistics) -> Int64
         """
         ...
-
     @property
     def ReceivedPacketsForwarded(self):
         """
@@ -1112,7 +1005,6 @@ class IPGlobalStatistics: # skipped bases: <type 'object'>
         Get: ReceivedPacketsForwarded(self: IPGlobalStatistics) -> Int64
         """
         ...
-
     @property
     def ReceivedPacketsWithAddressErrors(self):
         """
@@ -1121,7 +1013,6 @@ class IPGlobalStatistics: # skipped bases: <type 'object'>
         Get: ReceivedPacketsWithAddressErrors(self: IPGlobalStatistics) -> Int64
         """
         ...
-
     @property
     def ReceivedPacketsWithHeadersErrors(self):
         """
@@ -1130,7 +1021,6 @@ class IPGlobalStatistics: # skipped bases: <type 'object'>
         Get: ReceivedPacketsWithHeadersErrors(self: IPGlobalStatistics) -> Int64
         """
         ...
-
     @property
     def ReceivedPacketsWithUnknownProtocol(self):
         """
@@ -1140,10 +1030,9 @@ class IPGlobalStatistics: # skipped bases: <type 'object'>
         """
         ...
 
+class IPInterfaceProperties:  # skipped bases: <type 'object'>
+    """Provides information about network interfaces that support Internet Protocol version 4 (IPv4) or Internet Protocol version 6 (IPv6)."""
 
-
-class IPInterfaceProperties: # skipped bases: <type 'object'>
-    """ Provides information about network interfaces that support Internet Protocol version 4 (IPv4) or Internet Protocol version 6 (IPv6). """
     def GetIPv4Properties(self):
         """
         GetIPv4Properties(self: IPInterfaceProperties) -> IPv4InterfaceProperties
@@ -1153,7 +1042,6 @@ class IPInterfaceProperties: # skipped bases: <type 'object'>
             Returns: An System.Net.NetworkInformation.IPv4InterfaceProperties object that contains IPv4 configuration data, or ll if no data is available for the interface.
         """
         ...
-
     def GetIPv6Properties(self):
         """
         GetIPv6Properties(self: IPInterfaceProperties) -> IPv6InterfaceProperties
@@ -1163,7 +1051,6 @@ class IPInterfaceProperties: # skipped bases: <type 'object'>
             Returns: An System.Net.NetworkInformation.IPv6InterfaceProperties object that contains IPv6 configuration data.
         """
         ...
-
     @property
     def AnycastAddresses(self):
         """
@@ -1172,7 +1059,6 @@ class IPInterfaceProperties: # skipped bases: <type 'object'>
         Get: AnycastAddresses(self: IPInterfaceProperties) -> IPAddressInformationCollection
         """
         ...
-
     @property
     def DhcpServerAddresses(self):
         """
@@ -1181,7 +1067,6 @@ class IPInterfaceProperties: # skipped bases: <type 'object'>
         Get: DhcpServerAddresses(self: IPInterfaceProperties) -> IPAddressCollection
         """
         ...
-
     @property
     def DnsAddresses(self):
         """
@@ -1190,7 +1075,6 @@ class IPInterfaceProperties: # skipped bases: <type 'object'>
         Get: DnsAddresses(self: IPInterfaceProperties) -> IPAddressCollection
         """
         ...
-
     @property
     def DnsSuffix(self):
         """
@@ -1199,7 +1083,6 @@ class IPInterfaceProperties: # skipped bases: <type 'object'>
         Get: DnsSuffix(self: IPInterfaceProperties) -> str
         """
         ...
-
     @property
     def GatewayAddresses(self):
         """
@@ -1208,7 +1091,6 @@ class IPInterfaceProperties: # skipped bases: <type 'object'>
         Get: GatewayAddresses(self: IPInterfaceProperties) -> GatewayIPAddressInformationCollection
         """
         ...
-
     @property
     def IsDnsEnabled(self):
         """
@@ -1217,7 +1099,6 @@ class IPInterfaceProperties: # skipped bases: <type 'object'>
         Get: IsDnsEnabled(self: IPInterfaceProperties) -> bool
         """
         ...
-
     @property
     def IsDynamicDnsEnabled(self):
         """
@@ -1226,7 +1107,6 @@ class IPInterfaceProperties: # skipped bases: <type 'object'>
         Get: IsDynamicDnsEnabled(self: IPInterfaceProperties) -> bool
         """
         ...
-
     @property
     def MulticastAddresses(self):
         """
@@ -1235,7 +1115,6 @@ class IPInterfaceProperties: # skipped bases: <type 'object'>
         Get: MulticastAddresses(self: IPInterfaceProperties) -> MulticastIPAddressInformationCollection
         """
         ...
-
     @property
     def UnicastAddresses(self):
         """
@@ -1244,7 +1123,6 @@ class IPInterfaceProperties: # skipped bases: <type 'object'>
         Get: UnicastAddresses(self: IPInterfaceProperties) -> UnicastIPAddressInformationCollection
         """
         ...
-
     @property
     def WinsServersAddresses(self):
         """
@@ -1254,10 +1132,9 @@ class IPInterfaceProperties: # skipped bases: <type 'object'>
         """
         ...
 
+class IPInterfaceStatistics:  # skipped bases: <type 'object'>
+    """Provides Internet Protocol (IP) statistical data for an network interface on the local computer."""
 
-
-class IPInterfaceStatistics: # skipped bases: <type 'object'>
-    """ Provides Internet Protocol (IP) statistical data for an network interface on the local computer. """
     @property
     def BytesReceived(self):
         """
@@ -1266,7 +1143,6 @@ class IPInterfaceStatistics: # skipped bases: <type 'object'>
         Get: BytesReceived(self: IPInterfaceStatistics) -> Int64
         """
         ...
-
     @property
     def BytesSent(self):
         """
@@ -1275,7 +1151,6 @@ class IPInterfaceStatistics: # skipped bases: <type 'object'>
         Get: BytesSent(self: IPInterfaceStatistics) -> Int64
         """
         ...
-
     @property
     def IncomingPacketsDiscarded(self):
         """
@@ -1284,7 +1159,6 @@ class IPInterfaceStatistics: # skipped bases: <type 'object'>
         Get: IncomingPacketsDiscarded(self: IPInterfaceStatistics) -> Int64
         """
         ...
-
     @property
     def IncomingPacketsWithErrors(self):
         """
@@ -1293,7 +1167,6 @@ class IPInterfaceStatistics: # skipped bases: <type 'object'>
         Get: IncomingPacketsWithErrors(self: IPInterfaceStatistics) -> Int64
         """
         ...
-
     @property
     def IncomingUnknownProtocolPackets(self):
         """
@@ -1302,7 +1175,6 @@ class IPInterfaceStatistics: # skipped bases: <type 'object'>
         Get: IncomingUnknownProtocolPackets(self: IPInterfaceStatistics) -> Int64
         """
         ...
-
     @property
     def NonUnicastPacketsReceived(self):
         """
@@ -1311,7 +1183,6 @@ class IPInterfaceStatistics: # skipped bases: <type 'object'>
         Get: NonUnicastPacketsReceived(self: IPInterfaceStatistics) -> Int64
         """
         ...
-
     @property
     def NonUnicastPacketsSent(self):
         """
@@ -1320,7 +1191,6 @@ class IPInterfaceStatistics: # skipped bases: <type 'object'>
         Get: NonUnicastPacketsSent(self: IPInterfaceStatistics) -> Int64
         """
         ...
-
     @property
     def OutgoingPacketsDiscarded(self):
         """
@@ -1329,7 +1199,6 @@ class IPInterfaceStatistics: # skipped bases: <type 'object'>
         Get: OutgoingPacketsDiscarded(self: IPInterfaceStatistics) -> Int64
         """
         ...
-
     @property
     def OutgoingPacketsWithErrors(self):
         """
@@ -1338,7 +1207,6 @@ class IPInterfaceStatistics: # skipped bases: <type 'object'>
         Get: OutgoingPacketsWithErrors(self: IPInterfaceStatistics) -> Int64
         """
         ...
-
     @property
     def OutputQueueLength(self):
         """
@@ -1347,7 +1215,6 @@ class IPInterfaceStatistics: # skipped bases: <type 'object'>
         Get: OutputQueueLength(self: IPInterfaceStatistics) -> Int64
         """
         ...
-
     @property
     def UnicastPacketsReceived(self):
         """
@@ -1356,7 +1223,6 @@ class IPInterfaceStatistics: # skipped bases: <type 'object'>
         Get: UnicastPacketsReceived(self: IPInterfaceStatistics) -> Int64
         """
         ...
-
     @property
     def UnicastPacketsSent(self):
         """
@@ -1366,14 +1232,13 @@ class IPInterfaceStatistics: # skipped bases: <type 'object'>
         """
         ...
 
-
-
-class IPStatus(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class IPStatus(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Reports the status of sending an Internet Control Message Protocol (ICMP) echo message to a computer.
 
     enum IPStatus, values: BadDestination (11018), BadHeader (11042), BadOption (11007), BadRoute (11012), DestinationHostUnreachable (11003), DestinationNetworkUnreachable (11002), DestinationPortUnreachable (11005), DestinationProhibited (11004), DestinationProtocolUnreachable (11004), DestinationScopeMismatch (11045), DestinationUnreachable (11040), HardwareError (11008), IcmpError (11044), NoResources (11006), PacketTooBig (11009), ParameterProblem (11015), SourceQuench (11016), Success (0), TimedOut (11010), TimeExceeded (11041), TtlExpired (11013), TtlReassemblyTimeExceeded (11014), Unknown (-1), UnrecognizedNextHeader (11043)
     """
+
     BadDestination = None
     BadHeader = None
     BadOption = None
@@ -1400,9 +1265,9 @@ class IPStatus(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible
     UnrecognizedNextHeader = None
     value__ = None
 
+class IPv4InterfaceProperties:  # skipped bases: <type 'object'>
+    """Provides information about network interfaces that support Internet Protocol version 4 (IPv4)."""
 
-class IPv4InterfaceProperties: # skipped bases: <type 'object'>
-    """ Provides information about network interfaces that support Internet Protocol version 4 (IPv4). """
     @property
     def Index(self):
         """
@@ -1411,7 +1276,6 @@ class IPv4InterfaceProperties: # skipped bases: <type 'object'>
         Get: Index(self: IPv4InterfaceProperties) -> int
         """
         ...
-
     @property
     def IsAutomaticPrivateAddressingActive(self):
         """
@@ -1420,7 +1284,6 @@ class IPv4InterfaceProperties: # skipped bases: <type 'object'>
         Get: IsAutomaticPrivateAddressingActive(self: IPv4InterfaceProperties) -> bool
         """
         ...
-
     @property
     def IsAutomaticPrivateAddressingEnabled(self):
         """
@@ -1429,7 +1292,6 @@ class IPv4InterfaceProperties: # skipped bases: <type 'object'>
         Get: IsAutomaticPrivateAddressingEnabled(self: IPv4InterfaceProperties) -> bool
         """
         ...
-
     @property
     def IsDhcpEnabled(self):
         """
@@ -1438,7 +1300,6 @@ class IPv4InterfaceProperties: # skipped bases: <type 'object'>
         Get: IsDhcpEnabled(self: IPv4InterfaceProperties) -> bool
         """
         ...
-
     @property
     def IsForwardingEnabled(self):
         """
@@ -1447,7 +1308,6 @@ class IPv4InterfaceProperties: # skipped bases: <type 'object'>
         Get: IsForwardingEnabled(self: IPv4InterfaceProperties) -> bool
         """
         ...
-
     @property
     def Mtu(self):
         """
@@ -1456,7 +1316,6 @@ class IPv4InterfaceProperties: # skipped bases: <type 'object'>
         Get: Mtu(self: IPv4InterfaceProperties) -> int
         """
         ...
-
     @property
     def UsesWins(self):
         """
@@ -1466,10 +1325,9 @@ class IPv4InterfaceProperties: # skipped bases: <type 'object'>
         """
         ...
 
+class IPv4InterfaceStatistics:  # skipped bases: <type 'object'>
+    """Provides statistical data for a network interface on the local computer."""
 
-
-class IPv4InterfaceStatistics: # skipped bases: <type 'object'>
-    """ Provides statistical data for a network interface on the local computer. """
     @property
     def BytesReceived(self):
         """
@@ -1478,7 +1336,6 @@ class IPv4InterfaceStatistics: # skipped bases: <type 'object'>
         Get: BytesReceived(self: IPv4InterfaceStatistics) -> Int64
         """
         ...
-
     @property
     def BytesSent(self):
         """
@@ -1487,7 +1344,6 @@ class IPv4InterfaceStatistics: # skipped bases: <type 'object'>
         Get: BytesSent(self: IPv4InterfaceStatistics) -> Int64
         """
         ...
-
     @property
     def IncomingPacketsDiscarded(self):
         """
@@ -1496,7 +1352,6 @@ class IPv4InterfaceStatistics: # skipped bases: <type 'object'>
         Get: IncomingPacketsDiscarded(self: IPv4InterfaceStatistics) -> Int64
         """
         ...
-
     @property
     def IncomingPacketsWithErrors(self):
         """
@@ -1505,7 +1360,6 @@ class IPv4InterfaceStatistics: # skipped bases: <type 'object'>
         Get: IncomingPacketsWithErrors(self: IPv4InterfaceStatistics) -> Int64
         """
         ...
-
     @property
     def IncomingUnknownProtocolPackets(self):
         """
@@ -1514,7 +1368,6 @@ class IPv4InterfaceStatistics: # skipped bases: <type 'object'>
         Get: IncomingUnknownProtocolPackets(self: IPv4InterfaceStatistics) -> Int64
         """
         ...
-
     @property
     def NonUnicastPacketsReceived(self):
         """
@@ -1523,7 +1376,6 @@ class IPv4InterfaceStatistics: # skipped bases: <type 'object'>
         Get: NonUnicastPacketsReceived(self: IPv4InterfaceStatistics) -> Int64
         """
         ...
-
     @property
     def NonUnicastPacketsSent(self):
         """
@@ -1532,7 +1384,6 @@ class IPv4InterfaceStatistics: # skipped bases: <type 'object'>
         Get: NonUnicastPacketsSent(self: IPv4InterfaceStatistics) -> Int64
         """
         ...
-
     @property
     def OutgoingPacketsDiscarded(self):
         """
@@ -1541,7 +1392,6 @@ class IPv4InterfaceStatistics: # skipped bases: <type 'object'>
         Get: OutgoingPacketsDiscarded(self: IPv4InterfaceStatistics) -> Int64
         """
         ...
-
     @property
     def OutgoingPacketsWithErrors(self):
         """
@@ -1550,7 +1400,6 @@ class IPv4InterfaceStatistics: # skipped bases: <type 'object'>
         Get: OutgoingPacketsWithErrors(self: IPv4InterfaceStatistics) -> Int64
         """
         ...
-
     @property
     def OutputQueueLength(self):
         """
@@ -1559,7 +1408,6 @@ class IPv4InterfaceStatistics: # skipped bases: <type 'object'>
         Get: OutputQueueLength(self: IPv4InterfaceStatistics) -> Int64
         """
         ...
-
     @property
     def UnicastPacketsReceived(self):
         """
@@ -1568,7 +1416,6 @@ class IPv4InterfaceStatistics: # skipped bases: <type 'object'>
         Get: UnicastPacketsReceived(self: IPv4InterfaceStatistics) -> Int64
         """
         ...
-
     @property
     def UnicastPacketsSent(self):
         """
@@ -1578,10 +1425,9 @@ class IPv4InterfaceStatistics: # skipped bases: <type 'object'>
         """
         ...
 
+class IPv6InterfaceProperties:  # skipped bases: <type 'object'>
+    """Provides information about network interfaces that support Internet Protocol version 6 (IPv6)."""
 
-
-class IPv6InterfaceProperties: # skipped bases: <type 'object'>
-    """ Provides information about network interfaces that support Internet Protocol version 6 (IPv6). """
     def GetScopeId(self, scopeLevel):
         """
         GetScopeId(self: IPv6InterfaceProperties, scopeLevel: ScopeLevel) -> Int64
@@ -1593,7 +1439,6 @@ class IPv6InterfaceProperties: # skipped bases: <type 'object'>
             Returns: Returns System.Int64.The scope ID of the network interface associated with an IPv6 address.
         """
         ...
-
     @property
     def Index(self):
         """
@@ -1602,7 +1447,6 @@ class IPv6InterfaceProperties: # skipped bases: <type 'object'>
         Get: Index(self: IPv6InterfaceProperties) -> int
         """
         ...
-
     @property
     def Mtu(self):
         """
@@ -1612,10 +1456,9 @@ class IPv6InterfaceProperties: # skipped bases: <type 'object'>
         """
         ...
 
-
-
 class MulticastIPAddressInformation(IPAddressInformation):
-    """ Provides information about a network interface's multicast address. """
+    """Provides information about a network interface's multicast address."""
+
     @property
     def AddressPreferredLifetime(self):
         """
@@ -1624,7 +1467,6 @@ class MulticastIPAddressInformation(IPAddressInformation):
         Get: AddressPreferredLifetime(self: MulticastIPAddressInformation) -> Int64
         """
         ...
-
     @property
     def AddressValidLifetime(self):
         """
@@ -1633,7 +1475,6 @@ class MulticastIPAddressInformation(IPAddressInformation):
         Get: AddressValidLifetime(self: MulticastIPAddressInformation) -> Int64
         """
         ...
-
     @property
     def DhcpLeaseLifetime(self):
         """
@@ -1642,7 +1483,6 @@ class MulticastIPAddressInformation(IPAddressInformation):
         Get: DhcpLeaseLifetime(self: MulticastIPAddressInformation) -> Int64
         """
         ...
-
     @property
     def DuplicateAddressDetectionState(self):
         """
@@ -1651,7 +1491,6 @@ class MulticastIPAddressInformation(IPAddressInformation):
         Get: DuplicateAddressDetectionState(self: MulticastIPAddressInformation) -> DuplicateAddressDetectionState
         """
         ...
-
     @property
     def PrefixOrigin(self):
         """
@@ -1660,7 +1499,6 @@ class MulticastIPAddressInformation(IPAddressInformation):
         Get: PrefixOrigin(self: MulticastIPAddressInformation) -> PrefixOrigin
         """
         ...
-
     @property
     def SuffixOrigin(self):
         """
@@ -1670,10 +1508,11 @@ class MulticastIPAddressInformation(IPAddressInformation):
         """
         ...
 
+class MulticastIPAddressInformationCollection(
+    object, ICollection[MulticastIPAddressInformation]
+):  # skipped bases: <type 'IEnumerable[MulticastIPAddressInformation]'>, <type 'IEnumerable'>
+    """Stores a set of System.Net.NetworkInformation.MulticastIPAddressInformation types."""
 
-
-class MulticastIPAddressInformationCollection(object, ICollection[MulticastIPAddressInformation]): # skipped bases: <type 'IEnumerable[MulticastIPAddressInformation]'>, <type 'IEnumerable'>
-    """ Stores a set of System.Net.NetworkInformation.MulticastIPAddressInformation types. """
     def GetEnumerator(self):
         """
         GetEnumerator(self: MulticastIPAddressInformationCollection) -> IEnumerator[MulticastIPAddressInformation]
@@ -1685,15 +1524,12 @@ class MulticastIPAddressInformationCollection(object, ICollection[MulticastIPAdd
              this collection.
         """
         ...
-
-    def __getitem__(self, *args): #cannot find CLR method
-        """ x.__getitem__(y) <==> x[y] """
+    def __getitem__(self, *args):  # cannot find CLR method
+        """x.__getitem__(y) <==> x[y]"""
         ...
-
-    def __len__(self, *args): #cannot find CLR method
-        """ x.__len__() <==> len(x) """
+    def __len__(self, *args):  # cannot find CLR method
+        """x.__len__() <==> len(x)"""
         ...
-
     @property
     def Count(self):
         """
@@ -1702,7 +1538,6 @@ class MulticastIPAddressInformationCollection(object, ICollection[MulticastIPAdd
         Get: Count(self: MulticastIPAddressInformationCollection) -> int
         """
         ...
-
     @property
     def IsReadOnly(self):
         """
@@ -1712,14 +1547,13 @@ class MulticastIPAddressInformationCollection(object, ICollection[MulticastIPAdd
         """
         ...
 
-
-
-class NetBiosNodeType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class NetBiosNodeType(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the Network Basic Input/Output System (NetBIOS) node type.
 
     enum NetBiosNodeType, values: Broadcast (1), Hybrid (8), Mixed (4), Peer2Peer (2), Unknown (0)
     """
+
     Broadcast = None
     Hybrid = None
     Mixed = None
@@ -1727,47 +1561,47 @@ class NetBiosNodeType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConv
     Unknown = None
     value__ = None
 
-
-class NetworkAddressChangedEventHandler(MulticastDelegate): # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
+class NetworkAddressChangedEventHandler(
+    MulticastDelegate
+):  # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
     """
     References one or more methods to be called when the address of a network interface changes.
 
     NetworkAddressChangedEventHandler(object: object, method: IntPtr)
     """
+
     def BeginInvoke(self, sender, e, callback, object):
-        """ BeginInvoke(self: NetworkAddressChangedEventHandler, sender: object, e: EventArgs, callback: AsyncCallback, object: object) -> IAsyncResult """
+        """BeginInvoke(self: NetworkAddressChangedEventHandler, sender: object, e: EventArgs, callback: AsyncCallback, object: object) -> IAsyncResult"""
         ...
-
     def EndInvoke(self, result):
-        """ EndInvoke(self: NetworkAddressChangedEventHandler, result: IAsyncResult) """
+        """EndInvoke(self: NetworkAddressChangedEventHandler, result: IAsyncResult)"""
         ...
-
     def Invoke(self, sender, e):
-        """ Invoke(self: NetworkAddressChangedEventHandler, sender: object, e: EventArgs) """
+        """Invoke(self: NetworkAddressChangedEventHandler, sender: object, e: EventArgs)"""
         ...
 
-
-class NetworkAvailabilityChangedEventHandler(MulticastDelegate): # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
+class NetworkAvailabilityChangedEventHandler(
+    MulticastDelegate
+):  # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
     """
     References one or more methods to be called when the availability of the network changes.
 
     NetworkAvailabilityChangedEventHandler(object: object, method: IntPtr)
     """
+
     def BeginInvoke(self, sender, e, callback, object):
-        """ BeginInvoke(self: NetworkAvailabilityChangedEventHandler, sender: object, e: NetworkAvailabilityEventArgs, callback: AsyncCallback, object: object) -> IAsyncResult """
+        """BeginInvoke(self: NetworkAvailabilityChangedEventHandler, sender: object, e: NetworkAvailabilityEventArgs, callback: AsyncCallback, object: object) -> IAsyncResult"""
         ...
-
     def EndInvoke(self, result):
-        """ EndInvoke(self: NetworkAvailabilityChangedEventHandler, result: IAsyncResult) """
+        """EndInvoke(self: NetworkAvailabilityChangedEventHandler, result: IAsyncResult)"""
         ...
-
     def Invoke(self, sender, e):
-        """ Invoke(self: NetworkAvailabilityChangedEventHandler, sender: object, e: NetworkAvailabilityEventArgs) """
+        """Invoke(self: NetworkAvailabilityChangedEventHandler, sender: object, e: NetworkAvailabilityEventArgs)"""
         ...
-
 
 class NetworkAvailabilityEventArgs(EventArgs):
-    """ Provides data for the System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged event. """
+    """Provides data for the System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged event."""
+
     @property
     def IsAvailable(self):
         """
@@ -1777,14 +1611,13 @@ class NetworkAvailabilityEventArgs(EventArgs):
         """
         ...
 
-
-
-class NetworkChange: # skipped bases: <type 'object'>
+class NetworkChange:  # skipped bases: <type 'object'>
     """
     Allows applications to receive notification when the Internet Protocol (IP) address of a network interface, also called a network card or adapter, changes.
 
     NetworkChange()
     """
+
     @staticmethod
     def RegisterNetworkChange(nc):
         """
@@ -1795,24 +1628,23 @@ class NetworkChange: # skipped bases: <type 'object'>
             nc: The instance to register.
         """
         ...
-
     NetworkAddressChanged = None
     NetworkAvailabilityChanged = None
 
-
-class NetworkInformationAccess(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class NetworkInformationAccess(
+    Enum
+):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies permission to access information about network interfaces and traffic statistics.
 
     enum (flags) NetworkInformationAccess, values: None (0), Ping (4), Read (1)
     """
-    None = None
+
     Ping = None
     Read = None
     value__ = None
 
-
-class NetworkInformationException(Win32Exception): # skipped bases: <type '_Exception'>, <type 'ISerializable'>
+class NetworkInformationException(Win32Exception):  # skipped bases: <type '_Exception'>, <type 'ISerializable'>
     """
     The exception that is thrown when an error occurs while retrieving network information.
 
@@ -1820,6 +1652,7 @@ class NetworkInformationException(Win32Exception): # skipped bases: <type '_Exce
 
     NetworkInformationException(errorCode: int)
     """
+
     @property
     def ErrorCode(self):
         """
@@ -1828,12 +1661,11 @@ class NetworkInformationException(Win32Exception): # skipped bases: <type '_Exce
         Get: ErrorCode(self: NetworkInformationException) -> int
         """
         ...
-
-
     SerializeObjectState = None
 
-
-class NetworkInformationPermission(CodeAccessPermission, IUnrestrictedPermission): # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
+class NetworkInformationPermission(
+    CodeAccessPermission, IUnrestrictedPermission
+):  # skipped bases: <type 'ISecurityEncodable'>, <type 'IPermission'>, <type 'IStackWalk'>
     """
     Controls access to network information and traffic statistics for the local computer. This class cannot be inherited.
 
@@ -1841,6 +1673,7 @@ class NetworkInformationPermission(CodeAccessPermission, IUnrestrictedPermission
 
     NetworkInformationPermission(access: NetworkInformationAccess)
     """
+
     def AddPermission(self, access):
         """
         AddPermission(self: NetworkInformationPermission, access: NetworkInformationAccess)
@@ -1850,8 +1683,7 @@ class NetworkInformationPermission(CodeAccessPermission, IUnrestrictedPermission
             access: One of the System.Net.NetworkInformation.NetworkInformationAccess values.
         """
         ...
-
-    @staticmethod # known case of __new__
+    @staticmethod  # known case of __new__
     def __new__(cls, *__args):
         """
         __new__(cls: type, state: PermissionState)
@@ -1859,7 +1691,6 @@ class NetworkInformationPermission(CodeAccessPermission, IUnrestrictedPermission
         __new__(cls: type, access: NetworkInformationAccess)
         """
         ...
-
     @property
     def Access(self):
         """
@@ -1869,14 +1700,13 @@ class NetworkInformationPermission(CodeAccessPermission, IUnrestrictedPermission
         """
         ...
 
-
-
-class NetworkInformationPermissionAttribute(CodeAccessSecurityAttribute): # skipped bases: <type '_Attribute'>
+class NetworkInformationPermissionAttribute(CodeAccessSecurityAttribute):  # skipped bases: <type '_Attribute'>
     """
     Allows security actions for System.Net.NetworkInformation.NetworkInformationPermission to be applied to code using declarative security.
 
     NetworkInformationPermissionAttribute(action: SecurityAction)
     """
+
     def CreatePermission(self):
         """
         CreatePermission(self: NetworkInformationPermissionAttribute) -> IPermission
@@ -1886,7 +1716,6 @@ class NetworkInformationPermissionAttribute(CodeAccessSecurityAttribute): # skip
             Returns: A System.Net.NetworkInformation.NetworkInformationPermission that corresponds to this attribute.
         """
         ...
-
     @property
     def Access(self):
         """
@@ -1898,10 +1727,9 @@ class NetworkInformationPermissionAttribute(CodeAccessSecurityAttribute): # skip
         """
         ...
 
+class NetworkInterface:  # skipped bases: <type 'object'>
+    """Provides configuration and statistical information for a network interface."""
 
-
-class NetworkInterface: # skipped bases: <type 'object'>
-    """ Provides configuration and statistical information for a network interface. """
     @staticmethod
     def GetAllNetworkInterfaces():
         """
@@ -1914,7 +1742,6 @@ class NetworkInterface: # skipped bases: <type 'object'>
              detected.
         """
         ...
-
     def GetIPProperties(self):
         """
         GetIPProperties(self: NetworkInterface) -> IPInterfaceProperties
@@ -1924,7 +1751,6 @@ class NetworkInterface: # skipped bases: <type 'object'>
             Returns: An System.Net.NetworkInformation.IPInterfaceProperties object that describes this network interface.
         """
         ...
-
     def GetIPStatistics(self):
         """
         GetIPStatistics(self: NetworkInterface) -> IPInterfaceStatistics
@@ -1934,7 +1760,6 @@ class NetworkInterface: # skipped bases: <type 'object'>
             Returns: Returns System.Net.NetworkInformation.IPInterfaceStatistics.The IP statistics.
         """
         ...
-
     def GetIPv4Statistics(self):
         """
         GetIPv4Statistics(self: NetworkInterface) -> IPv4InterfaceStatistics
@@ -1944,7 +1769,6 @@ class NetworkInterface: # skipped bases: <type 'object'>
             Returns: An System.Net.NetworkInformation.IPv4InterfaceStatistics object.
         """
         ...
-
     @staticmethod
     def GetIsNetworkAvailable():
         """
@@ -1955,7 +1779,6 @@ class NetworkInterface: # skipped bases: <type 'object'>
             Returns: ue if a network connection is available; otherwise, lse.
         """
         ...
-
     def GetPhysicalAddress(self):
         """
         GetPhysicalAddress(self: NetworkInterface) -> PhysicalAddress
@@ -1965,7 +1788,6 @@ class NetworkInterface: # skipped bases: <type 'object'>
             Returns: A System.Net.NetworkInformation.PhysicalAddress object that contains the physical address.
         """
         ...
-
     def Supports(self, networkInterfaceComponent):
         """
         Supports(self: NetworkInterface, networkInterfaceComponent: NetworkInterfaceComponent) -> bool
@@ -1977,7 +1799,6 @@ class NetworkInterface: # skipped bases: <type 'object'>
             Returns: ue if the specified protocol is supported; otherwise, lse.
         """
         ...
-
     @property
     def Description(self):
         """
@@ -1986,7 +1807,6 @@ class NetworkInterface: # skipped bases: <type 'object'>
         Get: Description(self: NetworkInterface) -> str
         """
         ...
-
     @property
     def Id(self):
         """
@@ -1995,7 +1815,6 @@ class NetworkInterface: # skipped bases: <type 'object'>
         Get: Id(self: NetworkInterface) -> str
         """
         ...
-
     @property
     def IsReceiveOnly(self):
         """
@@ -2004,7 +1823,6 @@ class NetworkInterface: # skipped bases: <type 'object'>
         Get: IsReceiveOnly(self: NetworkInterface) -> bool
         """
         ...
-
     @property
     def Name(self):
         """
@@ -2013,7 +1831,6 @@ class NetworkInterface: # skipped bases: <type 'object'>
         Get: Name(self: NetworkInterface) -> str
         """
         ...
-
     @property
     def NetworkInterfaceType(self):
         """
@@ -2022,7 +1839,6 @@ class NetworkInterface: # skipped bases: <type 'object'>
         Get: NetworkInterfaceType(self: NetworkInterface) -> NetworkInterfaceType
         """
         ...
-
     @property
     def OperationalStatus(self):
         """
@@ -2031,7 +1847,6 @@ class NetworkInterface: # skipped bases: <type 'object'>
         Get: OperationalStatus(self: NetworkInterface) -> OperationalStatus
         """
         ...
-
     @property
     def Speed(self):
         """
@@ -2040,7 +1855,6 @@ class NetworkInterface: # skipped bases: <type 'object'>
         Get: Speed(self: NetworkInterface) -> Int64
         """
         ...
-
     @property
     def SupportsMulticast(self):
         """
@@ -2049,29 +1863,29 @@ class NetworkInterface: # skipped bases: <type 'object'>
         Get: SupportsMulticast(self: NetworkInterface) -> bool
         """
         ...
-
-
     IPv6LoopbackInterfaceIndex = 1
     LoopbackInterfaceIndex = 1
 
-
-class NetworkInterfaceComponent(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class NetworkInterfaceComponent(
+    Enum
+):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the Internet Protocol versions that are supported by a network interface.
 
     enum NetworkInterfaceComponent, values: IPv4 (0), IPv6 (1)
     """
+
     IPv4 = None
     IPv6 = None
     value__ = None
 
-
-class NetworkInterfaceType(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class NetworkInterfaceType(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies types of network interfaces.
 
     enum NetworkInterfaceType, values: AsymmetricDsl (94), Atm (37), BasicIsdn (20), Ethernet (6), Ethernet3Megabit (26), FastEthernetFx (69), FastEthernetT (62), Fddi (15), GenericModem (48), GigabitEthernet (117), HighPerformanceSerialBus (144), IPOverAtm (114), Isdn (63), Loopback (24), MultiRateSymmetricDsl (143), Ppp (23), PrimaryIsdn (21), RateAdaptDsl (95), Slip (28), SymmetricDsl (96), TokenRing (9), Tunnel (131), Unknown (1), VeryHighSpeedDsl (97), Wireless80211 (71), Wman (237), Wwanpp (243), Wwanpp2 (244)
     """
+
     AsymmetricDsl = None
     Atm = None
     BasicIsdn = None
@@ -2102,13 +1916,13 @@ class NetworkInterfaceType(Enum): # skipped bases: <type 'IComparable'>, <type '
     Wwanpp = None
     Wwanpp2 = None
 
-
-class OperationalStatus(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class OperationalStatus(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the operational state of a network interface.
 
     enum OperationalStatus, values: Dormant (5), Down (2), LowerLayerDown (7), NotPresent (6), Testing (3), Unknown (4), Up (1)
     """
+
     Dormant = None
     Down = None
     LowerLayerDown = None
@@ -2118,13 +1932,13 @@ class OperationalStatus(Enum): # skipped bases: <type 'IComparable'>, <type 'ICo
     Up = None
     value__ = None
 
-
-class PhysicalAddress: # skipped bases: <type 'object'>
+class PhysicalAddress:  # skipped bases: <type 'object'>
     """
     Provides the Media Access Control (MAC) address for a network interface (adapter).
 
     PhysicalAddress(address: Array[Byte])
     """
+
     def Equals(self, comparand):
         """
         Equals(self: PhysicalAddress, comparand: object) -> bool
@@ -2136,7 +1950,6 @@ class PhysicalAddress: # skipped bases: <type 'object'>
             Returns: ue if this instance and the specified instance contain the same address; otherwise lse.
         """
         ...
-
     def GetAddressBytes(self):
         """
         GetAddressBytes(self: PhysicalAddress) -> Array[Byte]
@@ -2146,7 +1959,6 @@ class PhysicalAddress: # skipped bases: <type 'object'>
             Returns: A System.Byte array containing the address.
         """
         ...
-
     def GetHashCode(self):
         """
         GetHashCode(self: PhysicalAddress) -> int
@@ -2156,7 +1968,6 @@ class PhysicalAddress: # skipped bases: <type 'object'>
             Returns: An integer hash value.
         """
         ...
-
     @staticmethod
     def Parse(address):
         """
@@ -2169,7 +1980,6 @@ class PhysicalAddress: # skipped bases: <type 'object'>
             Returns: A System.Net.NetworkInformation.PhysicalAddress instance with the specified address.
         """
         ...
-
     def ToString(self):
         """
         ToString(self: PhysicalAddress) -> str
@@ -2179,24 +1989,19 @@ class PhysicalAddress: # skipped bases: <type 'object'>
             Returns: A System.String containing the address contained in this instance.
         """
         ...
-
-    def __eq__(self, *args): #cannot find CLR method
-        """ x.__eq__(y) <==> x==y """
+    def __eq__(self, *args):  # cannot find CLR method
+        """x.__eq__(y) <==> x==y"""
         ...
+    def __ne__(self, *args): ...
 
-    def __ne__(self, *args): #cannot find CLR method
-        ...
-
-    None = None
-
-
-class Ping(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposable'>
+class Ping(Component):  # skipped bases: <type 'IComponent'>, <type 'IDisposable'>
     """
     Allows an application to determine whether a remote computer is accessible over the network.
 
     Ping()
     """
-    def OnPingCompleted(self, *args): #cannot find CLR method
+
+    def OnPingCompleted(self, *args):  # cannot find CLR method
         """
         OnPingCompleted(self: Ping, e: PingCompletedEventArgs)
 
@@ -2205,7 +2010,6 @@ class Ping(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposable'
             e: A System.Net.NetworkInformation.PingCompletedEventArgs  object that contains event data.
         """
         ...
-
     def Send(self, *__args):
         """
         Send(self: Ping, hostNameOrAddress: str) -> PingReply
@@ -2353,7 +2157,6 @@ class Ping(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposable'
              (MTU).
         """
         ...
-
     def SendAsync(self, *__args):
         """
         SendAsync(self: Ping, hostNameOrAddress: str, userToken: object)
@@ -2481,7 +2284,6 @@ class Ping(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposable'
             userToken: An object that is passed to the method invoked when the asynchronous operation completes.
         """
         ...
-
     def SendAsyncCancel(self):
         """
         SendAsyncCancel(self: Ping)
@@ -2489,7 +2291,6 @@ class Ping(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposable'
             Cancels all pending asynchronous requests to send an Internet Control Message Protocol (ICMP) echo message and receives a corresponding ICMP echo reply message.
         """
         ...
-
     def SendPingAsync(self, *__args):
         """
         SendPingAsync(self: Ping, address: IPAddress) -> Task[PingReply]
@@ -2613,28 +2414,23 @@ class Ping(Component): # skipped bases: <type 'IComponent'>, <type 'IDisposable'
             Returns: Returns System.Threading.Tasks.Task.The task object representing the asynchronous operation.
         """
         ...
-
     @property
     def CanRaiseEvents(self):
-        """ Gets a value indicating whether the component can raise an event. """
+        """Gets a value indicating whether the component can raise an event."""
         ...
-
     @property
     def DesignMode(self):
-        """ Gets a value that indicates whether the System.ComponentModel.Component is currently in design mode. """
+        """Gets a value that indicates whether the System.ComponentModel.Component is currently in design mode."""
         ...
-
     @property
     def Events(self):
-        """ Gets the list of event handlers that are attached to this System.ComponentModel.Component. """
+        """Gets the list of event handlers that are attached to this System.ComponentModel.Component."""
         ...
-
-
     PingCompleted = None
 
-
 class PingCompletedEventArgs(AsyncCompletedEventArgs):
-    """ Provides data for the System.Net.NetworkInformation.Ping.PingCompleted event. """
+    """Provides data for the System.Net.NetworkInformation.Ping.PingCompleted event."""
+
     @property
     def Reply(self):
         """
@@ -2644,28 +2440,24 @@ class PingCompletedEventArgs(AsyncCompletedEventArgs):
         """
         ...
 
-
-
-class PingCompletedEventHandler(MulticastDelegate): # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
+class PingCompletedEventHandler(MulticastDelegate):  # skipped bases: <type 'ICloneable'>, <type 'ISerializable'>
     """
     Represents the method that will handle the System.Net.NetworkInformation.Ping.PingCompleted event of a System.Net.NetworkInformation.Ping object.
 
     PingCompletedEventHandler(object: object, method: IntPtr)
     """
+
     def BeginInvoke(self, sender, e, callback, object):
-        """ BeginInvoke(self: PingCompletedEventHandler, sender: object, e: PingCompletedEventArgs, callback: AsyncCallback, object: object) -> IAsyncResult """
+        """BeginInvoke(self: PingCompletedEventHandler, sender: object, e: PingCompletedEventArgs, callback: AsyncCallback, object: object) -> IAsyncResult"""
         ...
-
     def EndInvoke(self, result):
-        """ EndInvoke(self: PingCompletedEventHandler, result: IAsyncResult) """
+        """EndInvoke(self: PingCompletedEventHandler, result: IAsyncResult)"""
         ...
-
     def Invoke(self, sender, e):
-        """ Invoke(self: PingCompletedEventHandler, sender: object, e: PingCompletedEventArgs) """
+        """Invoke(self: PingCompletedEventHandler, sender: object, e: PingCompletedEventArgs)"""
         ...
 
-
-class PingException(InvalidOperationException): # skipped bases: <type '_Exception'>, <type 'ISerializable'>
+class PingException(InvalidOperationException):  # skipped bases: <type '_Exception'>, <type 'ISerializable'>
     """
     The exception that is thrown when a erload:System.Net.NetworkInformation.Ping.Send or erload:System.Net.NetworkInformation.Ping.SendAsync method calls a method that throws an exception.
 
@@ -2673,10 +2465,10 @@ class PingException(InvalidOperationException): # skipped bases: <type '_Excepti
 
     PingException(message: str, innerException: Exception)
     """
+
     SerializeObjectState = None
 
-
-class PingOptions: # skipped bases: <type 'object'>
+class PingOptions:  # skipped bases: <type 'object'>
     """
     Used to control how System.Net.NetworkInformation.Ping data packets are transmitted.
 
@@ -2684,6 +2476,7 @@ class PingOptions: # skipped bases: <type 'object'>
 
     PingOptions()
     """
+
     @property
     def DontFragment(self):
         """
@@ -2694,7 +2487,6 @@ class PingOptions: # skipped bases: <type 'object'>
         Set: DontFragment(self: PingOptions) = value
         """
         ...
-
     @property
     def Ttl(self):
         """
@@ -2706,10 +2498,9 @@ class PingOptions: # skipped bases: <type 'object'>
         """
         ...
 
+class PingReply:  # skipped bases: <type 'object'>
+    """Provides information about the status and data resulting from a erload:System.Net.NetworkInformation.Ping.Send or erload:System.Net.NetworkInformation.Ping.SendAsync operation."""
 
-
-class PingReply: # skipped bases: <type 'object'>
-    """ Provides information about the status and data resulting from a erload:System.Net.NetworkInformation.Ping.Send or erload:System.Net.NetworkInformation.Ping.SendAsync operation. """
     @property
     def Address(self):
         """
@@ -2718,7 +2509,6 @@ class PingReply: # skipped bases: <type 'object'>
         Get: Address(self: PingReply) -> IPAddress
         """
         ...
-
     @property
     def Buffer(self):
         """
@@ -2727,7 +2517,6 @@ class PingReply: # skipped bases: <type 'object'>
         Get: Buffer(self: PingReply) -> Array[Byte]
         """
         ...
-
     @property
     def Options(self):
         """
@@ -2736,7 +2525,6 @@ class PingReply: # skipped bases: <type 'object'>
         Get: Options(self: PingReply) -> PingOptions
         """
         ...
-
     @property
     def RoundtripTime(self):
         """
@@ -2745,7 +2533,6 @@ class PingReply: # skipped bases: <type 'object'>
         Get: RoundtripTime(self: PingReply) -> Int64
         """
         ...
-
     @property
     def Status(self):
         """
@@ -2755,14 +2542,13 @@ class PingReply: # skipped bases: <type 'object'>
         """
         ...
 
-
-
-class PrefixOrigin(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class PrefixOrigin(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies how an IP address network prefix was located.
 
     enum PrefixOrigin, values: Dhcp (3), Manual (1), Other (0), RouterAdvertisement (4), WellKnown (2)
     """
+
     Dhcp = None
     Manual = None
     Other = None
@@ -2770,30 +2556,30 @@ class PrefixOrigin(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvert
     value__ = None
     WellKnown = None
 
-
-class ScopeLevel(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class ScopeLevel(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     The scope level for an IPv6 address.
 
     enum ScopeLevel, values: Admin (4), Global (14), Interface (1), Link (2), None (0), Organization (8), Site (5), Subnet (3)
     """
+
     Admin = None
     Global = None
     Interface = None
     Link = None
-    None = None
+
     Organization = None
     Site = None
     Subnet = None
     value__ = None
 
-
-class SuffixOrigin(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class SuffixOrigin(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies how an IP address host suffix was located.
 
     enum SuffixOrigin, values: LinkLayerAddress (4), Manual (1), OriginDhcp (3), Other (0), Random (5), WellKnown (2)
     """
+
     LinkLayerAddress = None
     Manual = None
     OriginDhcp = None
@@ -2802,9 +2588,9 @@ class SuffixOrigin(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvert
     value__ = None
     WellKnown = None
 
+class TcpConnectionInformation:  # skipped bases: <type 'object'>
+    """Provides information about the Transmission Control Protocol (TCP) connections on the local computer."""
 
-class TcpConnectionInformation: # skipped bases: <type 'object'>
-    """ Provides information about the Transmission Control Protocol (TCP) connections on the local computer. """
     @property
     def LocalEndPoint(self):
         """
@@ -2813,7 +2599,6 @@ class TcpConnectionInformation: # skipped bases: <type 'object'>
         Get: LocalEndPoint(self: TcpConnectionInformation) -> IPEndPoint
         """
         ...
-
     @property
     def RemoteEndPoint(self):
         """
@@ -2822,7 +2607,6 @@ class TcpConnectionInformation: # skipped bases: <type 'object'>
         Get: RemoteEndPoint(self: TcpConnectionInformation) -> IPEndPoint
         """
         ...
-
     @property
     def State(self):
         """
@@ -2832,14 +2616,13 @@ class TcpConnectionInformation: # skipped bases: <type 'object'>
         """
         ...
 
-
-
-class TcpState(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
+class TcpState(Enum):  # skipped bases: <type 'IComparable'>, <type 'IConvertible'>, <type 'IFormattable'>
     """
     Specifies the states of a Transmission Control Protocol (TCP) connection.
 
     enum TcpState, values: Closed (1), CloseWait (8), Closing (9), DeleteTcb (12), Established (5), FinWait1 (6), FinWait2 (7), LastAck (10), Listen (2), SynReceived (4), SynSent (3), TimeWait (11), Unknown (0)
     """
+
     Closed = None
     CloseWait = None
     Closing = None
@@ -2855,9 +2638,9 @@ class TcpState(Enum): # skipped bases: <type 'IComparable'>, <type 'IConvertible
     Unknown = None
     value__ = None
 
+class TcpStatistics:  # skipped bases: <type 'object'>
+    """Provides Transmission Control Protocol (TCP) statistical data."""
 
-class TcpStatistics: # skipped bases: <type 'object'>
-    """ Provides Transmission Control Protocol (TCP) statistical data. """
     @property
     def ConnectionsAccepted(self):
         """
@@ -2866,7 +2649,6 @@ class TcpStatistics: # skipped bases: <type 'object'>
         Get: ConnectionsAccepted(self: TcpStatistics) -> Int64
         """
         ...
-
     @property
     def ConnectionsInitiated(self):
         """
@@ -2875,7 +2657,6 @@ class TcpStatistics: # skipped bases: <type 'object'>
         Get: ConnectionsInitiated(self: TcpStatistics) -> Int64
         """
         ...
-
     @property
     def CumulativeConnections(self):
         """
@@ -2884,7 +2665,6 @@ class TcpStatistics: # skipped bases: <type 'object'>
         Get: CumulativeConnections(self: TcpStatistics) -> Int64
         """
         ...
-
     @property
     def CurrentConnections(self):
         """
@@ -2893,7 +2673,6 @@ class TcpStatistics: # skipped bases: <type 'object'>
         Get: CurrentConnections(self: TcpStatistics) -> Int64
         """
         ...
-
     @property
     def ErrorsReceived(self):
         """
@@ -2902,7 +2681,6 @@ class TcpStatistics: # skipped bases: <type 'object'>
         Get: ErrorsReceived(self: TcpStatistics) -> Int64
         """
         ...
-
     @property
     def FailedConnectionAttempts(self):
         """
@@ -2911,7 +2689,6 @@ class TcpStatistics: # skipped bases: <type 'object'>
         Get: FailedConnectionAttempts(self: TcpStatistics) -> Int64
         """
         ...
-
     @property
     def MaximumConnections(self):
         """
@@ -2920,7 +2697,6 @@ class TcpStatistics: # skipped bases: <type 'object'>
         Get: MaximumConnections(self: TcpStatistics) -> Int64
         """
         ...
-
     @property
     def MaximumTransmissionTimeout(self):
         """
@@ -2929,7 +2705,6 @@ class TcpStatistics: # skipped bases: <type 'object'>
         Get: MaximumTransmissionTimeout(self: TcpStatistics) -> Int64
         """
         ...
-
     @property
     def MinimumTransmissionTimeout(self):
         """
@@ -2938,7 +2713,6 @@ class TcpStatistics: # skipped bases: <type 'object'>
         Get: MinimumTransmissionTimeout(self: TcpStatistics) -> Int64
         """
         ...
-
     @property
     def ResetConnections(self):
         """
@@ -2947,7 +2721,6 @@ class TcpStatistics: # skipped bases: <type 'object'>
         Get: ResetConnections(self: TcpStatistics) -> Int64
         """
         ...
-
     @property
     def ResetsSent(self):
         """
@@ -2956,7 +2729,6 @@ class TcpStatistics: # skipped bases: <type 'object'>
         Get: ResetsSent(self: TcpStatistics) -> Int64
         """
         ...
-
     @property
     def SegmentsReceived(self):
         """
@@ -2965,7 +2737,6 @@ class TcpStatistics: # skipped bases: <type 'object'>
         Get: SegmentsReceived(self: TcpStatistics) -> Int64
         """
         ...
-
     @property
     def SegmentsResent(self):
         """
@@ -2974,7 +2745,6 @@ class TcpStatistics: # skipped bases: <type 'object'>
         Get: SegmentsResent(self: TcpStatistics) -> Int64
         """
         ...
-
     @property
     def SegmentsSent(self):
         """
@@ -2984,10 +2754,9 @@ class TcpStatistics: # skipped bases: <type 'object'>
         """
         ...
 
+class UdpStatistics:  # skipped bases: <type 'object'>
+    """Provides User Datagram Protocol (UDP) statistical data."""
 
-
-class UdpStatistics: # skipped bases: <type 'object'>
-    """ Provides User Datagram Protocol (UDP) statistical data. """
     @property
     def DatagramsReceived(self):
         """
@@ -2996,7 +2765,6 @@ class UdpStatistics: # skipped bases: <type 'object'>
         Get: DatagramsReceived(self: UdpStatistics) -> Int64
         """
         ...
-
     @property
     def DatagramsSent(self):
         """
@@ -3005,7 +2773,6 @@ class UdpStatistics: # skipped bases: <type 'object'>
         Get: DatagramsSent(self: UdpStatistics) -> Int64
         """
         ...
-
     @property
     def IncomingDatagramsDiscarded(self):
         """
@@ -3014,7 +2781,6 @@ class UdpStatistics: # skipped bases: <type 'object'>
         Get: IncomingDatagramsDiscarded(self: UdpStatistics) -> Int64
         """
         ...
-
     @property
     def IncomingDatagramsWithErrors(self):
         """
@@ -3023,7 +2789,6 @@ class UdpStatistics: # skipped bases: <type 'object'>
         Get: IncomingDatagramsWithErrors(self: UdpStatistics) -> Int64
         """
         ...
-
     @property
     def UdpListeners(self):
         """
@@ -3033,10 +2798,9 @@ class UdpStatistics: # skipped bases: <type 'object'>
         """
         ...
 
-
-
 class UnicastIPAddressInformation(IPAddressInformation):
-    """ Provides information about a network interface's unicast address. """
+    """Provides information about a network interface's unicast address."""
+
     @property
     def AddressPreferredLifetime(self):
         """
@@ -3045,7 +2809,6 @@ class UnicastIPAddressInformation(IPAddressInformation):
         Get: AddressPreferredLifetime(self: UnicastIPAddressInformation) -> Int64
         """
         ...
-
     @property
     def AddressValidLifetime(self):
         """
@@ -3054,7 +2817,6 @@ class UnicastIPAddressInformation(IPAddressInformation):
         Get: AddressValidLifetime(self: UnicastIPAddressInformation) -> Int64
         """
         ...
-
     @property
     def DhcpLeaseLifetime(self):
         """
@@ -3063,7 +2825,6 @@ class UnicastIPAddressInformation(IPAddressInformation):
         Get: DhcpLeaseLifetime(self: UnicastIPAddressInformation) -> Int64
         """
         ...
-
     @property
     def DuplicateAddressDetectionState(self):
         """
@@ -3072,7 +2833,6 @@ class UnicastIPAddressInformation(IPAddressInformation):
         Get: DuplicateAddressDetectionState(self: UnicastIPAddressInformation) -> DuplicateAddressDetectionState
         """
         ...
-
     @property
     def IPv4Mask(self):
         """
@@ -3081,7 +2841,6 @@ class UnicastIPAddressInformation(IPAddressInformation):
         Get: IPv4Mask(self: UnicastIPAddressInformation) -> IPAddress
         """
         ...
-
     @property
     def PrefixLength(self):
         """
@@ -3090,7 +2849,6 @@ class UnicastIPAddressInformation(IPAddressInformation):
         Get: PrefixLength(self: UnicastIPAddressInformation) -> int
         """
         ...
-
     @property
     def PrefixOrigin(self):
         """
@@ -3099,7 +2857,6 @@ class UnicastIPAddressInformation(IPAddressInformation):
         Get: PrefixOrigin(self: UnicastIPAddressInformation) -> PrefixOrigin
         """
         ...
-
     @property
     def SuffixOrigin(self):
         """
@@ -3109,10 +2866,11 @@ class UnicastIPAddressInformation(IPAddressInformation):
         """
         ...
 
+class UnicastIPAddressInformationCollection(
+    object, ICollection[UnicastIPAddressInformation]
+):  # skipped bases: <type 'IEnumerable'>, <type 'IEnumerable[UnicastIPAddressInformation]'>
+    """Stores a set of System.Net.NetworkInformation.UnicastIPAddressInformation types."""
 
-
-class UnicastIPAddressInformationCollection(object, ICollection[UnicastIPAddressInformation]): # skipped bases: <type 'IEnumerable'>, <type 'IEnumerable[UnicastIPAddressInformation]'>
-    """ Stores a set of System.Net.NetworkInformation.UnicastIPAddressInformation types. """
     def GetEnumerator(self):
         """
         GetEnumerator(self: UnicastIPAddressInformationCollection) -> IEnumerator[UnicastIPAddressInformation]
@@ -3124,15 +2882,12 @@ class UnicastIPAddressInformationCollection(object, ICollection[UnicastIPAddress
              this collection.
         """
         ...
-
-    def __getitem__(self, *args): #cannot find CLR method
-        """ x.__getitem__(y) <==> x[y] """
+    def __getitem__(self, *args):  # cannot find CLR method
+        """x.__getitem__(y) <==> x[y]"""
         ...
-
-    def __len__(self, *args): #cannot find CLR method
-        """ x.__len__() <==> len(x) """
+    def __len__(self, *args):  # cannot find CLR method
+        """x.__len__() <==> len(x)"""
         ...
-
     @property
     def Count(self):
         """
@@ -3141,7 +2896,6 @@ class UnicastIPAddressInformationCollection(object, ICollection[UnicastIPAddress
         Get: Count(self: UnicastIPAddressInformationCollection) -> int
         """
         ...
-
     @property
     def IsReadOnly(self):
         """

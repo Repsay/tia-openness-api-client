@@ -3832,6 +3832,16 @@ class DeviceItemComposition(
         Get: Parent(self: DeviceItemComposition) -> IEngineeringObject
         """
         ...
+    def Find(self, name: str) -> DeviceItem:
+        """ Find a device item by name
+
+        Args:
+            name (str): The name of the device item to find
+
+        Returns:
+            DeviceItem: The device item with the given name
+        """
+        ...
     def CreateFrom(self, masterCopy):
         """
         CreateFrom(self: DeviceItemComposition, masterCopy: MasterCopy) -> DeviceItem
