@@ -183,7 +183,12 @@ class DeviceItem(CompositionItem):
         if self.parent.value is None:
             raise tia_e.InvalidDeviceItemComposition("Parent value is None")
 
-        value = self.parent.value.Find(name)
+        value = None
+
+        for item in self.parent.value:
+            if item.Name == name:
+                value = item
+                break
 
         if value is None:
             self.value = None
@@ -486,13 +491,11 @@ class PLCUserBlockGroups(Composition[PLCUserBlockGroup]):
         if self.parent.value is None:
             raise tia_e.InvalidSoftware("Software value is None")
 
-        value = None
-
         if not isinstance(self.parent.value, sw.PlcSoftware):
             value = self.parent.value.Groups
 
         if not isinstance(self.parent.value, swb.PlcBlockUserGroup):
-            value = self.parent.value.BlockGroup.SystemBlockGroups
+            value = self.parent.value.BlockGroup.Groups
 
         if value is None:
             self.value = None
@@ -614,17 +617,19 @@ class PLCBlocks(Composition[PLCBlock]):
         for block in self.value:
             yield PLCBlock(self, block.Name)
 
-    def create(self, type: str, name: str) -> PLCBlock:
+    def create(self, path: str, name: str) -> PLCBlock:
         if self.value is None:
             raise tia_e.InvalidBlockComposition("Value is None")
 
-        file = os.path.join(cfg.DATA_PATH, "empty_blocks", f"{type}.xml")
-        new_file = os.path.join(cfg.DATA_PATH, "temp", f"{name}.xml")
+        if not os.path.isfile(path):
+            raise tia_e.InvalidPath(f"Invalid path: {path}")
 
-        if not os.path.isfile(file):
-            raise tia_e.InvalidBlockType(f"Invalid block type: {type}")
+        new_file = os.path.join(cfg.DATA_PATH, "temp", os.path.basename(path))
 
-        shutil.copyfile(file, new_file)
+        if not os.path.exists(os.path.dirname(new_file)):
+            os.makedirs(os.path.dirname(new_file))
+
+        shutil.copyfile(path, new_file)
 
         with open(new_file, "r") as f:
             data = f.read()
@@ -639,6 +644,29 @@ class PLCBlocks(Composition[PLCBlock]):
         self.value.Import(file_info, tia.ImportOptions.Override)
 
         os.remove(new_file)
+
+        return PLCBlock(self, name)
+
+    def create_instance_database(self, name: str, fb_name: str) -> PLCBlock:
+        if self.value is None:
+            raise tia_e.InvalidBlockComposition("Value is None")
+
+        self.value.CreateInstanceDB(name, True, 1, fb_name)
+
+        return PLCBlock(self, name)
+
+    def create_prodiag_block(self, name: str):
+        if self.value is None:
+            raise tia_e.InvalidBlockComposition("Value is None")
+
+        self.value.CreateFB(name, True, 1, swb.ProgrammingLanguage.ProDiag)
+
+        idb_name = name.replace("FB", "IDB")
+
+        if not self.parent.get_groups().find("IDB"):
+            self.parent.get_groups().create("IDB")
+
+        self.parent.get_groups().find("IDB").get_blocks().create_instance_database(idb_name, name)
 
         return PLCBlock(self, name)
 
@@ -1301,6 +1329,30 @@ class Project(TiaObject):
 
     def is_open(self) -> bool:
         return self.value is not None
+
+    def get_device_item(self, name: str) -> Optional[DeviceItem]:
+        if self.value is None:
+            raise tia_e.TIAInvalidProject("Project is None")
+
+        for device in self.devices:
+            for item in device.get_items():
+                if item.name == name:
+                    return item
+
+        return None
+
+    def get_plcs(self) -> list[DeviceItem]:
+        if self.value is None:
+            raise tia_e.TIAInvalidProject("Project is None")
+
+        plcs = []
+
+        for device in self.devices:
+            for item in device.get_items():
+                if isinstance(item.get_software(), PLCSoftware):
+                    plcs.append(item)
+
+        return plcs
 
     @property
     def devices(self) -> Devices:

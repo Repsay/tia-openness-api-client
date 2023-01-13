@@ -521,7 +521,7 @@ class PlcBlockComposition(
             Returns: Siemens.Engineering.SW.Blocks.PlcBlock
         """
         ...
-    def CreateInstanceDB(self, name, isAutoNumbered, number, instanceOfName):
+    def CreateInstanceDB(self, name: str, isAutoNumbered: bool, number: int, instanceOfName: str):
         """
         CreateInstanceDB(self: PlcBlockComposition, name: str, isAutoNumbered: bool, number: int, instanceOfName: str) -> InstanceDB
 
@@ -558,7 +558,9 @@ class PlcBlockComposition(
             Returns: A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         """
         ...
-    def Import(self, path: FileInfo, importOptions: ImportOptions, swImportOptions: Optional[SWImportOptions] = ...) -> list[PlcBlock]:
+    def Import(
+        self, path: FileInfo, importOptions: ImportOptions, swImportOptions: Optional[SWImportOptions] = ...
+    ) -> list[PlcBlock]:
         """
         Import(self: PlcBlockComposition, path: FileInfo, importOptions: ImportOptions) -> IList[PlcBlock]
 
