@@ -1,98 +1,134 @@
 class LibraryImportError(Exception):
     pass
 
+
 class LibraryDLLNotFound(Exception):
     pass
+
 
 class InvalidTIASession(Exception):
     pass
 
+
 class ProjectAlreadyExists(Exception):
     pass
+
 
 class ProjectNotFound(Exception):
     pass
 
+
 class InvalidProject(Exception):
     pass
+
 
 class InvalidDeviceComposition(Exception):
     pass
 
+
 class InvalidDevice(Exception):
     pass
+
 
 class InvalidDeviceItemComposition(Exception):
     pass
 
+
 class InvalidDeviceItem(Exception):
     pass
+
 
 class DeviceAlreadyExists(Exception):
     pass
 
+
 class InvalidSoftwareType(Exception):
     pass
+
 
 class InvalidSoftware(Exception):
     pass
 
+
 class InvalidSystemBlockGroupComposition(Exception):
     pass
+
 
 class InvalidSystemBlockGroup(Exception):
     pass
 
+
 class InvalidUserBlockGroupComposition(Exception):
     pass
+
 
 class InvalidUserBlockGroup(Exception):
     pass
 
+
 class InvalidBlockComposition(Exception):
     pass
+
 
 class InvalidBlockType(Exception):
     pass
 
+
 class InvalidBlock(Exception):
     pass
+
 
 class InvalidGlobalLibraryComposition(Exception):
     pass
 
+
 class InvalidGlobalLibrary(Exception):
     pass
+
 
 class InvalidTypeFolder(Exception):
     pass
 
+
 class InvalidTypeUserFolderComposition(Exception):
     pass
+
 
 class InvalidUserTypeFolder(Exception):
     pass
 
+
 class InvalidTypeUserFolder(Exception):
     pass
+
 
 class InvalidTypeComposition(Exception):
     pass
 
+
 class InvalidMasterCopyFolder(Exception):
     pass
+
 
 class InvalidMasterCopyUserFolderComposition(Exception):
     pass
 
+
 class InvalidUserMasterCopyFolder(Exception):
     pass
+
 
 class InvalidMasterCopyComposition(Exception):
     pass
 
+
 class InvalidMasterCopy(Exception):
     pass
+
+
+class InvalidPath(Exception):
+    pass
+
 
 class TIALibraryNotFound(Exception):
     pass
@@ -144,6 +180,7 @@ class TIABlockNotFound(Exception):
 
 class TIAInconsistentBlock(Exception):
     pass
+
 
 class TIAGlobalLibraryNotFound(Exception):
     pass
