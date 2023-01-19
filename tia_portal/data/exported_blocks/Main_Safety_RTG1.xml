@@ -1,65 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Document>
-  <Engineering version="V15.1" />
+  <Engineering version="V17" />
   <DocumentInfo>
-    <Created>2022-12-16T12:28:16.5002124Z</Created>
+    <Created>2023-01-16T15:54:28.2107293Z</Created>
     <ExportSetting>None</ExportSetting>
     <InstalledProducts>
       <Product>
         <DisplayName>Totally Integrated Automation Portal</DisplayName>
-        <DisplayVersion>V15.1 Update 1</DisplayVersion>
+        <DisplayVersion>V17</DisplayVersion>
       </Product>
       <OptionPackage>
         <DisplayName>TIA Portal Openness</DisplayName>
-        <DisplayVersion>V15.1</DisplayVersion>
-      </OptionPackage>
-      <Product>
-        <DisplayName>SINAMICS Startdrive Advanced</DisplayName>
-        <DisplayVersion>V15.1</DisplayVersion>
-      </Product>
-      <OptionPackage>
-        <DisplayName>G130, G150, S120, S150, SINAMICS MV, S210</DisplayName>
-        <DisplayVersion>V15.1</DisplayVersion>
+        <DisplayVersion>V17</DisplayVersion>
       </OptionPackage>
       <OptionPackage>
-        <DisplayName>G110M, G120, G120C, G120D, G120P</DisplayName>
-        <DisplayVersion>V15.1</DisplayVersion>
+        <DisplayName>TIA Portal Version Control Interface</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
       </OptionPackage>
       <Product>
         <DisplayName>STEP 7 Professional</DisplayName>
-        <DisplayVersion>V15.1 Update 1</DisplayVersion>
+        <DisplayVersion>V17</DisplayVersion>
       </Product>
       <OptionPackage>
         <DisplayName>STEP 7 Safety</DisplayName>
-        <DisplayVersion>V15.1</DisplayVersion>
+        <DisplayVersion>V17</DisplayVersion>
       </OptionPackage>
       <Product>
-        <DisplayName>WinCC Professional</DisplayName>
-        <DisplayVersion>V15.1 Update 1</DisplayVersion>
+        <DisplayName>WinCC Advanced</DisplayName>
+        <DisplayVersion>V17</DisplayVersion>
       </Product>
-      <OptionPackage>
-        <DisplayName>SIMATIC Visualization Architect</DisplayName>
-        <DisplayVersion>V15.1</DisplayVersion>
-      </OptionPackage>
     </InstalledProducts>
   </DocumentInfo>
   <SW.Blocks.FB ID="0">
     <AttributeList>
-      <Interface>
-        <Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v3">
-          <Section Name="Input" />
-          <Section Name="Output" />
-          <Section Name="InOut" />
-          <Section Name="Static" />
-          <Section Name="Temp" />
-          <Section Name="Constant" />
-        </Sections>
-      </Interface>
+      <AutoNumber>false</AutoNumber>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v5">
+  <Section Name="Input" />
+  <Section Name="Output" />
+  <Section Name="InOut" />
+  <Section Name="Static" />
+  <Section Name="Temp" />
+  <Section Name="Constant" />
+</Sections></Interface>
       <MemoryLayout>Optimized</MemoryLayout>
-      <MemoryReserve>100</MemoryReserve>
-      <Name>__EMPTY_BLOCK__</Name>
-      <ProgrammingLanguage>LAD</ProgrammingLanguage>
-      <SetENOAutomatically>False</SetENOAutomatically>
+      <Name>Main_Safety_RTG1</Name>
+      <Number>1</Number>
+      <ProgrammingLanguage>F_FBD</ProgrammingLanguage>
     </AttributeList>
     <ObjectList>
       <MultilingualText ID="1" CompositionName="Comment">
@@ -75,7 +61,7 @@
       <SW.Blocks.CompileUnit ID="3" CompositionName="CompileUnits">
         <AttributeList>
           <NetworkSource />
-          <ProgrammingLanguage>LAD</ProgrammingLanguage>
+          <ProgrammingLanguage>F_FBD</ProgrammingLanguage>
         </AttributeList>
         <ObjectList>
           <MultilingualText ID="4" CompositionName="Comment">

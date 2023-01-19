@@ -2,7 +2,7 @@ import configparser
 from tia_portal.version import TIAVersion
 import os
 
-DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "data"))
+DATA_PATH = os.path.join(os.path.expanduser("~"), ".tia_portal")
 CONFIG_PATH = os.path.join(DATA_PATH, "config.ini")
 VERSION = TIAVersion.V15_1
 
@@ -18,7 +18,7 @@ def load() -> None:
             "version": "V17",
         }
         config["USER"] = {}
-        config.write(open(CONFIG_PATH, "w"))
+        config.write(open(CONFIG_PATH, "w", encoding="utf-8"))
 
     config.read(CONFIG_PATH)
     global VERSION
@@ -34,4 +34,5 @@ def set_version(version: TIAVersion) -> None:
     config.read(CONFIG_PATH)
 
     config["USER"]["version"] = version.name
-    config.write(open(CONFIG_PATH, "w"))
+    with open(CONFIG_PATH, "w", encoding="utf-8") as configfile:
+        config.write(configfile)

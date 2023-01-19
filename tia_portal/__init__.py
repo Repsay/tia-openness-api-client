@@ -1,9 +1,10 @@
 from __future__ import annotations
 
-import clr
 import os
 import shutil
-from typing import Any, Iterator, List, Optional, Union
+from typing import Any, Iterator, Optional, Union
+
+import clr
 
 import tia_portal.config as cfg
 import tia_portal.exceptions as tia_e
@@ -13,8 +14,8 @@ from tia_portal.version import TIAVersion
 
 cfg.load()
 
-from System.Diagnostics import Process
-from System.IO import DirectoryInfo, FileInfo
+from System.Diagnostics import Process  # type: ignore pylint: disable=import-error,wrong-import-position,wrong-import-order
+from System.IO import DirectoryInfo, FileInfo  # type: ignore pylint: disable=import-error,wrong-import-position,wrong-import-order
 
 dll_path = f"C:\\Program Files\\Siemens\\Automation\\Portal {cfg.VERSION.name}\\PublicAPI\\V{cfg.VERSION.value.replace('_', '.')}\\Siemens.Engineering.dll"
 
@@ -22,54 +23,54 @@ if not os.path.exists(dll_path):
     raise tia_e.LibraryDLLNotFound(f"Could not find {dll_path}")
 
 try:
-    clr.AddReference(dll_path)
+    clr.AddReference(dll_path)  # pylint: disable=no-member
 except Exception as e:
     raise tia_e.LibraryImportError(f"Could not load {dll_path}") from e
 
 try:
-    import Siemens.Engineering as tia
+    import Siemens.Engineering as tia  # type: ignore pylint: disable=import-error
 except Exception as e:
-    raise tia_e.LibraryImportError(f"Could not import Siemens.Engineering") from e
+    raise tia_e.LibraryImportError("Could not import Siemens.Engineering") from e
 
 try:
-    import Siemens.Engineering.Compiler as comp
+    import Siemens.Engineering.Compiler as comp  # type: ignore pylint: disable=import-error
 except Exception as e:
-    raise tia_e.LibraryImportError(f"Could not import Siemens.Engineering.Compiler") from e
+    raise tia_e.LibraryImportError("Could not import Siemens.Engineering.Compiler") from e
 
 try:
-    import Siemens.Engineering.HW as hw
+    import Siemens.Engineering.HW as hw  # type: ignore pylint: disable=import-error
 except Exception as e:
-    raise tia_e.LibraryImportError(f"Could not import Siemens.Engineering.HW") from e
+    raise tia_e.LibraryImportError("Could not import Siemens.Engineering.HW") from e
 
 try:
-    import Siemens.Engineering.HW.Features as hwf
+    import Siemens.Engineering.HW.Features as hwf  # type: ignore pylint: disable=import-error
 except Exception as e:
-    raise tia_e.LibraryImportError(f"Could not import Siemens.Engineering.HW.Features") from e
+    raise tia_e.LibraryImportError("Could not import Siemens.Engineering.HW.Features") from e
 
 try:
-    import Siemens.Engineering.SW as sw
+    import Siemens.Engineering.SW as sw  # type: ignore pylint: disable=import-error
 except Exception as e:
-    raise tia_e.LibraryImportError(f"Could not import Siemens.Engineering.SW") from e
+    raise tia_e.LibraryImportError("Could not import Siemens.Engineering.SW") from e
 
 try:
-    import Siemens.Engineering.SW.Blocks as swb
+    import Siemens.Engineering.SW.Blocks as swb  # type: ignore pylint: disable=import-error
 except Exception as e:
-    raise tia_e.LibraryImportError(f"Could not import Siemens.Engineering.SW.Blocks") from e
+    raise tia_e.LibraryImportError("Could not import Siemens.Engineering.SW.Blocks") from e
 
 try:
-    import Siemens.Engineering.Library as lib
+    import Siemens.Engineering.Library as lib  # type: ignore pylint: disable=import-error
 except Exception as e:
-    raise tia_e.LibraryImportError(f"Could not import Siemens.Engineering.Library") from e
+    raise tia_e.LibraryImportError("Could not import Siemens.Engineering.Library") from e
 
 try:
-    import Siemens.Engineering.Library.MasterCopies as lib_mc
+    import Siemens.Engineering.Library.MasterCopies as lib_mc  # type: ignore pylint: disable=import-error
 except Exception as e:
-    raise tia_e.LibraryImportError(f"Could not import Siemens.Engineering.Library.MasterCopies") from e
+    raise tia_e.LibraryImportError("Could not import Siemens.Engineering.Library.MasterCopies") from e
 
 try:
-    import Siemens.Engineering.Library.Types as lib_type
+    import Siemens.Engineering.Library.Types as lib_type  # type: ignore pylint: disable=import-error
 except Exception as e:
-    raise tia_e.LibraryImportError(f"Could not import Siemens.Engineering.Library.Types") from e
+    raise tia_e.LibraryImportError("Could not import Siemens.Engineering.Library.Types") from e
 
 
 class Device(CompositionItem):
@@ -486,7 +487,9 @@ class PLCUserBlockGroup(CompositionItem):
 class PLCUserBlockGroups(Composition[PLCUserBlockGroup]):
     def __init__(self, parent: Union[PLCSoftware, PLCUserBlockGroup]) -> None:
         self.parent = parent
-        self.__value = None
+        self.__value: Optional[swb.PlcBlockUserGroupComposition] = None
+
+        value = None
 
         if self.parent.value is None:
             raise tia_e.InvalidSoftware("Software value is None")
@@ -655,7 +658,7 @@ class PLCBlocks(Composition[PLCBlock]):
 
         return PLCBlock(self, name)
 
-    def create_prodiag_block(self, name: str):
+    def create_prodiag_block(self, name: str) -> PLCBlock:
         if self.value is None:
             raise tia_e.InvalidBlockComposition("Value is None")
 
@@ -663,10 +666,15 @@ class PLCBlocks(Composition[PLCBlock]):
 
         idb_name = name.replace("FB", "IDB")
 
-        if not self.parent.get_groups().find("IDB"):
-            self.parent.get_groups().create("IDB")
+        if isinstance(self.parent, PLCSoftware):
+            groups = self.parent.get_user_block_groups()
+        else:
+            groups = self.parent.get_groups()
 
-        self.parent.get_groups().find("IDB").get_blocks().create_instance_database(idb_name, name)
+        if not groups.find("IDB"):
+            groups.create("IDB")
+
+        groups.find("IDB").get_blocks().create_instance_database(idb_name, name)
 
         return PLCBlock(self, name)
 
@@ -1085,6 +1093,8 @@ class MasterCopies(Composition[MasterCopy]):
 
 
 class Client:
+    """Client for TIA Portal"""
+
     def __init__(self) -> None:
         self.session: Optional[tia.TiaPortal] = tia.TiaPortal(tia.TiaPortalMode.WithoutUserInterface)
         self.project: Optional[Project] = None
@@ -1186,14 +1196,14 @@ class Client:
 
         return self.project
 
-    def create_projects(self, path: str, names: List[str], version: Optional[TIAVersion] = None) -> List[Project]:
+    def create_projects(self, path: str, names: list[str], version: Optional[TIAVersion] = None) -> list[Project]:
         if self.session is None:
             raise tia_e.TIAInvalidSession("Session is None")
 
         if self.project is not None:
             self.project.close()
 
-        projects: List[Project] = []
+        projects: list[Project] = []
         for name in names:
             project = Project(self, path, name, version)
             try:
@@ -1267,8 +1277,8 @@ class Project(TiaObject):
         self.value.Close()
         self.value = None
 
-    def create(self, open: bool = False) -> None:
-        if not open:
+    def create(self, open_existing: bool = False) -> None:
+        if not open_existing:
             new_session = tia.TiaPortal(tia.TiaPortalMode.WithoutUserInterface)
             old_session = None
         else:
