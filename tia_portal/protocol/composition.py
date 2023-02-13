@@ -1,3 +1,4 @@
+""" Composition protocol. This is a protocol for a composition of objects."""
 from __future__ import annotations
 from typing import Any, Optional, Protocol, Self, TypeVar, Iterator
 
@@ -7,6 +8,8 @@ T = TypeVar("T", covariant=True)
 
 
 class Composition(TiaObject, Protocol[T]):
+    """Composition protocol. This is a protocol for a composition of objects."""
+
     def __init__(self, parent: Any):
         ...
 
@@ -18,5 +21,7 @@ class Composition(TiaObject, Protocol[T]):
 
 
 class CompositionItem(TiaObject, Protocol):
+    """Composition item protocol. This is a protocol for an item in a composition of objects."""
+
     def __init__(self, parent: Composition[Self], name: str):  # type: ignore
         ...
