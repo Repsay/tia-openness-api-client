@@ -1,3 +1,6 @@
+""" This module contains all exceptions used in the tia_portal package. The exceptions are just wrappers for the exceptions raised by the TIA Portal API. The exceptions are used to make the API more user-friendly. The exceptions are grouped by the module they are used in."""
+
+
 class LibraryImportError(Exception):
     pass
 

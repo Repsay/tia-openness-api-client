@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import re
 import shutil
 from typing import Any, Iterator, Optional, Union
 
@@ -74,7 +75,24 @@ except Exception as e:
 
 
 class Device(CompositionItem):
+    """Represents a TIA Portal device. This device can be a PLC, HMI, etc. A device is part of a composition of devices.
+
+    Attributes:
+        parent (Devices): The parent composition of devices.
+        name (str): The name of the device.
+        value (Optional[hw.Device]): The value of the device and the connection to the C# library. So functions of the Openness API can be used on this variable.
+    """
+
     def __init__(self, parent: Devices, name: str):
+        """Initializes a device.
+
+        Args:
+            parent (Devices): The parent composition of devices.
+            name (str): The name of the device.
+
+        Raises:
+            tia_e.InvalidDeviceComposition: If the parent value is None.
+        """
         self.parent = parent
         self.name = name
         self.__value = None
@@ -98,9 +116,19 @@ class Device(CompositionItem):
         self.__value = value
 
     def exists(self) -> bool:
+        """Checks if the device exists by checking if the value is None.
+
+        Returns:
+            bool: True if the device exists, False otherwise.
+        """
         return self.value is not None
 
     def remove(self) -> None:
+        """Removes the device from the composition of devices.
+
+        Raises:
+            tia_e.InvalidDevice: If the value is None.
+        """
         if self.value is None:
             raise tia_e.InvalidDevice("Value is None")
 
@@ -108,14 +136,35 @@ class Device(CompositionItem):
         self.value = None
 
     def delete(self) -> None:
+        """Deletes the device from the composition of devices. This is an alias for remove."""
         self.remove()
 
     def get_items(self) -> DeviceItems:
+        """Gets the items of the device.
+
+        Returns:
+            DeviceItems: The items of the device a composition of items.
+        """
         return DeviceItems(self)
 
 
 class Devices(Composition[Device]):
+    """Represents a composition of devices. A device can be a PLC, HMI, etc.
+
+    Attributes:
+        parent (Project): The parent project.
+        value (Optional[hw.DeviceComposition]): The value of the composition of devices and the connection to the C# library. So functions of the Openness API can be used on this variable.
+    """
+
     def __init__(self, parent: Project) -> None:
+        """Initializes a composition of devices.
+
+        Args:
+            parent (Project): The parent project.
+
+        Raises:
+            tia_e.InvalidProject: If the parent value is None.
+        """
         self.parent = parent
         self.__value = None
 
@@ -138,12 +187,31 @@ class Devices(Composition[Device]):
         self.__value = value
 
     def find(self, name: str) -> Device:
+        """Finds a device by name.
+
+        Args:
+            name (str): The name of the device.
+
+        Raises:
+            tia_e.InvalidDeviceComposition: If the value is None.
+
+        Returns:
+            Device: The device with the given name.
+        """
         if self.value is None:
             raise tia_e.InvalidDeviceComposition("Value is None")
 
         return Device(self, name)
 
     def __iter__(self) -> Iterator[Device]:
+        """Iterates over all devices in the composition of devices.
+
+        Raises:
+            tia_e.InvalidDeviceComposition: If the value is None.
+
+        Yields:
+            Iterator[Device]: The next device in the composition of devices.
+        """
         if self.value is None:
             raise tia_e.InvalidDeviceComposition("Value is None")
 
@@ -151,6 +219,20 @@ class Devices(Composition[Device]):
             yield Device(self, device.Name)
 
     def create(self, HwTypeIdentifier: str, name: str, device_name: Optional[str]) -> Device:
+        """Creates a device in the composition of devices.
+
+        Args:
+            HwTypeIdentifier (str): The hardware type identifier of the device. These can be found in the TIA Portal when creating a new device.
+            name (str): The name of the device (This can be found in the network tab of the TIA Portal)
+            device_name (Optional[str]): The device name of the device. This is the name of the device in the TIA Portal. This is optional in some cases.
+
+        Raises:
+            tia_e.InvalidDeviceComposition: If the value is None.
+            tia_e.DeviceAlreadyExists: If the device already exists.
+
+        Returns:
+            Device: The created device.
+        """
         if self.value is None:
             raise tia_e.InvalidDeviceComposition("Value is None")
 
@@ -167,16 +249,54 @@ class Devices(Composition[Device]):
         return Device(self, name)
 
     def create_PLC(self, article_no: str, version: str, name: str, device_name: str) -> Device:
+        """Creates a PLC device in the composition of devices.
+
+        Args:
+            article_no (str): The article number of the PLC. This can be found in the TIA Portal when creating a new device.
+            version (str): The version of the PLC. This can be found in the TIA Portal when creating a new device.
+            name (str): The name of the device (This can be found in the network tab of the TIA Portal)
+            device_name (str): The device name of the device. This is the name of the device in the TIA Portal.
+
+        Returns:
+            Device: The created device.
+        """
         hw_id = f"OrderNumber:{article_no}/{version}"
         return self.create(hw_id, name, device_name)
 
     def create_HMI(self, article_no: str, version: str, name: str) -> Device:
+        """Creates a HMI device in the composition of devices.
+
+        Args:
+            article_no (str): The article number of the HMI. This can be found in the TIA Portal when creating a new device.
+            version (str): The version of the HMI. This can be found in the TIA Portal when creating a new device.
+            name (str): The name of the device (This can be found in the network tab of the TIA Portal)
+
+        Returns:
+            Device: The created device.
+        """
         hw_id = f"OrderNumber:{article_no}/{version}"
         return self.create(hw_id, name, None)
 
 
 class DeviceItem(CompositionItem):
+    """Represents a device item. A device item can be a PLC object or a HMI object. This class contains more specific functions for PLC and HMI objects.
+
+    Attributes:
+        parent (DeviceItems): The parent device items. This is the composition of device items.
+        name (str): The name of the device item.
+        value (Optional[hw.DeviceItem]): The value of the device item and the connection to the C# library. So functions of the Openness API can be used on this variable.
+    """
+
     def __init__(self, parent: DeviceItems, name: str):
+        """Initializes the device item.
+
+        Args:
+            parent (DeviceItems): The parent device items. This is the composition of device items.
+            name (str): The name of the device item.
+
+        Raises:
+            tia_e.InvalidDeviceItemComposition: If the parent value is None.
+        """
         self.parent = parent
         self.name = name
         self.__value = None
@@ -205,6 +325,18 @@ class DeviceItem(CompositionItem):
         self.__value = value
 
     def get_software(self) -> Union[PLCSoftware, None]:
+        # TODO: Implement more different software types
+        """Gets the software of the device item.
+
+        TODO:
+            Implement more different software types
+
+        Raises:
+            tia_e.InvalidDeviceItem: If the value is None.
+
+        Returns:
+            Union[PLCSoftware, None]: The software of the device item.
+        """
         if self.value is None:
             raise tia_e.InvalidDeviceItem("Value is None")
 
@@ -224,6 +356,14 @@ class DeviceItem(CompositionItem):
         return None
 
     def get_items(self) -> Optional[DeviceItems]:
+        """Gets the device items of the device item.
+
+        Raises:
+            tia_e.InvalidDeviceItem: If the value is None.
+
+        Returns:
+            Optional[DeviceItems]: The device items of the device item.
+        """
         if self.value is None:
             raise tia_e.InvalidDeviceItem("Value is None")
 
@@ -234,7 +374,22 @@ class DeviceItem(CompositionItem):
 
 
 class DeviceItems(Composition[DeviceItem]):
+    """Represents the device items of a device. This class contains more specific functions for PLC and HMI objects. This class is a composition of device items.
+
+    Attributes:
+        parent (Union[Device, DeviceItem]): The parent device or device item. This is a single device or a device item that contains device items.
+        value (Optional[hw.DeviceItemComposition]): The value of the device items and the connection to the C# library. So functions of the Openness API can be used on this variable.
+    """
+
     def __init__(self, parent: Union[Device, DeviceItem]) -> None:
+        """Initializes the device items.
+
+        Args:
+            parent (Union[Device, DeviceItem]): The parent device or device item. This is a single device or a device item that contains device items.
+
+        Raises:
+            tia_e.InvalidDevice: If the parent value is None.
+        """
         self.parent = parent
         self.__value = None
 
@@ -257,12 +412,31 @@ class DeviceItems(Composition[DeviceItem]):
         self.__value = value
 
     def find(self, name: str) -> DeviceItem:
+        """Finds a device item by name.
+
+        Args:
+            name (str): The name of the device item.
+
+        Raises:
+            tia_e.InvalidDeviceItemComposition: If the value is None.
+
+        Returns:
+            DeviceItem: The device item.
+        """
         if self.value is None:
             raise tia_e.InvalidDeviceItemComposition("Value is None")
 
         return DeviceItem(self, name)
 
     def __iter__(self) -> Iterator[DeviceItem]:
+        """Iterates over the device items.
+
+        Raises:
+            tia_e.InvalidDeviceItemComposition: If the value is None.
+
+        Yields:
+            Iterator[DeviceItem]: The device item.
+        """
         if self.value is None:
             raise tia_e.InvalidDeviceItemComposition("Value is None")
 
@@ -270,6 +444,11 @@ class DeviceItems(Composition[DeviceItem]):
             yield DeviceItem(self, device_item.Name)
 
     def get_device_items(self) -> list[DeviceItem]:
+        """Gets a list of the device items.
+
+        Returns:
+            list[DeviceItem]: The device items.
+        """
         device_items: list[DeviceItem] = []
         for device_item in self:
             device_items.append(device_item)
@@ -278,7 +457,23 @@ class DeviceItems(Composition[DeviceItem]):
 
 
 class PLCSoftware(TiaObject):
+    """Represents the PLC software of a device item. This class contains more specific functions for PLC objects and its software.
+
+    Attributes:
+        parent (DeviceItem): The parent device item. This is a single device item that contains PLC software.
+        value (Optional[sw.PlcSoftware]): The value of the PLC software and the connection to the C# library. So functions of the Openness API can be used on this variable.
+    """
+
     def __init__(self, parent: DeviceItem) -> None:
+        """Initializes the PLC software.
+
+        Args:
+            parent (DeviceItem): The parent device item. This is a single device item that contains PLC software.
+
+        Raises:
+            tia_e.InvalidDeviceItem: If the parent value is None or the software container is None or the software is None.
+            tia_e.InvalidSoftwareType: If the software is not PLC software.
+        """
         self.parent = parent
         self.__value = None
 
@@ -309,24 +504,56 @@ class PLCSoftware(TiaObject):
         self.__value = value
 
     def get_system_block_groups(self) -> PLCSystemBlockGroups:
+        """Gets the system block groups of the PLC software.
+
+        Raises:
+            tia_e.InvalidSoftware: If the value is None.
+
+        Returns:
+            PLCSystemBlockGroups: The system block groups this is a composition of system block groups.
+        """
         if self.value is None:
             raise tia_e.InvalidSoftware("Value is None")
 
         return PLCSystemBlockGroups(self)
 
     def get_user_block_groups(self) -> PLCUserBlockGroups:
+        """Gets the user block groups of the PLC software. This is a composition of user block groups. To this group new user block groups can be added.
+
+        Raises:
+            tia_e.InvalidSoftware: If the value is None.
+
+        Returns:
+            PLCUserBlockGroups: The user block groups. This is a composition of user block groups.
+        """
         if self.value is None:
             raise tia_e.InvalidSoftware("Value is None")
 
         return PLCUserBlockGroups(self)
 
     def get_blocks(self) -> PLCBlocks:
+        """Gets the blocks of the PLC software. This is a composition of blocks. This is of the main block group.
+
+        Raises:
+            tia_e.InvalidSoftware: If the value is None.
+
+        Returns:
+            PLCBlocks: The blocks of the PLC software. This is a composition of blocks.
+        """
         if self.value is None:
             raise tia_e.InvalidSoftware("Value is None")
 
         return PLCBlocks(self)
 
     def get_all_blocks(self, recursive: bool = False) -> list[PLCBlock]:
+        """Gets all blocks of the PLC software. This includes all blocks of the main block group and all blocks of the system block groups and user block groups.
+
+        Args:
+            recursive (bool, optional): If True, all blocks of the system block groups and user block groups will be included. Defaults to False.
+
+        Returns:
+            list[PLCBlock]: The blocks of the PLC software.
+        """
         if not recursive:
             return [block for block in self.get_blocks()]
         else:
@@ -340,7 +567,24 @@ class PLCSoftware(TiaObject):
 
 
 class PLCSystemBlockGroup(CompositionItem):
+    """Represents a system block group of a PLC software. This is a composition of system block groups.
+
+    Attributes:
+        parent (PLCSystemBlockGroups): The parent system block groups. This is a composition of system block groups.
+        name (str): The name of the system block group.
+        value (Optional[swb.PlcSystemBlockGroup]): The value of the system block group and the connection to the C# library. So functions of the Openness API can be used on this variable.
+    """
+
     def __init__(self, parent: PLCSystemBlockGroups, name: str) -> None:
+        """Initializes the system block group.
+
+        Args:
+            parent (PLCSystemBlockGroups): The parent system block groups. This is a composition of system block groups.
+            name (str): The name of the system block group.
+
+        Raises:
+            tia_e.InvalidSystemBlockGroupComposition: If the parent value is None.
+        """
         self.parent = parent
         self.name = name
         self.__value = None
@@ -364,18 +608,42 @@ class PLCSystemBlockGroup(CompositionItem):
         self.__value = value
 
     def get_groups(self) -> PLCSystemBlockGroups:
+        """Gets the system block groups of the system block group. This is a composition of system block groups.
+
+        Raises:
+            tia_e.InvalidSystemBlockGroup: If the value is None.
+
+        Returns:
+            PLCSystemBlockGroups: The system block groups of the system block group. This is a composition of system block groups.
+        """
         if self.value is None:
             raise tia_e.InvalidSystemBlockGroup("Value is None")
 
         return PLCSystemBlockGroups(self)
 
     def get_blocks(self) -> PLCBlocks:
+        """Gets the blocks of the system block group. This is a composition of blocks.
+
+        Raises:
+            tia_e.InvalidSystemBlockGroup: If the value is None.
+
+        Returns:
+            PLCBlocks: The blocks of the system block group. This is a composition of blocks.
+        """
         if self.value is None:
             raise tia_e.InvalidSystemBlockGroup("Value is None")
 
         return PLCBlocks(self)
 
     def get_all_blocks(self, recursive: bool = False) -> list[PLCBlock]:
+        """Gets all blocks of the system block group. This includes all blocks of the system block group and all blocks of the system block groups.
+
+        Args:
+            recursive (bool, optional): If True, all blocks of the system block groups will be included. Defaults to False.
+
+        Returns:
+            list[PLCBlock]: The blocks of the system block group.
+        """
         if not recursive:
             return [block for block in self.get_blocks()]
         else:
@@ -387,7 +655,22 @@ class PLCSystemBlockGroup(CompositionItem):
 
 
 class PLCSystemBlockGroups(Composition[PLCSystemBlockGroup]):
+    """Represents a composition of system block groups. This is a composition of system block groups.
+
+    Attributes:
+        parent (Union[PLCSoftware, PLCSystemBlockGroup]): The parent of the system block groups. This can be a PLC software or a system block group.
+        value (Optional[swb.PlcSystemBlockGroupComposition]): The value of the system block groups and the connection to the C# library. So functions of the Openness API can be used on this variable.
+    """
+
     def __init__(self, parent: Union[PLCSoftware, PLCSystemBlockGroup]) -> None:
+        """Initializes the system block groups.
+
+        Args:
+            parent (Union[PLCSoftware, PLCSystemBlockGroup]): The parent of the system block groups. This can be a PLC software or a system block group.
+
+        Raises:
+            tia_e.InvalidSoftware: If the parent value is None.
+        """
         self.parent = parent
         self.__value = None
 
@@ -416,12 +699,31 @@ class PLCSystemBlockGroups(Composition[PLCSystemBlockGroup]):
         self.__value = value
 
     def find(self, name: str) -> PLCSystemBlockGroup:
+        """Finds a system block group by name.
+
+        Args:
+            name (str): The name of the system block group.
+
+        Raises:
+            tia_e.InvalidSystemBlockGroupComposition: If the value is None.
+
+        Returns:
+            PLCSystemBlockGroup: The system block group with the given name.
+        """
         if self.value is None:
             raise tia_e.InvalidSystemBlockGroupComposition("Value is None")
 
         return PLCSystemBlockGroup(self, name)
 
     def __iter__(self) -> Iterator[PLCSystemBlockGroup]:
+        """Iterates over the system block groups.
+
+        Raises:
+            tia_e.InvalidSystemBlockGroupComposition: If the value is None.
+
+        Yields:
+            Iterator[PLCSystemBlockGroup]: The system block groups.
+        """
         if self.value is None:
             raise tia_e.InvalidSystemBlockGroupComposition("Value is None")
 
@@ -429,6 +731,17 @@ class PLCSystemBlockGroups(Composition[PLCSystemBlockGroup]):
             yield PLCSystemBlockGroup(self, system_block_group.Name)
 
     def create(self, name: str) -> PLCSystemBlockGroup:
+        """Creates a system block group.
+
+        Args:
+            name (str): The name of the system block group.
+
+        Raises:
+            tia_e.InvalidSystemBlockGroupComposition: If the value is None.
+
+        Returns:
+            PLCSystemBlockGroup: The created system block group.
+        """
         if self.value is None:
             raise tia_e.InvalidSystemBlockGroupComposition("Value is None")
 
@@ -438,7 +751,24 @@ class PLCSystemBlockGroups(Composition[PLCSystemBlockGroup]):
 
 
 class PLCUserBlockGroup(CompositionItem):
+    """Represents a user block group. This is a composition item of user block groups.
+
+    Attributes:
+        parent (PLCUserBlockGroups): The parent of the user block group. This is a composition of user block groups.
+        name (str): The name of the user block group.
+        value (Optional[swb.PlcBlockUserGroup]): The value of the user block group and the connection to the C# library. So functions of the Openness API can be used on this variable.
+    """
+
     def __init__(self, parent: PLCUserBlockGroups, name: str) -> None:
+        """Initializes the user block group.
+
+        Args:
+            parent (PLCUserBlockGroups): The parent of the user block group. This is a composition of user block groups.
+            name (str): The name of the user block group.
+
+        Raises:
+            tia_e.InvalidUserBlockGroupComposition: If the parent value is None.
+        """
         self.parent = parent
         self.name = name
         self.__value = None
@@ -462,18 +792,42 @@ class PLCUserBlockGroup(CompositionItem):
         self.__value = value
 
     def get_groups(self) -> PLCUserBlockGroups:
+        """Gets the user block groups of the user block group.
+
+        Raises:
+            tia_e.InvalidUserBlockGroup: If the value is None.
+
+        Returns:
+            PLCUserBlockGroups: The user block groups of the user block group.
+        """
         if self.value is None:
             raise tia_e.InvalidUserBlockGroup("Value is None")
 
         return PLCUserBlockGroups(self)
 
     def get_blocks(self) -> PLCBlocks:
+        """Gets the blocks of the user block group.
+
+        Raises:
+            tia_e.InvalidUserBlockGroup: If the value is None.
+
+        Returns:
+            PLCBlocks: The blocks of the user block group.
+        """
         if self.value is None:
             raise tia_e.InvalidUserBlockGroup("Value is None")
 
         return PLCBlocks(self)
 
     def get_all_blocks(self, recursive: bool = False) -> list[PLCBlock]:
+        """Gets all blocks of the user block group.
+
+        Args:
+            recursive (bool, optional): If the blocks of the subgroups should be included. Defaults to False.
+
+        Returns:
+            list[PLCBlock]: The blocks of the user block group.
+        """
         if not recursive:
             return [block for block in self.get_blocks()]
         else:
@@ -485,7 +839,22 @@ class PLCUserBlockGroup(CompositionItem):
 
 
 class PLCUserBlockGroups(Composition[PLCUserBlockGroup]):
+    """Represents a composition of user block groups. This is a composition of user block groups.
+
+    Attributes:
+        parent (Union[PLCSoftware, PLCUserBlockGroup]): The parent of the user block groups. This is a software or a user block group.
+        value (Optional[swb.PlcBlockUserGroupComposition]): The value of the user block groups and the connection to the C# library. So functions of the Openness API can be used on this variable.
+    """
+
     def __init__(self, parent: Union[PLCSoftware, PLCUserBlockGroup]) -> None:
+        """Initializes the user block groups.
+
+        Args:
+            parent (Union[PLCSoftware, PLCUserBlockGroup]): The parent of the user block groups. This is a software or a user block group.
+
+        Raises:
+            tia_e.InvalidSoftware: If the parent value is None.
+        """
         self.parent = parent
         self.__value: Optional[swb.PlcBlockUserGroupComposition] = None
 
@@ -514,12 +883,31 @@ class PLCUserBlockGroups(Composition[PLCUserBlockGroup]):
         self.__value = value
 
     def find(self, name: str) -> PLCUserBlockGroup:
+        """Finds a user block group by name.
+
+        Args:
+            name (str): The name of the user block group.
+
+        Raises:
+            tia_e.InvalidUserBlockGroupComposition: If the value is None.
+
+        Returns:
+            PLCUserBlockGroup: The user block group.
+        """
         if self.value is None:
             raise tia_e.InvalidUserBlockGroupComposition("Value is None")
 
         return PLCUserBlockGroup(self, name)
 
     def __iter__(self) -> Iterator[PLCUserBlockGroup]:
+        """Iterates over the user block groups.
+
+        Raises:
+            tia_e.InvalidUserBlockGroupComposition: If the value is None.
+
+        Yields:
+            Iterator[PLCUserBlockGroup]: The user block groups.
+        """
         if self.value is None:
             raise tia_e.InvalidUserBlockGroupComposition("Value is None")
 
@@ -527,6 +915,17 @@ class PLCUserBlockGroups(Composition[PLCUserBlockGroup]):
             yield PLCUserBlockGroup(self, user_block_group.Name)
 
     def create(self, name: str) -> PLCUserBlockGroup:
+        """Creates a user block group.
+
+        Args:
+            name (str): The name of the user block group.
+
+        Raises:
+            tia_e.InvalidUserBlockGroupComposition: If the value is None.
+
+        Returns:
+            PLCUserBlockGroup: The user block group.
+        """
         if self.value is None:
             raise tia_e.InvalidUserBlockGroupComposition("Value is None")
 
@@ -536,7 +935,24 @@ class PLCUserBlockGroups(Composition[PLCUserBlockGroup]):
 
 
 class PLCBlock(CompositionItem):
+    """Represents a block. This is a composition item of blocks.
+
+    Attributes:
+        parent (PLCBlocks): The parent of the block. This is a blocks.
+        name (str): The name of the block.
+        value (Optional[swb.PlcBlock]): The value of the block and the connection to the C# library. So functions of the Openness API can be used on this variable.
+    """
+
     def __init__(self, parent: PLCBlocks, name: str) -> None:
+        """Initializes the block.
+
+        Args:
+            parent (PLCBlocks): The parent of the block. This is a blocks.
+            name (str): The name of the block.
+
+        Raises:
+            tia_e.InvalidBlockComposition: If the parent value is None.
+        """
         self.parent = parent
         self.name = name
         self.__value = None
@@ -560,6 +976,14 @@ class PLCBlock(CompositionItem):
         self.__value = value
 
     def export(self) -> str:
+        """This function exports the block to a file. The file is stored in the exported_blocks folder in the data folder.
+
+        Raises:
+            tia_e.InvalidBlock: If the value is None or when the block is inconsistent. This means that the block is not compiled and therefore not exportable.
+
+        Returns:
+            str: The path to the exported file.
+        """
         if self.value is None:
             raise tia_e.InvalidBlock("Value is None")
 
@@ -577,9 +1001,37 @@ class PLCBlock(CompositionItem):
 
         return new_file
 
+    def update_software(self) -> None:
+        """This function updates the software with the block.
+
+        Raises:
+            tia_e.InvalidBlock: If the value is None.
+        """
+        if self.value is None:
+            raise tia_e.InvalidBlock("Value is None")
+
+        self.value.GetService[comp.ICompilable]().Compile()
+
 
 class PLCBlocks(Composition[PLCBlock]):
+    """Represents a blocks. This is a composition of blocks.
+
+    Attributes:
+        parent (Union[PLCSoftware, PLCSystemBlockGroup, PLCUserBlockGroup]): The parent of the blocks. This is a software, a system block group or a user block group.
+        value (Optional[swb.PlcBlockComposition]): The value of the blocks and the connection to the C# library. So functions of the Openness API can be used on this variable.
+    """
+
     def __init__(self, parent: Union[PLCSoftware, PLCSystemBlockGroup, PLCUserBlockGroup]) -> None:
+        """Initializes the blocks.
+
+        Args:
+            parent (Union[PLCSoftware, PLCSystemBlockGroup, PLCUserBlockGroup]): The parent of the blocks. This is a software, a system block group or a user block group.
+
+        Raises:
+            tia_e.InvalidSoftware: The software value is None.
+            tia_e.InvalidSystemBlockGroup: The system block group value is None.
+            tia_e.InvalidUserBlockGroup: The user block group value is None.
+        """
         self.parent = parent
         self.__value = None
 
@@ -608,19 +1060,51 @@ class PLCBlocks(Composition[PLCBlock]):
         self.__value = value
 
     def find(self, name: str) -> PLCBlock:
+        """Finds a block by name.
+
+        Args:
+            name (str): The name of the block.
+
+        Raises:
+            tia_e.InvalidBlockComposition: If the value is None.
+
+        Returns:
+            PLCBlock: The block.
+        """
         if self.value is None:
             raise tia_e.InvalidBlockComposition("Value is None")
 
         return PLCBlock(self, name)
 
     def __iter__(self) -> Iterator[PLCBlock]:
+        """Iterates over all blocks.
+
+        Raises:
+            tia_e.InvalidBlockComposition: If the value is None.
+
+        Yields:
+            Iterator[PLCBlock]: The block.
+        """
         if self.value is None:
             raise tia_e.InvalidBlockComposition("Value is None")
 
         for block in self.value:
             yield PLCBlock(self, block.Name)
 
-    def create(self, path: str, name: str) -> PLCBlock:
+    def create(self, path: str, name: str, labels: dict[str, str] = {}) -> PLCBlock:
+        """Creates a block from a file.
+
+        Args:
+            path (str): The path to the file. The file must be an valid XML file.
+            name (str): The name of the block.
+
+        Raises:
+            tia_e.InvalidBlockComposition: If the value is None.
+            tia_e.InvalidPath: If the path is invalid.
+
+        Returns:
+            PLCBlock: The block.
+        """
         if self.value is None:
             raise tia_e.InvalidBlockComposition("Value is None")
 
@@ -637,7 +1121,16 @@ class PLCBlocks(Composition[PLCBlock]):
         with open(new_file, "r") as f:
             data = f.read()
 
+        for key, value in labels.items():
+            data = data.replace(key, value)
+
         data = data.replace("__NAME__", name)
+
+        match = re.match(r"__\w+__", data)
+
+        if match:
+            for group in match.groups():
+                print(f"Warning: {group} is not replaced in {new_file}!")
 
         with open(new_file, "w") as f:
             f.write(data)
@@ -651,6 +1144,18 @@ class PLCBlocks(Composition[PLCBlock]):
         return PLCBlock(self, name)
 
     def create_instance_database(self, name: str, fb_name: str) -> PLCBlock:
+        """Creates an instance database.
+
+        Args:
+            name (str): The name of the instance database.
+            fb_name (str): The name of the function block which is used to link to the instance database.
+
+        Raises:
+            tia_e.InvalidBlockComposition: If the value is None.
+
+        Returns:
+            PLCBlock: The block.
+        """
         if self.value is None:
             raise tia_e.InvalidBlockComposition("Value is None")
 
@@ -659,6 +1164,17 @@ class PLCBlocks(Composition[PLCBlock]):
         return PLCBlock(self, name)
 
     def create_prodiag_block(self, name: str) -> PLCBlock:
+        """Creates a ProDiag block. This is a function block with an instance database. The instance database is created automatically. The instance database is created in the IDB group which is created automatically if it does not exist. This group is placed in the same group as the function block.
+
+        Args:
+            name (str): The name of the function block.
+
+        Raises:
+            tia_e.InvalidBlockComposition: If the value is None.
+
+        Returns:
+            PLCBlock: The block.
+        """
         if self.value is None:
             raise tia_e.InvalidBlockComposition("Value is None")
 
@@ -1093,9 +1609,15 @@ class MasterCopies(Composition[MasterCopy]):
 
 
 class Client:
-    """Client for TIA Portal"""
+    """Client for TIA Portal. This is the main class for the TIA Portal API. This class can create a new connection via Openness API to connect to a TIA Portal instance.
+
+    Attributes:
+        session (Optional[tia.TiaPortal]): The TIA Portal session.
+        project (Optional[Project]): The currently opened project.
+    """
 
     def __init__(self) -> None:
+        """Constructor for the Client class. This class can create a new connection via Openness API to connect to a TIA Portal instance."""
         self.session: Optional[tia.TiaPortal] = tia.TiaPortal(tia.TiaPortalMode.WithoutUserInterface)
         self.project: Optional[Project] = None
 
@@ -1103,6 +1625,11 @@ class Client:
     # GUI actions
     # ==================================================================================================================
     def open_gui(self) -> None:
+        """Opens the TIA Portal GUI. If a project is opened, it will be opened in the GUI as well.
+
+        Raises:
+            tia_e.TIAInvalidSession: If the session is None.
+        """
         if self.session is None:
             raise tia_e.TIAInvalidSession("Session is None")
 
@@ -1121,6 +1648,11 @@ class Client:
                 self.project.open()
 
     def close_gui(self) -> None:
+        """Closes the TIA Portal GUI. If a project is opened, it will be closed as well and reopened in the background.
+
+        Raises:
+            tia_e.TIAInvalidSession: If the session is None.
+        """
         if self.session is None:
             raise tia_e.TIAInvalidSession("Session is None")
         process = self.session.GetCurrentProcess()
@@ -1142,6 +1674,7 @@ class Client:
     # QUITING AND CLOSING
     # ==================================================================================================================
     def close(self) -> None:
+        """Closes the TIA Portal session and kills the process. If a project is opened, it will be closed as well."""
         if self.session is None:
             return
 
@@ -1154,9 +1687,11 @@ class Client:
         Process.GetProcessById(process.Id).Kill()
 
     def quit(self) -> None:
+        """This is an alias for the close method."""
         self.close()
 
     def __del__(self) -> None:
+        """Destructor for the Client class. This method will close the TIA Portal session and kill the process. If a project is opened, it will be closed as well."""
         if self.session is None:
             return
 
@@ -1173,6 +1708,19 @@ class Client:
     # ==================================================================================================================
 
     def open_project(self, path: str, name: str, version: Optional[TIAVersion] = None) -> Project:
+        """Opens a project in the TIA Portal.
+
+        Args:
+            path (str): The path to the Automation folder where all subfolders are located.
+            name (str): The name of the project.
+            version (Optional[TIAVersion], optional): The version of the project. Defaults to None. If None, the version of the session will be used.
+
+        Raises:
+            tia_e.TIAInvalidSession: If the session is None.
+
+        Returns:
+            Project: The opened project.
+        """
         if self.session is None:
             raise tia_e.TIAInvalidSession("Session is None")
 
@@ -1185,6 +1733,19 @@ class Client:
         return self.project
 
     def create_project(self, path: str, name: str, version: Optional[TIAVersion] = None) -> Project:
+        """Creates a new project in the TIA Portal.
+
+        Args:
+            path (str): The path to the Automation folder where all subfolders are located.
+            name (str): The name of the project.
+            version (Optional[TIAVersion], optional): The version of the project. Defaults to None. If None, the version of the session will be used.
+
+        Raises:
+            tia_e.TIAInvalidSession: If the session is None.
+
+        Returns:
+            Project: The created project.
+        """
         if self.session is None:
             raise tia_e.TIAInvalidSession("Session is None")
 
@@ -1197,6 +1758,19 @@ class Client:
         return self.project
 
     def create_projects(self, path: str, names: list[str], version: Optional[TIAVersion] = None) -> list[Project]:
+        """Creates multiple projects in the TIA Portal.
+
+        Args:
+            path (str): The path to the Automation folder where all subfolders are located.
+            names (list[str]): A list of project names.
+            version (Optional[TIAVersion], optional): The version of the project. Defaults to None. If None, the version of the session will be used.
+
+        Raises:
+            tia_e.TIAInvalidSession: If the session is None.
+
+        Returns:
+            list[Project]: A list of created projects.
+        """
         if self.session is None:
             raise tia_e.TIAInvalidSession("Session is None")
 
@@ -1217,7 +1791,26 @@ class Client:
 
 
 class Project(TiaObject):
+    """A class for handling projects in the TIA Portal. This class is not intended to be used directly. Use the Client class instead.
+
+    Attributes:
+        client (Client): The client object.
+        path (str): The path to the Automation folder where all subfolders are located.
+        name (str): The name of the project.
+        version (Optional[TIAVersion]): The version of the project. Defaults to None. If None, the version of the session will be used.
+        value (Optional[tia.Project]): The project object.
+        devices (Devices): A composition of Devices that are part of the project.
+    """
+
     def __init__(self, client: Client, path: str, name: str, version: Optional[TIAVersion] = None):
+        """Constructor for the Project class.
+
+        Args:
+            client (Client): The client object that created this project. This is used to access the session object.
+            path (str): The path to the Automation folder where all subfolders are located.
+            name (str): The name of the project.
+            version (Optional[TIAVersion], optional): The version of the project. Defaults to None. If None, the version of the session will be used.
+        """
         self.client = client
         self.path = path
         self.name = name
@@ -1235,6 +1828,12 @@ class Project(TiaObject):
         self.__value = value
 
     def open(self) -> None:
+        """Opens the project in the TIA Portal.
+
+        Raises:
+            tia_e.TIAInvalidSession: If the session is None.
+            tia_e.TIAProjectNotFound: If the project is not found or the path is not a file and the name is None.
+        """
         if self.client.session is None:
             raise tia_e.TIAInvalidSession("Session is None")
 
@@ -1265,6 +1864,7 @@ class Project(TiaObject):
         self.client.project = self
 
     def close(self) -> None:
+        """Closes the project in the TIA Portal."""
         if self.value is None:
             return
         self.save()
@@ -1272,12 +1872,22 @@ class Project(TiaObject):
         self.value = None
 
     def force_close(self) -> None:
+        """Forces the project to close without saving in the TIA Portal. This is useful if the project is not responding."""
         if self.value is None:
             return
         self.value.Close()
         self.value = None
 
     def create(self, open_existing: bool = False) -> None:
+        """Creates a new project in the TIA Portal.
+
+        Args:
+            open_existing (bool, optional): If True, the project will be opened if it already exists. Defaults to False.
+
+        Raises:
+            tia_e.TIAInvalidSession: If the session is None or the old session is None.
+            tia_e.TIAProjectAlreadyExists: If the project already exists and open_existing is False.
+        """
         if not open_existing:
             new_session = tia.TiaPortal(tia.TiaPortalMode.WithoutUserInterface)
             old_session = None
@@ -1306,17 +1916,57 @@ class Project(TiaObject):
         self.client.project = self
 
     def save(self) -> None:
+        """Saves the project in the TIA Portal.
+
+        Raises:
+            tia_e.TIAInvalidProject: If the value is None.
+        """
         if self.value is None:
             raise tia_e.TIAInvalidProject("Project is None")
         if self.is_modified():
             self.value.Save()
 
+    def save_as(self, name: str) -> None:
+        """Saves the project in the TIA Portal.
+
+        Args:
+            name (str): The name of the project.
+
+        Raises:
+            tia_e.TIAInvalidProject: If the value is None.
+        """
+        if self.value is None:
+            raise tia_e.TIAInvalidProject("Project is None")
+
+        dir_info = DirectoryInfo(os.path.join(self.path, name))
+        self.value.SaveAs(dir_info)
+
+        self.close()
+
+        project = Project(self.client, self.path, name, self.version)
+        project.open()
+
+        return
+
     def is_modified(self) -> bool:
+        """Checks if the project is modified.
+
+        Raises:
+            tia_e.TIAInvalidProject: If the value is None.
+
+        Returns:
+            bool: True if the project is modified, False otherwise.
+        """
         if self.value is None:
             raise tia_e.TIAInvalidProject("Project is None")
         return self.value.IsModified
 
     def compile(self) -> None:
+        """Compiles the project in the TIA Portal. This will compile all the software in the project. This will be needed to be able to export parts of the project.
+
+        Raises:
+            tia_e.TIAInvalidProject: If the value is None.
+        """
         if self.value is None:
             raise tia_e.TIAInvalidProject("Project is None")
 
@@ -1333,14 +1983,38 @@ class Project(TiaObject):
                 software_compile_service.Compile()
 
     def get_file_info(self) -> FileInfo:
+        """Gets the file info of the project.
+
+        Raises:
+            tia_e.TIAInvalidProject: If the value is None.
+
+        Returns:
+            FileInfo: The file info of the project.
+        """
         if self.value is None:
             raise tia_e.TIAInvalidProject("Project is None")
         return self.value.Path
 
     def is_open(self) -> bool:
+        """Checks if the project is open. Basically checks if the value is None.
+
+        Returns:
+            bool: True if the project is open, False otherwise.
+        """
         return self.value is not None
 
     def get_device_item(self, name: str) -> Optional[DeviceItem]:
+        """Gets a device item by name.
+
+        Args:
+            name (str): The name of the device item.
+
+        Raises:
+            tia_e.TIAInvalidProject: If the value is None.
+
+        Returns:
+            Optional[DeviceItem]: The device item if it exists, None otherwise.
+        """
         if self.value is None:
             raise tia_e.TIAInvalidProject("Project is None")
 
@@ -1352,6 +2026,14 @@ class Project(TiaObject):
         return None
 
     def get_plcs(self) -> list[DeviceItem]:
+        """Gets all the PLCs in the project.
+
+        Raises:
+            tia_e.TIAInvalidProject: If the value is None.
+
+        Returns:
+            list[DeviceItem]: A list of all the PLCs in the project.
+        """
         if self.value is None:
             raise tia_e.TIAInvalidProject("Project is None")
 
