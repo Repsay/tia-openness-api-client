@@ -9,11 +9,11 @@
 import configparser
 import os
 
-from tia_portal.version import TIAVersion
+from tia_portal.version import TiaVersion
 
 DATA_PATH = os.path.join(os.path.expanduser("~"), ".tia_portal")
 CONFIG_PATH = os.path.join(DATA_PATH, "config.ini")
-VERSION = TIAVersion.V15_1
+VERSION = TiaVersion.V15_1
 
 
 def load() -> None:
@@ -33,16 +33,16 @@ def load() -> None:
     config.read(CONFIG_PATH)
     global VERSION
     VERSION = (
-        TIAVersion[config["DEFAULT"]["version"]]
+        TiaVersion[config["DEFAULT"]["version"]]
         if config["USER"].get("version") is None
-        else TIAVersion[config["USER"]["version"]]
+        else TiaVersion[config["USER"]["version"]]
     )
 
 
-def set_version(version: TIAVersion) -> None:
+def set_version(version: TiaVersion) -> None:
     """Set the TIA Portal version.
 
-    Args:
+    Parameters:
         version (TIAVersion): TIA Portal version.
     """
     config = configparser.ConfigParser()

@@ -58,7 +58,7 @@ class CaxProvider(
     def Import(self, importFilePath: FileInfo, logFilePath: FileInfo, importOption: CaxImportOptions) -> bool:
         """Command to CAx Import
 
-        Args:
+        Parameters:
             importFilePath (FileInfo): Import file path
             logFilePath (FileInfo): Log file path
             importOption (CaxImportOptions): Cax Import Merge options

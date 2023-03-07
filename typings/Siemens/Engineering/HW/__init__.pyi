@@ -3405,7 +3405,7 @@ class HardwareObject(
     def Name(self, value: str) -> None:
         """Sets the name of the device
 
-        Args:
+        Parameters:
             value (str): The name of the device
         """
         ...
@@ -3609,7 +3609,7 @@ class DeviceComposition(
     def CreateWithItem(self, typeIdentifier: str, name: str, deviceName: Optional[str]) -> Device:
         """Create a device with subcomponents
 
-        Args:
+        Parameters:
             typeIdentifier (str): Type identifier of the device to be created with sub items
             name (str): Name of the device to be created with sub items
             deviceName (str): The name of the device to create with subcomponents
@@ -3621,7 +3621,7 @@ class DeviceComposition(
     def Find(self, name: str) -> Device:
         """Finds a given device
 
-        Args:
+        Parameters:
             name (str): Name to find
 
         Returns:
@@ -3833,9 +3833,9 @@ class DeviceItemComposition(
         """
         ...
     def Find(self, name: str) -> DeviceItem:
-        """ Find a device item by name
+        """Find a device item by name
 
-        Args:
+        Parameters:
             name (str): The name of the device item to find
 
         Returns:

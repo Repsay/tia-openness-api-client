@@ -34,7 +34,7 @@ class ProtectionProviderBase(
     def Protect(self, newPassword: SecureString) -> None:
         """Sets protection for the underlying object
 
-        Args:
+        Parameters:
             newPassword (SecureString): the password to protect the object with
         """
         ...
@@ -48,7 +48,7 @@ class ProtectionProviderBase(
     def Unprotect(self, currentPassword: SecureString) -> None:
         """Removes protection from the underlying object
 
-        Args:
+        Parameters:
             currentPassword (SecureString): the password the underlying object is currently protected with
         """
         ...

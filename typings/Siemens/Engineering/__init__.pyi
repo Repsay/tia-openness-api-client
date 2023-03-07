@@ -340,7 +340,7 @@ class IEngineeringObject(IEngineeringCompositionOrObject):
 
     def Create(self, compositionName: str, type: T, parameters: Dict[str, Any]) -> T:
         """Creates a new object in the composition.
-        Args:
+        Parameters:
             compositionName (str): Name of the composition.
             type (T): Type of the object to create.
             parameters (Dict[str, Any]): The parameters.
@@ -350,7 +350,7 @@ class IEngineeringObject(IEngineeringCompositionOrObject):
         ...
     def GetAttribute(self, name: str) -> Any:
         """Gets an attribute with the given name.
-        Args:
+        Parameters:
             name (str): The name of the attribute.
         Returns:
             Any: The attribute.
@@ -364,7 +364,7 @@ class IEngineeringObject(IEngineeringCompositionOrObject):
         ...
     def GetAttributes(self, names: List[str]) -> List[Object]:
         """Gets a list of attributes with the given names.
-        Args:
+        Parameters:
             names (List[str]): The names of the attributes.
         Returns:
             List[Object]: List of attributes.
@@ -372,7 +372,7 @@ class IEngineeringObject(IEngineeringCompositionOrObject):
         ...
     def GetComposition(self, name: str) -> IEngineeringCompositionOrObject:
         """Gets an IEngineeringCompositionOrObject with the given name.
-        Args:
+        Parameters:
             name (str): The name of the composition.
         Returns:
             IEngineeringCompositionOrObject: The composition which has the given name.
@@ -386,7 +386,7 @@ class IEngineeringObject(IEngineeringCompositionOrObject):
         ...
     def GetCreationInfos(self, compositionName: str) -> List[EngineeringCreationInfo]:
         """Gets the list of creation infos available for the object.
-        Args:
+        Parameters:
             compositionName (str): The name of the composition.
         Returns:
             List[EngineeringCreationInfo]: The list of creation infos available for the object.
@@ -400,7 +400,7 @@ class IEngineeringObject(IEngineeringCompositionOrObject):
         ...
     def Invoke(self, name: str, parameters: Dict[Any, Object]) -> Object:
         """Invokes an action on the object.
-        Args:
+        Parameters:
             name (str): The name of the action to invoke.
             parameters (Dict[Any, Object]): The parameters to pass to the action. The keys are the parameter Type and the values are objects.
         Returns:
@@ -409,14 +409,14 @@ class IEngineeringObject(IEngineeringCompositionOrObject):
         ...
     def SetAttribute(self, name: str, value: Object) -> None:
         """Sets an attribute with the given name to the given value value.
-        Args:
+        Parameters:
             name (str): The name of the attribute to set with the given value.
             value : The value to set for the attribute with the given name.
         """
         ...
     def SetAttributes(self, attributes: Dict[str, Object]) -> None:
         """Sets a list of attributes with the given names to the given values.
-        Args:
+        Parameters:
             attributes (Dict[str, Object]): The attributes to set. The keys are the attribute names and the values are the attribute values.
         """
         ...
@@ -455,7 +455,7 @@ class ExclusiveAccess(
         ...
     def Transaction(self, peristence: ITransactionSupport, undoDescription: str) -> Transaction:
         """Acquires a transaction instance from the active exclusive access session
-        Args:
+        Parameters:
             peristence (ITransactionSupport): The persistence where the transaction is to be created
             undoDescription (str): The description of the undo unit that is created for the open transaction
         Returns:
@@ -522,7 +522,7 @@ class IEngineeringComposition(IEngineeringCompositionOrObject, IEnumerable[U]):
         ...
     def Contains(self, item: U) -> bool:
         """Determines if item is contained within.
-        Args:
+        Parameters:
             item (IEngineeringObject): The item being sought.
         Returns:
             bool: true if item is contained within; otherwise false.
@@ -530,7 +530,7 @@ class IEngineeringComposition(IEngineeringCompositionOrObject, IEnumerable[U]):
         ...
     def Create(self, type: Optional[T], parameters: Optional[Dict[str, Object]]) -> T:
         """Creates an object of the given type with the given parameters.
-        Args:
+        Parameters:
             type (T): The type of the object to create.
             parameters (Dict[str, Object]): The parameters to use for the creation of the object.
         Returns:
@@ -551,7 +551,7 @@ class IEngineeringComposition(IEngineeringCompositionOrObject, IEnumerable[U]):
         ...
     def IndexOf(self, item: U) -> int:
         """Searches for item and returns the zero-based index of the first occurrence within.
-        Args:
+        Parameters:
             item (IEngineeringObject): The item for which an index is sought.
         Returns:
             int: The element at the specified item.
@@ -559,7 +559,7 @@ class IEngineeringComposition(IEngineeringCompositionOrObject, IEnumerable[U]):
         ...
     def Invoke(self, name: str, parameters: Dict[Any, Object]) -> Object:
         """Invokes the action with the given name and parameters.
-        Args:
+        Parameters:
             name (str): The name of the action to invoke.
             parameters (Dict[Any, Object]): The parameters to use for the invocation of the action.
         Returns:
@@ -605,7 +605,7 @@ class IEngineeringAssociation(IEngineeringInstance, IEnumerable[U]):
         ...
     def Contains(self, item: U) -> bool:
         """Determines if item is contained within.
-        Args:
+        Parameters:
             item (IEngineeringObject): The item being sought.
         Returns:
             bool: true if item is contained within; otherwise false.
@@ -619,7 +619,7 @@ class IEngineeringAssociation(IEngineeringInstance, IEnumerable[U]):
         ...
     def IndexOf(self, item: U) -> int:
         """Searches for item and returns the zero-based index of the first occurrence within.
-        Args:
+        Parameters:
             item (IEngineeringObject): The item for which an index is sought.
         Returns:
             int: The element at the specified item.
@@ -627,7 +627,7 @@ class IEngineeringAssociation(IEngineeringInstance, IEnumerable[U]):
         ...
     def Invoke(self, name: str, parameters: Dict[Any, Object]) -> Object:
         """Invokes the action with the given name and parameters.
-        Args:
+        Parameters:
             name (str): The name of the action to invoke.
             parameters (Dict[Any, Object]): The parameters to use for the invocation of the action.
         Returns:
@@ -752,13 +752,13 @@ class LanguageAssociation(
         ...
     def Add(self, item: Language) -> None:
         """Adds an item to the collection.
-        Args:
+        Parameters:
             item (Language): The item to add.
         """
         ...
     def Find(self, culture: CultureInfo) -> Language:
         """Searches for a language by a given culture.
-        Args:
+        Parameters:
             culture (CultureInfo): The culture to search for.
         Returns:
             Language: The language with the given culture, or None if not found.
@@ -772,7 +772,7 @@ class LanguageAssociation(
         ...
     def Remove(self, item: Language) -> bool:
         """Removes an item.
-        Args:
+        Parameters:
             item (Language): The item to be removed.
         Returns:
             bool: true if the item was removed; otherwise false.
@@ -798,7 +798,7 @@ class LanguageComposition(
         ...
     def Find(self, culture: CultureInfo) -> Language:
         """Searches for a language by a given culture.
-        Args:
+        Parameters:
             culture (CultureInfo): The culture to search for.
         Returns:
             Language: The language with the given culture, or None if not found.
@@ -930,7 +930,7 @@ class MultilingualTextItemComposition(
         ...
     def Find(self, language: Language) -> MultilingualTextItem:
         """Searches multilingual text item by language.
-        Args:
+        Parameters:
             language (Language): Language to find.
         Returns:
             MultilingualTextItem: Siemens.Engineering.MultilingualTextItem
@@ -1120,7 +1120,7 @@ class Project(
         ...
     def Archive(self, targetDirectory: DirectoryInfo, targetName: str, archivationMode: ProjectArchivationMode) -> None:
         """Archives the current project
-        Args:
+        Parameters:
             targetDirectory (DirectoryInfo): Directory where the project to be archived
             targetName (str): File name for the archived file
             archivationMode (ProjectArchivationMode): Archivation mode
@@ -1131,7 +1131,7 @@ class Project(
         ...
     def ExportProjectTexts(self, path: FileInfo, sourceLanguage: CultureInfo, targetLanguage: CultureInfo) -> None:
         """Export project text to an xlsx file
-        Args:
+        Parameters:
             path (FileInfo): Path to the xlsx file
             sourceLanguage (CultureInfo): The source language to use for the export of project texts
             targetLanguage (CultureInfo): The target language to use for the export of project texts
@@ -1145,7 +1145,7 @@ class Project(
         ...
     def ImportProjectTexts(self, path: FileInfo, updateSourceLanguage: bool) -> ProjectTextResult:
         """Import project text from an import file
-        Args:
+        Parameters:
             path (FileInfo): Path to the xlsx file
             updateSourceLanguage (bool): True if the source language is to be updated
         Returns:
@@ -1157,13 +1157,13 @@ class Project(
         ...
     def SaveAs(self, targetFolderPath: DirectoryInfo) -> None:
         """Saves all changes of the project to a new location
-        Args:
+        Parameters:
             targetFolderPath (DirectoryInfo): Target location for newly SavedAs project
         """
         ...
     def ShowHwEditor(self, view: View) -> None:
         """Show the indicated item in the HW editor of the attached TIA Portal
-        Args:
+        Parameters:
             view (View): Which view of the HW editor to show
         """
         ...
@@ -1202,7 +1202,7 @@ class ProjectComposition(
         ...
     def Create(self, path: DirectoryInfo, name: str) -> Project:
         """Creates a new project
-        Args:
+        Parameters:
             path (DirectoryInfo): Path to the project
             name (str): Name of the project
         """
@@ -1220,7 +1220,7 @@ class ProjectComposition(
         projectOpenMode: Optional[ProjectOpenMode] = ...,
     ) -> Project:
         """Open a project from the specified path.
-        Args:
+        Parameters:
             path (FileInfo): Path to the Tia Portal project file.
             umacDelegate (UmacDelegate, optional): Delegate that will be called if user authentication with UMAC is necessary. Defaults to None.
             projectOpenMode (ProjectOpenMode, optional): The mode in which the project will be opened. Defaults to ProjectOpenMode.Primary.
@@ -1235,7 +1235,7 @@ class ProjectComposition(
         projectOpenMode: Optional[ProjectOpenMode] = ...,
     ) -> Project:
         """Open a project from the specified path. If the project is not compatible with the current version of TIA Portal, it will be upgraded.
-        Args:
+        Parameters:
             path (FileInfo): Path to the Tia Portal project file.
             umacDelegate (Optional[UmacDelegate], optional): Delegate that will be called if user authentication with UMAC is necessary. Defaults to None.
             projectOpenMode (Optional[ProjectOpenMode], optional): The mode in which the project will be opened. Defaults to ProjectOpenMode.Primary.
@@ -1251,7 +1251,7 @@ class ProjectComposition(
         projectOpenMode: Optional[ProjectOpenMode] = ...,
     ) -> Project:
         """Retrieves an archived project with or without UMAC
-        Args:
+        Parameters:
             sourcePath (FileInfo): The path of the archived project file
             targetDirectory (DirectoryInfo): The path to the folder where project would be retrieved.
             umacDelegate (Optional[UmacDelegate], optional): Delegate will be called if the project is protected and user authentication is required. If the project is not protected, this parameter is ignored. Defaults to None.
@@ -1268,7 +1268,7 @@ class ProjectComposition(
         projectOpenMode: Optional[ProjectOpenMode] = ...,
     ) -> Project:
         """Retrieves a project from an archive and upgrades it to the current version with umac
-        Args:
+        Parameters:
             sourcePath (FileInfo): The path of the archived project file
             targetDirectory (DirectoryInfo): The path to the folder where project would be retrieved.
             umacDelegate (Optional[UmacDelegate], optional): Delegate will be called if the project is protected and user authentication is required. If the project is not protected, this parameter is ignored. Defaults to None.
@@ -1352,7 +1352,7 @@ class TiaPortal(
     IDisposable,
 ):
     """Represents a connection to the TIA Portal.
-    Args:
+    Parameters:
         tiaPortalMode(TiaPortalMode): The TIA Portal mode to connect to.
     """
 
@@ -1374,7 +1374,7 @@ class TiaPortal(
 
     def ExclusiveAccess(self, text: Optional[str] = ...) -> ExclusiveAccess:
         """Acquire an exclusive access session to the TIA Portal
-        Args:
+        Parameters:
             text (Optional[str], optional): The text to present to the interactive user while an exclusive access session is active. Defaults to None.
         Returns:
             ExclusiveAccess: Siemens.Engineering.ExclusiveAccess
@@ -1389,7 +1389,7 @@ class TiaPortal(
     @staticmethod
     def GetProcess(processId: int, *__args) -> TiaPortalProcess:
         """Gets the information of the running TIA-Portal.
-        Args:
+        Parameters:
             processId (int): TIA-Portal's process id.
             timeout (Optional[TimeSpan], optional): An optional parameter that provides the ability to set a timeout. Defaults to None.
             millisecondsTimeout (Optional[int], optional): An optional parameter that provides the ability to set a timeout. Defaults to None.
@@ -1610,7 +1610,7 @@ class UmacCredentials(
         ...
     def SetPassword(self, password: SecureString) -> None:
         """Sets the password of the UmacCredentials object.
-        Args:
+        Parameters:
             password (SecureString): The password to set.
         """
         ...
@@ -1628,7 +1628,7 @@ class UmacDelegate(MulticastDelegate):
 
     def BeginInvoke(self, umacCredentials: UmacCredentials, callback: AsyncCallback, object: Object) -> IAsyncResult:
         """Starts an asynchronous invocation of the delegate.
-        Args:
+        Parameters:
             umacCredentials (UmacCredentials): Credentials to be used for authentication.
             callback (AsyncCallback): The method to be called when the asynchronous operation completes.
             object : The object to pass to the callback method.
@@ -1638,13 +1638,13 @@ class UmacDelegate(MulticastDelegate):
         ...
     def EndInvoke(self, result: IAsyncResult) -> None:
         """Ends an asynchronous invocation of the delegate.
-        Args:
+        Parameters:
             result (IAsyncResult): The System.IAsyncResult returned by a call
         """
         ...
     def Invoke(self, umacCredentials: UmacCredentials):
         """Invokes the delegate.
-        Args:
+        Parameters:
             umacCredentials (UmacCredentials): Credentials to be used for authentication.
         """
         ...

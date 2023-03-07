@@ -1607,17 +1607,15 @@ class DirectoryInfo(FileSystemInfo):  # skipped bases: <type 'ISerializable'>
 
     @classmethod
     def __new__(cls, path: str) -> DirectoryInfo:
-        """ create a new instance of DirectoryInfo
+        """create a new instance of DirectoryInfo
 
-        Args:
+        Parameters:
             path (str): The fully qualified name of the new directory, or the relative directory to create.
 
         Returns:
             DirectoryInfo: A DirectoryInfo object representing the directory specified by path.
         """
         ...
-
-
     def Create(self, directorySecurity=None):
         """
         Create(self: DirectoryInfo)
@@ -2902,12 +2900,11 @@ class FileInfo(FileSystemInfo):  # skipped bases: <type 'ISerializable'>
 
     @classmethod
     def __new__(cls, fileName: str) -> FileInfo:
-        """ create a new instance for the creation, copying, deletion, moving, and opening of files, and aids in the creation of System.IO.FileStream objects. This class cannot be inherited.To browse the .NET Framework source code for this type, see the Reference Source.
+        """create a new instance for the creation, copying, deletion, moving, and opening of files, and aids in the creation of System.IO.FileStream objects. This class cannot be inherited.To browse the .NET Framework source code for this type, see the Reference Source.
 
-        Args:
+        Parameters:
             fileName (str): The fully qualified name of the new file, or the relative file name.
         """
-
     def AppendText(self):
         """
         AppendText(self: FileInfo) -> StreamWriter

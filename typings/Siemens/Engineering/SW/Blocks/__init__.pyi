@@ -706,7 +706,7 @@ class PlcBlockUserGroupComposition(
     def Create(self, name: str) -> PlcBlockUserGroup:
         """Create PlcBlockUserGroup with given name
 
-        Args:
+        Parameters:
             name (str): Name of the PlcBlockUserGroup
 
         Returns:
@@ -831,7 +831,7 @@ class PlcSystemBlockGroupComposition(
     def Create(self, name: str) -> PlcSystemBlockGroup:
         """Create PlcSystemBlockGroup with given name
 
-        Args:
+        Parameters:
             name (str): Name of the PlcSystemBlockGroup
 
         Returns:

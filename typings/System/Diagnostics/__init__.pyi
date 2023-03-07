@@ -4009,7 +4009,7 @@ class Process(Component):  # skipped bases: <type 'IComponent'>, <type 'IDisposa
         """Returns a new System.Diagnostics.Process component, given a process identifier and the name of a computer on the network.
 
 
-        Args:
+        Parameters:
             processId (int): The system-unique identifier of a process resource.
             machineName (Optional[str], optional): The name of a computer on the network. Defaults to None.
 

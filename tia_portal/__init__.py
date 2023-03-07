@@ -5,13 +5,13 @@ import re
 import shutil
 from typing import Any, Iterator, Optional, Union
 
-import clr
+import clr  # pylint: disable=import-error
 
 import tia_portal.config as cfg
 import tia_portal.exceptions as tia_e
 from tia_portal.protocol.composition import Composition, CompositionItem
 from tia_portal.protocol.objects import TiaObject
-from tia_portal.version import TIAVersion
+from tia_portal.version import TiaVersion
 
 cfg.load()
 
@@ -24,7 +24,7 @@ if not os.path.exists(dll_path):
     raise tia_e.LibraryDLLNotFound(f"Could not find {dll_path}")
 
 try:
-    clr.AddReference(dll_path)  # pylint: disable=no-member
+    clr.AddReference(dll_path)  # type: ignore pylint: disable=no-member
 except Exception as e:
     raise tia_e.LibraryImportError(f"Could not load {dll_path}") from e
 
@@ -86,7 +86,7 @@ class Device(CompositionItem):
     def __init__(self, parent: Devices, name: str):
         """Initializes a device.
 
-        Args:
+        Parameters:
             parent (Devices): The parent composition of devices.
             name (str): The name of the device.
 
@@ -159,7 +159,7 @@ class Devices(Composition[Device]):
     def __init__(self, parent: Project) -> None:
         """Initializes a composition of devices.
 
-        Args:
+        Parameters:
             parent (Project): The parent project.
 
         Raises:
@@ -189,7 +189,7 @@ class Devices(Composition[Device]):
     def find(self, name: str) -> Device:
         """Finds a device by name.
 
-        Args:
+        Parameters:
             name (str): The name of the device.
 
         Raises:
@@ -221,7 +221,7 @@ class Devices(Composition[Device]):
     def create(self, HwTypeIdentifier: str, name: str, device_name: Optional[str]) -> Device:
         """Creates a device in the composition of devices.
 
-        Args:
+        Parameters:
             HwTypeIdentifier (str): The hardware type identifier of the device. These can be found in the TIA Portal when creating a new device.
             name (str): The name of the device (This can be found in the network tab of the TIA Portal)
             device_name (Optional[str]): The device name of the device. This is the name of the device in the TIA Portal. This is optional in some cases.
@@ -251,7 +251,7 @@ class Devices(Composition[Device]):
     def create_PLC(self, article_no: str, version: str, name: str, device_name: str) -> Device:
         """Creates a PLC device in the composition of devices.
 
-        Args:
+        Parameters:
             article_no (str): The article number of the PLC. This can be found in the TIA Portal when creating a new device.
             version (str): The version of the PLC. This can be found in the TIA Portal when creating a new device.
             name (str): The name of the device (This can be found in the network tab of the TIA Portal)
@@ -266,7 +266,7 @@ class Devices(Composition[Device]):
     def create_HMI(self, article_no: str, version: str, name: str) -> Device:
         """Creates a HMI device in the composition of devices.
 
-        Args:
+        Parameters:
             article_no (str): The article number of the HMI. This can be found in the TIA Portal when creating a new device.
             version (str): The version of the HMI. This can be found in the TIA Portal when creating a new device.
             name (str): The name of the device (This can be found in the network tab of the TIA Portal)
@@ -290,7 +290,7 @@ class DeviceItem(CompositionItem):
     def __init__(self, parent: DeviceItems, name: str):
         """Initializes the device item.
 
-        Args:
+        Parameters:
             parent (DeviceItems): The parent device items. This is the composition of device items.
             name (str): The name of the device item.
 
@@ -327,9 +327,6 @@ class DeviceItem(CompositionItem):
     def get_software(self) -> Union[PLCSoftware, None]:
         # TODO: Implement more different software types
         """Gets the software of the device item.
-
-        TODO:
-            Implement more different software types
 
         Raises:
             tia_e.InvalidDeviceItem: If the value is None.
@@ -384,7 +381,7 @@ class DeviceItems(Composition[DeviceItem]):
     def __init__(self, parent: Union[Device, DeviceItem]) -> None:
         """Initializes the device items.
 
-        Args:
+        Parameters:
             parent (Union[Device, DeviceItem]): The parent device or device item. This is a single device or a device item that contains device items.
 
         Raises:
@@ -414,7 +411,7 @@ class DeviceItems(Composition[DeviceItem]):
     def find(self, name: str) -> DeviceItem:
         """Finds a device item by name.
 
-        Args:
+        Parameters:
             name (str): The name of the device item.
 
         Raises:
@@ -467,7 +464,7 @@ class PLCSoftware(TiaObject):
     def __init__(self, parent: DeviceItem) -> None:
         """Initializes the PLC software.
 
-        Args:
+        Parameters:
             parent (DeviceItem): The parent device item. This is a single device item that contains PLC software.
 
         Raises:
@@ -548,7 +545,7 @@ class PLCSoftware(TiaObject):
     def get_all_blocks(self, recursive: bool = False) -> list[PLCBlock]:
         """Gets all blocks of the PLC software. This includes all blocks of the main block group and all blocks of the system block groups and user block groups.
 
-        Args:
+        Parameters:
             recursive (bool, optional): If True, all blocks of the system block groups and user block groups will be included. Defaults to False.
 
         Returns:
@@ -578,7 +575,7 @@ class PLCSystemBlockGroup(CompositionItem):
     def __init__(self, parent: PLCSystemBlockGroups, name: str) -> None:
         """Initializes the system block group.
 
-        Args:
+        Parameters:
             parent (PLCSystemBlockGroups): The parent system block groups. This is a composition of system block groups.
             name (str): The name of the system block group.
 
@@ -638,7 +635,7 @@ class PLCSystemBlockGroup(CompositionItem):
     def get_all_blocks(self, recursive: bool = False) -> list[PLCBlock]:
         """Gets all blocks of the system block group. This includes all blocks of the system block group and all blocks of the system block groups.
 
-        Args:
+        Parameters:
             recursive (bool, optional): If True, all blocks of the system block groups will be included. Defaults to False.
 
         Returns:
@@ -665,7 +662,7 @@ class PLCSystemBlockGroups(Composition[PLCSystemBlockGroup]):
     def __init__(self, parent: Union[PLCSoftware, PLCSystemBlockGroup]) -> None:
         """Initializes the system block groups.
 
-        Args:
+        Parameters:
             parent (Union[PLCSoftware, PLCSystemBlockGroup]): The parent of the system block groups. This can be a PLC software or a system block group.
 
         Raises:
@@ -701,7 +698,7 @@ class PLCSystemBlockGroups(Composition[PLCSystemBlockGroup]):
     def find(self, name: str) -> PLCSystemBlockGroup:
         """Finds a system block group by name.
 
-        Args:
+        Parameters:
             name (str): The name of the system block group.
 
         Raises:
@@ -733,7 +730,7 @@ class PLCSystemBlockGroups(Composition[PLCSystemBlockGroup]):
     def create(self, name: str) -> PLCSystemBlockGroup:
         """Creates a system block group.
 
-        Args:
+        Parameters:
             name (str): The name of the system block group.
 
         Raises:
@@ -762,7 +759,7 @@ class PLCUserBlockGroup(CompositionItem):
     def __init__(self, parent: PLCUserBlockGroups, name: str) -> None:
         """Initializes the user block group.
 
-        Args:
+        Parameters:
             parent (PLCUserBlockGroups): The parent of the user block group. This is a composition of user block groups.
             name (str): The name of the user block group.
 
@@ -822,7 +819,7 @@ class PLCUserBlockGroup(CompositionItem):
     def get_all_blocks(self, recursive: bool = False) -> list[PLCBlock]:
         """Gets all blocks of the user block group.
 
-        Args:
+        Parameters:
             recursive (bool, optional): If the blocks of the subgroups should be included. Defaults to False.
 
         Returns:
@@ -849,7 +846,7 @@ class PLCUserBlockGroups(Composition[PLCUserBlockGroup]):
     def __init__(self, parent: Union[PLCSoftware, PLCUserBlockGroup]) -> None:
         """Initializes the user block groups.
 
-        Args:
+        Parameters:
             parent (Union[PLCSoftware, PLCUserBlockGroup]): The parent of the user block groups. This is a software or a user block group.
 
         Raises:
@@ -885,7 +882,7 @@ class PLCUserBlockGroups(Composition[PLCUserBlockGroup]):
     def find(self, name: str) -> PLCUserBlockGroup:
         """Finds a user block group by name.
 
-        Args:
+        Parameters:
             name (str): The name of the user block group.
 
         Raises:
@@ -917,7 +914,7 @@ class PLCUserBlockGroups(Composition[PLCUserBlockGroup]):
     def create(self, name: str) -> PLCUserBlockGroup:
         """Creates a user block group.
 
-        Args:
+        Parameters:
             name (str): The name of the user block group.
 
         Raises:
@@ -946,7 +943,7 @@ class PLCBlock(CompositionItem):
     def __init__(self, parent: PLCBlocks, name: str) -> None:
         """Initializes the block.
 
-        Args:
+        Parameters:
             parent (PLCBlocks): The parent of the block. This is a blocks.
             name (str): The name of the block.
 
@@ -1024,7 +1021,7 @@ class PLCBlocks(Composition[PLCBlock]):
     def __init__(self, parent: Union[PLCSoftware, PLCSystemBlockGroup, PLCUserBlockGroup]) -> None:
         """Initializes the blocks.
 
-        Args:
+        Parameters:
             parent (Union[PLCSoftware, PLCSystemBlockGroup, PLCUserBlockGroup]): The parent of the blocks. This is a software, a system block group or a user block group.
 
         Raises:
@@ -1062,7 +1059,7 @@ class PLCBlocks(Composition[PLCBlock]):
     def find(self, name: str) -> PLCBlock:
         """Finds a block by name.
 
-        Args:
+        Parameters:
             name (str): The name of the block.
 
         Raises:
@@ -1094,7 +1091,7 @@ class PLCBlocks(Composition[PLCBlock]):
     def create(self, path: str, name: str, labels: dict[str, str] = {}) -> PLCBlock:
         """Creates a block from a file.
 
-        Args:
+        Parameters:
             path (str): The path to the file. The file must be an valid XML file.
             name (str): The name of the block.
 
@@ -1146,7 +1143,7 @@ class PLCBlocks(Composition[PLCBlock]):
     def create_instance_database(self, name: str, fb_name: str) -> PLCBlock:
         """Creates an instance database.
 
-        Args:
+        Parameters:
             name (str): The name of the instance database.
             fb_name (str): The name of the function block which is used to link to the instance database.
 
@@ -1166,7 +1163,7 @@ class PLCBlocks(Composition[PLCBlock]):
     def create_prodiag_block(self, name: str) -> PLCBlock:
         """Creates a ProDiag block. This is a function block with an instance database. The instance database is created automatically. The instance database is created in the IDB group which is created automatically if it does not exist. This group is placed in the same group as the function block.
 
-        Args:
+        Parameters:
             name (str): The name of the function block.
 
         Raises:
@@ -1707,10 +1704,10 @@ class Client:
     # PROJECTS
     # ==================================================================================================================
 
-    def open_project(self, path: str, name: str, version: Optional[TIAVersion] = None) -> Project:
+    def open_project(self, path: str, name: str, version: Optional[TiaVersion] = None) -> Project:
         """Opens a project in the TIA Portal.
 
-        Args:
+        Parameters:
             path (str): The path to the Automation folder where all subfolders are located.
             name (str): The name of the project.
             version (Optional[TIAVersion], optional): The version of the project. Defaults to None. If None, the version of the session will be used.
@@ -1732,10 +1729,10 @@ class Client:
 
         return self.project
 
-    def create_project(self, path: str, name: str, version: Optional[TIAVersion] = None) -> Project:
+    def create_project(self, path: str, name: str, version: Optional[TiaVersion] = None) -> Project:
         """Creates a new project in the TIA Portal.
 
-        Args:
+        Parameters:
             path (str): The path to the Automation folder where all subfolders are located.
             name (str): The name of the project.
             version (Optional[TIAVersion], optional): The version of the project. Defaults to None. If None, the version of the session will be used.
@@ -1757,10 +1754,10 @@ class Client:
 
         return self.project
 
-    def create_projects(self, path: str, names: list[str], version: Optional[TIAVersion] = None) -> list[Project]:
+    def create_projects(self, path: str, names: list[str], version: Optional[TiaVersion] = None) -> list[Project]:
         """Creates multiple projects in the TIA Portal.
 
-        Args:
+        Parameters:
             path (str): The path to the Automation folder where all subfolders are located.
             names (list[str]): A list of project names.
             version (Optional[TIAVersion], optional): The version of the project. Defaults to None. If None, the version of the session will be used.
@@ -1802,10 +1799,10 @@ class Project(TiaObject):
         devices (Devices): A composition of Devices that are part of the project.
     """
 
-    def __init__(self, client: Client, path: str, name: str, version: Optional[TIAVersion] = None):
+    def __init__(self, client: Client, path: str, name: str, version: Optional[TiaVersion] = None):
         """Constructor for the Project class.
 
-        Args:
+        Parameters:
             client (Client): The client object that created this project. This is used to access the session object.
             path (str): The path to the Automation folder where all subfolders are located.
             name (str): The name of the project.
@@ -1881,7 +1878,7 @@ class Project(TiaObject):
     def create(self, open_existing: bool = False) -> None:
         """Creates a new project in the TIA Portal.
 
-        Args:
+        Parameters:
             open_existing (bool, optional): If True, the project will be opened if it already exists. Defaults to False.
 
         Raises:
@@ -1929,7 +1926,7 @@ class Project(TiaObject):
     def save_as(self, name: str) -> None:
         """Saves the project in the TIA Portal.
 
-        Args:
+        Parameters:
             name (str): The name of the project.
 
         Raises:
@@ -2006,7 +2003,7 @@ class Project(TiaObject):
     def get_device_item(self, name: str) -> Optional[DeviceItem]:
         """Gets a device item by name.
 
-        Args:
+        Parameters:
             name (str): The name of the device item.
 
         Raises:
