@@ -1184,7 +1184,7 @@ class PLCBlocks(Composition[PLCBlock]):
         else:
             groups = self.parent.get_groups()
 
-        if not groups.find("IDB"):
+        if not groups.find("IDB").value:
             groups.create("IDB")
 
         groups.find("IDB").get_blocks().create_instance_database(idb_name, name)
@@ -1692,13 +1692,16 @@ class Client:
         if self.session is None:
             return
 
-        if self.project and self.project.is_open():
-            self.project.force_close()
+        try:
+            if self.project and self.project.is_open():
+                self.project.force_close()
 
-        process = self.session.GetCurrentProcess()
-        self.session.Dispose()
-        self.session = None
-        Process.GetProcessById(process.Id).Kill()
+            process = self.session.GetCurrentProcess()
+            self.session.Dispose()
+            self.session = None
+            Process.GetProcessById(process.Id).Kill()
+        except Exception:
+            pass
 
     # ==================================================================================================================
     # PROJECTS
@@ -1923,7 +1926,7 @@ class Project(TiaObject):
         if self.is_modified():
             self.value.Save()
 
-    def save_as(self, name: str) -> None:
+    def save_as(self, name: str, path: Optional[str] = None) -> None:
         """Saves the project in the TIA Portal.
 
         Parameters:
@@ -1935,12 +1938,19 @@ class Project(TiaObject):
         if self.value is None:
             raise tia_e.TIAInvalidProject("Project is None")
 
-        dir_info = DirectoryInfo(os.path.join(self.path, name))
+        if path is None:
+            dir_info = DirectoryInfo(os.path.join(self.path, name))
+        else:
+            dir_info = DirectoryInfo(os.path.join(path, name))
+
         self.value.SaveAs(dir_info)
 
         self.close()
 
-        project = Project(self.client, self.path, name, self.version)
+        if path is None:
+            project = Project(self.client, self.path, name, self.version)
+        else:
+            project = Project(self.client, path, name, self.version)
         project.open()
 
         return
