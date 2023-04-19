@@ -385,6 +385,15 @@ class DeviceItem(CompositionItem):
             return DeviceItems(self)
 
         return None
+    
+    def set_name(self, name: str) -> None:
+        if self.value is None:
+            raise tia_e.InvalidDeviceItem("Value is None")
+        
+        self.value.Name = name
+        self.name = name
+
+        return None
 
 
 class DeviceItems(Composition[DeviceItem]):
