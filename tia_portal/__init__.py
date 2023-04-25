@@ -42,7 +42,9 @@ except Exception as e:
 try:
     import Siemens.Engineering.Compiler as comp  # type: ignore pylint: disable=import-error
 except Exception as e:
-    raise tia_e.LibraryImportError("Could not import Siemens.Engineering.Compiler") from e
+    raise tia_e.LibraryImportError(
+        "Could not import Siemens.Engineering.Compiler"
+    ) from e
 
 try:
     import Siemens.Engineering.HW as hw  # type: ignore pylint: disable=import-error
@@ -52,7 +54,9 @@ except Exception as e:
 try:
     import Siemens.Engineering.HW.Features as hwf  # type: ignore pylint: disable=import-error
 except Exception as e:
-    raise tia_e.LibraryImportError("Could not import Siemens.Engineering.HW.Features") from e
+    raise tia_e.LibraryImportError(
+        "Could not import Siemens.Engineering.HW.Features"
+    ) from e
 
 try:
     import Siemens.Engineering.SW as sw  # type: ignore pylint: disable=import-error
@@ -62,22 +66,30 @@ except Exception as e:
 try:
     import Siemens.Engineering.SW.Blocks as swb  # type: ignore pylint: disable=import-error
 except Exception as e:
-    raise tia_e.LibraryImportError("Could not import Siemens.Engineering.SW.Blocks") from e
+    raise tia_e.LibraryImportError(
+        "Could not import Siemens.Engineering.SW.Blocks"
+    ) from e
 
 try:
     import Siemens.Engineering.Library as lib  # type: ignore pylint: disable=import-error
 except Exception as e:
-    raise tia_e.LibraryImportError("Could not import Siemens.Engineering.Library") from e
+    raise tia_e.LibraryImportError(
+        "Could not import Siemens.Engineering.Library"
+    ) from e
 
 try:
     import Siemens.Engineering.Library.MasterCopies as lib_mc  # type: ignore pylint: disable=import-error
 except Exception as e:
-    raise tia_e.LibraryImportError("Could not import Siemens.Engineering.Library.MasterCopies") from e
+    raise tia_e.LibraryImportError(
+        "Could not import Siemens.Engineering.Library.MasterCopies"
+    ) from e
 
 try:
     import Siemens.Engineering.Library.Types as lib_type  # type: ignore pylint: disable=import-error
 except Exception as e:
-    raise tia_e.LibraryImportError("Could not import Siemens.Engineering.Library.Types") from e
+    raise tia_e.LibraryImportError(
+        "Could not import Siemens.Engineering.Library.Types"
+    ) from e
 
 
 class Device(CompositionItem):
@@ -86,8 +98,7 @@ class Device(CompositionItem):
     Attributes:
         parent (Devices): The parent composition of devices.
         name (str): The name of the device.
-        value (Optional[hw.Device]): The value of the device and the connection to the C# library.
-          So functions of the Openness API can be used on this variable.
+        value (Optional[hw.Device]): The value of the device and the connection to the C# library. So functions of the Openness API can be used on this variable.
     """
 
     def __init__(self, parent: Devices, name: str):
@@ -161,8 +172,7 @@ class Devices(Composition[Device]):
     Attributes:
         parent (Project): The parent project.
         value (Optional[hw.DeviceComposition]): The value of the composition of devices
-            and the connection to the C# library.
-          So functions of the Openness API can be used on this variable.
+            and the connection to the C# library. So functions of the Openness API can be used on this variable.
     """
 
     def __init__(self, parent: Project) -> None:
@@ -226,7 +236,10 @@ class Devices(Composition[Device]):
             yield Device(self, device.Name)
 
     def create(
-        self, HwTypeIdentifier: str, name: str, device_name: Optional[str]  # pylint: disable=invalid-name
+        self,
+        HwTypeIdentifier: str,
+        name: str,
+        device_name: Optional[str],  # pylint: disable=invalid-name
     ) -> Device:
         """Creates a device in the composition of devices.
 
@@ -277,7 +290,9 @@ class Devices(Composition[Device]):
         hw_id = f"OrderNumber:{article_no}/{version}"
         return self.create(hw_id, name, device_name)
 
-    def create_HMI(self, article_no: str, version: str, name: str) -> Device:  # pylint: disable=invalid-name
+    def create_HMI(
+        self, article_no: str, version: str, name: str
+    ) -> Device:  # pylint: disable=invalid-name
         """Creates a HMI device in the composition of devices.
 
         Parameters:
@@ -385,11 +400,11 @@ class DeviceItem(CompositionItem):
             return DeviceItems(self)
 
         return None
-    
+
     def set_name(self, name: str) -> None:
         if self.value is None:
             raise tia_e.InvalidDeviceItem("Value is None")
-        
+
         self.value.Name = name
         self.name = name
 
@@ -1095,7 +1110,9 @@ class PLCBlocks(Composition[PLCBlock]):
                 API can be used on this variable.
     """
 
-    def __init__(self, parent: Union[PLCSoftware, PLCSystemBlockGroup, PLCUserBlockGroup]) -> None:
+    def __init__(
+        self, parent: Union[PLCSoftware, PLCSystemBlockGroup, PLCUserBlockGroup]
+    ) -> None:
         """Initializes the blocks.
 
         Parameters:
@@ -1167,7 +1184,9 @@ class PLCBlocks(Composition[PLCBlock]):
         for block in self.value:
             yield PLCBlock(self, block.Name)
 
-    def create(self, path: str, name: str, labels: Optional[dict[str, str]] = None) -> PLCBlock:
+    def create(
+        self, path: str, name: str, labels: Optional[dict[str, str]] = None
+    ) -> PLCBlock:
         """Creates a block from a file.
 
         Parameters:
@@ -1993,7 +2012,9 @@ class Client:
     # PROJECTS
     # ==================================================================================================================
 
-    def open_project(self, path: str, name: str, version: Optional[TiaVersion] = None) -> Project:
+    def open_project(
+        self, path: str, name: str, version: Optional[TiaVersion] = None
+    ) -> Project:
         """Opens a project in the TIA Portal.
 
         Parameters:
@@ -2019,7 +2040,9 @@ class Client:
 
         return self.project
 
-    def create_project(self, path: str, name: str, version: Optional[TiaVersion] = None) -> Project:
+    def create_project(
+        self, path: str, name: str, version: Optional[TiaVersion] = None
+    ) -> Project:
         """Creates a new project in the TIA Portal.
 
         Parameters:
@@ -2045,7 +2068,9 @@ class Client:
 
         return self.project
 
-    def create_projects(self, path: str, names: list[str], version: Optional[TiaVersion] = None) -> list[Project]:
+    def create_projects(
+        self, path: str, names: list[str], version: Optional[TiaVersion] = None
+    ) -> list[Project]:
         """Creates multiple projects in the TIA Portal.
 
         Parameters:
@@ -2093,7 +2118,9 @@ class Project(TiaObject):
         devices (Devices): A composition of Devices that are part of the project.
     """
 
-    def __init__(self, client: Client, path: str, name: str, version: Optional[TiaVersion] = None):
+    def __init__(
+        self, client: Client, path: str, name: str, version: Optional[TiaVersion] = None
+    ):
         """Constructor for the Project class.
 
         Parameters:
@@ -2130,7 +2157,9 @@ class Project(TiaObject):
             raise tia_e.TIAInvalidSession("Session is None")
 
         if self.value is not None:
-            print(f"There is already a Project open, closing {self.value.Name} before opening {self.name}")
+            print(
+                f"There is already a Project open, closing {self.value.Name} before opening {self.name}"
+            )
             self.close()
 
         if isinstance(self.path, FileInfo):
@@ -2138,7 +2167,9 @@ class Project(TiaObject):
             self.name = file_info.Name.split(".")[0]
         else:
             file_name = (
-                self.name if self.name.endswith(f".ap{self.version.value}") else f"{self.name}.ap{self.version.value}"
+                self.name
+                if self.name.endswith(f".ap{self.version.value}")
+                else f"{self.name}.ap{self.version.value}"
             )
             file_path = os.path.join(self.path, self.name, file_name)
             self.name = self.name
@@ -2194,7 +2225,9 @@ class Project(TiaObject):
             raise tia_e.TIAInvalidSession("Session is None")
 
         file_name = (
-            self.name if self.name.endswith(f".ap{self.version.value}") else f"{self.name}.ap{self.version.value}"
+            self.name
+            if self.name.endswith(f".ap{self.version.value}")
+            else f"{self.name}.ap{self.version.value}"
         )
         file_path = os.path.join(self.path, self.name, file_name)
 
@@ -2270,7 +2303,9 @@ class Project(TiaObject):
         devices = [item for device in self.value.Devices for item in device.DeviceItems]  # type: ignore
         software_containers: list[Optional[hwf.SoftwareContainer]]
         software_containers = [item.GetService[hwf.SoftwareContainer]() for item in devices]  # type: ignore
-        software_containers_filtered = [item for item in software_containers if item is not None]
+        software_containers_filtered = [
+            item for item in software_containers if item is not None
+        ]
 
         for software_container in software_containers_filtered:
             software = software_container.Software
@@ -2360,4 +2395,6 @@ class Project(TiaObject):
 
     @devices.setter
     def devices(self, value: Any) -> None:
-        raise NotImplementedError("Devices can only be accessed through the devices property")
+        raise NotImplementedError(
+            "Devices can only be accessed through the devices property"
+        )
