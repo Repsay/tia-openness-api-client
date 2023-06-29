@@ -56,6 +56,16 @@ The example code above uses the tia_portal library to open a project in TIA Port
 
 Please note that some lines of code have been commented out and are not being executed, and that the input() call at the end is used to keep the console window open until the user presses Enter.
 
+## Installation
+
+To install tia-openness-api-client, you can use pip:
+
+```bash
+pip install -e .
+```
+
+This will install the tia_portal library as an editable package, allowing you to make changes to the source code and have them reflected in your Python environment.
+
 ## Contributing
 
 If you'd like to contribute to tia-openness-api-client, please fork the repository and create a new branch for your changes. Once you've made your changes, submit a pull request and we'll review your changes.

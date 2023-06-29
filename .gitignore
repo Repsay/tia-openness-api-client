@@ -157,6 +157,5 @@ cython_debug/
 *.bak
 generate.py
 mock_data.xlsx
-setup.py
 stubs_regex.txt
 test.py
