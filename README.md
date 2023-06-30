@@ -66,6 +66,10 @@ pip install -e .
 
 This will install the tia_portal library as an editable package, allowing you to make changes to the source code and have them reflected in your Python environment.
 
+This repository is developed using Python 3.11, but with some modifications, it may be possible to make it compatible with older versions of Python. However, since I cannot test the code myself due to the unavailability of TIA Portal and TIA Openness, I cannot guarantee full compatibility or provide specific instructions for adapting the code to older Python versions. If you choose to make it compatible with an older version, it is advisable to review the code carefully, resolve any potential syntax or module compatibility issues, and thoroughly test the modified code to ensure its proper functioning.
+
+Additionally, if you are able to make the necessary changes to make this repository compatible with older versions of Python, I encourage you to contribute your modifications back to the project. By doing so, you can help other users who may be in a similar situation and ensure the codebase remains accessible and useful to a wider audience. Sharing your updates, bug fixes, or compatibility improvements with the community is a valuable contribution that can benefit the entire development community.
+
 ## Contributing
 
 If you'd like to contribute to tia-openness-api-client, please fork the repository and create a new branch for your changes. Once you've made your changes, submit a pull request and we'll review your changes.
