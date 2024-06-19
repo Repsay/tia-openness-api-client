@@ -13,6 +13,7 @@ class TiaVersion(Enum):
         V16 (str): TIA Portal V16.
         V17 (str): TIA Portal V17.
         V18 (str): TIA Portal V18.
+        V19 (str): TIA Portal V19.
     """
 
     V15 = "15"
@@ -20,3 +21,4 @@ class TiaVersion(Enum):
     V16 = "16"
     V17 = "17"
     V18 = "18"
+    V19 = "19"
