@@ -13,7 +13,8 @@ The API provides access to all the features of TIA Portal, including creating an
 For comprehensive documentation and examples, see [USAGE.md](USAGE.md) which covers:
 - Project operations (open, create, save, compile)
 - Accessing hardware (PLCs, HMIs, devices)
-- Working with blocks (export, create from templates)
+- Creating hardware (PLCs, HMIs)
+- Working with blocks (export, create from templates, instance DBs)
 - Global libraries and master copies
 - Complete working examples
 - Limitations and best practices

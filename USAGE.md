@@ -13,6 +13,8 @@ This guide provides condensed documentation for common operations with the TIA O
 - [Global Libraries](#global-libraries)
 - [Complete Example](#complete-example)
 - [Limitations](#limitations)
+- [Additional Resources](#additional-resources)
+- [Tips and Best Practices](#tips-and-best-practices)
 
 ## Getting Started
 
