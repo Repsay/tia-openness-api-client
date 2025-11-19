@@ -8,7 +8,17 @@ The TIA Openness API is a powerful tool for automating tasks in TIA Portal, Siem
 
 The API provides access to all the features of TIA Portal, including creating and modifying project files, adding and configuring devices, configuring network settings, and much more. With the TIA Openness API, you can automate complex engineering tasks and accelerate your development processes.
 
-## Usage
+## Documentation
+
+For comprehensive documentation and examples, see [USAGE.md](USAGE.md) which covers:
+- Project operations (open, create, save, compile)
+- Accessing hardware (PLCs, HMIs, devices)
+- Working with blocks (export, create from templates)
+- Global libraries and master copies
+- Complete working examples
+- Limitations and best practices
+
+## Quick Start
 
 Here's an example of how to use tia-openness-api-client to create a new project in TIA Portal:
 
