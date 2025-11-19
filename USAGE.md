@@ -353,47 +353,65 @@ else:
 ### Accessing Global Libraries
 
 ```python
-# Get global libraries (requires an open project)
-libraries = tia_client.get_global_libraries()
+# Import GlobalLibraries class
+from tia_portal import GlobalLibraries
+
+# Get global libraries (requires a TIA Portal session)
+libraries = GlobalLibraries(tia_client)
 
 for library in libraries:
     print(f"Library: {library.name}")
 ```
 
-### Opening a Global Library
+### Finding a Specific Global Library
 
 ```python
-# Open a specific global library
-library = tia_client.open_global_library(
-    path="C:\\path\\to\\libraries",
-    name="MyLibrary"
-)
+# Find a specific global library by name
+libraries = GlobalLibraries(tia_client)
+library = libraries.find("MyLibrary")
+
+if library.value is not None:
+    print(f"Found library: {library.name}")
+else:
+    print("Library not found")
 ```
 
 ### Working with Library Types
 
 ```python
-# Access library types
-types_folder = library.get_types()
+# Access library types through the type_folder property
+types_folder = library.type_folder
 
-# Get all types recursively
-all_types = types_folder.get_all_types(recursive=True)
+# Get the types collection
+types = types_folder.types
 
-for lib_type in all_types:
+# Iterate through types
+for lib_type in types:
     print(f"Library Type: {lib_type.name}")
+
+# Access type folders (user-created folders)
+type_folders = types_folder.folders
+for folder in type_folders:
+    print(f"Type Folder: {folder.name}")
 ```
 
 ### Working with Master Copies
 
 ```python
-# Access master copies
-master_copies_folder = library.get_master_copies()
+# Access master copies through the master_copy_folder property
+master_copy_folder = library.master_copy_folder
 
-# Get all master copies recursively
-all_master_copies = master_copies_folder.get_all_master_copies(recursive=True)
+# Get the master copies collection
+master_copies = master_copy_folder.master_copies
 
-for master_copy in all_master_copies:
+# Iterate through master copies
+for master_copy in master_copies:
     print(f"Master Copy: {master_copy.name}")
+
+# Access master copy folders (user-created folders)
+mc_folders = master_copy_folder.folders
+for folder in mc_folders:
+    print(f"Master Copy Folder: {folder.name}")
 ```
 
 ## Complete Example
@@ -486,7 +504,8 @@ For extending functionality beyond these capabilities, refer to the [Siemens TIA
   - `DeviceItem`: Specific device items (PLCs, HMIs, etc.)
   - `PLCSoftware`: PLC software operations
   - `PLCBlock`: Individual block operations
-  - `GlobalLibrary`: Global library operations
+  - `GlobalLibraries`: Access to global libraries
+  - `GlobalLibrary`: Individual global library operations
 
 ## Tips and Best Practices
 
