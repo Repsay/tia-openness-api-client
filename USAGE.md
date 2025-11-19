@@ -1,6 +1,6 @@
 # TIA Openness API Client - Usage Guide
 
-This guide provides condensed documentation for common operations with the TIA Openness API Client.
+This guide provides condensed documentation for common operations with the TIA Openness API Client. It covers how to access, create, and export PLCs, HMIs, blocks, and other hardware components.
 
 ## Table of Contents
 
