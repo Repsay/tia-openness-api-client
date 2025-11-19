@@ -7,9 +7,11 @@ This guide provides condensed documentation for common operations with the TIA O
 - [Getting Started](#getting-started)
 - [Project Operations](#project-operations)
 - [Accessing Hardware](#accessing-hardware)
+- [Creating Hardware](#creating-hardware)
 - [Working with PLCs](#working-with-plcs)
 - [Working with Blocks](#working-with-blocks)
 - [Global Libraries](#global-libraries)
+- [Complete Example](#complete-example)
 - [Limitations](#limitations)
 
 ## Getting Started
@@ -129,6 +131,57 @@ for device in project.devices:
                 print(f"    Nested Item: {nested.name}")
 ```
 
+## Creating Hardware
+
+### Creating a PLC Device
+
+```python
+# Get the devices collection
+devices = project.devices
+
+# Create a PLC device
+# You need the article number and version from TIA Portal
+plc_device = devices.create_PLC(
+    article_no="6ES7 511-1AK02-0AB0",  # Article number from TIA Portal
+    version="V2.0",                     # Version
+    name="PLC_1",                       # Network name
+    device_name="PLC_1"                 # Device name in TIA Portal
+)
+
+print(f"Created PLC: {plc_device.name}")
+```
+
+### Creating an HMI Device
+
+```python
+# Create an HMI device
+hmi_device = devices.create_HMI(
+    article_no="6AV2 124-0MC01-0AX0",  # Article number from TIA Portal
+    version="V15.1",                    # Version
+    name="HMI_1"                        # Device name
+)
+
+print(f"Created HMI: {hmi_device.name}")
+```
+
+### Creating a Generic Device
+
+For other device types, use the generic create method:
+
+```python
+# Create a device with hardware type identifier
+device = devices.create(
+    HwTypeIdentifier="OrderNumber:6ES7 515-2AM01-0AB0/V2.0",
+    name="Device_1",
+    device_name="MyDevice"
+)
+```
+
+**Note:** To find the article number and version:
+1. Open TIA Portal
+2. Add a new device manually
+3. The article number and version are shown in the device catalog
+
 ## Working with PLCs
 
 ### Accessing PLC Software
@@ -235,6 +288,50 @@ print(f"Created block: {new_block.name}")
 
 **Note:** The XML file can contain placeholders like `__NAME__` which will be replaced with values from the `labels` dictionary. If `labels` is not provided, `__NAME__` will be replaced with the `name` parameter.
 
+### Creating Instance Databases
+
+Instance databases (DBs) are used with function blocks (FBs):
+
+```python
+# Get the blocks collection
+blocks = software.get_blocks()
+
+# Create an instance database linked to a function block
+instance_db = blocks.create_instance_database(
+    name="DB_MyInstance",
+    fb_name="FB_MyFunctionBlock"  # The FB that this DB is an instance of
+)
+
+print(f"Created instance DB: {instance_db.name}")
+```
+
+### Creating ProDiag Blocks
+
+ProDiag blocks are function blocks with automatic instance database creation:
+
+```python
+# Create a ProDiag function block
+# This automatically creates the FB and its instance DB
+prodiag_block = blocks.create_prodiag_block(name="FB_Diagnosis")
+
+print(f"Created ProDiag block: {prodiag_block.name}")
+# This also creates "IDB_Diagnosis" automatically in an "IDB" group
+```
+
+### Creating User Block Groups
+
+```python
+# Get user block groups collection
+user_groups = software.get_user_block_groups()
+
+# Create a new user block group
+new_group = user_groups.create("MyBlockGroup")
+print(f"Created group: {new_group.name}")
+
+# You can then create blocks within this group
+group_blocks = new_group.get_blocks()
+```
+
 ### Getting Block Information
 
 ```python
@@ -247,17 +344,6 @@ if block.value and block.value.IsConsistent:
     print("Block is compiled and consistent")
 else:
     print("Block needs compilation")
-```
-
-### Creating User Block Groups
-
-```python
-# Get user block groups collection
-user_groups = software.get_user_block_groups()
-
-# Create a new user block group
-new_group = user_groups.create("MyBlockGroup")
-print(f"Created group: {new_group.name}")
 ```
 
 ## Global Libraries
@@ -368,18 +454,20 @@ finally:
 
 Based on the current implementation, please note:
 
-1. **Import Functionality**: Direct import of PLCs, HMIs, or complete hardware configurations is not currently implemented in this library. The library primarily supports:
+1. **Import Functionality**: Direct import of complete hardware configurations or projects is not currently implemented. However, the library supports:
    - Creating blocks from XML templates
    - Exporting blocks to XML
+   - Creating PLCs and HMIs via article numbers
 
-2. **Hardware Creation**: Direct creation of new hardware devices (PLCs, HMIs) is not currently implemented. The library is designed to work with existing devices in projects.
+2. **HMI Operations**: While HMI devices can be created and accessed through the device hierarchy, HMI-specific software operations (screens, tags, etc.) are limited. The library primarily focuses on PLC software operations.
 
-3. **HMI Operations**: While HMI devices can be accessed through the device hierarchy, HMI-specific operations are limited. The library primarily focuses on PLC software operations.
+3. **Hardware Identifiers**: When creating PLCs and HMIs, you need to know the exact article number and version from TIA Portal. These can be found in the hardware catalog when manually adding devices.
 
-4. **Block Import**: Blocks can be created from XML files using templates with the `create()` method, but there is no direct "import" method for blocks.
+4. **Block Import**: Blocks can be created from XML files using templates with the `create()` method, but there is no direct "import from backup" method for blocks.
 
 5. **Primary Use Case**: This library was primarily designed for:
    - Automating PLC code/block creation
+   - Creating hardware devices (PLCs, HMIs)
    - Exporting blocks for backup or documentation
    - Managing project compilation and basic operations
 
@@ -411,3 +499,7 @@ For extending functionality beyond these capabilities, refer to the [Siemens TIA
 5. **Recursive operations**: When getting blocks or groups, use the `recursive=True` parameter to get all nested items.
 
 6. **Path separators**: Use double backslashes (`\\`) or raw strings (`r"C:\path"`) for Windows paths.
+
+7. **Hardware article numbers**: To find article numbers for creating hardware, open TIA Portal's hardware catalog and note the article number and version of the device you want to create programmatically.
+
+8. **Device naming**: When creating devices, be consistent with naming conventions. The `name` parameter is typically the network name, while `device_name` is the name shown in the TIA Portal project tree.
