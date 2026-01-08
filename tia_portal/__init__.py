@@ -1083,6 +1083,22 @@ class PLCBlock(CompositionItem):
         temp = self.value.GetType().Name
 
         return temp.split(".")[-1]
+    
+    def get_instanceof(self) -> str:
+        """This function returns the instance of name of the block.
+
+        Raises:
+            tia_e.InvalidBlock: If the value is None.
+
+        Returns:
+            str: The instance of name
+        """
+        if self.value is None:
+            raise tia_e.InvalidBlock("Value is None")
+
+        temp = self.value.get_InstanceOfName()
+
+        return temp.split(".")[-1]
 
     def assign_prodiag(self, prodiag: str):
         """This function assigns a prodiag to the block.

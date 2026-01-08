@@ -13,7 +13,7 @@ from tia_portal.version import TiaVersion
 
 DATA_PATH = os.path.join(os.path.expanduser("~"), ".tia_portal")
 CONFIG_PATH = os.path.join(DATA_PATH, "config.ini")
-VERSION = TiaVersion.V15_1
+VERSION = TiaVersion.V18
 
 
 def load() -> None:
@@ -25,7 +25,7 @@ def load() -> None:
 
     if not os.path.exists(CONFIG_PATH):
         config["DEFAULT"] = {
-            "version": "V17",
+            "version": "V18",
         }
         config["USER"] = {}
         config.write(open(CONFIG_PATH, "w", encoding="utf-8"))
